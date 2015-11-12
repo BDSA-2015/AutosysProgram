@@ -45,8 +45,11 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IEntity.cs" />
+    <Compile Include="Repository\IRepository.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\Phase.cs" />
+    <Compile Include="StudyManagement\Task.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
