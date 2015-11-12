@@ -10,4 +10,5 @@ namespace Storage.Repository
     class DBContext : DbContext
     {
     }
+    
 }
