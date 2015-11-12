@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudyManagement\Criteria.cs" />
+    <Compile Include="StudyManagement\Phase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -54,7 +56,6 @@
     <Folder Include="ExportManagement\" />
     <Folder Include="PaperManagement\" />
     <Folder Include="ProtocolManagement\" />
-    <Folder Include="StudyManagement\" />
     <Folder Include="UserManagement\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
