@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AutosysBackend")]
+[assembly: AssemblyTitle("ApplicationLogic")]
 [assembly: AssemblyDescription("BDSA15 Exam project")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ITU")]
-[assembly: AssemblyProduct("AutosysBackend")]
+[assembly: AssemblyProduct("ApplicationLogic")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
