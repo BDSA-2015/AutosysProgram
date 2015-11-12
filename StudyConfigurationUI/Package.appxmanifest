@@ -7,14 +7,14 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="c8fabb8a-aa8f-4377-8c67-948dd70fef66"
+    Name="59be78e1-d483-4c32-a350-f6845aae17b7"
     Publisher="CN=DennisThinhTan"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="c8fabb8a-aa8f-4377-8c67-948dd70fef66" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="59be78e1-d483-4c32-a350-f6845aae17b7" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>AutosysProgram</DisplayName>
+    <DisplayName>StudyConfigurationUI</DisplayName>
     <PublisherDisplayName>DennisThinhTan</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -30,12 +30,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="AutosysProgram.App">
+      EntryPoint="StudyConfigurationUI.App">
       <uap:VisualElements
-        DisplayName="AutosysProgram"
+        DisplayName="StudyConfigurationUI"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="AutosysProgram"
+        Description="StudyConfigurationUI"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
