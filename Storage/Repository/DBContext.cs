@@ -4,12 +4,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ConsoleApplication1.ApplicationLogic.PaperManagement;
 
-namespace ConsoleApplication1.Repository
+namespace Storage.Repository
 {
     class DBContext : DbContext
     {
-        public DbSet<Paper> Papers { get; set; }
     }
+    
 }
