@@ -1,14 +1,17 @@
-﻿using System;
+﻿using ApplicationLogics.UserManagement;
+using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.StudyManagement
 {
-    public class Phase
+    public class Phase : IEntity
     {
+        public int Id { get; set; }
         public List<Criteria> Criterias { get; protected set; }
         public Dictionary<User,Task> AssignedTask { get; protected set; }
 
@@ -17,7 +20,6 @@ namespace ApplicationLogics.StudyManagement
         public bool PhaseFinished { get; protected set; }
 
         public List<Phase> DependentPhases { get; protected set; }
-
 
         public bool HasCriteria(Criteria criteria)
         {
@@ -34,7 +36,6 @@ namespace ApplicationLogics.StudyManagement
             throw new NotImplementedException();
         }
 
-
         public void AddUserToTask(User user)
         {
             throw new NotImplementedException();
@@ -43,7 +44,6 @@ namespace ApplicationLogics.StudyManagement
         {
             throw new NotImplementedException();
         }
-
 
         public void AddTask(Task task)
         {
@@ -59,8 +59,6 @@ namespace ApplicationLogics.StudyManagement
         {
             throw new NotImplementedException();
         }
-
-        
 
         public IEnumerable<Task> GetUnfinishedTask()
         {
