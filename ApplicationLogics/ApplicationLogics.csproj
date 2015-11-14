@@ -53,8 +53,9 @@
     <Compile Include="StudyManagement\Phase.cs" />
     <Compile Include="StudyManagement\Role.cs" />
     <Compile Include="StudyManagement\Task.cs" />
-    <Compile Include="UserManagement\Team.cs" />
     <Compile Include="UserManagement\User.cs" />
+    <Compile Include="UserManagement\UserHandler.cs" />
+    <Compile Include="UserManagement\UserValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
