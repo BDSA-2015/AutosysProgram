@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.StudyManagement
 {
-    public class Phase
+    public class Phase : IEntity
     {
-        public List<Criteria> Criterias { get; protected set; }
+        public int Id { get; set; }
 
+        public List<Criteria> Criterias { get; protected set; }
 
         public bool HasCriteria()
         {
@@ -25,5 +27,7 @@ namespace ApplicationLogics.StudyManagement
         {
             throw new NotImplementedException();
         }
+
     }
+
 }

@@ -10,7 +10,10 @@ namespace ApplicationLogics.StudyManagement
     public class Task : IEntity
     {
         public int Id { get; set; }
+
         public enum Types { FillData, ResolveConflict }
-        
+
+        // Data fields, still do not know data type?
+        public object PropertyValue { get; set; }
     }
 }

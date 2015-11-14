@@ -7,8 +7,10 @@ using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.StudyManagement
 {
-    public class Criteria : IEntity
+    public class Role : IEntity
     {
         public int Id { get; set; }
+        public enum Type { Validator, Reviewer }
     }
+
 }

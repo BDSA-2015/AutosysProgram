@@ -5,10 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationLogics.Repository;
 
-namespace ApplicationLogics.StudyManagement
+namespace ApplicationLogics.UserManagement
 {
-    public class Criteria : IEntity
+    public class Team : IEntity
     {
         public int Id { get; set; }
+
+        public List<User> Members { get; set; }
+        
+        public User Manager { get; set; } 
     }
 }

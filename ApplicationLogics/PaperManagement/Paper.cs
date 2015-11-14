@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationLogics.Repository;
 
-namespace ApplicationLogics.StudyManagement
+namespace ApplicationLogics.PaperManagement
 {
-    public class Criteria : IEntity
+    public class Paper : IEntity
     {
         public int Id { get; set; }
     }
+
 }

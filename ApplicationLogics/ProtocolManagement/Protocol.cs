@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationLogics.Repository;
 
-namespace ApplicationLogics.StudyManagement
+namespace ApplicationLogics.ExportManagement
 {
-    public class Criteria : IEntity
+    public class Protocol : IEntity
     {
         public int Id { get; set; }
     }

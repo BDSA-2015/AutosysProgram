@@ -43,13 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProtocolManagement\Protocol.cs" />
+    <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IEntity.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\Phase.cs" />
+    <Compile Include="StudyManagement\Role.cs" />
     <Compile Include="StudyManagement\Task.cs" />
+    <Compile Include="UserManagement\Team.cs" />
+    <Compile Include="UserManagement\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -57,9 +62,6 @@
   <ItemGroup>
     <Folder Include="AutosysServer\" />
     <Folder Include="ExportManagement\" />
-    <Folder Include="PaperManagement\" />
-    <Folder Include="ProtocolManagement\" />
-    <Folder Include="UserManagement\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication1.Repository
 {
-    interface IStorage<T> where T : class
+    public interface IStorage<T> where T : class
     {
         void Create(T item);
         T Read(int id);

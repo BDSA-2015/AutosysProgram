@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Storage.Repository
 {
-    class DBContext : DbContext
+    public class DBContext : DbContext
     {
     }
     
