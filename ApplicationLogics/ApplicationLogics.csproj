@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutosysServer\Adapter.cs" />
+    <Compile Include="AutosysServer\MainHandler.cs" />
+    <Compile Include="AutosysServer\Request.cs" />
+    <Compile Include="AutosysServer\RequestHandler.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
     <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="Program.cs" />
@@ -60,7 +64,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AutosysServer\" />
     <Folder Include="ExportManagement\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
