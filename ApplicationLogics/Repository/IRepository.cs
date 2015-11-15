@@ -4,11 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication1.Repository
+namespace ApplicationLogics.Repository
 {
-    public interface IStorage<T> where T : class
+
+    /// <summary>
+    /// This interface outlines the CRUD methods that the storage repository class will be able to perform.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IRepository<T> : IDisposable where T : IEntity
     {
-        void Create(T item);
+        int Create(T item);
         T Read(int id);
         IEnumerable<T> Read();
         void Update(T item);
