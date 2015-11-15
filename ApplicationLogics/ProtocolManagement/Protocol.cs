@@ -7,8 +7,12 @@ using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.ExportManagement
 {
+    /// <summary>
+    /// This class represents the Research Protocol used to configure a given study.
+    /// </summary>
     public class Protocol : IEntity
     {
+        // Which other attributes does a protocol contain?
         public int Id { get; set; }
     }
 }
