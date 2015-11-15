@@ -14,7 +14,7 @@ namespace ApplicationLogics.StudyManagement
         public  Dictionary<int, Role> RolesInPhase { get; protected set; }
 
         //A map of tasks in the current phase, each task can have multiple 
-        public Dictionary<Task, List<int>> TaskInPhase { get; protected set; }
+        public Dictionary<Task, List<int>> TasksInPhase { get; protected set; }
 
 
         public void AddRole(int UserId, Role role = null)
