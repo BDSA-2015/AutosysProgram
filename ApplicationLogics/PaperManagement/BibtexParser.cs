@@ -2,28 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ApplicationLogics.PaperManagement
 {
-    public class BibtexParser : IParser
+    class BibtexParser
     {
         /// <summary>
-        /// Regex for matching BibTex items.
-        /// </summary>
-        readonly Regex _entryRegex = new Regex(@"(?:@(\w+)\{([\w]+),((?:\W*[a-zA-Z]+\W?=\W?\{.*\},?)*)\W*\},?)");
-
-        /// <summary>
-        /// Regex for matching fields within a BibTex item.
-        /// </summary>
-        readonly Regex _fieldRegex = new Regex(@"([a-zA-Z]+)\W?=\W?\{(.*)\},?");
-
-        public IList<string> Parse(string data)
+        /// Generates a BibTex file based on the file (Which is given a a string) This file will contain a mapping of common properties of a file (Auther, Year written, etc..) to the respective values  </summary>
+        /// <returns>
+        /// Returns a bibtex file.</returns>
+        public BibTexFile generateBibTexFile(string file)
         {
             throw new NotImplementedException();
-        } 
-
-
+        }
     }
 }
