@@ -13,7 +13,7 @@ namespace ApplicationLogics.PaperManagement
     {
         public int Id { get; set; }
 
-        public Dictionary<Tag, List<String>> PaperInformation { get; protected set; }
+        public Dictionary<Item, List<String>> PaperInformation { get; protected set; }
 
 
         public Paper()
@@ -21,12 +21,12 @@ namespace ApplicationLogics.PaperManagement
             throw  new NotImplementedException();
         }
 
-        public Paper(Dictionary<Tag, List<String>> PaperInformation)
+        public Paper(Dictionary<Item, List<String>> PaperInformation)
         {
             throw new NotImplementedException();
         }
 
-        public void AddInformation(Tag tag, string information)
+        public void AddInformation(Item itemTag, string information)
         {
             throw new NotImplementedException();
         }
