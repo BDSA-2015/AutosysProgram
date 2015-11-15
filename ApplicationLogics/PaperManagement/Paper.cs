@@ -15,22 +15,34 @@ namespace ApplicationLogics.PaperManagement
 
         public Dictionary<Tag, List<String>> PaperInformation { get; protected set; }
 
-
+        /// <summary>
+        /// Create a empty paper with no values.
+        /// </summary>
         public Paper()
         {
             throw  new NotImplementedException();
         }
-
+        /// <summary>
+        /// Create a Paper based existing information
+        /// </summary>
+        /// <param name="PaperInformation"></param>
         public Paper(Dictionary<Tag, List<String>> PaperInformation)
         {
             throw new NotImplementedException();
         }
-
+        /// <summary>
+        /// Update information on paper or add a information on the Paper
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="information"></param>
         public void AddInformation(Tag tag, string information)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Remove a information about the paper. This will remove all information about the specified Tag, even if multiple information was stored under this Tag
+        /// </summary>
         public void RemoveInformation()
         {
             throw new NotImplementedException();
