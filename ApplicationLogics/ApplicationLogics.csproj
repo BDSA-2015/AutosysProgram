@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExportManagement\CSVConverter.cs" />
+    <Compile Include="ExportManagement\ExportHandler.cs" />
+    <Compile Include="ExportManagement\ExportType.cs" />
+    <Compile Include="ExportManagement\IConverter.cs" />
+    <Compile Include="ExportManagement\PDFConverter.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
     <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="Program.cs" />
@@ -61,7 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AutosysServer\" />
-    <Folder Include="ExportManagement\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
