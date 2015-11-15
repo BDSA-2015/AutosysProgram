@@ -13,7 +13,7 @@ namespace ApplicationLogics.PaperManagement
     {
         public int Id { get; set; }
 
-        public Dictionary<Item, List<String>> PaperInformation { get; protected set; }
+        public Dictionary<ITag, List<String>> PaperInformation { get; protected set; }
 
         /// <summary>
         /// Create a empty paper with no values.
@@ -26,16 +26,16 @@ namespace ApplicationLogics.PaperManagement
         /// Create a Paper based existing information
         /// </summary>
         /// <param name="PaperInformation"></param>
-        public Paper(Dictionary<Tag, List<String>> PaperInformation)
+        public Paper(Dictionary<ITag, List<String>> PaperInformation)
         {
             throw new NotImplementedException();
         }
         /// <summary>
         /// Update information on paper or add a information on the Paper
         /// </summary>
-        /// <param name="tag"></param>
+        /// <param name="itemTag"></param>
         /// <param name="information"></param>
-        public void AddInformation(Tag tag, string information)
+        public void AddInformation(ITag itemTag, string information)
         {
             throw new NotImplementedException();
         }

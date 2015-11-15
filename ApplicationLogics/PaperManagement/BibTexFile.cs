@@ -8,7 +8,7 @@ namespace ApplicationLogics.PaperManagement
 {
 
     //Not implemented yet. This class will be based on a existing file wich we will be provided
-    class BibTexFile
+    public class BibTexFile : IFile
     {
     }
 }

@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogics.PaperManagement
 {
-    public interface IFieldChecker
+    public class TagChecker : IChecker
     {
-        bool Validate(string field);
+        public bool Validate(ITag tag)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

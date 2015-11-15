@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogics.PaperManagement
 {
-    public interface IItemChecker
+    public interface ITag
     {
-        bool Validate(Item item);
+        string TagName { get; set; }
     }
 }

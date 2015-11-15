@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogics.PaperManagement
 {
-    public interface IParser
+    public interface IFile
     {
-        IFile Parse(string data);
     }
 }
