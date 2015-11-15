@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationLogics.ExportManagement;
 
 namespace ApplicationLogics.ProtocolManagement
 {
@@ -12,7 +13,27 @@ namespace ApplicationLogics.ProtocolManagement
     /// </summary>
     static class ProtocolHandler
     {
-        
+
+        public static void CreateProtocol()
+        {
+
+        }
+
+        public static void ReadProtocol(Protocol protocol)
+        {
+
+        }
+
+        public static void UpdateProtocol(Protocol protocol)
+        {
+
+        }
+
+        public static void DeleteProtocol(int protocolId)
+        {
+
+        }
+
     }
 
 }
