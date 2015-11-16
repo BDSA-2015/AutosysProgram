@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Data;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.PaperManagement;
 using Threading = System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace Storage.Repository
         DbSet<Task> Tasks { get; set; }
 
         // User entities
+        DbSet<Team> Teams { get; set; }
         DbSet<User> Users { get; set; }
 
         // Protocol entities
