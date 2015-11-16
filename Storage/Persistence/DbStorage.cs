@@ -17,7 +17,6 @@ namespace Storage.Persistence
     /// <typeparam name="T"></typeparam>
     public class DbStorage<T> : IRepository<T> where T : class, IEntity
     {
-
         private DbContext _dbContext;
 
         public DbStorage(DbContext context)
