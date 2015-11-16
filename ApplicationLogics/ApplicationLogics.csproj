@@ -52,6 +52,7 @@
     <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProtocolManagement\ProtocolHandler.cs" />
     <Compile Include="Repository\IEntity.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
