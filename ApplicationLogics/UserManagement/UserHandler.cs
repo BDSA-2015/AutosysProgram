@@ -1,15 +1,14 @@
 ﻿using System;
 using ApplicationLogics.Repository;
-using ConsoleApplication1.Repository;
 
 namespace ApplicationLogics.UserManagement
 {
     public class UserHandler
     {
         private readonly UserValidator _userValidator;
-        private IStorage<IEntity> _storage;
+        private IRepository<IEntity> _storage;
 
-        public UserHandler(IStorage<IEntity> storage)
+        public UserHandler(IRepository<IEntity> storage)
         {
             _userValidator = new UserValidator();
             _storage = storage;

@@ -20,7 +20,6 @@ namespace Storage.Repository
         DbSet<Task> Tasks { get; set; }
 
         // User entities
-        DbSet<Team> Teams { get; set; }
         DbSet<User> Users { get; set; }
 
         // Protocol entities
