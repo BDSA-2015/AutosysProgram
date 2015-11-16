@@ -57,6 +57,9 @@
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\Phase.cs" />
     <Compile Include="StudyManagement\Role.cs" />
+    <Compile Include="StudyManagement\Study.cs" />
+    <Compile Include="StudyManagement\StudyHandler.cs" />
+    <Compile Include="StudyManagement\StudyManager.cs" />
     <Compile Include="StudyManagement\Task.cs" />
     <Compile Include="UserManagement\Team.cs" />
     <Compile Include="UserManagement\User.cs" />

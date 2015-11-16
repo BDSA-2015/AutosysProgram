@@ -11,7 +11,7 @@ namespace ApplicationLogics.StudyManagement
     {
         public int Id { get; set; }
 
-        public enum Types { FillData, ResolveConflict }
+        public enum Types { NotStarted, Started, Done }
 
         // Data fields, still do not know data type?
         public object PropertyValue { get; set; }
