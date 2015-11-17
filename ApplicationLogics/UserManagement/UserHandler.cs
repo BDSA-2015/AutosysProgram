@@ -17,7 +17,7 @@ namespace ApplicationLogics.UserManagement
 
         public bool ValidateUser(User user)
         {
-            return _userValidator.validateUser(user);
+            return _userValidator.ValidateUser(user);
         }
 
         public void CreateUser(string name)

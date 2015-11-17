@@ -33,7 +33,6 @@ namespace ApplicationLogics.AutosysServer
                 if (_requestQueue.Count > 0)
                 {
                     throw new NotImplementedException();
-                    yield return _requestQueue.Dequeue();
                 }
 
             }
