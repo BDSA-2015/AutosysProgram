@@ -69,7 +69,7 @@ namespace ApplicationLogics.AutosysServer
             throw new NotImplementedException();
         }
 
-        public void GetTasks(int studyId, int userId, int count, TaskType Type)
+        public void GetTasks(int studyId, int userId, int count, StudyManagement.Task.TaskType Type)
         {
             throw new NotImplementedException();
         } //TODO TASK TYPE IS AN ENUM?
