@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExportManagement\IConverter.cs" />
     <Compile Include="PaperManagement\BibTexFile.cs" />
     <Compile Include="PaperManagement\BibtexParser.cs" />
     <Compile Include="PaperManagement\FieldTag.cs" />
@@ -60,6 +61,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IEntity.cs" />
+    <Compile Include="ExportManagement\CSVConverter.cs" />
+    <Compile Include="ExportManagement\ExportHandler.cs" />
+    <Compile Include="ExportManagement\ExportType.cs" />
+    <Compile Include="ExportManagement\PDFConverter.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\Phase.cs" />
@@ -67,14 +72,15 @@
     <Compile Include="StudyManagement\Task.cs" />
     <Compile Include="UserManagement\Team.cs" />
     <Compile Include="UserManagement\User.cs" />
+    <Compile Include="AutosysServer\Adapter.cs" />
+    <Compile Include="AutosysServer\MainHandler.cs" />
+    <Compile Include="AutosysServer\Request.cs" />
+    <Compile Include="AutosysServer\RequestHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AutosysServer\" />
-    <Folder Include="ExportManagement\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

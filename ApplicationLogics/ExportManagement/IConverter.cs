@@ -10,5 +10,4 @@ namespace ApplicationLogics.ExportManagement
     {
         ExportType Convert(Protocol protocol);
     }
-
 }
