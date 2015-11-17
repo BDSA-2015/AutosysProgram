@@ -13,13 +13,13 @@ namespace ApplicationLogics.AutosysServer
     public class MainHandler
     {
 
-        private UserHandler _userHandler;
-        private ProtocolHandler _protocolHandler;
-        private PaperHandler _paperHandler;
-        private ExportHandler _exportHandler;
-        private StudyHandler _studyHandler;
-        private IStorage<IEntity> _Storage;
-        private RequestHandler _requestHandler;
+        //private UserHandler _userHandler;
+        //private ProtocolHandler _protocolHandler;
+        //private PaperHandler _paperHandler;
+        //private ExportHandler _exportHandler;
+        //private StudyHandler _studyHandler;
+        //private IStorage<IEntity> _Storage;
+        //private RequestHandler _requestHandler;
 
         public MainHandler()
         {

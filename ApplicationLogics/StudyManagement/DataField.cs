@@ -14,7 +14,6 @@ namespace ApplicationLogics.StudyManagement
     /// </summary>
     public class DataField
     {
-
         public enum Type
         {
             String,
@@ -24,26 +23,20 @@ namespace ApplicationLogics.StudyManagement
             Resource // Link to resource 
         }
 
-        //[Required] //nuGet not working
+        public DataField(string Name, Type type, bool isModifiable) {}
+
         public string Name { get; set; }
 
         public string Description { get; set; }
 
         public Type FieldType { get; set; }
 
-        /// <summary>
-        /// Used for <see cref="Type.Enumeration"/> and <see cref="Type.Flags"/> data types, a collection of the predefined values.
-        /// </summary>
-        public string[] TypeInfo { get; set; }
+        public bool IsModifiable { get; set; }
 
         /// <summary>
-        /// This property holds the data for the field and can be used to provide default data to the user, as well as by the user to submit the task.
-        /// The data this field holds depends on the data type.
-        /// For all but <see cref="Type.Flags" /> this array contains just one element; the representation of the object for that data type (see <see cref="Type" />).
-        /// For <see cref="Type.Flags" /> it can contain several flags, either existing ones listed in <see cref="TypeInfo" />, or new ones.
-        /// For <see cref="Type.Resource" /> it contains a JSON representation of <see cref="Resource" />.
+        /// Used for Enumeration and Flags data types, a collection of the predefined values.
         /// </summary>
-        public string[] Data { get; set; }
+        public string[] TypeInfo { get; set; }
 
     }
 
