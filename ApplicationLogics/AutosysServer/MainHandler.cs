@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
-using System.Threading.Tasks;
+using ApplicationLogics.PaperManagement;
+using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.Repository;
+using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
 using Microsoft.SqlServer.Server;
+using Task = System.Threading.Tasks.Task;
 
 namespace ApplicationLogics.AutosysServer
 {
@@ -18,7 +21,7 @@ namespace ApplicationLogics.AutosysServer
         private PaperHandler _paperHandler;
         private ExportHandler _exportHandler;
         private StudyHandler _studyHandler;
-        private IStorage<IEntity> _Storage;
+        private IRepository<IEntity> _Storage;
         private RequestHandler _requestHandler;
 
         public MainHandler()
@@ -69,7 +72,7 @@ namespace ApplicationLogics.AutosysServer
             throw new NotImplementedException();
         }
 
-        public void GetTasks(int studyId, int userId, int count, TaskType Type)
+        public void GetTasks(int studyId, int userId, int count, StudyManagement.Task.TaskType Type)
         {
             throw new NotImplementedException();
         } //TODO TASK TYPE IS AN ENUM?
@@ -97,16 +100,6 @@ namespace ApplicationLogics.AutosysServer
         /// <param name="modifiedField"></param>
         /// <returns></returns>
         public Task DeliverTask(int studyId, int userId, int taskId, string modifiedField)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// retrieves a specified resource (e.g., PDF file).
-        /// </summary>
-        /// <param name="resourceId"></param>
-        /// <returns></returns>
-        public Resource GetResource(int resourceId)
         {
             throw new NotImplementedException();
         }

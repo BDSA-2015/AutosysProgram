@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogics.StudyManagement
 {
-    class Study: IEntity
+    public class Study: IEntity
     {
         public int Id { get; set; }
         /// <summary>
