@@ -9,20 +9,12 @@ namespace ApplicationLogics.StudyManagement
 {
     public class Criteria : IEntity
     {
-        /// <summary>
-        /// Unique Id
-        /// </summary>
         public int Id { get; set; }
 
-        /// <summary>
-        /// Criteria name
-        /// </summary>
         public string Name { get; set; }
 
-        /// <summary>
-        /// A short summary of the Criteria
-        /// </summary>
         public string Description { get; set; }
+        public DataField DataField { get; set; }
     }
 
 }

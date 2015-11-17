@@ -14,7 +14,7 @@ namespace ApplicationLogics.UserManagement
 
         public string Name { get; internal set; }
 
-
+        public string Metadata { get; set; }
     }
 
 }

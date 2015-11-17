@@ -23,8 +23,6 @@ namespace ApplicationLogics.StudyManagement
             Resource // Link to resource 
         }
 
-        public DataField(string Name, Type type, bool isModifiable) {}
-
         public string Name { get; set; }
 
         public string Description { get; set; }
