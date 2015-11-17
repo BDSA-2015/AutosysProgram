@@ -13,7 +13,7 @@ namespace ApplicationLogics.StudyManagement
     {
         public int Id { get; set; }
         public List<Criteria> Criterias { get; protected set; }
-        public Dictionary<Task,List<User> AssignedTask { get; protected set; }
+        public Dictionary<Task,List<User>> AssignedTask { get; protected set; }
 
         public List<Task> UnAssignedTasks { get; protected set; }
 

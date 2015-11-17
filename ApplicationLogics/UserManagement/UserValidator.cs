@@ -5,7 +5,7 @@ namespace ApplicationLogics.UserManagement
     public class UserValidator
     {
 
-        public bool validateUser(User user)
+        public bool ValidateUser(User user)
         {
             throw new NotImplementedException();
         }

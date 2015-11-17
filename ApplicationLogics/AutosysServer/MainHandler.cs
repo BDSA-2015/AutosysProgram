@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
-using System.Threading.Tasks;
+using ApplicationLogics.PaperManagement;
+using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.Repository;
+using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
 using Microsoft.SqlServer.Server;
+using Task = System.Threading.Tasks.Task;
 
 namespace ApplicationLogics.AutosysServer
 {
@@ -13,13 +16,13 @@ namespace ApplicationLogics.AutosysServer
     public class MainHandler
     {
 
-        //private UserHandler _userHandler;
-        //private ProtocolHandler _protocolHandler;
-        //private PaperHandler _paperHandler;
-        //private ExportHandler _exportHandler;
-        //private StudyHandler _studyHandler;
-        //private IStorage<IEntity> _Storage;
-        //private RequestHandler _requestHandler;
+        private UserHandler _userHandler;
+        private ProtocolHandler _protocolHandler;
+        private PaperHandler _paperHandler;
+        private ExportHandler _exportHandler;
+        private StudyHandler _studyHandler;
+        private IRepository<IEntity> _Storage;
+        private RequestHandler _requestHandler;
 
         public MainHandler()
         {
@@ -101,15 +104,7 @@ namespace ApplicationLogics.AutosysServer
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// retrieves a specified resource (e.g., PDF file).
-        /// </summary>
-        /// <param name="resourceId"></param>
-        /// <returns></returns>
-        public Resource GetResource(int resourceId)
-        {
-            throw new NotImplementedException();
-        }
+   
 
         /// <summary>
         /// retrieves all task IDs of tasks which have already been delivered, and can still be edited.

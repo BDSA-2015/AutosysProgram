@@ -105,6 +105,7 @@
     <Compile Include="PaperManagement\IParser.cs" />
     <Compile Include="PaperManagement\TagValidator.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
+    <Compile Include="ProtocolManagement\ProtocolHandler.cs" />
     <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,7 +120,13 @@
     <Compile Include="StudyManagement\Phase.cs" />
     <Compile Include="StudyManagement\Role.cs" />
     <Compile Include="StudyManagement\Task.cs" />
+    <Compile Include="StudyManagement\Study.cs" />
+    <Compile Include="StudyManagement\StudyHandler.cs" />
+    <Compile Include="StudyManagement\StudyManager.cs" />
+    <Compile Include="UserManagement\Team.cs" />
     <Compile Include="UserManagement\User.cs" />
+    <Compile Include="UserManagement\UserHandler.cs" />
+    <Compile Include="UserManagement\UserValidator.cs" />
     <Compile Include="AutosysServer\Adapter.cs" />
     <Compile Include="AutosysServer\MainHandler.cs" />
     <Compile Include="AutosysServer\Request.cs" />
