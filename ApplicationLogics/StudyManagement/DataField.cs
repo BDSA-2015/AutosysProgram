@@ -17,7 +17,7 @@ namespace ApplicationLogics.StudyManagement
         public DataField(string name, string description, Type fieldType, string fieldValue, bool isModifiable)
         {
             if(string.IsNullOrEmpty(name) && string.IsNullOrEmpty(description) && string.IsNullOrEmpty(fieldValue))
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("Please enter valid arguments. Null, whitespaces and empty strings are not allowed.");
             _name = name;
             _description = description;
             _fieldType = fieldType;
