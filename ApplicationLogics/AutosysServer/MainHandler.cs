@@ -5,7 +5,6 @@ using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using ApplicationLogics.Repository;
 using ApplicationLogics.UserManagement;
-using ConsoleApplication1.Repository;
 using Microsoft.SqlServer.Server;
 
 namespace ApplicationLogics.AutosysServer

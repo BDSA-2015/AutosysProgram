@@ -70,7 +70,6 @@
     <Compile Include="StudyManagement\Phase.cs" />
     <Compile Include="StudyManagement\Role.cs" />
     <Compile Include="StudyManagement\Task.cs" />
-    <Compile Include="UserManagement\Team.cs" />
     <Compile Include="UserManagement\User.cs" />
     <Compile Include="AutosysServer\Adapter.cs" />
     <Compile Include="AutosysServer\MainHandler.cs" />
