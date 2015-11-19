@@ -123,6 +123,8 @@
     <Compile Include="StudyManagement\Study.cs" />
     <Compile Include="StudyManagement\StudyHandler.cs" />
     <Compile Include="StudyManagement\StudyManager.cs" />
+    <Compile Include="UserManagement\Manager.cs" />
+    <Compile Include="UserManagement\Researcher.cs" />
     <Compile Include="UserManagement\Team.cs" />
     <Compile Include="UserManagement\User.cs" />
     <Compile Include="UserManagement\UserHandler.cs" />
