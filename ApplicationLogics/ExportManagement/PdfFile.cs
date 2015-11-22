@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogics.ExportManagement
 {
-    public interface IConverter
+    public class PdfFile : IExportFile
     {
-        IExportFile Convert(Protocol protocol);
+        public int Id { get; set; }
+        public ExportType Type { get; set; }
+        public byte[] Bytes { get; set; }
     }
 }

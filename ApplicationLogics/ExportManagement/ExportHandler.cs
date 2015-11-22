@@ -17,9 +17,14 @@ namespace ApplicationLogics
             _converter = converter;
         }
 
-        public ExportType Export(Protocol protocol)
+        public CsvFile ExportCsvFile(Protocol protocol)
         {
-            throw new NotImplementedException();
+            return _converter.Convert(protocol) as CsvFile;
+        }
+
+        public PdfFile ExportPdfFile(Protocol protocol)
+        {
+            return _converter.Convert(protocol) as PdfFile;
         }
     }
 }

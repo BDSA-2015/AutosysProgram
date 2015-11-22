@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.ExportManagement
 {
-    public interface IConverter
+    public interface IExportFile : IEntity
     {
-        IExportFile Convert(Protocol protocol);
+        ExportType Type { get; set; }
     }
 }
