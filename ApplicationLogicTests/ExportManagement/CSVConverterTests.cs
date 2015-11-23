@@ -10,13 +10,13 @@ using ApplicationLogics.StudyManagement;
 namespace ApplicationLogics.ExportManagement.Tests
 {
     [TestClass()]
-    public class CSVConverterTests
+    public class CsvConverterTests
     {
-        private CSVConverter converter;
+        private CsvConverter _converter;
         [TestInitialize]
         public void Initialize()
         {
-            converter = new CSVConverter();
+            _converter = new CsvConverter();
         }
 
         [TestMethod()]
@@ -28,7 +28,7 @@ namespace ApplicationLogics.ExportManagement.Tests
             protocol.InclusionCriteria = new List<Criteria>();
 
             //Act
-            CsvFile csvFile = converter.Convert(protocol) as CsvFile;
+            CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
 
             //Assert
             Assert.AreEqual(ExportType.CSV, csvFile.Type);
@@ -48,7 +48,7 @@ namespace ApplicationLogics.ExportManagement.Tests
                 protocol.ExclusionCriteria.Add(new Criteria() { Name = $"criteria{0}" });
                 protocol.InclusionCriteria.Add(new Criteria() { Name = $"criteria{0}" });
 
-            CsvFile csvFile = converter.Convert(protocol) as CsvFile;
+            CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
 
             //Assert
             Assert.AreEqual(ExportType.CSV, csvFile.Type);
@@ -71,7 +71,7 @@ namespace ApplicationLogics.ExportManagement.Tests
                 protocol.InclusionCriteria.Add(new Criteria() { Name = $"criteria{i}" });
             }
 
-            CsvFile csvFile = converter.Convert(protocol) as CsvFile;
+            CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
 
             //Assert
             Assert.AreEqual(ExportType.CSV, csvFile.Type);
@@ -91,7 +91,7 @@ namespace ApplicationLogics.ExportManagement.Tests
             //Act
                 protocol.ExclusionCriteria.Add(null);
 
-            CsvFile csvFile = converter.Convert(protocol) as CsvFile;
+            CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
         }
 
         [TestMethod()]
@@ -106,7 +106,7 @@ namespace ApplicationLogics.ExportManagement.Tests
             //Act
             protocol.ExclusionCriteria.Add(new Criteria() {Name = null});
 
-            CsvFile csvFile = converter.Convert(protocol) as CsvFile;
+            CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
         }
 
         [TestMethod()]
@@ -121,28 +121,23 @@ namespace ApplicationLogics.ExportManagement.Tests
             //Act
             protocol.ExclusionCriteria.Add(new Criteria() { Name = "" });
 
-            CsvFile csvFile = converter.Convert(protocol) as CsvFile;
+            CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
         }
 
         [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConvertNullCriteriaListInputTest()
         {
-            //Arrange
-            var protocol = new Protocol();
-            protocol.ExclusionCriteria = null;
-
-            CsvFile csvFile = converter.Convert(protocol) as CsvFile;
+            //Act
+            CsvFile csvFile = _converter.Convert(null) as CsvFile;
         }
 
         [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConvertNullProtocolInputTest()
         {
-            //Arrange
-            Protocol protocol = null;
-
-            CsvFile csvFile = converter.Convert(protocol) as CsvFile;
+            //Act
+            CsvFile csvFile = _converter.Convert(null) as CsvFile;
         }
 
 

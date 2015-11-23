@@ -7,8 +7,16 @@ using ApplicationLogics.StudyManagement;
 
 namespace ApplicationLogics.ExportManagement
 {
-    public class CSVConverter : IConverter
+    /// <summary>
+    /// Class for converting export files to the CSV format.
+    /// </summary>
+    public class CsvConverter : IConverter
     {
+        /// <summary>
+        /// Converts the given Protocol to an IExportFile which can be exported by an ExportHandler
+        /// </summary>
+        /// <param name="protocol">The Protocol which is to be exported</param>
+        /// <returns></returns>
         public IExportFile Convert(Protocol protocol)
         {
             if (protocol == null)
@@ -20,9 +28,16 @@ namespace ApplicationLogics.ExportManagement
             exportFile.Type = ExportType.CSV;
             exportFile.InclusionData = ConvertInclusionData(protocol);
             exportFile.ExclusionData = ConvertExclusionData(protocol);
+            exportFile.Description = protocol.Description;
+            exportFile.Origin = protocol.Id;
             return exportFile;
         }
 
+        /// <summary>
+        /// Converts the data in a Protocol's InclusionCriteria to a CSV format
+        /// </summary>
+        /// <param name="protocol">The Protocol to be converted</param>
+        /// <returns>The Protocol's Inclusion Criteria as a CSV string</returns>
         private string ConvertInclusionData(Protocol protocol)
         {
             
@@ -40,6 +55,11 @@ namespace ApplicationLogics.ExportManagement
             }));
         }
 
+        /// <summary>
+        /// Converts the data in a Protocol's ExclusionCriteria to a CSV format
+        /// </summary>
+        /// <param name="protocol">The Protocol to be converted</param>
+        /// <returns>The Protocol's Exclusion Criteria as a CSV string</returns>
         private string ConvertExclusionData(Protocol protocol)
         {
             return string.Join(",", protocol.ExclusionCriteria.Select(x =>

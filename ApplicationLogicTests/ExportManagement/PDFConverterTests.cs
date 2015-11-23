@@ -14,15 +14,16 @@ namespace ApplicationLogics.ExportManagement.Tests
     [TestClass()]
     public class PDFConverterTests
     {
-        private PDFConverter converter;
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            converter = new PDFConverter();
-        }
-
         //Under construction
+
+        //private PDFConverter converter;
+
+        //[TestInitialize]
+        //public void Initialize()
+        //{
+        //    converter = new PDFConverter();
+        //}
+
         //[TestMethod()]
         //public void ConvertEmptyAcceptedInputTest()
         //{

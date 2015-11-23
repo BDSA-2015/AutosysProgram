@@ -7,14 +7,16 @@ using ApplicationLogics.ExportManagement;
 
 namespace ApplicationLogics
 {
+    /// <summary>
+    /// Class for exporting research protocols to the clients in different formats.
+    /// </summary>
     public class ExportHandler
     {
         private IConverter _converter;
-        //For converting to different files types for exporting
 
         public CsvFile ExportCsvFile(Protocol protocol)
         {
-            _converter = new CSVConverter();
+            _converter = new CsvConverter();
             return _converter.Convert(protocol) as CsvFile;
         }
 

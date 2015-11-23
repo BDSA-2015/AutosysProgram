@@ -6,5 +6,8 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogics
 {
+    /// <summary>
+    /// The possible export types for Protocols.
+    /// </summary>
         public enum ExportType { CSV, PDF};
 }
