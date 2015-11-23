@@ -9,21 +9,18 @@ namespace ApplicationLogics
 {
     public class ExportHandler
     {
-        //For converting to different files types for exporting
         private IConverter _converter;
-
-        public ExportHandler(IConverter converter)
-        {
-            _converter = converter;
-        }
+        //For converting to different files types for exporting
 
         public CsvFile ExportCsvFile(Protocol protocol)
         {
+            _converter = new CSVConverter();
             return _converter.Convert(protocol) as CsvFile;
         }
 
         public PdfFile ExportPdfFile(Protocol protocol)
         {
+            _converter = new PDFConverter();
             return _converter.Convert(protocol) as PdfFile;
         }
     }
