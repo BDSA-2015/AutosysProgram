@@ -8,7 +8,7 @@ using ApplicationLogics.StudyManagement;
 
 namespace ApplicationLogics.ExportManagement
 {
-    class PDFConverter : IConverter
+    public class PDFConverter : IConverter
     {
         public IExportFile Convert(Protocol protocol)
         {
@@ -23,7 +23,7 @@ namespace ApplicationLogics.ExportManagement
             var myList = new List<Criteria>();
             myList.AddRange(protocol.InclusionCriteria);
 
-            return string.Join(",", myList.Select(x => x.Name.ToArray()));
+            return string.Join(" ", myList.Select(x => x.Name.ToArray()));
         }
 
         private string ConvertExclusionData(Protocol protocol)
@@ -31,7 +31,7 @@ namespace ApplicationLogics.ExportManagement
             var myList = new List<Criteria>();
             myList.AddRange(protocol.ExclusionCriteria);
 
-            return string.Join(",", myList.Select(x => x.Name.ToArray()));
+            return string.Join(" ", myList.Select(x => x.Name.ToArray()));
         }
     }
 }
