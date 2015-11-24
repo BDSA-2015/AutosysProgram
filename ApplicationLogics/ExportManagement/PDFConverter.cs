@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
-using Newtonsoft.Json;
 
 namespace ApplicationLogics.ExportManagement
 {
@@ -13,7 +9,7 @@ namespace ApplicationLogics.ExportManagement
     /// Class for converting export files to the PDF format.
     /// </summary>
     //Class is under construction
-    public class PDFConverter : IConverter
+    public class PdfConverter : IConverter
     {
         /// <summary>
         /// Serializes the given Protocol and returns it as a JSON string

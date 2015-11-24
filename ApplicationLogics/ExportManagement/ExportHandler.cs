@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ApplicationLogics.ExportManagement;
+﻿using ApplicationLogics.ProtocolManagement;
 using Newtonsoft.Json;
 
-namespace ApplicationLogics
+namespace ApplicationLogics.ExportManagement
 {
     /// <summary>
     /// Class for exporting research protocols to the clients in different formats.
@@ -23,7 +18,7 @@ namespace ApplicationLogics
 
         public string ExportPdfFile(Protocol protocol)
         {
-            _converter = new PDFConverter();
+            _converter = new PdfConverter();
             return JsonConvert.SerializeObject(_converter.Convert(protocol));
         }
     }

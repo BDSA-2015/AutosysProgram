@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ApplicationLogics.Repository;
 using ApplicationLogics.StudyManagement;
-using ApplicationLogics.UserManagement;
 
-namespace ApplicationLogics.ExportManagement
+namespace ApplicationLogics.ProtocolManagement
 {
     /// <summary>
     /// This class represents the Research Protocol used to configure a given study.

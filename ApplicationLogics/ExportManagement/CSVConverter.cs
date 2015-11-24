@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Newtonsoft.Json;
+using ApplicationLogics.ProtocolManagement;
 
 namespace ApplicationLogics.ExportManagement
 {

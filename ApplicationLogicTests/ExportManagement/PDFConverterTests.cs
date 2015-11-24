@@ -7,12 +7,12 @@ namespace ApplicationLogicTests.ExportManagement
     {
         //Under construction
 
-        //private PDFConverter converter;
+        //private PdfConverter converter;
 
         //[TestInitialize]
         //public void Initialize()
         //{
-        //    converter = new PDFConverter();
+        //    converter = new PdfConverter();
         //}
 
         //[TestMethod()]

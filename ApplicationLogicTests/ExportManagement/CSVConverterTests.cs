@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ApplicationLogics.ExportManagement;
+using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

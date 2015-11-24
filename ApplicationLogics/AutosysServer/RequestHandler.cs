@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ApplicationLogics.StudyManagement;
-using Task = System.Threading.Tasks.Task;
 
 namespace ApplicationLogics.AutosysServer
 {
