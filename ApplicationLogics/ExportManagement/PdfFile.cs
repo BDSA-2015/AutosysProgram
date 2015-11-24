@@ -12,7 +12,6 @@ namespace ApplicationLogics.ExportManagement
     public class PdfFile : IExportFile
     {
         public int Id { get; set; }
-        public ExportType Type { get; set; }
         public int Origin { get; set; }
         public string Description { get; set; }
         public byte[] Bytes { get; set; }

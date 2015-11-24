@@ -11,6 +11,6 @@ namespace ApplicationLogics.ExportManagement
     /// </summary>
     public interface IConverter
     {
-        string Convert(Protocol protocol);
+        IExportFile Convert(Protocol protocol);
     }
 }

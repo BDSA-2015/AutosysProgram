@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationLogics.ExportManagement;
+using Newtonsoft.Json;
 
 namespace ApplicationLogics
 {
@@ -17,13 +18,13 @@ namespace ApplicationLogics
         public string ExportCsvFile(Protocol protocol)
         {
             _converter = new CsvConverter();
-            return _converter.Convert(protocol);
+            return JsonConvert.SerializeObject(_converter.Convert(protocol));
         }
 
         public string ExportPdfFile(Protocol protocol)
         {
             _converter = new PDFConverter();
-            return _converter.Convert(protocol);
+            return JsonConvert.SerializeObject(_converter.Convert(protocol));
         }
     }
 }

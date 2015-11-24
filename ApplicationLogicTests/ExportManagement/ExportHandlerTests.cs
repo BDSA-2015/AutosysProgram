@@ -1,25 +1,23 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ApplicationLogics;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ApplicationLogics;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.StudyManagement;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 
-namespace ApplicationLogics.Tests
+namespace ApplicationLogicTests.ExportManagement
 {
     [TestClass()]
     public class ExportHandlerTests
     {
-        private ExportHandler exportHandler;
+        private ExportHandler _exportHandler;
 
         [TestInitialize()]
         public void Initialize()
         {
             //Arrange
-            exportHandler = new ExportHandler();
+            _exportHandler = new ExportHandler();
         }
 
         [TestMethod()]
@@ -43,17 +41,15 @@ namespace ApplicationLogics.Tests
             };
             protocol.Id = 0;
             protocol.Description = "This is a protocol";
-
-            //Act
-            var exportFile = exportHandler.ExportCsvFile(protocol);
+            var serializedExportFile = _exportHandler.ExportCsvFile(protocol);
 
             //Assert
-            Assert.AreEqual(0, exportFile.Id);
-            Assert.AreEqual(ExportType.CSV, exportFile.Type);
-            Assert.AreEqual(protocol.Description, exportFile.Description);
-            Assert.AreEqual(protocol.Id, exportFile.Origin);
-            Assert.AreEqual("Medicine,Health", exportFile.ExclusionData);
-            Assert.AreEqual("Software,PC", exportFile.InclusionData);
+            var deserializedExportFile = JsonConvert.DeserializeObject<CsvFile>(serializedExportFile);
+            Assert.AreEqual(0, deserializedExportFile.Id);
+            Assert.AreEqual(protocol.Description, deserializedExportFile.Description);
+            Assert.AreEqual(protocol.Id, deserializedExportFile.Origin);
+            Assert.AreEqual("Medicine,Health", deserializedExportFile.ExclusionCriteria);
+            Assert.AreEqual("Software,PC", deserializedExportFile.InclusionCriteria);
         }
 
         [TestMethod()]
@@ -61,7 +57,7 @@ namespace ApplicationLogics.Tests
         public void ExportCsvFileNullInputTest()
         {
             //Act
-            var exportFile = exportHandler.ExportCsvFile(null);
+            var exportFile = _exportHandler.ExportCsvFile(null);
         }
 
         //[TestMethod()]

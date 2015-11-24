@@ -1,18 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ApplicationLogics.ExportManagement;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using ApplicationLogics.StudyManagement;
 
-namespace ApplicationLogics.ExportManagement.Tests
+namespace ApplicationLogicTests.ExportManagement
 {
     [TestClass()]
-    public class PDFConverterTests
+    public class PdfConverterTests
     {
         //Under construction
 

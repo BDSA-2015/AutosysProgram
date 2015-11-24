@@ -12,7 +12,6 @@ namespace ApplicationLogics.ExportManagement
     /// </summary>
     public interface IExportFile : IEntity
     {
-        ExportType Type { get; set; }
         int Origin { get; set; }
         string Description { get; set; }
     }
