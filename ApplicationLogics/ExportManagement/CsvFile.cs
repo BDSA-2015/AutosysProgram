@@ -2,6 +2,8 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using ApplicationLogics.ExportManagement.Interfaces;
+
 namespace ApplicationLogics.ExportManagement
 {
     public class CsvFile : IExportFile

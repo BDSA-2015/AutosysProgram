@@ -2,13 +2,14 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using ApplicationLogics.ExportManagement.Interfaces;
 using ApplicationLogics.ProtocolManagement;
 using Newtonsoft.Json;
 
 namespace ApplicationLogics.ExportManagement
 {
     /// <summary>
-    ///     Class for exporting research protocols to the clients in different formats.
+    /// Class for exporting research protocols to the clients in different formats.
     /// </summary>
     public class ExportHandler
     {

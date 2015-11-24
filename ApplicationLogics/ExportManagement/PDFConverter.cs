@@ -4,22 +4,27 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using ApplicationLogics.ExportManagement.Interfaces;
 using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
 
 namespace ApplicationLogics.ExportManagement
 {
     /// <summary>
-    ///     Class for converting export files to the PDF format.
+    /// Class for converting export files to the PDF format.
     /// </summary>
     //Class is under construction
     public class PdfConverter : IConverter
     {
         /// <summary>
-        ///     Serializes the given Protocol and returns it as a JSON string
+        /// Serializes the given Protocol and returns it as a JSON string
         /// </summary>
-        /// <param name="protocol">The Protocol to be exported</param>
-        /// <returns>A Protocol serialized to a JSON string</returns>
+        /// <param name="protocol">
+        /// The Protocol to be exported
+        /// </param>
+        /// <returns>
+        /// A Protocol serialized to a JSON string
+        /// </returns>
         public IExportFile Convert(Protocol protocol)
         {
             var exportFile = new PdfFile();

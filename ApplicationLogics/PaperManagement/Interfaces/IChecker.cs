@@ -2,7 +2,7 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-namespace ApplicationLogics.PaperManagement
+namespace ApplicationLogics.PaperManagement.Interfaces
 {
     internal interface IChecker
     {

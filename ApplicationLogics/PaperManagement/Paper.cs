@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using ApplicationLogics.PaperManagement.Interfaces;
 using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.PaperManagement
@@ -11,7 +12,7 @@ namespace ApplicationLogics.PaperManagement
     public class Paper : IEntity
     {
         /// <summary>
-        ///     Create a empty paper with no values.
+        /// Creates an empty paper with no values.
         /// </summary>
         public Paper()
         {
@@ -19,19 +20,20 @@ namespace ApplicationLogics.PaperManagement
         }
 
         /// <summary>
-        ///     Create a Paper based existing information
+        /// Creates a Paper based on existing information.
         /// </summary>
-        /// <param name="PaperInformation"></param>
-        public Paper(Dictionary<ITag, List<string>> PaperInformation)
+        /// <param name="paperInformation"></param>
+        public Paper(Dictionary<ITag, List<string>> paperInformation)
         {
             throw new NotImplementedException();
         }
 
         public Dictionary<ITag, List<string>> PaperInformation { get; protected set; }
+
         public int Id { get; set; }
 
         /// <summary>
-        ///     Update information on paper or add a information on the Paper
+        /// Update information on paper or add addtional information on the Paper.
         /// </summary>
         /// <param name="itemTag"></param>
         /// <param name="information"></param>
@@ -41,8 +43,8 @@ namespace ApplicationLogics.PaperManagement
         }
 
         /// <summary>
-        ///     Remove a information about the paper. This will remove all information about the specified Tag, even if multiple
-        ///     information was stored under this Tag
+        /// Remove information about a paper. This will remove all information about the specified Tag
+        /// (even if multiple information was stored under this Tag).
         /// </summary>
         public void RemoveInformation()
         {

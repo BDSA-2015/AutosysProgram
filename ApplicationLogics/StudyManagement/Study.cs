@@ -9,26 +9,26 @@ namespace ApplicationLogics.StudyManagement
 {
     public class Study : IEntity
     {
-        /// <summary>
-        ///     The Study's name. Try to keep the name unique
-        /// </summary>
+
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         /// <summary>
-        ///     What kind of study  is this
+        /// Study type. 
         /// </summary>
         public string Classification { get; set; }
 
         /// <summary>
-        ///     A quick summary of the study
+        /// A quick summary of the study
         /// </summary>
-        public string description { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
-        ///     The phases the project has been through and the current phase
+        /// Phases that study has undergone and the current phase.
         /// </summary>
-        public List<Phase> phases { get; set; }
+        public List<Phase> Phases { get; set; }
 
-        public int Id { get; set; }
     }
+
 }

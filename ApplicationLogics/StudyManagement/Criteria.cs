@@ -6,10 +6,13 @@ using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.StudyManagement
 {
+
+    /// <summary>
+    /// This class represents ... in a ... and is used in ... to ...
+    /// </summary>
     public class Criteria : IEntity
     {
         public string Name { get; set; }
-
         public string Description { get; set; }
         public DataField DataField { get; set; }
         public int Id { get; set; }

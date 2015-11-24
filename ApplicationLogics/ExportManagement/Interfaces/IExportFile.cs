@@ -4,10 +4,10 @@
 
 using ApplicationLogics.Repository;
 
-namespace ApplicationLogics.ExportManagement
+namespace ApplicationLogics.ExportManagement.Interfaces
 {
     /// <summary>
-    ///     Interface for ExportFiles generated from an existing Protocol.
+    /// Interface for ExportFiles generated from an existing Protocol.
     /// </summary>
     public interface IExportFile : IEntity
     {

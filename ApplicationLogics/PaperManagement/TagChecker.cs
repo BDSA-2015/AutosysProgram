@@ -3,6 +3,7 @@
 // Jacob Mullit Møiniche.
 
 using System;
+using ApplicationLogics.PaperManagement.Interfaces;
 
 namespace ApplicationLogics.PaperManagement
 {

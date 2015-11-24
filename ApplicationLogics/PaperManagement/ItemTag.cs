@@ -9,7 +9,7 @@ namespace ApplicationLogics.PaperManagement
     public class ItemTag : IEntity
     {
         /// <summary>
-        ///     This is a Bibtex property holder. Year, Auther. etc, but is not the value to the property
+        /// This is a Bibtex property holder (e.g. Year or Author) but not the actual value of the property
         /// </summary>
         public string TagName { get; set; }
 

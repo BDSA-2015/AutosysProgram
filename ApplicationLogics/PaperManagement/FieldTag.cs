@@ -2,12 +2,14 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using ApplicationLogics.PaperManagement.Interfaces;
+
 namespace ApplicationLogics.PaperManagement
 {
     internal class FieldTag : ITag
     {
         /// <summary>
-        ///     This is a Bibtex property holder. Year, Auther. etc, but is not the value to the property
+        /// This is a Bibtex property holder (e.g. Year or Author) but not the actual value. 
         /// </summary>
         public string TagName { get; set; }
     }

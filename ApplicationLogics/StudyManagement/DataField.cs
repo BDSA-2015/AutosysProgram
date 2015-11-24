@@ -7,7 +7,7 @@ using System;
 namespace ApplicationLogics.StudyManagement
 {
     /// <summary>
-    ///     A datafield is part of a given task and is used to determine how paper content is evaluated.
+    /// A datafield is part of a given task and is used to determine how paper content is evaluated.
     /// </summary>
     public class DataField
     {
@@ -15,8 +15,8 @@ namespace ApplicationLogics.StudyManagement
         {
             String,
             Boolean, // True or false 
-            Enumeration, // Select one item from list. Comma seperated
-            Flags, // Select multiple items or none from list. Comma seperated
+            Enumeration, // Select one item from list. Comma separated
+            Flags, // Select multiple items or none from list. Comma separated
             Resource // type such as PDF, JPEG etc.
         }
 
@@ -58,8 +58,8 @@ namespace ApplicationLogics.StudyManagement
 
 
         /// <summary>
-        ///     We use string to define field value. We use comma serperation
-        ///     when using enumerarion and flags
+        /// We use string to define field values. 
+        /// We use comma serperation when using enumerarion and flags.
         /// </summary>
         public string FieldValue
         {

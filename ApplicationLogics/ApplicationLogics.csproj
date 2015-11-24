@@ -122,7 +122,7 @@
     <Compile Include="StudyManagement\DataField.cs" />
     <Compile Include="StudyManagement\Phase.cs" />
     <Compile Include="StudyManagement\Role.cs" />
-    <Compile Include="StudyManagement\Task.cs" />
+    <Compile Include="StudyManagement\TaskRequest.cs" />
     <Compile Include="StudyManagement\Study.cs" />
     <Compile Include="StudyManagement\StudyHandler.cs" />
     <Compile Include="StudyManagement\StudyManager.cs" />

@@ -5,10 +5,11 @@
 namespace ApplicationLogics.ProtocolManagement
 {
     /// <summary>
-    ///     This class is responsible for handling incoming research protocols.
+    /// This class is responsible for handling incoming research protocols.
     /// </summary>
     public class ProtocolHandler
     {
+        
         public static void CreateProtocol()
         {
         }

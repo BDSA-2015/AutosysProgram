@@ -12,9 +12,9 @@ namespace ApplicationLogics.StudyManagement
     public class Phase : IEntity
     {
         public List<Criteria> Criterias { get; protected set; }
-        public Dictionary<Task, List<User>> AssignedTask { get; protected set; }
+        public Dictionary<TaskRequest, List<User>> AssignedTask { get; protected set; }
 
-        public List<Task> UnAssignedTasks { get; protected set; }
+        public List<TaskRequest> UnAssignedTasks { get; protected set; }
 
         public bool PhaseFinished { get; protected set; }
 
@@ -46,7 +46,7 @@ namespace ApplicationLogics.StudyManagement
             throw new NotImplementedException();
         }
 
-        public void AddTask(Task task)
+        public void AddTask(TaskRequest task)
         {
             throw new NotImplementedException();
         }
@@ -56,12 +56,12 @@ namespace ApplicationLogics.StudyManagement
             throw new NotImplementedException();
         }
 
-        public void UpdateTask(Task task)
+        public void UpdateTask(TaskRequest task)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Task> GetUnfinishedTask()
+        public IEnumerable<TaskRequest> GetUnfinishedTask()
         {
             throw new NotImplementedException();
         }

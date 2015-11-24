@@ -7,10 +7,10 @@ using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.StudyManagement
 {
-    public class Task : IEntity
+    public class TaskRequest : IEntity
     {
         /// <summary>
-        ///     Determines task states; initialized, in progress or completed
+        /// Determines task states; initialized, in progress or completed
         /// </summary>
         public enum Progress
         {
@@ -19,7 +19,7 @@ namespace ApplicationLogics.StudyManagement
             Done
         }
 
-        public enum TaskType
+        public enum Type
         {
             FillOutDataFields,
             HandleConflictingDatafields

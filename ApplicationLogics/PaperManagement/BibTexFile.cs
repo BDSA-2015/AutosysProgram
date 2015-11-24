@@ -2,10 +2,14 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using ApplicationLogics.PaperManagement.Interfaces;
+
 namespace ApplicationLogics.PaperManagement
 {
-    //Not implemented yet. This class will be based on a existing file wich we will be provided
+    // Not implemented yet. This class will be based on a existing file wich we will be provided
     public class BibTexFile : IFile
     {
+
     }
+
 }

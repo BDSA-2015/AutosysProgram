@@ -3,16 +3,21 @@
 // Jacob Mullit Møiniche.
 
 using System;
+using ApplicationLogics.PaperManagement.Interfaces;
 
 namespace ApplicationLogics.PaperManagement
 {
+
+    /// <summary>
+    /// This class is used to create papers based on e.g. a BibTex file or other document types. 
+    /// </summary>
     public class PaperHandler
     {
-        //is used to generate Bibtex files, which later can be stored as a Paper
+        // Used to generate Bibtex files later stored as a Paper
         private IParser parser { get; set; }
 
         /// <summary>
-        ///     Create a empty Paper
+        /// Create a empty Paper.
         /// </summary>
         public Paper CreatePaper()
         {
@@ -20,7 +25,7 @@ namespace ApplicationLogics.PaperManagement
         }
 
         /// <summary>
-        ///     Create a Paper based on a BibTex file.
+        /// Create a Paper based on a BibTex file.
         /// </summary>
         /// <param name="file"></param>
         public Paper CreatePaper(BibTexFile file)
@@ -29,10 +34,14 @@ namespace ApplicationLogics.PaperManagement
         }
 
         /// <summary>
-        ///     Create a Paper based on a document
+        /// Create a Paper based on a document
         /// </summary>
-        /// <param name="document"></param>
-        /// <returns> Paper based on a automaed analysis of the file</returns>
+        /// <param name="document">
+        /// Document used to create a paper. 
+        /// </param>
+        /// <returns> 
+        /// Paper based on an automated analysis of the file
+        /// </returns>
         public Paper LoadFile(string document)
         {
             throw new NotImplementedException();

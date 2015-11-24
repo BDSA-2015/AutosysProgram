@@ -6,9 +6,8 @@ using System;
 
 namespace ApplicationLogics.StudyManagement
 {
-    internal class StudyHandler
+    internal class StudyHandler // TODO Why internal? 
     {
-        //Support C.R.U.D. operations 
         public void Create()
         {
             throw new NotImplementedException();

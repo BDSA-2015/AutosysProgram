@@ -4,10 +4,10 @@
 
 using ApplicationLogics.ProtocolManagement;
 
-namespace ApplicationLogics.ExportManagement
+namespace ApplicationLogics.ExportManagement.Interfaces
 {
     /// <summary>
-    ///     Interface for Converter classes used by an ExportHandler.
+    /// Interface for Converter classes used by an ExportHandler.
     /// </summary>
     public interface IConverter
     {

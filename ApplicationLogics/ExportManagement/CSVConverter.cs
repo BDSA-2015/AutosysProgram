@@ -4,17 +4,18 @@
 
 using System;
 using System.Linq;
+using ApplicationLogics.ExportManagement.Interfaces;
 using ApplicationLogics.ProtocolManagement;
 
 namespace ApplicationLogics.ExportManagement
 {
     /// <summary>
-    ///     Class for converting export files to the CSV format.
+    /// Class for converting export files to the CSV format.
     /// </summary>
     public class CsvConverter : IConverter
     {
         /// <summary>
-        ///     Converts the given Protocol to an IExportFile which can be exported by an ExportHandler
+        /// Converts the given Protocol to an IExportFile which can be exported by an ExportHandler
         /// </summary>
         /// <param name="protocol">The Protocol which is to be exported</param>
         /// <returns></returns>
@@ -22,7 +23,7 @@ namespace ApplicationLogics.ExportManagement
         {
             if (protocol == null)
             {
-                throw new ArgumentNullException("The given Protocol cannot be null");
+                throw new ArgumentNullException(null, "The given Protocol cannot be null"); 
             }
 
             var exportFile = new CsvFile();
@@ -34,17 +35,21 @@ namespace ApplicationLogics.ExportManagement
         }
 
         /// <summary>
-        ///     Converts the data in a Protocol's InclusionCriteria to a CSV format
+        /// Converts data from inclusion criteria in a Protocol into a CSV format.  
         /// </summary>
-        /// <param name="protocol">The Protocol to be converted</param>
-        /// <returns>The Protocol's Inclusion Criteria as a CSV string</returns>
+        /// <param name="protocol">
+        /// The Protocol to be converted
+        /// </param>
+        /// <returns>
+        /// The Protocol's Inclusion Criteria as a CSV string
+        /// </returns>
         private string ConvertInclusionData(Protocol protocol)
         {
             return string.Join(",", protocol.InclusionCriteria.Select(x =>
             {
                 if (x == null)
                 {
-                    throw new ArgumentNullException("The Inclusion Criteria cannot be null");
+                    throw new ArgumentNullException(null, "The Inclusion Criteria cannot be null"); 
                 }
                 if (string.IsNullOrEmpty(x.Name))
                 {
@@ -55,7 +60,7 @@ namespace ApplicationLogics.ExportManagement
         }
 
         /// <summary>
-        ///     Converts the data in a Protocol's ExclusionCriteria to a CSV format
+        /// Converts data from exclusion criteria in a protocol to a CSV format
         /// </summary>
         /// <param name="protocol">The Protocol to be converted</param>
         /// <returns>The Protocol's Exclusion Criteria as a CSV string</returns>
@@ -65,11 +70,11 @@ namespace ApplicationLogics.ExportManagement
             {
                 if (x == null)
                 {
-                    throw new ArgumentNullException("The Exclusion Criteria cannot be null");
+                    throw new ArgumentNullException(null, "The Exclusion Criteria cannot be null");
                 }
                 if (string.IsNullOrEmpty(x.Name))
                 {
-                    throw new ArgumentNullException("Cannot convert null or empty criteria name");
+                    throw new ArgumentNullException(null, "Cannot convert null or empty criteria name");
                 }
                 return x.Name;
             }));

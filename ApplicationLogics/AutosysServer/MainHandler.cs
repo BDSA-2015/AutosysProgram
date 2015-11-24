@@ -10,18 +10,18 @@ using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.Repository;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
+using System.Threading.Tasks;
 
 namespace ApplicationLogics.AutosysServer
 {
     public class MainHandler
     {
+        private IRepository<IEntity> _Storage;
         private ExportHandler _exportHandler;
         private PaperHandler _paperHandler;
         private ProtocolHandler _protocolHandler;
         private RequestHandler _requestHandler;
-        private IRepository<IEntity> _Storage;
         private StudyHandler _studyHandler;
-
         private UserHandler _userHandler;
 
         public MainHandler()
@@ -74,52 +74,63 @@ namespace ApplicationLogics.AutosysServer
             throw new NotImplementedException();
         }
 
-        public void GetTasks(int studyId, int userId, int count, Task.TaskType Type)
+        public void GetTasks(int studyId, int userId, int count, TaskRequest.Type type)
         {
             throw new NotImplementedException();
-        } //TODO TASK TYPE IS AN ENUM?
+        } 
 
         /// <summary>
-        ///     reports the different stages in the study, and per stage, for each user the amount of tasks done, out of all the
-        ///     known tasks to be done
+        /// Reports the different stages in a study and shows completed tasks per stage for each user.  
         /// </summary>
-        /// <param name="userId"></param>
-        public List<System.Threading.Tasks.Task> GetStudyOverview(int userId)
+        /// <param name="userId"> 
+        /// If of user related to a given study.
+        /// </param>
+        public List<Task> GetStudyOverview(int userId)
         {
             throw new NotImplementedException();
         }
 
 
         /// <summary>
-        ///     deliver a finished task, including the resulting modified fields.
-        ///     This should return whether or not the task was delivered
-        ///     (e.g., can still be delivered) successfully).
-        ///     This can be called several times for the same task,
-        ///     in which case the latest value is used(if the task is still editable, which is decided by the server).
+        /// Deliver a finished task including a result with modified fields.
+        /// This should return whether or not the task was delivered (e.g., can still be delivered) successfully).
+        /// Can be called several times for the same task in which case the latest value is used (if the task is still editable, which is decided by the server).
         /// </summary>
+        /// <param name="studyId">
+        /// Study holding task.
+        /// </param>
+        /// <param name="userId">
+        /// User assigned to task.
+        /// </param>
+        /// <param name="taskId">
+        /// Id of the task. 
+        /// </param>
+        /// <param name="modifiedField">
+        /// Datafields that have been changed in the task.
+        /// </param>
+        /// <returns>
+        /// A task request with results. 
+        /// </returns>
+        public TaskRequest DeliverTask(int studyId, int userId, int taskId, string modifiedField)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        /// <summary>
+        /// Retrieves all ids of task requests which have already been delivered and can still be edited.
+        /// </summary>
+        /// <param name="userId">
+        /// 
+        /// </param>
         /// <param name="studyId"></param>
-        /// <param name="userId"></param>
-        /// <param name="taskId"></param>
-        /// <param name="modifiedField"></param>
         /// <returns></returns>
-        public System.Threading.Tasks.Task DeliverTask(int studyId, int userId, int taskId, string modifiedField)
+        public List<int> GetReviewableTaskIDs(int userId, int studyId)
         {
             throw new NotImplementedException();
         }
 
-
-        /// <summary>
-        ///     retrieves all task IDs of tasks which have already been delivered, and can still be edited.
-        /// </summary>
-        /// <param name="userID"></param>
-        /// <param name="studyID"></param>
-        /// <returns></returns>
-        public List<int> GetReviewableTaskIDs(int userID, int studyID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<System.Threading.Tasks.Task> GetReviewableTasks(int userID, int studyID)
+        public List<Task> GetReviewableTasks(int userId, int studyId)
         {
             throw new NotImplementedException();
         }

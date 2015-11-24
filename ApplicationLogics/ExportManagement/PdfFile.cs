@@ -2,10 +2,12 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using ApplicationLogics.ExportManagement.Interfaces;
+
 namespace ApplicationLogics.ExportManagement
 {
     /// <summary>
-    ///     Class for creating a PdfFile to export.
+    /// Class for creating a PdfFile to export.
     /// </summary>
     public class PdfFile : IExportFile
     {
