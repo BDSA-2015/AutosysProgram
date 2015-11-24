@@ -14,16 +14,16 @@ namespace ApplicationLogics
     {
         private IConverter _converter;
 
-        public CsvFile ExportCsvFile(Protocol protocol)
+        public string ExportCsvFile(Protocol protocol)
         {
             _converter = new CsvConverter();
-            return _converter.Convert(protocol) as CsvFile;
+            return _converter.Convert(protocol);
         }
 
-        public PdfFile ExportPdfFile(Protocol protocol)
+        public string ExportPdfFile(Protocol protocol)
         {
             _converter = new PDFConverter();
-            return _converter.Convert(protocol) as PdfFile;
+            return _converter.Convert(protocol);
         }
     }
 }
