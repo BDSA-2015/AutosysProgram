@@ -1,4 +1,8 @@
-﻿using System;
+﻿// PaperHandler.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
+// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
+// Jacob Mullit Møiniche.
+
+using System;
 
 namespace ApplicationLogics.PaperManagement
 {
@@ -6,8 +10,9 @@ namespace ApplicationLogics.PaperManagement
     {
         //is used to generate Bibtex files, which later can be stored as a Paper
         private IParser parser { get; set; }
+
         /// <summary>
-        /// Create a empty Paper
+        ///     Create a empty Paper
         /// </summary>
         public Paper CreatePaper()
         {
@@ -15,7 +20,7 @@ namespace ApplicationLogics.PaperManagement
         }
 
         /// <summary>
-        /// Create a Paper based on a BibTex file.
+        ///     Create a Paper based on a BibTex file.
         /// </summary>
         /// <param name="file"></param>
         public Paper CreatePaper(BibTexFile file)
@@ -24,7 +29,7 @@ namespace ApplicationLogics.PaperManagement
         }
 
         /// <summary>
-        /// Create a Paper based on a document
+        ///     Create a Paper based on a document
         /// </summary>
         /// <param name="document"></param>
         /// <returns> Paper based on a automaed analysis of the file</returns>
@@ -32,6 +37,5 @@ namespace ApplicationLogics.PaperManagement
         {
             throw new NotImplementedException();
         }
-       
     }
 }
