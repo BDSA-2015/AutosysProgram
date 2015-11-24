@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ApplicationLogics.ProtocolManagement;
 
 namespace ApplicationLogics.ExportManagement
 {
@@ -11,6 +7,6 @@ namespace ApplicationLogics.ExportManagement
     /// </summary>
     public interface IConverter
     {
-        string Convert(Protocol protocol);
+        IExportFile Convert(Protocol protocol);
     }
 }

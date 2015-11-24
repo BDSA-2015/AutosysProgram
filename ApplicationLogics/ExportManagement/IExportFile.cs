@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ApplicationLogics.Repository;
+﻿using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.ExportManagement
 {
@@ -12,7 +7,6 @@ namespace ApplicationLogics.ExportManagement
     /// </summary>
     public interface IExportFile : IEntity
     {
-        ExportType Type { get; set; }
         int Origin { get; set; }
         string Description { get; set; }
     }

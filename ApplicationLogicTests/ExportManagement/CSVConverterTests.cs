@@ -1,13 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ApplicationLogics.ExportManagement;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ApplicationLogics.ExportManagement;
+using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ApplicationLogics.ExportManagement.Tests
+namespace ApplicationLogicTests.ExportManagement
 {
     [TestClass()]
     public class CsvConverterTests
@@ -31,9 +29,8 @@ namespace ApplicationLogics.ExportManagement.Tests
             CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
 
             //Assert
-            Assert.AreEqual(ExportType.CSV, csvFile.Type);
-            Assert.AreEqual("", csvFile.ExclusionData);
-            Assert.AreEqual("", csvFile.InclusionData);
+            Assert.AreEqual("", csvFile.ExclusionCriteria);
+            Assert.AreEqual("", csvFile.InclusionCriteria);
         }
 
         [TestMethod()]
@@ -51,9 +48,8 @@ namespace ApplicationLogics.ExportManagement.Tests
             CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
 
             //Assert
-            Assert.AreEqual(ExportType.CSV, csvFile.Type);
-            Assert.AreEqual("criteria0", csvFile.ExclusionData);
-            Assert.AreEqual("criteria0", csvFile.InclusionData);
+            Assert.AreEqual("criteria0", csvFile.ExclusionCriteria);
+            Assert.AreEqual("criteria0", csvFile.InclusionCriteria);
         }
 
         [TestMethod()]
@@ -74,9 +70,8 @@ namespace ApplicationLogics.ExportManagement.Tests
             CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
 
             //Assert
-            Assert.AreEqual(ExportType.CSV, csvFile.Type);
-            Assert.AreEqual("criteria0,criteria1,criteria2", csvFile.ExclusionData);
-            Assert.AreEqual("criteria0,criteria1,criteria2", csvFile.InclusionData);
+            Assert.AreEqual("criteria0,criteria1,criteria2", csvFile.ExclusionCriteria);
+            Assert.AreEqual("criteria0,criteria1,criteria2", csvFile.InclusionCriteria);
         }
 
         [TestMethod()]
@@ -91,7 +86,7 @@ namespace ApplicationLogics.ExportManagement.Tests
             //Act
                 protocol.ExclusionCriteria.Add(null);
 
-            CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
+            var csvFile = _converter.Convert(protocol) as CsvFile;
         }
 
         [TestMethod()]

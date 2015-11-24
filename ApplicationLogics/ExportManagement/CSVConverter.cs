@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Newtonsoft.Json;
+using ApplicationLogics.ProtocolManagement;
 
 namespace ApplicationLogics.ExportManagement
 {
@@ -14,7 +14,7 @@ namespace ApplicationLogics.ExportManagement
         /// </summary>
         /// <param name="protocol">The Protocol which is to be exported</param>
         /// <returns></returns>
-        public string Convert(Protocol protocol)
+        public IExportFile Convert(Protocol protocol)
         {
             if (protocol == null)
             {
@@ -22,12 +22,11 @@ namespace ApplicationLogics.ExportManagement
             }
 
             var exportFile = new CsvFile();
-            exportFile.Type = ExportType.CSV;
             exportFile.InclusionCriteria = ConvertInclusionData(protocol);
             exportFile.ExclusionCriteria = ConvertExclusionData(protocol);
             exportFile.Description = protocol.Description;
             exportFile.Origin = protocol.Id;
-            return JsonConvert.SerializeObject(exportFile);
+            return exportFile;
         }
 
         /// <summary>
