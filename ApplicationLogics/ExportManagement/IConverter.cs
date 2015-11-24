@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogics.ExportManagement
 {
+    /// <summary>
+    /// Interface for Converter classes used by an ExportHandler.
+    /// </summary>
     public interface IConverter
     {
-        ExportType Convert(Protocol protocol);
+        IExportFile Convert(Protocol protocol);
     }
 }

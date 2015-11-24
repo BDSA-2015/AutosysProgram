@@ -19,6 +19,5 @@ namespace ApplicationLogics.ExportManagement
         public List<Criteria> InclusionCriteria { get; set; }
         public List<Criteria> ExclusionCriteria { get; set; } 
         public string Description { get; set; } // Describes protocol goal
-    
     }
 }

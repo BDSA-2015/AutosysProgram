@@ -91,7 +91,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExportManagement\CsvFile.cs" />
     <Compile Include="ExportManagement\IConverter.cs" />
+    <Compile Include="ExportManagement\IExportFile.cs" />
+    <Compile Include="ExportManagement\PdfFile.cs" />
     <Compile Include="PaperManagement\BibTexFile.cs" />
     <Compile Include="PaperManagement\BibtexParser.cs" />
     <Compile Include="PaperManagement\FieldTag.cs" />
