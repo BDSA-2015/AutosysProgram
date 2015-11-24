@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿// PDFConverter.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
+// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
+// Jacob Mullit Møiniche.
+
+using System.Collections.Generic;
 using System.Linq;
 using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
@@ -6,13 +10,13 @@ using ApplicationLogics.StudyManagement;
 namespace ApplicationLogics.ExportManagement
 {
     /// <summary>
-    /// Class for converting export files to the PDF format.
+    ///     Class for converting export files to the PDF format.
     /// </summary>
     //Class is under construction
     public class PdfConverter : IConverter
     {
         /// <summary>
-        /// Serializes the given Protocol and returns it as a JSON string
+        ///     Serializes the given Protocol and returns it as a JSON string
         /// </summary>
         /// <param name="protocol">The Protocol to be exported</param>
         /// <returns>A Protocol serialized to a JSON string</returns>

@@ -1,4 +1,8 @@
-﻿using System;
+﻿// MainHandler.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
+// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
+// Jacob Mullit Møiniche.
+
+using System;
 using System.Collections.Generic;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.PaperManagement;
@@ -6,21 +10,19 @@ using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.Repository;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
-using Task = System.Threading.Tasks.Task;
 
 namespace ApplicationLogics.AutosysServer
 {
-
     public class MainHandler
     {
+        private ExportHandler _exportHandler;
+        private PaperHandler _paperHandler;
+        private ProtocolHandler _protocolHandler;
+        private RequestHandler _requestHandler;
+        private IRepository<IEntity> _Storage;
+        private StudyHandler _studyHandler;
 
         private UserHandler _userHandler;
-        private ProtocolHandler _protocolHandler;
-        private PaperHandler _paperHandler;
-        private ExportHandler _exportHandler;
-        private StudyHandler _studyHandler;
-        private IRepository<IEntity> _Storage;
-        private RequestHandler _requestHandler;
 
         public MainHandler()
         {
@@ -29,7 +31,7 @@ namespace ApplicationLogics.AutosysServer
 
         private void HandleRequest()
         {
-            throw new NotImplementedException();//TODO Consider what parameters and how request are coming.
+            throw new NotImplementedException(); //TODO Consider what parameters and how request are coming.
         }
 
         private bool ValidateUser(int userId)
@@ -38,7 +40,9 @@ namespace ApplicationLogics.AutosysServer
         }
 
         //TODO CONSIDER REFACTOR THESE METHODS INTO NEW CLASSES: EG CONTROLLERS (METHODS GIVEN BY STEVEN)
+
         #region Code given by steven. Just extend the folding to see them.
+
         public void CreateTeam(string teamName)
         {
             throw new NotImplementedException();
@@ -70,42 +74,42 @@ namespace ApplicationLogics.AutosysServer
             throw new NotImplementedException();
         }
 
-        public void GetTasks(int studyId, int userId, int count, StudyManagement.Task.TaskType Type)
+        public void GetTasks(int studyId, int userId, int count, Task.TaskType Type)
         {
             throw new NotImplementedException();
         } //TODO TASK TYPE IS AN ENUM?
 
         /// <summary>
-        /// reports the different stages in the study, and per stage, for each user the amount of tasks done, out of all the known tasks to be done
+        ///     reports the different stages in the study, and per stage, for each user the amount of tasks done, out of all the
+        ///     known tasks to be done
         /// </summary>
         /// <param name="userId"></param>
-        public List<Task> GetStudyOverview(int userId)
+        public List<System.Threading.Tasks.Task> GetStudyOverview(int userId)
         {
             throw new NotImplementedException();
         }
 
 
         /// <summary>
-        /// deliver a finished task, including the resulting modified fields. 
-        /// This should return whether or not the task was delivered
-        /// (e.g., can still be delivered) successfully).
-        /// This can be called several times for the same task, 
-        /// in which case the latest value is used(if the task is still editable, which is decided by the server).
+        ///     deliver a finished task, including the resulting modified fields.
+        ///     This should return whether or not the task was delivered
+        ///     (e.g., can still be delivered) successfully).
+        ///     This can be called several times for the same task,
+        ///     in which case the latest value is used(if the task is still editable, which is decided by the server).
         /// </summary>
         /// <param name="studyId"></param>
         /// <param name="userId"></param>
         /// <param name="taskId"></param>
         /// <param name="modifiedField"></param>
         /// <returns></returns>
-        public Task DeliverTask(int studyId, int userId, int taskId, string modifiedField)
+        public System.Threading.Tasks.Task DeliverTask(int studyId, int userId, int taskId, string modifiedField)
         {
             throw new NotImplementedException();
         }
 
-   
 
         /// <summary>
-        /// retrieves all task IDs of tasks which have already been delivered, and can still be edited.
+        ///     retrieves all task IDs of tasks which have already been delivered, and can still be edited.
         /// </summary>
         /// <param name="userID"></param>
         /// <param name="studyID"></param>
@@ -115,12 +119,11 @@ namespace ApplicationLogics.AutosysServer
             throw new NotImplementedException();
         }
 
-        public List<Task> GetReviewableTasks(int userID, int studyID)
+        public List<System.Threading.Tasks.Task> GetReviewableTasks(int userID, int studyID)
         {
             throw new NotImplementedException();
-        } 
-        #endregion
+        }
 
+        #endregion
     }
 }
-

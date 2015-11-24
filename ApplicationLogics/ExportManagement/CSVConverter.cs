@@ -1,16 +1,20 @@
-﻿using System;
+﻿// CSVConverter.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
+// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
+// Jacob Mullit Møiniche.
+
+using System;
 using System.Linq;
 using ApplicationLogics.ProtocolManagement;
 
 namespace ApplicationLogics.ExportManagement
 {
     /// <summary>
-    /// Class for converting export files to the CSV format.
+    ///     Class for converting export files to the CSV format.
     /// </summary>
     public class CsvConverter : IConverter
     {
         /// <summary>
-        /// Converts the given Protocol to an IExportFile which can be exported by an ExportHandler
+        ///     Converts the given Protocol to an IExportFile which can be exported by an ExportHandler
         /// </summary>
         /// <param name="protocol">The Protocol which is to be exported</param>
         /// <returns></returns>
@@ -30,13 +34,12 @@ namespace ApplicationLogics.ExportManagement
         }
 
         /// <summary>
-        /// Converts the data in a Protocol's InclusionCriteria to a CSV format
+        ///     Converts the data in a Protocol's InclusionCriteria to a CSV format
         /// </summary>
         /// <param name="protocol">The Protocol to be converted</param>
         /// <returns>The Protocol's Inclusion Criteria as a CSV string</returns>
         private string ConvertInclusionData(Protocol protocol)
         {
-            
             return string.Join(",", protocol.InclusionCriteria.Select(x =>
             {
                 if (x == null)
@@ -52,7 +55,7 @@ namespace ApplicationLogics.ExportManagement
         }
 
         /// <summary>
-        /// Converts the data in a Protocol's ExclusionCriteria to a CSV format
+        ///     Converts the data in a Protocol's ExclusionCriteria to a CSV format
         /// </summary>
         /// <param name="protocol">The Protocol to be converted</param>
         /// <returns>The Protocol's Exclusion Criteria as a CSV string</returns>
