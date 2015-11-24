@@ -92,20 +92,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExportManagement\CsvFile.cs" />
-    <Compile Include="ExportManagement\IConverter.cs" />
-    <Compile Include="ExportManagement\IExportFile.cs" />
+    <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
+    <Compile Include="ExportManagement\Interfaces\IExportFile.cs" />
     <Compile Include="ExportManagement\PdfFile.cs" />
     <Compile Include="PaperManagement\BibTexFile.cs" />
     <Compile Include="PaperManagement\BibtexParser.cs" />
     <Compile Include="PaperManagement\FieldTag.cs" />
-    <Compile Include="PaperManagement\IChecker.cs" />
-    <Compile Include="PaperManagement\IFile.cs" />
-    <Compile Include="PaperManagement\ITag.cs" />
-    <Compile Include="PaperManagement\IValidator.cs" />
+    <Compile Include="PaperManagement\Interfaces\IChecker.cs" />
+    <Compile Include="PaperManagement\Interfaces\IFile.cs" />
+    <Compile Include="PaperManagement\Interfaces\ITag.cs" />
+    <Compile Include="PaperManagement\Interfaces\IValidator.cs" />
     <Compile Include="PaperManagement\PaperHandler.cs" />
     <Compile Include="PaperManagement\ItemTag.cs" />
     <Compile Include="PaperManagement\TagChecker.cs" />
-    <Compile Include="PaperManagement\IParser.cs" />
+    <Compile Include="PaperManagement\Interfaces\IParser.cs" />
     <Compile Include="PaperManagement\TagValidator.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
     <Compile Include="ProtocolManagement\ProtocolHandler.cs" />
