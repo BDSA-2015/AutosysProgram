@@ -12,9 +12,29 @@ namespace ApplicationLogics.StudyManagement
     /// </summary>
     public class Criteria : IEntity
     {
+        public enum CriteriaOperation { Less,equal, Greater}
+
+        //Used for serialization 
+        public Criteria() { }
+       
         public string Name { get; set; }
+
+
         public string Description { get; set; }
-        public DataField DataField { get; set; }
+
+        /// <summary>
+        /// The operator which determin the relation between variable1 and variable2
+        /// </summary>
+        public CriteriaOperation ComparisonSign { get; set; }
+        
+        /// <summary>
+        /// First variable which is comapared with the second variable based on the the Criteria option.
+        /// </summary>
+        public DataField variable1 { get; set; }
+        /// <summary>
+        /// First second variable which is comapared with the first variable based on the the Criteria option.
+        /// </summary>
+        public DataField variable2 { get; set; }
         public int Id { get; set; }
     }
 }
