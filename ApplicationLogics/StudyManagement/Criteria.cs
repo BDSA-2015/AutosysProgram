@@ -12,7 +12,7 @@ namespace ApplicationLogics.StudyManagement
     /// </summary>
     public class Criteria : IEntity
     {
-        public enum CriteriaOperation { Less,equal, Greater}
+        public enum CriteriaOperation { NoteDefined,Less,equal, Greater}
 
         //Used for serialization 
         public Criteria() { }
