@@ -4,12 +4,11 @@
 
 using System;
 using System.Collections.Generic;
-using ApplicationLogics.Repository;
 using ApplicationLogics.UserManagement;
 
 namespace ApplicationLogics.StudyManagement
 {
-    public class Phase : IEntity
+    public class Phase 
     {
         public List<Criteria> Criterias { get; protected set; }
         public Dictionary<TaskRequest, List<User>> AssignedTask { get; protected set; }
@@ -19,7 +18,6 @@ namespace ApplicationLogics.StudyManagement
         public bool PhaseFinished { get; protected set; }
 
         public List<Phase> DependentPhases { get; protected set; }
-        public int Id { get; set; }
 
         public bool HasCriteria(Criteria criteria)
         {

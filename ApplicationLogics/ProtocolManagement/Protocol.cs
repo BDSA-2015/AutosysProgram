@@ -3,7 +3,6 @@
 // Jacob Mullit Møiniche.
 
 using System.Collections.Generic;
-using ApplicationLogics.Repository;
 using ApplicationLogics.StudyManagement;
 
 namespace ApplicationLogics.ProtocolManagement
@@ -11,10 +10,8 @@ namespace ApplicationLogics.ProtocolManagement
     /// <summary>
     /// This class represents the Research Protocol used to configure a given study.
     /// </summary>
-    public class Protocol : IEntity
+    public class Protocol 
     {
-        public int Id { get; set; }
-
         public List<Criteria> InclusionCriteria { get; set; }
 
         public List<Criteria> ExclusionCriteria { get; set; }

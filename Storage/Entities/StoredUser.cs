@@ -9,5 +9,7 @@ namespace Storage.Entities
 {
     public class StoredUser : IEntity
     {
+        public int Id { get; set; }
     }
+
 }

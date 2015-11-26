@@ -2,18 +2,14 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-using ApplicationLogics.Repository;
-
 namespace ApplicationLogics.StudyManagement
 {
-    public class Role : IEntity
+    public class Role 
     {
         public enum Type
         {
             Validator,
             Reviewer
         }
-
-        public int Id { get; set; }
     }
 }

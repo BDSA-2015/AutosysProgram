@@ -3,11 +3,10 @@
 // Jacob Mullit Møiniche.
 
 using System.Collections.Generic;
-using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.StudyManagement
 {
-    public class TaskRequest : IEntity
+    public class TaskRequest 
     {
         /// <summary>
         /// Determines task states; initialized, in progress or completed
@@ -30,6 +29,6 @@ namespace ApplicationLogics.StudyManagement
         private List<DataField> NonModifiableDatafields { get; set; }
 
         public List<DataField> ModifiableDatafields { get; set; }
-        public int Id { get; set; }
     }
+
 }

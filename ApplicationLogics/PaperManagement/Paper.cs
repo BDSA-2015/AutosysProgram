@@ -5,11 +5,10 @@
 using System;
 using System.Collections.Generic;
 using ApplicationLogics.PaperManagement.Interfaces;
-using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.PaperManagement
 {
-    public class Paper : IEntity
+    public class Paper 
     {
         /// <summary>
         /// Creates an empty paper with no values.
@@ -29,8 +28,6 @@ namespace ApplicationLogics.PaperManagement
         }
 
         public Dictionary<ITag, List<string>> PaperInformation { get; protected set; }
-
-        public int Id { get; set; }
 
         /// <summary>
         /// Update information on paper or add addtional information on the Paper.

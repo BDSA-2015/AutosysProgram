@@ -3,16 +3,16 @@
 // Jacob Mullit Møiniche.
 
 using System;
-using ApplicationLogics.Repository;
+using ApplicationLogics.StorageFasade;
 
 namespace ApplicationLogics.UserManagement
 {
     public class UserHandler
     {
         private readonly UserValidator _userValidator;
-        private IRepository<IEntity> _storage;
+        private IFasade<User> _storage;
 
-        public UserHandler(IRepository<IEntity> storage)
+        public UserHandler(IFasade<User> storage)
         {
             _userValidator = new UserValidator();
             _storage = storage;

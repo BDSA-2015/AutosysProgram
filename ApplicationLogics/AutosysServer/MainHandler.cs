@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.PaperManagement;
 using ApplicationLogics.ProtocolManagement;
-using ApplicationLogics.Repository;
+using ApplicationLogics.StorageFasade;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ namespace ApplicationLogics.AutosysServer
 {
     public class MainHandler
     {
-        private IRepository<IEntity> _Storage;
+        //private IFasade<> _Storage; TODO WHAT TO GIVE MAINHANDLER AS OBJECT?
         private ExportHandler _exportHandler;
         private PaperHandler _paperHandler;
         private ProtocolHandler _protocolHandler;
@@ -137,4 +137,5 @@ namespace ApplicationLogics.AutosysServer
 
         #endregion
     }
+
 }

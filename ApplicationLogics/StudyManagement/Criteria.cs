@@ -2,19 +2,16 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-using ApplicationLogics.Repository;
-
 namespace ApplicationLogics.StudyManagement
 {
 
     /// <summary>
     /// This class represents ... in a ... and is used in ... to ...
     /// </summary>
-    public class Criteria : IEntity
+    public class Criteria 
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public DataField DataField { get; set; }
-        public int Id { get; set; }
     }
 }

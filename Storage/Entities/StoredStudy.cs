@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationLogics.Repository;
 
 namespace Storage.Entities
 {
-    public class StoredStudy
+    public class StoredStudy : IEntity
     {
+        public int Id { get; set; }
     }
+
 }

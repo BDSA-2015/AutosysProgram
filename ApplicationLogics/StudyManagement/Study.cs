@@ -3,15 +3,11 @@
 // Jacob Mullit Møiniche.
 
 using System.Collections.Generic;
-using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.StudyManagement
 {
-    public class Study : IEntity
+    public class Study 
     {
-
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         /// <summary>
