@@ -3,34 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ApplicationLogics.UserManagement;
+using ApplicationLogics.Repository;
+using Storage.Entities;
 
-namespace ApplicationLogics.StorageFasade
+namespace Storage.Repository
 {
-    public class UserFasade : IFasade<User>
+    public class UserRepository : IRepository<StoredUser> 
     {
-
-        public int Create(User item)
+        public int Create(StoredUser item)
         {
             throw new NotImplementedException();
         }
 
-        public User Read(int id)
+        public void Delete(StoredUser item)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<User> Read()
+        public IEnumerable<StoredUser> Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(User item)
+        public StoredUser Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(User item)
+        public void Update(StoredUser item)
         {
             throw new NotImplementedException();
         }

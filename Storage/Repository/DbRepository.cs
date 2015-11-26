@@ -10,11 +10,11 @@ namespace Storage.Persistence
     /// These are used specifically on a given Dbcontext set in the main method in the Program class. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class DbStorage<T> : IRepository<T> where T : class, IEntity
+    public class DbRepository<T> : IRepository<T> where T : class, IEntity
     {
         private DbContext _dbContext;
 
-        public DbStorage(DbContext context)
+        public DbRepository(DbContext context)
         {
             _dbContext = context;
         }

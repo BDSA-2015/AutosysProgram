@@ -7,30 +7,29 @@ using ApplicationLogics.UserManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class UserFasade : IFasade<User>
+    public class TeamFasade : IFasade<Team>
     {
-
-        public int Create(User item)
+        public int Create(Team item)
         {
             throw new NotImplementedException();
         }
 
-        public User Read(int id)
+        public void Delete(Team item)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<User> Read()
+        public IEnumerable<Team> Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(User item)
+        public Team Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(User item)
+        public void Update(Team item)
         {
             throw new NotImplementedException();
         }

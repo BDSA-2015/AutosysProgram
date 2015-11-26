@@ -3,36 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ApplicationLogics.UserManagement;
+using ApplicationLogics.ProtocolManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class UserFasade : IFasade<User>
+    public class ProtocolFasade : IFasade<Protocol>
     {
-
-        public int Create(User item)
+        public int Create(Protocol item)
         {
             throw new NotImplementedException();
         }
 
-        public User Read(int id)
+        public Protocol Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<User> Read()
+        public IEnumerable<Protocol> Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(User item)
+        public void Update(Protocol item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(User item)
+        public void Delete(Protocol item)
         {
             throw new NotImplementedException();
         }
     }
+
 }

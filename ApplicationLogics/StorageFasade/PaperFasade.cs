@@ -3,36 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ApplicationLogics.UserManagement;
+using ApplicationLogics.PaperManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class UserFasade : IFasade<User>
+    public class PaperFasade : IFasade<Paper>
     {
-
-        public int Create(User item)
+        public int Create(Paper item)
         {
             throw new NotImplementedException();
         }
 
-        public User Read(int id)
+        public void Delete(Paper item)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<User> Read()
+        public IEnumerable<Paper> Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(User item)
+        public Paper Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(User item)
+        public void Update(Paper item)
         {
             throw new NotImplementedException();
         }
     }
+
 }
