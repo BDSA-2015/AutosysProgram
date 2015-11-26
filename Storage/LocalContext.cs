@@ -19,7 +19,7 @@ namespace Storage
         DbSet<StoredPhase> Phases { get; set; }
         DbSet<StoredRole> Roles { get; set; }
         DbSet<StoredTaskRequest> Tasks { get; set; }
-        DbSet<StoredDatafield> Datafields { get; set; }
+        DbSet<StoredDataField> Datafields { get; set; }
         DbSet<StoredStudy> Studies { get; set; }
 
         // User entities

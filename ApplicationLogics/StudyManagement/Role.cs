@@ -4,12 +4,21 @@
 
 namespace ApplicationLogics.StudyManagement
 {
+
+    /// <summary>
+    /// A role is assigned to a user in a given phase and determines what tasks are to be received. 
+    /// </summary>
     public class Role 
     {
+
         public enum Type
         {
             Validator,
             Reviewer
         }
+
+        public Type RoleType { get; set; }
+
     }
+
 }

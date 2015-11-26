@@ -16,6 +16,6 @@ namespace ApplicationLogics.ProtocolManagement
 
         public List<Criteria> ExclusionCriteria { get; set; }
 
-        public string Description { get; set; } // Describes protocol goal
+        public string Description { get; set; } 
     }
 }

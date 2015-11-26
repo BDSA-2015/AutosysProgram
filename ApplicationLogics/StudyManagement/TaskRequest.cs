@@ -6,6 +6,14 @@ using System.Collections.Generic;
 
 namespace ApplicationLogics.StudyManagement
 {
+
+    /// <summary>
+    /// This class represents an assignment in a given phase in a study. 
+    /// A task is deﬁned by a unique id, a set of visible data ﬁelds (unmodiﬁable), a set of requested data ﬁelds (modiﬁable) and a type. 
+    /// A taks type can either be request to ﬁll out data ﬁeld(s) or a request to handle conﬂicting data ﬁeld(s). 
+    /// By way of example, a phase could involve review tasks assigned for two reviewers. 
+    /// A validator could then analyze any inconsistencies between the work of both reviewers in a second phase. 
+    /// </summary>
     public class TaskRequest 
     {
         /// <summary>

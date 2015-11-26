@@ -6,6 +6,10 @@ using System.Collections.Generic;
 
 namespace ApplicationLogics.StudyManagement
 {
+    /// <summary>
+    ///  This class represents the whole work process from initiating a research to narrowing down relevant research evidence. 
+    /// A study consists of diﬀerent phases where data is continuously synthesized and approved by users with different roles. 
+    /// </summary>
     public class Study 
     {
         public string Name { get; set; }

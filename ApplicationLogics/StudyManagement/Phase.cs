@@ -8,14 +8,21 @@ using ApplicationLogics.UserManagement;
 
 namespace ApplicationLogics.StudyManagement
 {
+
+    /// <summary>
+    /// This class details how task requests are handled and handed out. 
+    /// Each phase is dependent on each other sequentially and is completed in a ﬁxed order. 
+    /// </summary>
     public class Phase 
     {
-        public List<Criteria> Criterias { get; protected set; }
+        public List<Criteria> Criteria { get; protected set; }
         public Dictionary<TaskRequest, List<User>> AssignedTask { get; protected set; }
 
-        public List<TaskRequest> UnAssignedTasks { get; protected set; }
+        public Dictionary<User, Role> AssignedRole { get; protected set; } 
 
-        public bool PhaseFinished { get; protected set; }
+        public List<TaskRequest> UnassignedTasks { get; protected set; }
+
+        public bool IsFinished { get; protected set; }
 
         public List<Phase> DependentPhases { get; protected set; }
 
