@@ -112,12 +112,12 @@
     <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\IEntity.cs" />
     <Compile Include="ExportManagement\CSVConverter.cs" />
     <Compile Include="ExportManagement\ExportHandler.cs" />
     <Compile Include="ExportManagement\ExportType.cs" />
     <Compile Include="ExportManagement\PDFConverter.cs" />
-    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="StorageFasade\IStorageFasade.cs" />
+    <Compile Include="StorageFasade\UserFasade.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\DataField.cs" />
     <Compile Include="StudyManagement\Phase.cs" />
