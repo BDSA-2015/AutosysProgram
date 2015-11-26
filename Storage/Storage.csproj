@@ -73,6 +73,9 @@
     <Compile Include="Entities\StoredTaskRequest.cs" />
     <Compile Include="Entities\StoredTeam.cs" />
     <Compile Include="Entities\StoredUser.cs" />
+    <Compile Include="Repository\StudyRepository.cs" />
+    <Compile Include="Repository\TaskRepository.cs" />
+    <Compile Include="Repository\TeamRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

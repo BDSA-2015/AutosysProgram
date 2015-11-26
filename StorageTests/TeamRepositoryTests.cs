@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace StorageTests
 {
     [TestClass]
-    public class UnitTest1
+    public class TeamRepositoryTests
     {
         [TestMethod]
         public void TestMethod1()
