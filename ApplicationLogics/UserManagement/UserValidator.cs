@@ -1,14 +1,15 @@
 ﻿using System;
+using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.UserManagement
 {
     public class UserValidator
     {
 
-        public bool ValidateUser(User user)
+
+        public bool ValidateUser(int userId, IRepository<User> repository )
         {
-            throw new NotImplementedException();
+            return repository.Read(userId) != null;
         }
-      
     }
 }
