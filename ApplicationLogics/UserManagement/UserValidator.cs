@@ -1,5 +1,5 @@
 ﻿using System;
-using ApplicationLogics.Repository;
+using ApplicationLogics.StorageFasade;
 
 namespace ApplicationLogics.UserManagement
 {
@@ -7,9 +7,14 @@ namespace ApplicationLogics.UserManagement
     {
 
 
-        public bool ValidateUser(int userId, IRepository<User> repository )
+        public bool ValidateUser(int userId, IFasade<User> userFasade )
         {
-            return repository.Read(userId) != null;
+            return userFasade.Read(userId) != null;
+        }
+
+        public bool ValidateEnteredUserInformation(string name, string metadata)
+        {
+            return !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(metadata);
         }
     }
 }

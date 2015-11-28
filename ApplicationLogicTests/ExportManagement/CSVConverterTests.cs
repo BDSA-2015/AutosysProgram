@@ -1,4 +1,8 @@
-﻿using System;
+﻿// CSVConverterTests.cs is a part of Autosys project in BDSA-2015. Created: 24, 11, 2015.
+// Creaters: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
+// Jacob Mullit Møiniche.
+
+using System;
 using System.Collections.Generic;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.ProtocolManagement;
@@ -7,17 +11,18 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApplicationLogicTests.ExportManagement
 {
-    [TestClass()]
+    [TestClass]
     public class CsvConverterTests
     {
         private CsvConverter _converter;
+
         [TestInitialize]
         public void Initialize()
         {
             _converter = new CsvConverter();
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void ConvertEmptyAcceptedInputTest()
         {
             //Arrange
@@ -33,7 +38,7 @@ namespace ApplicationLogicTests.ExportManagement
             Assert.AreEqual("", csvFile.InclusionCriteria);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void ConvertSingleAcceptedInputTest()
         {
             //Arrange
@@ -42,8 +47,8 @@ namespace ApplicationLogicTests.ExportManagement
             protocol.InclusionCriteria = new List<Criteria>();
 
             //Act
-                protocol.ExclusionCriteria.Add(new Criteria() { Name = $"criteria{0}" });
-                protocol.InclusionCriteria.Add(new Criteria() { Name = $"criteria{0}" });
+            protocol.ExclusionCriteria.Add(new Criteria {Name = $"criteria{0}"});
+            protocol.InclusionCriteria.Add(new Criteria {Name = $"criteria{0}"});
 
             CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
 
@@ -52,7 +57,7 @@ namespace ApplicationLogicTests.ExportManagement
             Assert.AreEqual("criteria0", csvFile.InclusionCriteria);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void ConvertManyAcceptedInputTest()
         {
             //Arrange
@@ -63,8 +68,8 @@ namespace ApplicationLogicTests.ExportManagement
             //Act
             for (int i = 0; i < 3; i++)
             {
-                protocol.ExclusionCriteria.Add(new Criteria() {Name = $"criteria{i}"});
-                protocol.InclusionCriteria.Add(new Criteria() { Name = $"criteria{i}" });
+                protocol.ExclusionCriteria.Add(new Criteria {Name = $"criteria{i}"});
+                protocol.InclusionCriteria.Add(new Criteria {Name = $"criteria{i}"});
             }
 
             CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
@@ -74,8 +79,8 @@ namespace ApplicationLogicTests.ExportManagement
             Assert.AreEqual("criteria0,criteria1,criteria2", csvFile.InclusionCriteria);
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void ConvertNullCriteriaInputTest()
         {
             //Arrange
@@ -84,13 +89,13 @@ namespace ApplicationLogicTests.ExportManagement
             protocol.InclusionCriteria = new List<Criteria>();
 
             //Act
-                protocol.ExclusionCriteria.Add(null);
+            protocol.ExclusionCriteria.Add(null);
 
             var csvFile = _converter.Convert(protocol) as CsvFile;
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void ConvertCriteriaNameNullInputTest()
         {
             //Arrange
@@ -99,13 +104,13 @@ namespace ApplicationLogicTests.ExportManagement
             protocol.InclusionCriteria = new List<Criteria>();
 
             //Act
-            protocol.ExclusionCriteria.Add(new Criteria() {Name = null});
+            protocol.ExclusionCriteria.Add(new Criteria {Name = null});
 
             CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void ConvertCriteriaNameEmptyInputTest()
         {
             //Arrange
@@ -114,27 +119,25 @@ namespace ApplicationLogicTests.ExportManagement
             protocol.InclusionCriteria = new List<Criteria>();
 
             //Act
-            protocol.ExclusionCriteria.Add(new Criteria() { Name = "" });
+            protocol.ExclusionCriteria.Add(new Criteria {Name = ""});
 
             CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void ConvertNullCriteriaListInputTest()
         {
             //Act
             CsvFile csvFile = _converter.Convert(null) as CsvFile;
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void ConvertNullProtocolInputTest()
         {
             //Act
             CsvFile csvFile = _converter.Convert(null) as CsvFile;
         }
-
-
     }
 }

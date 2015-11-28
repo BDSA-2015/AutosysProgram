@@ -1,25 +1,34 @@
-﻿using ApplicationLogics.UserManagement;
+﻿// Phase.cs is a part of Autosys project in BDSA-2015. Created: 12, 11, 2015.
+// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
+// Jacob Mullit Møiniche.
+
 using System;
 using System.Collections.Generic;
-using ApplicationLogics.Repository;
+using ApplicationLogics.UserManagement;
 
 namespace ApplicationLogics.StudyManagement
 {
-    public class Phase : IEntity
+
+    /// <summary>
+    /// This class details how task requests are handled and handed out. 
+    /// Each phase is dependent on each other sequentially and is completed in a ﬁxed order. 
+    /// </summary>
+    public class Phase 
     {
-        public int Id { get; set; }
-        public List<Criteria> Criterias { get; protected set; }
-        public Dictionary<Task,List<User>> AssignedTask { get; protected set; }
+        public List<Criteria> Criteria { get; protected set; }
+        public Dictionary<TaskRequest, List<User>> AssignedTask { get; protected set; }
 
-        public List<Task> UnAssignedTasks { get; protected set; }
+        public Dictionary<User, Role> AssignedRole { get; protected set; } 
 
-        public bool PhaseFinished { get; protected set; }
+        public List<TaskRequest> UnassignedTasks { get; protected set; }
+
+        public bool IsFinished { get; protected set; }
 
         public List<Phase> DependentPhases { get; protected set; }
 
         public bool HasCriteria(Criteria criteria)
         {
-         throw new NotImplementedException();   
+            throw new NotImplementedException();
         }
 
         public void AddCriteria(Criteria criteria)
@@ -36,12 +45,13 @@ namespace ApplicationLogics.StudyManagement
         {
             throw new NotImplementedException();
         }
+
         public void RemoveUserFromTask(User user)
         {
             throw new NotImplementedException();
         }
 
-        public void AddTask(Task task)
+        public void AddTask(TaskRequest task)
         {
             throw new NotImplementedException();
         }
@@ -51,12 +61,12 @@ namespace ApplicationLogics.StudyManagement
             throw new NotImplementedException();
         }
 
-        public void UpdateTask(Task task)
+        public void UpdateTask(TaskRequest task)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Task> GetUnfinishedTask()
+        public IEnumerable<TaskRequest> GetUnfinishedTask()
         {
             throw new NotImplementedException();
         }
@@ -68,7 +78,6 @@ namespace ApplicationLogics.StudyManagement
 
         public void RemoveDependency(Phase pahse)
         {
-            
         }
     }
 }

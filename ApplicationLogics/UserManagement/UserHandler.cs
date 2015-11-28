@@ -3,27 +3,28 @@
 // Jacob Mullit Møiniche.
 
 using System;
-using ApplicationLogics.Repository;
+using ApplicationLogics.StorageFasade;
 
 namespace ApplicationLogics.UserManagement
 {
     public class UserHandler
     {
-        private readonly IRepository<User> _storage;
+        private readonly IFasade<User> _storage;
         private readonly UserValidator _userValidator;
 
-        public UserHandler(IRepository<User> storage)
+        public UserHandler(IFasade<User> storage)
         {
             _userValidator = new UserValidator();
             _storage = storage;
 
-            
-
-
-
         }
 
 
+        /// <summary>
+        /// Validates if a user is valid.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>a boolean if a user is valid</returns>
         public bool ValidateUser(int userId)
         {
             return _userValidator.ValidateUser(userId, _storage);
@@ -31,7 +32,7 @@ namespace ApplicationLogics.UserManagement
 
         public void CreateUser(string name, string metadata)
         {
-            if(string.IsNullOrEmpty(name) || string.IsNullOrEmpty(metadata))
+            if(!_userValidator.ValidateEnteredUserInformation(name,metadata))
                 throw new ArgumentException("Input may not be null, whitespace or empty");
 
             var user = new User() {Name = name.Trim(), Metadata = metadata.Trim()};
@@ -39,12 +40,12 @@ namespace ApplicationLogics.UserManagement
 
         }
 
-        public void EditUser(int id)
+        public void EditUser(int id) //TODO ID's are not used in FACADE AND REPO. This may need to be changed
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteUser(int id)
+        public void DeleteUser(int id) //TODO ID's are not used in FACADE AND REPO. This may need to be changed
         {
             if(id < 0 )
                 throw  new ArgumentException("Id may not be less than 0");
@@ -59,7 +60,7 @@ namespace ApplicationLogics.UserManagement
 
         public User ReadUser(int id)
         {
-            throw new NotImplementedException();
+            return _storage.Read(id);
         }
     }
 }

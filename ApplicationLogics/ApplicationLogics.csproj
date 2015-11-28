@@ -91,57 +91,68 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutosysServer\FacadeInjectionContainer.cs" />
     <Compile Include="ExportManagement\CsvFile.cs" />
-    <Compile Include="ExportManagement\IConverter.cs" />
-    <Compile Include="ExportManagement\IExportFile.cs" />
+    <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
+    <Compile Include="ExportManagement\Interfaces\IExportFile.cs" />
     <Compile Include="ExportManagement\PdfFile.cs" />
     <Compile Include="PaperManagement\BibTexFile.cs" />
     <Compile Include="PaperManagement\BibtexParser.cs" />
     <Compile Include="PaperManagement\FieldTag.cs" />
-    <Compile Include="PaperManagement\IChecker.cs" />
-    <Compile Include="PaperManagement\IFile.cs" />
-    <Compile Include="PaperManagement\ITag.cs" />
-    <Compile Include="PaperManagement\IValidator.cs" />
+    <Compile Include="PaperManagement\Interfaces\IChecker.cs" />
+    <Compile Include="PaperManagement\Interfaces\IFile.cs" />
+    <Compile Include="PaperManagement\Interfaces\ITag.cs" />
+    <Compile Include="PaperManagement\Interfaces\IValidator.cs" />
     <Compile Include="PaperManagement\PaperHandler.cs" />
     <Compile Include="PaperManagement\ItemTag.cs" />
     <Compile Include="PaperManagement\TagChecker.cs" />
-    <Compile Include="PaperManagement\IParser.cs" />
+    <Compile Include="PaperManagement\Interfaces\IParser.cs" />
     <Compile Include="PaperManagement\TagValidator.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
     <Compile Include="ProtocolManagement\ProtocolHandler.cs" />
     <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\IEntity.cs" />
     <Compile Include="ExportManagement\CSVConverter.cs" />
     <Compile Include="ExportManagement\ExportHandler.cs" />
     <Compile Include="ExportManagement\ExportType.cs" />
     <Compile Include="ExportManagement\PDFConverter.cs" />
-    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="StorageFasade\CriteriaFasade.cs" />
+    <Compile Include="StorageFasade\DatafieldFasade.cs" />
+    <Compile Include="StorageFasade\Interface\IFasade.cs" />
+    <Compile Include="StorageFasade\PaperFasade.cs" />
+    <Compile Include="StorageFasade\PhaseFasade.cs" />
+    <Compile Include="StorageFasade\ProtocolFasade.cs" />
+    <Compile Include="StorageFasade\RoleFasade.cs" />
+    <Compile Include="StorageFasade\StudyFasade.cs" />
+    <Compile Include="StorageFasade\TaskRequestFasade.cs" />
+    <Compile Include="StorageFasade\TeamFasade.cs" />
+    <Compile Include="StorageFasade\UserFasade.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\DataField.cs" />
     <Compile Include="StudyManagement\Phase.cs" />
     <Compile Include="StudyManagement\Role.cs" />
-    <Compile Include="StudyManagement\Task.cs" />
+    <Compile Include="StudyManagement\TaskRequest.cs" />
     <Compile Include="StudyManagement\Study.cs" />
     <Compile Include="StudyManagement\StudyHandler.cs" />
     <Compile Include="StudyManagement\StudyManager.cs" />
-    <Compile Include="UserManagement\Manager.cs" />
-    <Compile Include="UserManagement\Researcher.cs" />
     <Compile Include="UserManagement\Team.cs" />
     <Compile Include="UserManagement\User.cs" />
     <Compile Include="UserManagement\UserHandler.cs" />
     <Compile Include="UserManagement\UserValidator.cs" />
     <Compile Include="AutosysServer\Adapter.cs" />
     <Compile Include="AutosysServer\MainHandler.cs" />
-    <Compile Include="AutosysServer\Request.cs" />
-    <Compile Include="AutosysServer\RequestHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Storage\Storage.csproj">
+      <Project>{390d70e5-5e15-4344-915a-d570f5bca74d}</Project>
+      <Name>Storage</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
