@@ -10,7 +10,6 @@ namespace ApplicationLogics.ExportManagement
     {
         public string InclusionCriteria { get; set; }
         public string ExclusionCriteria { get; set; }
-        public int Id { get; set; }
         public int Origin { get; set; }
         public string Description { get; set; }
     }

@@ -112,7 +112,6 @@
     <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\IEntity.cs" />
     <Compile Include="ExportManagement\CSVConverter.cs" />
     <Compile Include="ExportManagement\ExportHandler.cs" />
     <Compile Include="ExportManagement\ExportType.cs" />
@@ -127,6 +126,17 @@
     <Compile Include="StudyManagement\Bibtex\IItemChecker.cs" />
     <Compile Include="StudyManagement\Bibtex\Item.cs" />
     <Compile Include="StudyManagement\Bibtex\ItemValidator.cs" />
+    <Compile Include="StorageFasade\CriteriaFasade.cs" />
+    <Compile Include="StorageFasade\DatafieldFasade.cs" />
+    <Compile Include="StorageFasade\IFasade.cs" />
+    <Compile Include="StorageFasade\PaperFasade.cs" />
+    <Compile Include="StorageFasade\PhaseFasade.cs" />
+    <Compile Include="StorageFasade\ProtocolFasade.cs" />
+    <Compile Include="StorageFasade\RoleFasade.cs" />
+    <Compile Include="StorageFasade\StudyFasade.cs" />
+    <Compile Include="StorageFasade\TaskRequestFasade.cs" />
+    <Compile Include="StorageFasade\TeamFasade.cs" />
+    <Compile Include="StorageFasade\UserFasade.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\DataField.cs" />
     <Compile Include="StudyManagement\Phase.cs" />

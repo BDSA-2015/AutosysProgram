@@ -2,18 +2,23 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-using ApplicationLogics.Repository;
-
 namespace ApplicationLogics.StudyManagement
 {
-    public class Role : IEntity
+
+    /// <summary>
+    /// A role is assigned to a user in a given phase and determines what tasks are to be received. 
+    /// </summary>
+    public class Role 
     {
+
         public enum Type
         {
             Validator,
             Reviewer
         }
 
-        public int Id { get; set; }
+        public Type RoleType { get; set; }
+
     }
+
 }

@@ -12,7 +12,12 @@ using ApplicationLogics.StudyManagement.BibTex;
 
 namespace ApplicationLogics.StudyManagement
 {
-    public class Phase : IEntity
+
+    /// <summary>
+    /// This class details how task requests are handled and handed out. 
+    /// Each phase is dependent on each other sequentially and is completed in a ﬁxed order. 
+    /// </summary>
+    public class Phase 
     {
         /// <summary>
         /// This is a magical list which contains all Bibtexfiles stored in the system. The reason we haven't extracted them more elegantly from the database is becasue we intend for furture implementation to be able to search with more advanced filters which are not provided by a simple database.
@@ -37,7 +42,9 @@ namespace ApplicationLogics.StudyManagement
         public List<Criteria> InclusionCriterias { get; protected set; }
         public Dictionary<TaskRequest, List<User>> AssignedTask { get; protected set; }
 
-        public List<TaskRequest> UnAssignedTasks { get; protected set; }
+        public Dictionary<User, Role> AssignedRole { get; protected set; } 
+
+        public List<TaskRequest> UnassignedTasks { get; protected set; }
 
 
         public void GetPapersWhichMatchCriterias()
@@ -49,7 +56,6 @@ namespace ApplicationLogics.StudyManagement
         public bool PhaseFinished { get; protected set; }
 
         public List<Phase> DependentPhases { get; protected set; }
-        public int Id { get; set; }
 
 
 

@@ -2,17 +2,15 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-using ApplicationLogics.Repository;
-
 namespace ApplicationLogics.PaperManagement
 {
-    public class ItemTag : IEntity
+    public class ItemTag 
     {
         /// <summary>
         /// This is a Bibtex property holder (e.g. Year or Author) but not the actual value of the property
         /// </summary>
         public string TagName { get; set; }
 
-        public int Id { get; set; }
     }
+
 }
