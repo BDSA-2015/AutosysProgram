@@ -10,8 +10,39 @@ namespace ApplicationLogics.StudyManagement
     /// </summary>
     public class Criteria 
     {
+        public enum CriteriaOperation { NoteDefined,Less,Equal, Greater}
+
+        //Used for serialization 
+        public Criteria() { }
+       
+        /// <summary>
+        /// The Criteria Nam, Can be used to associate a defualt type of limitation with a certain name
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// A short description of the Criterias purpose.
+        /// </summary>
         public string Description { get; set; }
-        public DataField DataField { get; set; }
+
+
+        /// <summary>
+        /// The object the exclusion/inclusion criteria centers around. 
+        /// </summary>
+        public DataField SearchItem { get; set; }
+        /// <summary>
+        /// A variable which gives context to the searchItem. fx Has the search item more quantity than x?
+        /// </summary>
+        public CriteriaLimitation Limitation { get; set; }
+
+        /// <summary>
+        /// This value determins the relation between the SearchItem and the limitation value. Fx is Less, then Criteria is required to be less than the Limitation value
+        /// </summary>
+        public CriteriaOperation LimitationType { get; set; }
+
+        
+
+        
+        public int Id { get; set; }
     }
 }
