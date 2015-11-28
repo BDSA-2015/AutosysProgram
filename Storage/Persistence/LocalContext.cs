@@ -6,6 +6,7 @@ using System.Text;
 using System.Data;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.PaperManagement;
+using ApplicationLogics.PaperManagement.Bibtex;
 using Threading = System.Threading.Tasks;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;

@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogics.PaperManagement
 {
-    interface IChecker
+    public class PaperManagementFacade
     {
-        bool Validate(ITag tag);
     }
 }
