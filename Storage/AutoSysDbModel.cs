@@ -22,6 +22,15 @@ namespace Storage
         {
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            /* Example of fluent API 
+            modelBuilder.Entity<StoredUser>()
+                .Property(u => u.Name)
+                .HasColumnName("display_name");
+            */
+        }
+
         // DbSets for all entity types included in the model 
 
         // Study entities 

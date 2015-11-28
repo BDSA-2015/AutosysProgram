@@ -1,5 +1,3 @@
-using Storage.Entities;
-
 namespace Storage.Migrations
 {
     using System;
@@ -7,23 +5,25 @@ namespace Storage.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
+    /// <summary>
+    /// This class is used to update the database schema upon changes. 
+    /// </summary>
     internal sealed class Configuration : DbMigrationsConfiguration<Storage.AutoSysDbModel>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         /// <summary>
-        /// This method will be called after migrating to the latest version.
+        /// Called after migrating to the latest version or updating the database. 
         /// </summary>
-        /// <param name="context">
-        /// Database target. 
-        /// </param>
+        /// <param name="context"></param>
         protected override void Seed(Storage.AutoSysDbModel context)
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AutoSysDbModel>());
-            context.Users.Add(new StoredUser {Name = "Test", MetaData = "MetaTest"});
+            Database.SetInitializer(new CreateDatabaseIfNotExists<AutoSysDbModel>());
+            context.Database.CreateIfNotExists();
+            //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
