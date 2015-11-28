@@ -1,11 +1,11 @@
+using System;
+using System.Data.Entity;
+using System.Linq;
 using Storage.Entities;
 
 namespace Storage
 {
-    using System;
-    using System.Data.Entity;
-    using System.Linq;
-
+    
     /// <summary>
     /// This class is used to target a local database holding tables for all stored model entities in the system.
     /// The context holds DbSets (tables) for all stored model entities and is used to apply changes to these in the database. 
