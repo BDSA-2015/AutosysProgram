@@ -118,6 +118,15 @@
     <Compile Include="ExportManagement\ExportType.cs" />
     <Compile Include="ExportManagement\PDFConverter.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="StudyManagement\BibTexFileSearcher.cs" />
+    <Compile Include="StudyManagement\Bibtex\DefaultFieldChecker.cs" />
+    <Compile Include="StudyManagement\Bibtex\DefaultItemChecker.cs" />
+    <Compile Include="StudyManagement\Bibtex\FieldValidator.cs" />
+    <Compile Include="StudyManagement\Bibtex\IBibliographyParser.cs" />
+    <Compile Include="StudyManagement\Bibtex\IFieldChecker.cs" />
+    <Compile Include="StudyManagement\Bibtex\IItemChecker.cs" />
+    <Compile Include="StudyManagement\Bibtex\Item.cs" />
+    <Compile Include="StudyManagement\Bibtex\ItemValidator.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\DataField.cs" />
     <Compile Include="StudyManagement\Phase.cs" />
