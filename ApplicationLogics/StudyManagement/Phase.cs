@@ -23,7 +23,7 @@ namespace ApplicationLogics.StudyManagement
         /// This is a magical list which contains all Bibtexfiles stored in the system. The reason we haven't extracted them more elegantly from the database is becasue we intend for furture implementation to be able to search with more advanced filters which are not provided by a simple database.
         /// It should also be noted, I have no #!#&@ idea how to get this list right now, but I'll pray for a miracle.
         /// </summary>
-        private List<Item> reports { get;  set; } 
+        private List<Paper> reports { get;  set; } 
 
 
 

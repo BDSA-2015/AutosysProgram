@@ -21,7 +21,7 @@ namespace ApplicationLogics.StudyManagement
 
         public bool SatisfyCriteria(Item item, Criteria criteria)
         {
-            
+          
         }
     }
 }
