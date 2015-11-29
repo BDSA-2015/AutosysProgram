@@ -3,20 +3,19 @@
 // Jacob Mullit Møiniche.
 
 using System;
+using System.Collections.Generic;
 using ApplicationLogics.StorageFasade;
+using ApplicationLogics.UserManagement.Utils;
 
 namespace ApplicationLogics.UserManagement
 {
     public class UserHandler
     {
         private readonly IFasade<User> _storage;
-        private readonly UserValidator _userValidator;
 
         public UserHandler(IFasade<User> storage)
         {
-            _userValidator = new UserValidator();
             _storage = storage;
-
         }
 
 
@@ -27,24 +26,37 @@ namespace ApplicationLogics.UserManagement
         /// <returns>a boolean if a user is valid</returns>
         public bool ValidateUser(int userId)
         {
-            return _userValidator.ValidateUser(userId, _storage);
+            return UserValidator.ValidateExistence(userId, _storage);
         }
 
-        public void CreateUser(string name, string metadata)
+        /// <summary>
+        /// Creates a user with information from a userDTo
+        /// </summary>
+        /// <param name="userDto">userDto from webapi</param>
+        public void CreateUser(SystematicStudyService.Models.User userDto)
         {
-            if(!_userValidator.ValidateEnteredUserInformation(name,metadata))
+
+            var user = DtoConverter.ConvertDtoUser(userDto);
+            if (!UserValidator.ValidateEnteredUserInformation(user))
                 throw new ArgumentException("Input may not be null, whitespace or empty");
 
-            var user = new User() {Name = name.Trim(), Metadata = metadata.Trim()};
             _storage.Create(user);
 
         }
 
+        /// <summary>
+        /// Edit and update an existing user
+        /// </summary>
+        /// <param name="id">id of user to update</param>
         public void EditUser(int id) //TODO ID's are not used in FACADE AND REPO. This may need to be changed
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Delete an existing user
+        /// </summary>
+        /// <param name="id">id of user to delete.</param>
         public void DeleteUser(int id) //TODO ID's are not used in FACADE AND REPO. This may need to be changed
         {
             if(id < 0 )
@@ -58,9 +70,23 @@ namespace ApplicationLogics.UserManagement
             else throw new NullReferenceException("Specified user does not exist.");
         }
 
+        /// <summary>
+        /// Get a user from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public User ReadUser(int id)
         {
             return _storage.Read(id);
         }
+
+        /// <summary>
+        /// Get every user from the database.
+        /// </summary>
+        /// <returns>All users</returns>
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _storage.Read();
+        } 
     }
 }
