@@ -1,5 +1,4 @@
 # AutosysProject
-1.1 Purpose of the System
 Today, the amount of data has grown to a level where it is starting to challenge researchers who need to
 extract the best available research on a specific question. As a result, researchers apply systematic studies
 on big data sets where they exploit metadata to classify subsets with useful data. This requires smart
