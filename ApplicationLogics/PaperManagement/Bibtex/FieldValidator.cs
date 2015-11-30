@@ -16,7 +16,14 @@ namespace ApplicationLogics.PaperManagement.Bibtex
 
         public bool IsFieldValid(string fieldData, EnumField type)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(fieldData))
+            {
+                throw new ArgumentNullException("The given field data cannot be null or empty");
+            }
+
+            return _checkers.ContainsKey(type)
+                ? _checkers[type].Validate(fieldData)
+                : _defaultChecker.Validate(fieldData);
         }
     }
 }
