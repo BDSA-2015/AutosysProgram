@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.RegularExpressions;
 using ApplicationLogics.PaperManagement.Interfaces;
 
@@ -9,9 +10,8 @@ namespace ApplicationLogics.PaperManagement.Bibtex
     {
         readonly PaperValidator _validator;
 
-        //TODO Make sure the right regexes are used
         /// <summary>
-        /// Regex for matching BibTex items.
+        /// Regex for matching BibTex Entries.
         /// </summary>
         readonly Regex _entryRegex = new Regex(@"(?:@(\w+)\{([\w]+),((?:\W*[a-zA-Z]+\W?=\W?\{.*\},?)*)\W*\},?)");
 
@@ -31,12 +31,63 @@ namespace ApplicationLogics.PaperManagement.Bibtex
         /// Returns a bibtex file.</returns>
         public List<Paper> Parse(string file)
         {
-            throw new NotImplementedException();
+            //Most of the code is from AS1 BDSA 2015
+            MatchCollection matchCollection = _entryRegex.Matches(file);
+
+            var papers = new List<Paper>();
+
+            foreach (Match match in matchCollection)
+            {
+                try
+                {
+                    string key = match.Groups[2].Value;
+                    EnumEntry type = (EnumEntry)Enum.Parse(typeof(EnumEntry), match.Groups[1].Value, true);
+                    Dictionary<EnumField, string> fields = ParsePaper(match.Groups[3].Value);
+                    var paper = new Paper(type, fields);
+
+                    if (!_validator.IsPaperValid(paper))
+                    {
+                        throw new InvalidDataException($"The Paper with key {key} is not valid");
+                    }
+
+                    papers.Add(paper);
+                }
+                catch (ArgumentException e)
+                {
+                    throw new InvalidDataException($"The Paper type {match.Groups[1].Value} is not known by the parser", e);
+                }
+            }
+
+            return papers;
         }
 
         private Dictionary<EnumField, string> ParsePaper(string data)
         {
-            throw new NotImplementedException();
+            //Most of the code is from AS1 in BDSA 2015
+            var matchCollection = _fieldRegex.Matches(data);
+
+            
+            var fields = new Dictionary<EnumField, string>();
+
+            // Iterate over every field.
+            foreach (Match match in matchCollection)
+            {
+                try
+                {
+                    // Get the field type and value.
+                    var key = (EnumField)Enum.Parse(typeof(EnumField), match.Groups[1].Value, true);
+                    var value = match.Groups[2].Value;
+
+                    fields.Add(key, value);
+                }
+                catch (ArgumentException e)
+                {
+                    throw new InvalidDataException(
+                        $"The field type {match.Groups[1].Value} is not known by the parser", e);
+                }
+            }
+
+            return fields;
         }
     }
 }

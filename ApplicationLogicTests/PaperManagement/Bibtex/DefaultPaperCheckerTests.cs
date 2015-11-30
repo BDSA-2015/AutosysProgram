@@ -16,7 +16,8 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             var fields = new Dictionary<EnumField, string>
             {
                 {EnumField.Year, "2015"},
-                {EnumField.Author, "William McSomething"}
+                {EnumField.Author, "William McSomething"},
+                {EnumField.Booktitle, "Insatiate Your Dreams"}
             };
             var paper = new Paper(EnumEntry.Phdthesis, fields);
 
