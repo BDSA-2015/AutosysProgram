@@ -60,12 +60,17 @@
     <Compile Include="ExportManagement\ExportHandlerTests.cs" />
     <Compile Include="ExportManagement\PDFConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserManagement\DtoConverterTest.cs" />
     <Compile Include="UserManagement\UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ApplicationLogics\ApplicationLogics.csproj">
       <Project>{C10EB25D-DE01-4D48-A5D9-A28E69F9325D}</Project>
       <Name>ApplicationLogics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApi\WebApi.csproj">
+      <Project>{b9d7d263-0fa5-46e1-bbd8-53822b6877cd}</Project>
+      <Name>WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
