@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// DtoConverter.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
+// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
+// Jacob Mullit Møiniche.
 namespace ApplicationLogics.UserManagement.Utils
 {
     /// <summary>
     /// Responsible for converting user and team Dto's
     /// </summary>
-    class DtoConverter
+    internal class DtoConverter
     {
         /// <summary>
         /// Converts Dto item to team item.
@@ -18,7 +15,7 @@ namespace ApplicationLogics.UserManagement.Utils
         /// <returns>Team</returns>
         internal static Team ConvertDtoTeam(SystematicStudyService.Models.Team teamDto)
         {
-            return new Team()
+            return new Team
             {
                 Name = teamDto.Name.Trim(),
                 Metadata = teamDto.Metadata.Trim(),
@@ -33,7 +30,7 @@ namespace ApplicationLogics.UserManagement.Utils
         /// <returns>User</returns>
         internal static User ConvertDtoUser(SystematicStudyService.Models.User userDto)
         {
-            return new User()
+            return new User
             {
                 Name = userDto.Name.Trim(),
                 Metadata = userDto.Metadata.Trim()

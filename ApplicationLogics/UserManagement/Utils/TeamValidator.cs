@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// TeamValidator.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
+// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
+// Jacob Mullit Møiniche.
 using ApplicationLogics.StorageFasade;
 
 namespace ApplicationLogics.UserManagement.Utils
@@ -10,7 +8,7 @@ namespace ApplicationLogics.UserManagement.Utils
     /// <summary>
     /// Responsible for validating teams
     /// </summary>
-    class TeamValidator
+    internal class TeamValidator
     {
         /// <summary>
         /// Validate existience of team
@@ -31,9 +29,9 @@ namespace ApplicationLogics.UserManagement.Utils
         /// <returns>validated team information</returns>
         internal static bool ValidateEnteredTeamData(Team team)
         {
-            return 
-                !string.IsNullOrEmpty(team.Name) && 
-                !string.IsNullOrEmpty(team.Metadata) && 
+            return
+                !string.IsNullOrEmpty(team.Name) &&
+                !string.IsNullOrEmpty(team.Metadata) &&
                 (team.UserIDs.Length > 0);
         }
     }

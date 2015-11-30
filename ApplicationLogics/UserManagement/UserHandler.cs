@@ -35,13 +35,11 @@ namespace ApplicationLogics.UserManagement
         /// <param name="userDto">userDto from webapi</param>
         public void CreateUser(SystematicStudyService.Models.User userDto)
         {
-
             var user = DtoConverter.ConvertDtoUser(userDto);
             if (!UserValidator.ValidateEnteredUserInformation(user))
                 throw new ArgumentException("Input may not be null, whitespace or empty");
 
             _storage.Create(user);
-
         }
 
         /// <summary>
@@ -59,10 +57,10 @@ namespace ApplicationLogics.UserManagement
         /// <param name="id">id of user to delete.</param>
         public void DeleteUser(int id) //TODO ID's are not used in FACADE AND REPO. This may need to be changed
         {
-            if(id < 0 )
-                throw  new ArgumentException("Id may not be less than 0");
+            if (id < 0)
+                throw new ArgumentException("Id may not be less than 0");
 
-            var userToDelete =_storage.Read(id);
+            var userToDelete = _storage.Read(id);
             if (userToDelete != null)
             {
                 _storage.Delete(userToDelete);
@@ -87,6 +85,6 @@ namespace ApplicationLogics.UserManagement
         public IEnumerable<User> GetAllUsers()
         {
             return _storage.Read();
-        } 
+        }
     }
 }

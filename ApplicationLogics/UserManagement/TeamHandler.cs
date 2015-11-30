@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// TeamHandler.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
+// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
+// Jacob Mullit Møiniche.
+using System;
 using ApplicationLogics.StorageFasade;
 using ApplicationLogics.UserManagement.Utils;
-using Microsoft.SqlServer.Server;
 
 namespace ApplicationLogics.UserManagement
 {
-    class TeamHandler
+    /// <summary>
+    /// Responsible for Team operations
+    /// </summary>
+    internal class TeamHandler
     {
-        private readonly IFasade<Team> _storage; 
+        private readonly IFasade<Team> _storage;
 
         public TeamHandler(IFasade<Team> storage)
         {
@@ -34,9 +35,8 @@ namespace ApplicationLogics.UserManagement
         /// <param name="teamDto"> dto Item from webAPI</param>
         public void Create(SystematicStudyService.Models.Team teamDto)
         {
-
             var team = DtoConverter.ConvertDtoTeam(teamDto);
-            if(!TeamValidator.ValidateEnteredTeamData(team))
+            if (!TeamValidator.ValidateEnteredTeamData(team))
                 throw new ArgumentException("Team data is invalid");
 
             _storage.Create(team);
@@ -58,19 +58,15 @@ namespace ApplicationLogics.UserManagement
         public void Update(int oldId, SystematicStudyService.Models.Team teamDto)
         {
             var team = DtoConverter.ConvertDtoTeam(teamDto);
-            if (!TeamValidator.ValidateEnteredTeamData(team))       throw new ArgumentException("Team data is invalid");
-            if (!TeamValidator.ValidateExistence(oldId,_storage))   throw new ArgumentException("Team does not exist");
+            if (!TeamValidator.ValidateEnteredTeamData(team)) throw new ArgumentException("Team data is invalid");
+            if (!TeamValidator.ValidateExistence(oldId, _storage)) throw new ArgumentException("Team does not exist");
 
             _storage.Update(team);
-
-
         }
 
         public IEnumerable<Team> GetAllTeams()
         {
             return _storage.Read();
-        } 
-
-     
+        }
     }
 }
