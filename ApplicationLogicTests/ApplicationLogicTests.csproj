@@ -56,7 +56,9 @@
   <ItemGroup>
     <Compile Include="PaperManagement\Bibtex\CostumFieldCheckerTests.cs" />
     <Compile Include="PaperManagement\Bibtex\DefaultFieldCheckerTests.cs" />
+    <Compile Include="PaperManagement\Bibtex\DefaultPaperCheckerTests.cs" />
     <Compile Include="PaperManagement\Bibtex\FieldValidatorTests.cs" />
+    <Compile Include="PaperManagement\Bibtex\PaperValidatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
