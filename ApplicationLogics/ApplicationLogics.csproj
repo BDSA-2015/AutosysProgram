@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="ExportManagement\IConverter.cs" />
     <Compile Include="PaperManagement\Bibtex\BibtexParser.cs" />
+    <Compile Include="PaperManagement\Bibtex\CustomFieldChecker.cs" />
     <Compile Include="PaperManagement\Bibtex\DefaultPaperChecker.cs" />
     <Compile Include="PaperManagement\Bibtex\EnumEntry.cs" />
     <Compile Include="PaperManagement\Bibtex\EnumField.cs" />

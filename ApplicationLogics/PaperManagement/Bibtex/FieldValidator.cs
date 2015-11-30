@@ -6,8 +6,8 @@ namespace ApplicationLogics.PaperManagement.Bibtex
 {
     public class FieldValidator
     {
-        readonly Dictionary<EnumField, IFieldChecker> _checkers;
-        readonly IFieldChecker _defaultChecker = new DefaultFieldChecker();
+        private readonly Dictionary<EnumField, IFieldChecker> _checkers;
+        private readonly IFieldChecker _defaultChecker = new DefaultFieldChecker();
     
         public FieldValidator(Dictionary<EnumField, IFieldChecker> checkers = null)
         {
