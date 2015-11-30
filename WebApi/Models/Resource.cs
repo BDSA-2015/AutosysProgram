@@ -12,7 +12,7 @@ namespace SystematicStudyService.Models
         /// The unique ID for the resource, which can be used to retrieve the resource by calling <see cref="StudyController.GetResource" />.
         /// </summary>
         [Required]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// The file extension of the resource.
