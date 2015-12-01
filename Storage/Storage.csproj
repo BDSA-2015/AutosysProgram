@@ -48,6 +48,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,37 +58,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoSysDbModel.cs" />
     <Compile Include="EnumExtensions.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\DbRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LocalContext.cs" />
     <Compile Include="Repository\IEntity.cs" />
     <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Entities\StoredCriteria.cs" />
-    <Compile Include="Entities\StoredDataField.cs" />
-    <Compile Include="Entities\StoredPaper.cs" />
-    <Compile Include="Entities\StoredPhase.cs" />
-    <Compile Include="Entities\StoredProtocol.cs" />
-    <Compile Include="Entities\StoredRole.cs" />
-    <Compile Include="Entities\StoredStudy.cs" />
-    <Compile Include="Entities\StoredTaskRequest.cs" />
-    <Compile Include="Entities\StoredTeam.cs" />
-    <Compile Include="Entities\StoredUser.cs" />
+    <Compile Include="Models\StoredCriteria.cs" />
+    <Compile Include="Models\StoredDataField.cs" />
+    <Compile Include="Models\StoredPaper.cs" />
+    <Compile Include="Models\StoredPhase.cs" />
+    <Compile Include="Models\StoredProtocol.cs" />
+    <Compile Include="Models\StoredRole.cs" />
+    <Compile Include="Models\StoredStudy.cs" />
+    <Compile Include="Models\StoredTaskRequest.cs" />
+    <Compile Include="Models\StoredTeam.cs" />
+    <Compile Include="Models\StoredUser.cs" />
     <Compile Include="Repository\StudyRepository.cs" />
     <Compile Include="Repository\TaskRepository.cs" />
     <Compile Include="Repository\TeamRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ApplicationLogics\ApplicationLogics.csproj">
-      <Project>{c10eb25d-de01-4d48-a5d9-a28e69f9325d}</Project>
-      <Name>ApplicationLogics</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
