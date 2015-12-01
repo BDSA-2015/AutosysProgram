@@ -1,40 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using ApplicationLogics.PaperManagement.Bibtex;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace ApplicationLogicTests.PaperManagement.Bibtex
 {
     [TestClass()]
     public class BibtexParserTests
     {
-        [TestMethod()]
-        public void ParseDefaultValidatorValidInputTest()
+        private BibtexParser _parser;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            _parser = new BibtexParser(new PaperValidator());
+        }
+
+        [TestCase(DefaultEnumField.Author, "William, Funstuff")]
+        [TestCase(DefaultEnumField.Booktitle, "ITU student anno 2015")]
+        [TestCase(DefaultEnumField.Title, "A student's thoughts on programming")]
+        [TestCase(DefaultEnumField.Year, "2015")]
+        [TestCase(DefaultEnumField.Month, "Aug")]
+        [TestCase(DefaultEnumField.Volume, "1")]
+        public void ParseDefaultInputPaperTest(DefaultEnumField field, string data)
         {
             //Arrange
             var file = Properties.Resources.valid;
             var fileString = System.Text.Encoding.Default.GetString(file);
-            var parser = new BibtexParser(new PaperValidator());
-            //var bibtexInput = "@phdthesis{1234, "+
-            //                            "author={Oren Patashnik}, "+
-            //                            "title={BIBTEXing}, "+
-            //                            "year={1988},}"+
-            //                            "@article{5678, " +
-            //                            "author={Morgan Testing}, " +
-            //                            "title={Sharp testing}, " +
-            //                            "year={2000},}";
+
             //Act
-            var papers = parser.Parse(fileString);
+            var papers = _parser.Parse(fileString);
 
             //Assert
             var validPaper = papers[0];
-            Assert.AreEqual(DefaultEnumEntry.Article, validPaper.Type);
-            Assert.AreEqual("William, Funstuff", validPaper.Fields[DefaultEnumField.Author]);
-            Assert.AreEqual("ITU student anno 2015", validPaper.Fields[DefaultEnumField.Booktitle]);
-            Assert.AreEqual("A student's thoughts on programming", validPaper.Fields[DefaultEnumField.Title]);
-            Assert.AreEqual("2015", validPaper.Fields[DefaultEnumField.Year]);
-            Assert.AreEqual("Aug", validPaper.Fields[DefaultEnumField.Month]);
-            Assert.AreEqual("1", validPaper.Fields[DefaultEnumField.Volume]);
+
+            Assert.AreEqual(validPaper.DefaultFields[field], data);
         }
 
         [TestMethod()]
@@ -42,11 +45,10 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ParseDefaultValidatorMissingAuthorTypeInputTest()
         {
             //Arrange
-            var parser = new BibtexParser(new PaperValidator());
             var bibtexInput = Properties.Resources.missingAuthor;
             var invalidFile = System.Text.Encoding.Default.GetString(bibtexInput);
             //Act
-            var papers = parser.Parse(invalidFile);
+            var papers = _parser.Parse(invalidFile);
         }
 
         [TestMethod()]
@@ -54,10 +56,9 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ParseDefaultValidatorMissingStartInputTest()
         {
             //Arrange
-            var parser = new BibtexParser(new PaperValidator());
             var bibtexInput = Properties.Resources.missingStartTag;
             var invalidFile = System.Text.Encoding.Default.GetString(bibtexInput);
-            var papers = parser.Parse(invalidFile);
+            var papers = _parser.Parse(invalidFile);
         }
 
         [TestMethod()]
@@ -65,11 +66,10 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ParseDefaultValidatorMissingBracketTypeInputTest()
         {
             //Arrange
-            var parser = new BibtexParser(new PaperValidator());
             var bibtexInput = Properties.Resources.missingBrackets;
             var invalidFile = System.Text.Encoding.Default.GetString(bibtexInput);
             //Act
-            var papers = parser.Parse(invalidFile);
+            var papers = _parser.Parse(invalidFile);
         }
     }
 }
