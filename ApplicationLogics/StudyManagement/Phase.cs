@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using ApplicationLogics.UserManagement;
+using ApplicationLogics.UserManagement.Entities;
 
 namespace ApplicationLogics.StudyManagement
 {

@@ -2,7 +2,9 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-namespace ApplicationLogics.UserManagement
+using System.IO.MemoryMappedFiles;
+
+namespace ApplicationLogics.UserManagement.Entities
 {
 
     /// <summary>
@@ -10,8 +12,9 @@ namespace ApplicationLogics.UserManagement
     /// </summary>
     public class User 
     {
-        public string Name { get; internal set; }
 
+        public int Id { get; set; }
+        public string Name { get; set; }
         public string Metadata { get; set; }
     }
 }

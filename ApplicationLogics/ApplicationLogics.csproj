@@ -95,6 +95,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutosysServer\FacadeInjectionContainer.cs" />
     <Compile Include="ExportManagement\CsvFile.cs" />
     <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
     <Compile Include="ExportManagement\Interfaces\IExportFile.cs" />
@@ -122,7 +123,7 @@
     <Compile Include="ExportManagement\PDFConverter.cs" />
     <Compile Include="StorageFasade\CriteriaFasade.cs" />
     <Compile Include="StorageFasade\DatafieldFasade.cs" />
-    <Compile Include="StorageFasade\IFasade.cs" />
+    <Compile Include="StorageFasade\Mapping\Interface\IFasade.cs" />
     <Compile Include="StorageFasade\Mapping\Interface\IMap.cs" />
     <Compile Include="StorageFasade\Mapping\BaseMapper.cs" />
     <Compile Include="StorageFasade\PaperFasade.cs" />
@@ -141,12 +142,12 @@
     <Compile Include="StudyManagement\Study.cs" />
     <Compile Include="StudyManagement\StudyHandler.cs" />
     <Compile Include="StudyManagement\StudyManager.cs" />
-    <Compile Include="UserManagement\Manager.cs" />
-    <Compile Include="UserManagement\Researcher.cs" />
-    <Compile Include="UserManagement\Team.cs" />
-    <Compile Include="UserManagement\User.cs" />
+    <Compile Include="UserManagement\Entities\Team.cs" />
+    <Compile Include="UserManagement\Entities\User.cs" />
+    <Compile Include="UserManagement\TeamHandler.cs" />
     <Compile Include="UserManagement\UserHandler.cs" />
-    <Compile Include="UserManagement\UserValidator.cs" />
+    <Compile Include="UserManagement\Utils\TeamValidator.cs" />
+    <Compile Include="UserManagement\Utils\UserValidator.cs" />
     <Compile Include="AutosysServer\Adapter.cs" />
     <Compile Include="AutosysServer\MainHandler.cs" />
     <Compile Include="AutosysServer\Request.cs" />
@@ -160,6 +161,10 @@
     <ProjectReference Include="..\Storage\Storage.csproj">
       <Project>{390d70e5-5e15-4344-915a-d570f5bca74d}</Project>
       <Name>Storage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApi\WebApi.csproj">
+      <Project>{b9d7d263-0fa5-46e1-bbd8-53822b6877cd}</Project>
+      <Name>WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

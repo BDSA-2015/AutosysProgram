@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationLogics.Repository;
 using ApplicationLogics.UserManagement;
+using Storage.Entities;
 
 namespace ApplicationLogics.StorageFasade
 {
     public class TeamFasade : IFasade<Team>
     {
+
+        public TeamFasade(IRepository<StoredTeam> repository)
+        {
+            
+        }
+
         public int Create(Team item)
         {
             throw new NotImplementedException();
