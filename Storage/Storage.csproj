@@ -85,12 +85,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ApplicationLogics\ApplicationLogics.csproj">
-      <Project>{c10eb25d-de01-4d48-a5d9-a28e69f9325d}</Project>
-      <Name>ApplicationLogics</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

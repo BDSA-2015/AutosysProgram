@@ -12,11 +12,10 @@ namespace ApplicationLogics.StorageFasade.Mapper
     /// To map an object do the following:
     /// https://github.com/AutoMapper/AutoMapper/wiki/Getting-started
     /// </summary>
-    interface IMap<T, K> 
+    public interface IMap<T, K> 
         where T : class 
         where K : class
     {
-        T Map(K item);
-        K Map(T item);
+        K Map(T source, K destination);
     }
 }

@@ -37,6 +37,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -119,7 +123,8 @@
     <Compile Include="StorageFasade\CriteriaFasade.cs" />
     <Compile Include="StorageFasade\DatafieldFasade.cs" />
     <Compile Include="StorageFasade\IFasade.cs" />
-    <Compile Include="StorageFasade\Mapper\IMap.cs" />
+    <Compile Include="StorageFasade\Mapping\Interface\IMap.cs" />
+    <Compile Include="StorageFasade\Mapping\BaseMapper.cs" />
     <Compile Include="StorageFasade\PaperFasade.cs" />
     <Compile Include="StorageFasade\PhaseFasade.cs" />
     <Compile Include="StorageFasade\ProtocolFasade.cs" />
@@ -151,7 +156,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Storage\Storage.csproj">
+      <Project>{390d70e5-5e15-4344-915a-d570f5bca74d}</Project>
+      <Name>Storage</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
