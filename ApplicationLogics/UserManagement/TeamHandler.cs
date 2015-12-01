@@ -36,7 +36,7 @@ namespace ApplicationLogics.UserManagement
         /// <param name="teamDto"> dto Item from webAPI</param>
         public void Create(SystematicStudyService.Models.Team teamDto)
         {
-            var team = DtoConverter.ConvertDtoTeam(teamDto);
+            var team = new Team(); //TODO User Mapper to convert team
             if (!TeamValidator.ValidateEnteredTeamData(team))
                 throw new ArgumentException("Team data is invalid");
 

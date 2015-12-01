@@ -64,7 +64,6 @@
     <Compile Include="ExportManagement\ExportHandlerTests.cs" />
     <Compile Include="ExportManagement\PDFConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserManagement\DtoConverterTest.cs" />
     <Compile Include="UserManagement\TeamHandlerTests.cs" />
     <Compile Include="UserManagement\UserTest.cs" />
   </ItemGroup>

@@ -36,7 +36,7 @@ namespace ApplicationLogics.UserManagement
         /// <param name="userDto">userDto from webapi</param>
         public void CreateUser(SystematicStudyService.Models.User userDto)
         {
-            var user = DtoConverter.ConvertDtoUser(userDto);
+            var user = new User();//TODO User Mapper to convert user
             if (!UserValidator.ValidateEnteredUserInformation(user))
                 throw new ArgumentException("Input may not be null, whitespace or empty");
 

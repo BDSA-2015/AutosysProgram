@@ -144,7 +144,6 @@
     <Compile Include="UserManagement\Entities\User.cs" />
     <Compile Include="UserManagement\TeamHandler.cs" />
     <Compile Include="UserManagement\UserHandler.cs" />
-    <Compile Include="UserManagement\Utils\DtoConverter.cs" />
     <Compile Include="UserManagement\Utils\TeamValidator.cs" />
     <Compile Include="UserManagement\Utils\UserValidator.cs" />
     <Compile Include="AutosysServer\Adapter.cs" />
