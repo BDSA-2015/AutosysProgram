@@ -11,8 +11,7 @@ namespace ApplicationLogics.StudyManagement
     /// </summary>
     public  class CriteriaHandler
     {
-
-
+        
 
 
         /// <summary>
@@ -33,7 +32,7 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
         /// <param name="critera">The Criteria you which to modify</param>
         /// <param name="itemToSearchFor">THe item you you wish to search for</param>
-        public void setCriteria(Criteria critera, CriteriaRelation itemToSearchFor)
+        public void setSearchCriteria(Criteria critera, CriteriaRelation itemToSearchFor)
         {
             critera.Requirement = itemToSearchFor;
         }
@@ -42,7 +41,7 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         /// Set the Criteria to search for papers which have a bibtex tag with a value which contains this string
         /// </summary>
-        public void SetSearchCriteria_ContainsString(string bibTexTagName, string substring)
+        public void SetSearchCriteria_ContainsString(Criteria critera, string bibTexTagName, string substring)
         {
             throw new NotImplementedException();
         }
@@ -50,7 +49,7 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         /// Set the Criteria to search for papers which have a bibtex tag with a value which equals this string.
         /// </summary>
-        public void SetSearchCriteria_equals(string bibTexTagName, string value)
+        public void SetSearchCriteria_equals(Criteria critera, string bibTexTagName, string value)
         {
             throw new NotImplementedException();
         }
@@ -58,7 +57,7 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         /// Set the Criteria to search for papers which have a bibtex tag with a value which less than the given value.
         /// </summary>
-        public void SetSearchCriteria_LessThan(string bibTexTagName, int value)
+        public void SetSearchCriteria_LessThan(Criteria critera, string bibTexTagName, int value)
         {
             throw new NotImplementedException();
         }
@@ -67,7 +66,7 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         /// Set the Criteria to search for papers which have a bibtex tag with a value which Greater than the given value.
         /// </summary>
-        public void SetSearchCriteria_GreaterThan(string bibTexTagName, int value)
+        public void SetSearchCriteria_GreaterThan(Criteria critera, string bibTexTagName, int value)
         {
             throw new NotImplementedException();
         }
@@ -75,7 +74,7 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         /// Set the Criteria to search for papers which have a bibtex tag with a value Which match .
         /// </summary>
-        public void SetSearchCriteria_Regex(string bibTexTagName, string substring)
+        public void SetSearchCriteria_Regex(Criteria critera, string bibTexTagName, string substring)
         {
             throw new NotImplementedException();
         }
