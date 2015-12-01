@@ -119,6 +119,7 @@
     <Compile Include="StorageFasade\CriteriaFasade.cs" />
     <Compile Include="StorageFasade\DatafieldFasade.cs" />
     <Compile Include="StorageFasade\IFasade.cs" />
+    <Compile Include="StorageFasade\Mapper\IMap.cs" />
     <Compile Include="StorageFasade\PaperFasade.cs" />
     <Compile Include="StorageFasade\PhaseFasade.cs" />
     <Compile Include="StorageFasade\ProtocolFasade.cs" />
