@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using ApplicationLogics.StorageFasade;
+using ApplicationLogics.UserManagement.Entities;
 using ApplicationLogics.UserManagement.Utils;
 
 namespace ApplicationLogics.UserManagement

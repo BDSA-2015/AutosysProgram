@@ -1,5 +1,6 @@
 ﻿using System;
 using ApplicationLogics.UserManagement;
+using ApplicationLogics.UserManagement.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApplicationLogicTests.UserManagement

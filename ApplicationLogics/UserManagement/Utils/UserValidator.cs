@@ -2,6 +2,7 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 using ApplicationLogics.StorageFasade;
+using ApplicationLogics.UserManagement.Entities;
 
 namespace ApplicationLogics.UserManagement.Utils
 {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationLogics.Repository;
 using ApplicationLogics.UserManagement;
+using ApplicationLogics.UserManagement.Entities;
 using Storage.Entities;
 
 namespace ApplicationLogics.StorageFasade
