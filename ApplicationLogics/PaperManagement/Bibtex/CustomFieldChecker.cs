@@ -12,6 +12,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
     /// </summary>
     public class CustomFieldChecker
     {
+        //Regular expression to for matching a bibtex field
         private readonly Regex _regex;
 
         public CustomFieldChecker(string pattern)
@@ -19,13 +20,18 @@ namespace ApplicationLogics.PaperManagement.Bibtex
             _regex = new Regex(pattern);
         }
 
-        public bool Validate(string tag)
+        /// <summary>
+        /// Method to validate bibtex fields when parsing bitex files to Paper objects
+        /// </summary>
+        /// <param name="field">The bibtex field to validate</param>
+        /// <returns>True if the field is valid otherwise false</returns>
+        public bool Validate(string field)
         {
-            if (string.IsNullOrEmpty(tag))
+            if (string.IsNullOrEmpty(field))
             {
                 throw new ArgumentNullException("The given bibtex field cannot be null or empty");
             }
-            return _regex.IsMatch(tag);
+            return _regex.IsMatch(field);
         }
     }
 }

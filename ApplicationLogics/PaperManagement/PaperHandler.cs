@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.PaperManagement.Interfaces;
-using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.PaperManagement
 {
+    /// <summary>
+    /// Class for handling all functionality associated with creating and importing Papers into the program
+    /// </summary>
     public class PaperHandler
     {
-        //is used to generate Bibtex files, which later can be stored as a Paper
+        //Used to generate Bibtex files, which later is stored as Papers in the database
         private IParser _parser;
 
         public PaperHandler(IParser parser)
@@ -20,29 +22,11 @@ namespace ApplicationLogics.PaperManagement
         }
 
         /// <summary>
-        /// Create an empty Paper
+        /// Creates a List of Paper based on an imported BibTex file which is parsed to the program.
         /// </summary>
-        public Paper CreatePaper()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Create a Paper based on a BibTex file.
-        /// </summary>
-        /// <param name="file"></param>
-        public Paper ImportPaper(string file)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Extra Stuff
-        /// <summary>
-        /// Create a Paper based on a document
-        /// </summary>
-        /// <param name="document"></param>
-        /// <returns> Paper based on an automated analysis of the file</returns>
-        public Paper GeneratePaper(string document)
+        /// <param name="file">The bibtex file which is parsed to the program</param>
+        /// <returns>A List of Papers which was valid for parsing</returns>
+        public List<Paper> ImportPaper(string file)
         {
             throw new NotImplementedException();
         }

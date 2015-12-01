@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogics.PaperManagement.Bibtex
 {
-    public class CostumEntry
+    /// <summary>
+    /// Class for creating custom made entries for parsing bibtex files defined by the client
+    /// </summary>
+    public class CustomEntry
     {
 
     }

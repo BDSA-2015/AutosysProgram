@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogics.PaperManagement.Bibtex
 {
-    class CostumField
+    /// <summary>
+    /// Class for creating custom made fields for parsing bibtex files defined by the client
+    /// </summary>
+    public class CustomField
     {
     }
 }

@@ -13,7 +13,7 @@ using ApplicationLogics.PaperManagement.Bibtex;
 namespace ApplicationLogics.PaperManagement.Interfaces
 {
     /// <summary>
-    /// Interface for Paper checkers
+    /// Interface for Paper checkers used to validate Papers for parsing
     /// </summary>
     public interface IPaperChecker
     {

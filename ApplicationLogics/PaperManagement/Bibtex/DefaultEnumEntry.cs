@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ApplicationLogics.PaperManagement.Bibtex
 {
     /// <summary>
-    /// The possible Entry types for bibliographic items
+    /// Entry types for bibtex files, which are recognized by default
     /// </summary>
     public enum DefaultEnumEntry
     {

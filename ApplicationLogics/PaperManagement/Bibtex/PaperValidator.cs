@@ -5,6 +5,9 @@ using ApplicationLogics.PaperManagement.Interfaces;
 
 namespace ApplicationLogics.PaperManagement.Bibtex
 {
+    /// <summary>
+    /// Class for validating Papers to be parsed in a BibtexParser object
+    /// </summary>
     public class PaperValidator
     {
         /// <summary>
@@ -21,6 +24,11 @@ namespace ApplicationLogics.PaperManagement.Bibtex
             _checkers = checkers ?? new Dictionary<DefaultEnumEntry, IPaperChecker>();
         }
 
+        /// <summary>
+        /// Method for validating Papers for parsing in a BibtexParser object
+        /// </summary>
+        /// <param name="paper">The Paper to be validated for parsing</param>
+        /// <returns>True if the Paper is valid false otherwise</returns>
         public bool IsPaperValid(Paper paper)
         {
             if (paper == null)

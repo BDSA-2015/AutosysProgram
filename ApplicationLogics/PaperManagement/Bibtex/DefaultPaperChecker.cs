@@ -11,7 +11,14 @@ namespace ApplicationLogics.PaperManagement.Bibtex
     /// </summary>
     public class DefaultPaperChecker : IPaperChecker
     {
+        //Validates fields against a default field checker
         readonly FieldValidator _validator = new FieldValidator();
+
+        /// <summary>
+        /// Method for validating a Paper for parsing in a BibtexParser
+        /// </summary>
+        /// <param name="paper">The Paper which is to be validated for parsing</param>
+        /// <returns>True if the Paper is valid otherwise false</returns>
         public bool Validate(Paper paper)
         {
             if (paper == null)

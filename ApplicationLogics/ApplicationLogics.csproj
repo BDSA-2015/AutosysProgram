@@ -96,8 +96,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PaperManagement\Bibtex\BibtexParser.cs" />
-    <Compile Include="PaperManagement\Bibtex\CostumEntry.cs" />
-    <Compile Include="PaperManagement\Bibtex\CostumField.cs" />
+    <Compile Include="PaperManagement\Bibtex\CustomEntry.cs" />
+    <Compile Include="PaperManagement\Bibtex\CustomField.cs" />
     <Compile Include="PaperManagement\Bibtex\CustomFieldChecker.cs" />
     <Compile Include="PaperManagement\Bibtex\DefaultPaperChecker.cs" />
     <Compile Include="PaperManagement\Bibtex\DefaultEnumEntry.cs" />

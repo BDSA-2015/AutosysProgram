@@ -6,6 +6,9 @@ using ApplicationLogics.PaperManagement.Interfaces;
 
 namespace ApplicationLogics.PaperManagement.Bibtex
 {
+    /// <summary>
+    /// Class for passing Bibtex files to Papers based to be saved in the database
+    /// </summary>
     public class BibtexParser : IParser
     {
         readonly PaperValidator _validator;
@@ -26,9 +29,10 @@ namespace ApplicationLogics.PaperManagement.Bibtex
         }
 
         /// <summary>
-        /// Generates a BibTex file based on the file (Which is given a a string) This file will contain a mapping of common properties of a file (Auther, Year written, etc..) to the respective values  </summary>
-        /// <returns>
-        /// Returns a bibtex file.</returns>
+        /// Generates a BibTex file based on the file (Which is given a a string) 
+        /// This file will contain a mapping of common properties of a file (Auther, Year written, etc..) 
+        /// to the respective values  </summary>
+        /// <returns> Returns a List of Papers which matched the entry and field regexes.</returns>
         public List<Paper> Parse(string file)
         {
             //Most of the code is from AS1 BDSA 2015
@@ -61,10 +65,15 @@ namespace ApplicationLogics.PaperManagement.Bibtex
             return papers;
         }
 
-        private Dictionary<DefaultEnumField, string> ParsePaper(string data)
+        /// <summary>
+        /// Helper method for verifying the bibtex fields of a Paper to see if the Paper should be parsed
+        /// </summary>
+        /// <param name="fieldData">Bibtex field data associated with a specific bibtex item</param>
+        /// <returns></returns>
+        private Dictionary<DefaultEnumField, string> ParsePaper(string fieldData)
         {
             //Most of the code is from AS1 in BDSA 2015
-            var matchCollection = _fieldRegex.Matches(data);
+            var matchCollection = _fieldRegex.Matches(fieldData);
 
             
             var fields = new Dictionary<DefaultEnumField, string>();
