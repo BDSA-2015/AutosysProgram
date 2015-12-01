@@ -34,7 +34,7 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         /// The bibtex tag the critereia the Requirement will effect 
         /// </summary>
-        public ITag CriteriaTarget { get; set; }
+        public string CriteriaTarget { get; set; }
 
         /// <summary>
         /// The criteria papers will be sorted after
