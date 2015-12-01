@@ -35,7 +35,7 @@ namespace Storage.Entities
         [Required][StringLength(400)]
         public string Description { get; set; }
 
-
+        [NotMapped]
         public Type FieldType { get; set; }
 
         /// <summary>

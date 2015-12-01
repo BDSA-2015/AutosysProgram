@@ -58,7 +58,7 @@ namespace ApplicationLogics.UserManagement
 
         public void Update(int oldId, SystematicStudyService.Models.Team teamDto)
         {
-            var team = DtoConverter.ConvertDtoTeam(teamDto);
+            var team = new Team(); //TODO Use Automapper
             if (!TeamValidator.ValidateEnteredTeamData(team)) throw new ArgumentException("Team data is invalid");
             if (!TeamValidator.ValidateExistence(oldId, _storage)) throw new ArgumentException("Team does not exist");
 

@@ -123,7 +123,9 @@
     <Compile Include="ExportManagement\PDFConverter.cs" />
     <Compile Include="StorageFasade\CriteriaFasade.cs" />
     <Compile Include="StorageFasade\DatafieldFasade.cs" />
-    <Compile Include="StorageFasade\Interface\IFasade.cs" />
+    <Compile Include="StorageFasade\Mapping\Interface\IFasade.cs" />
+    <Compile Include="StorageFasade\Mapping\Interface\IMap.cs" />
+    <Compile Include="StorageFasade\Mapping\BaseMapper.cs" />
     <Compile Include="StorageFasade\PaperFasade.cs" />
     <Compile Include="StorageFasade\PhaseFasade.cs" />
     <Compile Include="StorageFasade\ProtocolFasade.cs" />
@@ -148,6 +150,8 @@
     <Compile Include="UserManagement\Utils\UserValidator.cs" />
     <Compile Include="AutosysServer\Adapter.cs" />
     <Compile Include="AutosysServer\MainHandler.cs" />
+    <Compile Include="AutosysServer\Request.cs" />
+    <Compile Include="AutosysServer\RequestHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

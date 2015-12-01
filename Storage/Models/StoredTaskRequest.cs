@@ -37,6 +37,7 @@ namespace Storage.Entities
         [Key]
         public int Id { get; set; }
 
+        [NotMapped]
         public Type TaskType { get; set; }
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace Storage.Entities
             private set { TaskType = EnumExtensions.ParseEnum<Type>(value); }
         }
 
-
+        [NotMapped]
         public Type TaskProgress { get; set; }
 
         /// <summary>
