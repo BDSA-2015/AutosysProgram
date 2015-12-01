@@ -6,24 +6,25 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogics.StudyManagement
 {
-    public static class CriteriaHandler
+    /// <summary>
+    /// This class is meant for Creating new Criterias
+    /// </summary>
+    public  class CriteriaHandler
     {
 
 
-        
+
 
         /// <summary>
-        /// Create an empty criteria. Specy its purpose with AddRelation
+        /// Create an empty criteria. Specify its purpose with AddRelation method
         /// </summary>
-        static  Criteria CreateCriteria(string name, string description)
+         public Criteria CreateCriteria(string name, string description)
         {
             var criteria = new Criteria();
             criteria.Name = name;
             criteria.Description = description;
 
             return criteria;
-
-            throw new NotImplementedException(); //Should we assign an ID at this state
         }
 
 
@@ -32,38 +33,51 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
         /// <param name="critera">The Criteria you which to modify</param>
         /// <param name="itemToSearchFor">THe item you you wish to search for</param>
-        static void SetCriteriaToSearchForASpecificItem(Criteria critera, DataField itemToSearchFor)
+        public void setCriteria(Criteria critera, CriteriaRelation itemToSearchFor)
         {
-            critera.LimitationType = Criteria.CriteriaOperation.Equal;
-            critera.SearchItem = itemToSearchFor;
-            critera.Limitation = null;
+            critera.Requirement = itemToSearchFor;
         }
 
 
         /// <summary>
-        /// Define the criteria as a boolean equation which include/ exclude material based on the year.
+        /// Set the Criteria to search for papers which have a bibtex tag with a value which contains this string
         /// </summary>
-        static void SetYearLimitation(Criteria criteria, DataField searchItem, Criteria.CriteriaOperation relation,
-            DateTime timeLimitation)
+        public void SetSearchCriteria_ContainsString(string bibTexTagName, string substring)
         {
-            if (relation == Criteria.CriteriaOperation.Equal)
-                throw new ArgumentException("Not accepted type, can't compare a year to itself");
-
-            criteria.SearchItem = searchItem;
-            criteria.LimitationType = relation;
-            criteria.Limitation = new CriteriaLimitation(timeLimitation);
+            throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Define a critreria which is based of a quantity problem. The criteria is satisfied if the criteria lives up to the boolian equation
+        /// Set the Criteria to search for papers which have a bibtex tag with a value which equals this string.
         /// </summary>
-        static void SetQuantityLimitation(Criteria criteria, DataField seachItem,
-            Criteria.CriteriaOperation limitationType, int limitation)
+        public void SetSearchCriteria_equals(string bibTexTagName, string value)
         {
-            criteria.SearchItem = seachItem;
-            criteria.LimitationType = limitationType;
-            criteria.Limitation = new CriteriaLimitation(limitation);
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Set the Criteria to search for papers which have a bibtex tag with a value which less than the given value.
+        /// </summary>
+        public void SetSearchCriteria_LessThan(string bibTexTagName, int value)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        /// <summary>
+        /// Set the Criteria to search for papers which have a bibtex tag with a value which Greater than the given value.
+        /// </summary>
+        public void SetSearchCriteria_GreaterThan(string bibTexTagName, int value)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Set the Criteria to search for papers which have a bibtex tag with a value Which match .
+        /// </summary>
+        public void SetSearchCriteria_Regex(string bibTexTagName, string substring)
+        {
+            throw new NotImplementedException();
         }
     }
-
 }
