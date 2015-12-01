@@ -5,10 +5,8 @@
 using System;
 using System.Collections.Generic;
 using ApplicationLogics.PaperManagement;
-using ApplicationLogics.Repository;
 using ApplicationLogics.UserManagement;
-using BibliographyParser;
-using ApplicationLogics.StudyManagement.BibTex;
+
 
 namespace ApplicationLogics.StudyManagement
 {
@@ -50,7 +48,7 @@ namespace ApplicationLogics.StudyManagement
         public void GetPapersWhichMatchCriterias()
         {
             BibTexFile file = new BibTexFile();
-            file.
+            throw new NotImplementedException();
         }
 
         public bool PhaseFinished { get; protected set; }
