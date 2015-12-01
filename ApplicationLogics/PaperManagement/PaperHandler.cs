@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.PaperManagement.Interfaces;
+using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.PaperManagement
 {

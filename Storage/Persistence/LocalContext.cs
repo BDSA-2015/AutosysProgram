@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Data;
+﻿using System.Data.Entity;
 using ApplicationLogics.ExportManagement;
-using ApplicationLogics.PaperManagement;
 using ApplicationLogics.PaperManagement.Bibtex;
-using Threading = System.Threading.Tasks;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
+using Task = ApplicationLogics.StudyManagement.Task;
 
-namespace Storage.Repository
+namespace Storage.Persistence
 {
     public class LocalContext : DbContext
     {
