@@ -122,6 +122,17 @@
     <Compile Include="ExportManagement\ExportHandler.cs" />
     <Compile Include="ExportManagement\ExportType.cs" />
     <Compile Include="ExportManagement\PDFConverter.cs" />
+    <Compile Include="StorageFasade\CriteriaFasade.cs" />
+    <Compile Include="StorageFasade\DatafieldFasade.cs" />
+    <Compile Include="StorageFasade\IFasade.cs" />
+    <Compile Include="StorageFasade\PaperFasade.cs" />
+    <Compile Include="StorageFasade\PhaseFasade.cs" />
+    <Compile Include="StorageFasade\ProtocolFasade.cs" />
+    <Compile Include="StorageFasade\RoleFasade.cs" />
+    <Compile Include="StorageFasade\StudyFasade.cs" />
+    <Compile Include="StorageFasade\TaskRequestFasade.cs" />
+    <Compile Include="StorageFasade\TeamFasade.cs" />
+    <Compile Include="StorageFasade\UserFasade.cs" />
     <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
     <Compile Include="ExportManagement\Interfaces\IExportFile.cs" />
     <Compile Include="Repository\IRepository.cs" />

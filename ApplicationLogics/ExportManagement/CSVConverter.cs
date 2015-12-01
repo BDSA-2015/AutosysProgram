@@ -30,7 +30,7 @@ namespace ApplicationLogics.ExportManagement
             exportFile.InclusionCriteria = ConvertInclusionData(protocol);
             exportFile.ExclusionCriteria = ConvertExclusionData(protocol);
             exportFile.Description = protocol.Description;
-            exportFile.Origin = protocol.Id;
+            // exportFile.Origin = protocol.Id;
             return exportFile;
         }
 
