@@ -14,13 +14,13 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         {
             //Arrange
             var validator = new PaperValidator();
-            var fields = new Dictionary<EnumField, string>()
+            var fields = new Dictionary<DefaultEnumField, string>()
             {
-                {EnumField.Author, "Professor Clever"},
-                {EnumField.Year, "2015"},
-                {EnumField.Title, "How to see sharp" }
+                {DefaultEnumField.Author, "Professor Clever"},
+                {DefaultEnumField.Year, "2015"},
+                {DefaultEnumField.Title, "How to see sharp" }
             };
-            var paper = new Paper(EnumEntry.Article, fields);
+            var paper = new Paper(DefaultEnumEntry.Article, fields);
 
             //Assert
             Assert.IsTrue(validator.IsPaperValid(paper));
@@ -31,12 +31,12 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         {
             //Arrange
             var validator = new PaperValidator();
-            var fields = new Dictionary<EnumField, string>()
+            var fields = new Dictionary<DefaultEnumField, string>()
             {
-                {EnumField.Year, "2015"},
-                {EnumField.Booktitle, "How to see sharp" }
+                {DefaultEnumField.Year, "2015"},
+                {DefaultEnumField.Booktitle, "How to see sharp" }
             };
-            var paper = new Paper(EnumEntry.Article, fields);
+            var paper = new Paper(DefaultEnumEntry.Article, fields);
 
             //Assert
             Assert.IsFalse(validator.IsPaperValid(paper));
@@ -47,12 +47,12 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         {
             //Arrange
             var validator = new PaperValidator();
-            var fields = new Dictionary<EnumField, string>()
+            var fields = new Dictionary<DefaultEnumField, string>()
             {
-                {EnumField.Author, "Professor Clever"},
-                {EnumField.Year, "2015"},
+                {DefaultEnumField.Author, "Professor Clever"},
+                {DefaultEnumField.Year, "2015"},
             };
-            var paper = new Paper(EnumEntry.Article, fields);
+            var paper = new Paper(DefaultEnumEntry.Article, fields);
 
             //Assert
             Assert.IsFalse(validator.IsPaperValid(paper));
@@ -63,12 +63,12 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         {
             //Arrange
             var validator = new PaperValidator();
-            var fields = new Dictionary<EnumField, string>()
+            var fields = new Dictionary<DefaultEnumField, string>()
             {
-                {EnumField.Author, "Professor Clever"},
-                {EnumField.Booktitle, "How to see sharp" }
+                {DefaultEnumField.Author, "Professor Clever"},
+                {DefaultEnumField.Booktitle, "How to see sharp" }
             };
-            var paper = new Paper(EnumEntry.Article, fields);
+            var paper = new Paper(DefaultEnumEntry.Article, fields);
 
             //Assert
             Assert.IsFalse(validator.IsPaperValid(paper));

@@ -41,8 +41,8 @@ namespace ApplicationLogics.PaperManagement.Bibtex
                 try
                 {
                     string key = match.Groups[2].Value;
-                    EnumEntry type = (EnumEntry)Enum.Parse(typeof(EnumEntry), match.Groups[1].Value, true);
-                    Dictionary<EnumField, string> fields = ParsePaper(match.Groups[3].Value);
+                    DefaultEnumEntry type = (DefaultEnumEntry)Enum.Parse(typeof(DefaultEnumEntry), match.Groups[1].Value, true);
+                    Dictionary<DefaultEnumField, string> fields = ParsePaper(match.Groups[3].Value);
                     var paper = new Paper(type, fields);
 
                     if (!_validator.IsPaperValid(paper))
@@ -61,13 +61,13 @@ namespace ApplicationLogics.PaperManagement.Bibtex
             return papers;
         }
 
-        private Dictionary<EnumField, string> ParsePaper(string data)
+        private Dictionary<DefaultEnumField, string> ParsePaper(string data)
         {
             //Most of the code is from AS1 in BDSA 2015
             var matchCollection = _fieldRegex.Matches(data);
 
             
-            var fields = new Dictionary<EnumField, string>();
+            var fields = new Dictionary<DefaultEnumField, string>();
 
             // Iterate over every field.
             foreach (Match match in matchCollection)
@@ -75,7 +75,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
                 try
                 {
                     // Get the field type and value.
-                    var key = (EnumField)Enum.Parse(typeof(EnumField), match.Groups[1].Value, true);
+                    var key = (DefaultEnumField)Enum.Parse(typeof(DefaultEnumField), match.Groups[1].Value, true);
                     var value = match.Groups[2].Value;
 
                     fields.Add(key, value);

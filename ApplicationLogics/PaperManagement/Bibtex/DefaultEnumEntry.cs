@@ -9,7 +9,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
     /// <summary>
     /// The possible Entry types for bibliographic items
     /// </summary>
-    public enum EnumEntry
+    public enum DefaultEnumEntry
     {
         Article,
         Book,

@@ -13,13 +13,13 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         {
             //Arrange
             DefaultPaperChecker checker = new DefaultPaperChecker();
-            var fields = new Dictionary<EnumField, string>
+            var fields = new Dictionary<DefaultEnumField, string>
             {
-                {EnumField.Year, "2015"},
-                {EnumField.Author, "William McSomething"},
-                {EnumField.Booktitle, "Insatiate Your Dreams"}
+                {DefaultEnumField.Year, "2015"},
+                {DefaultEnumField.Author, "William McSomething"},
+                {DefaultEnumField.Booktitle, "Insatiate Your Dreams"}
             };
-            var paper = new Paper(EnumEntry.Phdthesis, fields);
+            var paper = new Paper(DefaultEnumEntry.Phdthesis, fields);
 
             //Assert
             Assert.IsTrue(checker.Validate(paper));
@@ -30,8 +30,8 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         {
             //Arrange
             DefaultPaperChecker checker = new DefaultPaperChecker();
-            var fields = new Dictionary<EnumField, string> {{EnumField.Author, "\nInvalid"}};
-            var paper = new Paper(EnumEntry.Phdthesis, fields);
+            var fields = new Dictionary<DefaultEnumField, string> {{DefaultEnumField.Author, "\nInvalid"}};
+            var paper = new Paper(DefaultEnumEntry.Phdthesis, fields);
 
             //Assert
             Assert.IsFalse(checker.Validate(paper));

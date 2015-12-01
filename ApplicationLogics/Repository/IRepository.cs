@@ -1,12 +1,12 @@
-﻿using System;
+﻿// IRepository.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
+// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
+// Jacob Mullit Møiniche.
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApplicationLogics.Repository
 {
-
     /// <summary>
     /// This interface outlines the CRUD methods that the storage repository class will be able to perform.
     /// </summary>

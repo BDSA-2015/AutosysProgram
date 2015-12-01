@@ -1,6 +1,4 @@
-﻿using ApplicationLogics.Repository;
-
-namespace ApplicationLogics
+﻿namespace ApplicationLogics
 {
     public class Program
     {

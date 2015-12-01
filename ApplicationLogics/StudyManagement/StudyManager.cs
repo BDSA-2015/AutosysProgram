@@ -1,23 +1,24 @@
-﻿using System;
+﻿// StudyManager.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
+// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
+// Jacob Mullit Møiniche.
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApplicationLogics.StudyManagement
 {
-    class StudyManager
+    internal class StudyManager // TODO Why internal? 
     {
-        public Phase currentPhase { get; protected set; }
+        public Phase CurrentPhase { get; protected set; }
 
-        //The key is the user's ID and the values are his roles in the current phase
-        public  Dictionary<int, Role> RolesInPhase { get; protected set; }
+        // Key is user id and values consist of the roles assigned to a user in current phase
+        public Dictionary<int, Role> RolesInPhase { get; protected set; }
 
-        //A map of tasks in the current phase, each task can have multiple 
-        public Dictionary<Task, List<int>> TasksInPhase { get; protected set; }
+        // A map of tasks in the current phase, each task can have multiple users 
+        public Dictionary<TaskRequest, List<int>> TasksInPhase { get; protected set; }
 
 
-        public void AddRole(int UserId, Role role = null)
+        public void AddRole(int userId, Role role = null)
         {
             throw new NotImplementedException();
         }
@@ -32,20 +33,19 @@ namespace ApplicationLogics.StudyManagement
             throw new NotImplementedException();
         }
 
-        public void AddTask(Task task, List<int> participant = null)
+        public void AddTask(TaskRequest task, List<int> participant = null)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveMemberFromTask(int UserId)
+        public void RemoveMemberFromTask(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveTask(Task task)
+        public void RemoveTask(TaskRequest task)
         {
             throw new NotImplementedException();
         }
-
     }
 }

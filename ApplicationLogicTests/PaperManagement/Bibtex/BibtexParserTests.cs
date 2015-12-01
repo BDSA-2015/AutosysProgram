@@ -28,13 +28,13 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
 
             //Assert
             var validPaper = papers[0];
-            Assert.AreEqual(EnumEntry.Article, validPaper.Type);
-            Assert.AreEqual("William, Funstuff", validPaper.Fields[EnumField.Author]);
-            Assert.AreEqual("ITU student anno 2015", validPaper.Fields[EnumField.Booktitle]);
-            Assert.AreEqual("A student's thoughts on programming", validPaper.Fields[EnumField.Title]);
-            Assert.AreEqual("2015", validPaper.Fields[EnumField.Year]);
-            Assert.AreEqual("Aug", validPaper.Fields[EnumField.Month]);
-            Assert.AreEqual("1", validPaper.Fields[EnumField.Volume]);
+            Assert.AreEqual(DefaultEnumEntry.Article, validPaper.Type);
+            Assert.AreEqual("William, Funstuff", validPaper.Fields[DefaultEnumField.Author]);
+            Assert.AreEqual("ITU student anno 2015", validPaper.Fields[DefaultEnumField.Booktitle]);
+            Assert.AreEqual("A student's thoughts on programming", validPaper.Fields[DefaultEnumField.Title]);
+            Assert.AreEqual("2015", validPaper.Fields[DefaultEnumField.Year]);
+            Assert.AreEqual("Aug", validPaper.Fields[DefaultEnumField.Month]);
+            Assert.AreEqual("1", validPaper.Fields[DefaultEnumField.Volume]);
         }
 
         [TestMethod()]

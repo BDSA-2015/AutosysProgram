@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogics.PaperManagement.Bibtex
 {
-    public enum EnumField
+    public enum DefaultEnumField
     {
         Address,
         Abstract,

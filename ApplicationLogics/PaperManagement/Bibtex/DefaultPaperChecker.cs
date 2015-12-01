@@ -18,8 +18,8 @@ namespace ApplicationLogics.PaperManagement.Bibtex
             {
                 throw new ArgumentNullException("The given Paper cannot be null");
             }
-            if (paper.Fields.ContainsKey(EnumField.Author) && paper.Fields.ContainsKey(EnumField.Year) && 
-                (paper.Fields.ContainsKey(EnumField.Title) || paper.Fields.ContainsKey(EnumField.Booktitle)))
+            if (paper.Fields.ContainsKey(DefaultEnumField.Author) && paper.Fields.ContainsKey(DefaultEnumField.Year) && 
+                (paper.Fields.ContainsKey(DefaultEnumField.Title) || paper.Fields.ContainsKey(DefaultEnumField.Booktitle)))
             {
                 return paper.Fields.All(field => _validator.IsFieldValid(field.Value, field.Key));
             }

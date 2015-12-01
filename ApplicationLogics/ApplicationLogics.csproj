@@ -91,12 +91,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExportManagement\IConverter.cs" />
     <Compile Include="PaperManagement\Bibtex\BibtexParser.cs" />
+    <Compile Include="PaperManagement\Bibtex\CostumEntry.cs" />
+    <Compile Include="PaperManagement\Bibtex\CostumField.cs" />
     <Compile Include="PaperManagement\Bibtex\CustomFieldChecker.cs" />
     <Compile Include="PaperManagement\Bibtex\DefaultPaperChecker.cs" />
-    <Compile Include="PaperManagement\Bibtex\EnumEntry.cs" />
-    <Compile Include="PaperManagement\Bibtex\EnumField.cs" />
+    <Compile Include="PaperManagement\Bibtex\DefaultEnumEntry.cs" />
+    <Compile Include="PaperManagement\Bibtex\DefaultEnumField.cs" />
     <Compile Include="PaperManagement\Bibtex\DefaultFieldChecker.cs" />
     <Compile Include="PaperManagement\Bibtex\FieldValidator.cs" />
     <Compile Include="PaperManagement\Bibtex\Paper.cs" />
@@ -111,16 +112,20 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IEntity.cs" />
+    <Compile Include="ExportManagement\CsvFile.cs" />
+    <Compile Include="ExportManagement\PdfFile.cs" />
     <Compile Include="ExportManagement\CSVConverter.cs" />
     <Compile Include="ExportManagement\ExportHandler.cs" />
     <Compile Include="ExportManagement\ExportType.cs" />
     <Compile Include="ExportManagement\PDFConverter.cs" />
+    <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
+    <Compile Include="ExportManagement\Interfaces\IExportFile.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\DataField.cs" />
     <Compile Include="StudyManagement\Phase.cs" />
     <Compile Include="StudyManagement\Role.cs" />
-    <Compile Include="StudyManagement\Task.cs" />
+    <Compile Include="StudyManagement\TaskRequest.cs" />
     <Compile Include="StudyManagement\Study.cs" />
     <Compile Include="StudyManagement\StudyHandler.cs" />
     <Compile Include="StudyManagement\StudyManager.cs" />

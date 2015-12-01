@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationLogics.ExportManagement
+namespace ApplicationLogics.PaperManagement.Bibtex
 {
-    public interface IConverter
+    public class CostumEntry
     {
-        ExportType Convert(Protocol protocol);
+
     }
 }

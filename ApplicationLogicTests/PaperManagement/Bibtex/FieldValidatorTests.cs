@@ -16,8 +16,8 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             var field2 = "My Name";
 
             //Assert
-            Assert.IsTrue(validator.IsFieldValid(field1, EnumField.Address));
-            Assert.IsTrue(validator.IsFieldValid(field2, EnumField.Author));
+            Assert.IsTrue(validator.IsFieldValid(field1, DefaultEnumField.Address));
+            Assert.IsTrue(validator.IsFieldValid(field2, DefaultEnumField.Author));
 
         }
 
@@ -30,8 +30,8 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             var field2 = "\n My Name on two lines";
 
             //Assert
-            Assert.IsFalse(validator.IsFieldValid(field1, EnumField.Address));
-            Assert.IsFalse(validator.IsFieldValid(field2, EnumField.Author));
+            Assert.IsFalse(validator.IsFieldValid(field1, DefaultEnumField.Address));
+            Assert.IsFalse(validator.IsFieldValid(field2, DefaultEnumField.Author));
 
         }
 
@@ -43,7 +43,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             FieldValidator validator = new FieldValidator();
 
             //Act
-            validator.IsFieldValid("", EnumField.Address);
+            validator.IsFieldValid("", DefaultEnumField.Address);
 
         }
 
@@ -55,7 +55,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             FieldValidator validator = new FieldValidator();
 
             //Act
-            validator.IsFieldValid(null, EnumField.Address);
+            validator.IsFieldValid(null, DefaultEnumField.Address);
 
         }
     }
