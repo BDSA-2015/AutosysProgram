@@ -1,6 +1,8 @@
 ﻿using System;
 using ApplicationLogics.StorageFasade.Mapper;
 using ApplicationLogics.StorageFasade.Mapping;
+using ApplicationLogicTests.Mapping.Stub;
+using AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApplicationLogicTests.Mapping
@@ -9,74 +11,83 @@ namespace ApplicationLogicTests.Mapping
     public class BaseMapperTests
     {
 
-        private IMap<ObjectA, ObjectB> _mapper;
+        private IMap _mapper;
+        private ObjectDto _objectDto;
         [TestInitialize]
         public void Initialize()
         {
-           _mapper = new BaseMapper<ObjectA, ObjectB>();
+            _mapper = new BaseMapperStub();
+            _mapper.CreateMappings();
+            _objectDto = new ObjectDto() {Name="John Doe"};
         }
 
         /// <summary>
-        /// Test if returned destination object is not null
+        /// Test mapping of two objects with same property names
         /// </summary>
         [TestMethod]
-        public void ValidMappingTest_NotNull()
+        public void DtoToObjectWithSamePropertyTest()
         {
             //Arrange
+            var target = new ObjectSameOneProperty();
 
-            var inputObject = new ObjectA();
-        
             //Act
-            var outputObject = _mapper.Map(inputObject,new ObjectB());
+            var result = AutoMapper.Mapper.Map(_objectDto, target);
 
             //Assert
-            Assert.IsNotNull(outputObject);
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Name == _objectDto.Name);
+
         }
 
         /// <summary>
-        /// Test if a correct destination class has been returned.
+        /// Test mapping of two objects with different property names.
+        /// The expected outcome is both property values must be the same after 
+        /// the transfer
         /// </summary>
         [TestMethod]
-        public void ValidMappingTest_CorrectClassReturned()
+        public void DtoToObjectWithDifferentPropertyNameTest()
         {
             //Arrange
-            var inputObject = new ObjectA();
+            var target = new ObjectDifferentProperty();
 
             //Act
-            var outputObject = _mapper.Map(inputObject, new ObjectB());
+            var result = AutoMapper.Mapper.Map(_objectDto, target);
 
             //Assert
-            Assert.IsInstanceOfType(outputObject, typeof(ObjectB));
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.FullName == _objectDto.Name);
         }
 
         /// <summary>
-        /// Test if a property from a source object is correctly transfered to a destination object
+        /// Test mapping of two objects with different numbers of properties.
+        /// The expected outcome is Name from DTO must be transfered correctly to target object that has
+        /// two properties. EG FirstName and LastName.
         /// </summary>
         [TestMethod]
-        public void ValidMappingTest_CorrectPropertyTransfer()
+        public void DtoToObjectWithManyPropertiesTest()
         {
             //Arrange
-            const string expectedName = "Name";
-
-            var inputObject = new ObjectA() { Name = expectedName };
-
+            var target = new ObjectManyProperties();
 
             //Act
-            var outputObject = _mapper.Map(inputObject, new ObjectB());
+            var result = AutoMapper.Mapper.Map(_objectDto, target);
 
             //Assert
-            Assert.AreEqual(inputObject.Name, outputObject.Name);
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.FirstName == "John");
+            Assert.IsTrue(result.LastName == "Doe");
         }
 
 
-        private class ObjectA
+
+
+        [TestMethod]
+        public void ValidConfigurationTest()
         {
-            public string Name { get; set;} 
+            Mapper.AssertConfigurationIsValid();
         }
 
-        private class ObjectB
-        {
-            public string Name { get; set;}
-        }
+
+
     }
 }
