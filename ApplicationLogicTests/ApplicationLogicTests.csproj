@@ -64,6 +64,11 @@
     <Compile Include="ExportManagement\ExportHandlerTests.cs" />
     <Compile Include="ExportManagement\PDFConverterTests.cs" />
     <Compile Include="Mapping\BaseMapperTests.cs" />
+    <Compile Include="Mapping\Stub\BaseMapperStub.cs" />
+    <Compile Include="Mapping\Stub\ObjectDifferentProperty.cs" />
+    <Compile Include="Mapping\Stub\ObjectDto.cs" />
+    <Compile Include="Mapping\Stub\ObjectManyProperties.cs" />
+    <Compile Include="Mapping\Stub\ObjectSameOneProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserManagement\TeamHandlerTests.cs" />
     <Compile Include="UserManagement\TeamValidatorTests.cs" />

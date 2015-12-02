@@ -1,12 +1,16 @@
 ﻿using ApplicationLogics.StorageFasade.Mapper;
+using ApplicationLogics.UserManagement;
+using ApplicationLogics.UserManagement.Entities;
 
 namespace ApplicationLogics.StorageFasade.Mapping
 {
     /// <summary>
     /// This class is used to convert user objects in the logical layer (UserDto, User)
     /// to user objects in the storage layer (StoredUser), vice versa. 
+    /// To see different mappings, look at BaseMapperStub.cs in the test files or
+    /// https://github.com/AutoMapper/AutoMapper/wiki/Getting-started
     /// </summary>
-    public class BaseMapper<T,K> : IMap<T, K> where T : class where K : class
+    public class BaseMapper : IMap
     {
       
        /// <summary>
@@ -15,10 +19,28 @@ namespace ApplicationLogics.StorageFasade.Mapping
        /// <param name="source"> source object</param>
        /// <param name="destination"> destination object</param>
        /// <returns>destination object</returns>
-        public K Map(T source, K destination)
+        public void CreateMappings()
         {
-            AutoMapper.Mapper.CreateMap(typeof(T), typeof(K));
-            return AutoMapper.Mapper.Map(source, destination);
+            CreateUserMappings();
+            CreateTeamMappings();
+        }
+
+        private void CreateUserMappings()
+        {
+            //DTO to User
+            AutoMapper.Mapper.CreateMap<SystematicStudyService.Models.User, User>();
+            
+            //User to DTO
+            AutoMapper.Mapper.CreateMap<User, SystematicStudyService.Models.User>();
+        }
+
+        private void CreateTeamMappings()
+        {
+            //DTO to User
+            AutoMapper.Mapper.CreateMap<SystematicStudyService.Models.Team, Team>();
+
+            //User to DTO
+            AutoMapper.Mapper.CreateMap<Team, SystematicStudyService.Models.Team>();
         }
     }
 }
