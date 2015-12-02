@@ -95,6 +95,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutosysServer\Mapping\AutoMapperConfigurator.cs" />
     <Compile Include="ExportManagement\CsvFile.cs" />
     <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
     <Compile Include="ExportManagement\Interfaces\IExportFile.cs" />
@@ -123,8 +124,7 @@
     <Compile Include="StorageFasade\CriteriaFasade.cs" />
     <Compile Include="StorageFasade\DatafieldFasade.cs" />
     <Compile Include="StorageFasade\IFasade.cs" />
-    <Compile Include="StorageFasade\Mapping\Interface\IMap.cs" />
-    <Compile Include="StorageFasade\Mapping\BaseMapper.cs" />
+    <Compile Include="AutosysServer\Mapping\Profiles\UserManagementMappingProfile.cs" />
     <Compile Include="StorageFasade\PaperFasade.cs" />
     <Compile Include="StorageFasade\PhaseFasade.cs" />
     <Compile Include="StorageFasade\ProtocolFasade.cs" />

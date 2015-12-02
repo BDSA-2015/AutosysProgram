@@ -1,6 +1,5 @@
 ﻿using System;
 using ApplicationLogics.StorageFasade.Mapper;
-using ApplicationLogics.StorageFasade.Mapping;
 using ApplicationLogicTests.Mapping.Stub;
 using AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
