@@ -58,6 +58,13 @@ namespace ApplicationLogics.StudyManagement
             critera.Requirement.Criteria = value;
         }
 
+        public void SetSearchCriteria_equals(Criteria critera, string bibTexTagName, int value)
+        {
+            critera.CriteriaTarget = bibTexTagName;
+            critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Equals;
+            critera.Requirement.Criteria = ""+value;
+        }
+
         /// <summary>
         /// Set the Criteria to search for papers which have a bibtex tag with a value which less than the given value.
         /// </summary>
