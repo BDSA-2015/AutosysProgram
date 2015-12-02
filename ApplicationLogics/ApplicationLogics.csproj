@@ -161,6 +161,10 @@
       <Project>{390d70e5-5e15-4344-915a-d570f5bca74d}</Project>
       <Name>Storage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebApi\WebApi.csproj">
+      <Project>{b9d7d263-0fa5-46e1-bbd8-53822b6877cd}</Project>
+      <Name>WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
