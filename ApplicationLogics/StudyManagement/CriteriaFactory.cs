@@ -19,6 +19,10 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
          public Criteria CreateEmptyCriteria(string name, string description)
         {
+            EmptyStringChecker(name);
+            EmptyStringChecker(description);
+
+
             var criteria = new Criteria();
             criteria.Name = name;
             criteria.Description = description;
@@ -43,6 +47,8 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
         public void SetSearchCriteria_ContainsString(Criteria critera, string bibTexTagName, string substring)
         {
+            EmptyStringChecker(substring);
+
             critera.CriteriaTarget = bibTexTagName;
             critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Contains;
             critera.Requirement.Criteria = substring;           
@@ -53,6 +59,8 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
         public void SetSearchCriteria_equals(Criteria critera, string bibTexTagName, string value)
         {
+            EmptyStringChecker(value);
+
             critera.CriteriaTarget = bibTexTagName;
             critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Equals;
             critera.Requirement.Criteria = value;
@@ -92,6 +100,16 @@ namespace ApplicationLogics.StudyManagement
         public void SetSearchCriteria_Regex(Criteria critera, string bibTexTagName, string regexPattern)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Throws an argumentException if a empty string is found
+        /// </summary>
+        /// <param name="varialbe"></param>
+        private void EmptyStringChecker(string varialbe)
+        {
+            if(varialbe.Length==0)
+                throw new ArgumentException();
         }
     }
 }
