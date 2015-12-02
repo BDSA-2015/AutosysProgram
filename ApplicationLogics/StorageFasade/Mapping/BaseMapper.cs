@@ -6,6 +6,8 @@ namespace ApplicationLogics.StorageFasade.Mapping
     /// <summary>
     /// This class is used to convert user objects in the logical layer (UserDto, User)
     /// to user objects in the storage layer (StoredUser), vice versa. 
+    /// To see different mappings, look at BaseMapperStub.cs in the test files or
+    /// https://github.com/AutoMapper/AutoMapper/wiki/Getting-started
     /// </summary>
     public class BaseMapper : IMap
     {
