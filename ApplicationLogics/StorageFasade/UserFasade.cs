@@ -27,7 +27,7 @@ namespace ApplicationLogics.StorageFasade
         /// <returns> int</returns>
         public int Create(User user)
         {
-            return _userRepository.Create(ConvertUser(user));
+            return _userRepository.Create(AutoMapper.Mapper.Map<StoredUser>(user));
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace ApplicationLogics.StorageFasade
         public User Read(int id)
         {
             var storedUser = _userRepository.Read(id);
-            return ConvertUser(storedUser);
+            return AutoMapper.Mapper.Map<User>(storedUser);
         }
 
         /// <summary>
@@ -48,7 +48,8 @@ namespace ApplicationLogics.StorageFasade
         public IEnumerable<User> Read()
         {
            var storedUsers = _userRepository.Read();
-           var userList = storedUsers.Select(ConvertUser).ToList(); //Converts storedUsers to user and return as a list
+
+           var userList = storedUsers.Select(AutoMapper.Mapper.Map<User>).ToList(); //Converts storedUsers to user and return as a list
            return userList;
         }
 
@@ -60,28 +61,12 @@ namespace ApplicationLogics.StorageFasade
 
         public void Delete(User user)
         {
-            //TODO How to retrieve specific user from database without any ID?
-            throw new NotImplementedException();
-        }
+            var toDelete = Read(user.Id);
+            if(toDelete == null) throw new NullReferenceException("User does not exist");
+            if (!user.Equals(toDelete)) throw new ArgumentException("User has been updated");
+            var storedUserToDelete = AutoMapper.Mapper.Map<StoredUser>(toDelete);
+            _userRepository.Delete(storedUserToDelete);
 
-        /// <summary>
-        /// Converts User to StoredUser
-        /// </summary>
-        /// <param name="user">User</param>
-        /// <returns>User</returns>
-        private StoredUser ConvertUser(User user)
-        {
-            return new StoredUser() { Name = user.Name, MetaData = user.Metadata };
-        }
-
-        /// <summary>
-        /// Convert storedUser to user
-        /// </summary>
-        /// <param name="user">Stored User</param>
-        /// <returns>User</returns>
-        private User ConvertUser(StoredUser user)
-        {
-            return new User() { Name = user.Name, Metadata = user.MetaData};
         }
     }
 }

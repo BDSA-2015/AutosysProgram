@@ -150,8 +150,6 @@
     <Compile Include="UserManagement\Utils\UserValidator.cs" />
     <Compile Include="AutosysServer\Adapter.cs" />
     <Compile Include="AutosysServer\MainHandler.cs" />
-    <Compile Include="AutosysServer\Request.cs" />
-    <Compile Include="AutosysServer\RequestHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

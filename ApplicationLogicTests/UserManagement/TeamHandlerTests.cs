@@ -7,6 +7,9 @@ using Storage.Entities;
 
 namespace ApplicationLogicTests.UserManagement
 {
+    /// <summary>
+    /// Test for the TeamHandler Class
+    /// </summary>
     [TestClass]
     public class TeamHandlerTests
     {

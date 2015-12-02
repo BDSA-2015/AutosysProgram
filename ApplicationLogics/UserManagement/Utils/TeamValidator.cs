@@ -8,7 +8,7 @@ namespace ApplicationLogics.UserManagement.Utils
     /// <summary>
     /// Responsible for validating teams
     /// </summary>
-    internal class TeamValidator
+    public class TeamValidator
     {
         /// <summary>
         /// Validate existience of team
@@ -16,8 +16,9 @@ namespace ApplicationLogics.UserManagement.Utils
         /// <param name="teamId">team to find</param>
         /// <param name="teamFasade">Storage location</param>
         /// <returns>Existence of team</returns>
-        internal static bool ValidateExistence(int teamId, IFasade<Team> teamFasade)
+        public static bool ValidateExistence(int teamId, IFasade<Team> teamFasade)
         {
+            if (teamId < 0) return false;
             var team = teamFasade.Read(teamId);
             return team != null;
         }
@@ -27,11 +28,12 @@ namespace ApplicationLogics.UserManagement.Utils
         /// </summary>
         /// <param name="team">team to validate</param>
         /// <returns>validated team information</returns>
-        internal static bool ValidateEnteredTeamData(Team team)
+        public static bool ValidateEnteredTeamData(Team team)
         {
             return
-                !string.IsNullOrEmpty(team.Name) &&
-                !string.IsNullOrEmpty(team.Metadata) &&
+                team.Id>=0 &&
+                !string.IsNullOrWhiteSpace(team.Name) &&
+                !string.IsNullOrWhiteSpace(team.Metadata) &&
                 (team.UserIDs.Length > 0);
         }
     }

@@ -66,6 +66,8 @@
     <Compile Include="Mapping\BaseMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserManagement\TeamHandlerTests.cs" />
+    <Compile Include="UserManagement\TeamValidatorTests.cs" />
+    <Compile Include="UserManagement\UserHandlerTests.cs" />
     <Compile Include="UserManagement\UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
