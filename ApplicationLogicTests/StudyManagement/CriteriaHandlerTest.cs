@@ -7,13 +7,13 @@ namespace ApplicationLogicTests.StudyManagement
     [TestClass]
     public class CriteriaHandlerTest
     {
-        private CriteriaHandler handler;
+        private CriteriaFactory handler;
         private Criteria criteria;
 
         [TestInitialize]
         public void TestInitializer()
         {
-            handler = new CriteriaHandler();
+            handler = new CriteriaFactory();
             
         }
         
