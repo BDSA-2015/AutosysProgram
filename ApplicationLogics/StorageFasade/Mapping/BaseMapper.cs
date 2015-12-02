@@ -1,6 +1,7 @@
 ﻿using ApplicationLogics.StorageFasade.Mapper;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
+using Storage.Entities;
 
 namespace ApplicationLogics.StorageFasade.Mapping
 {
@@ -25,6 +26,9 @@ namespace ApplicationLogics.StorageFasade.Mapping
             CreateTeamMappings();
         }
 
+        /// <summary>
+        /// Creates mappings for User in application logic, DTO and StoredEntity
+        /// </summary>
         private void CreateUserMappings()
         {
             //DTO to User
@@ -32,15 +36,32 @@ namespace ApplicationLogics.StorageFasade.Mapping
             
             //User to DTO
             AutoMapper.Mapper.CreateMap<User, SystematicStudyService.Models.User>();
+
+            //User to StoredEntity
+            AutoMapper.Mapper.CreateMap<User, StoredUser>();
+
+            //StoredEntity to User
+            AutoMapper.Mapper.CreateMap<StoredUser,User>();
+
         }
 
+        /// <summary>
+        /// Creates mappings for Team in application logic, DTO and StoredEntity
+        /// </summary>
         private void CreateTeamMappings()
         {
-            //DTO to User
+            //DTO to Team
             AutoMapper.Mapper.CreateMap<SystematicStudyService.Models.Team, Team>();
 
-            //User to DTO
+            //Team to DTO
             AutoMapper.Mapper.CreateMap<Team, SystematicStudyService.Models.Team>();
+
+
+            //Team to StoredEntity
+            AutoMapper.Mapper.CreateMap<Team, StoredTeam>();
+
+            //StoredEntity to User
+            AutoMapper.Mapper.CreateMap<StoredTeam, Team>();
         }
     }
 }
