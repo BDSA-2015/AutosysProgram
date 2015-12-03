@@ -37,6 +37,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -91,6 +95,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutosysServer\Mapping\AutoMapperConfigurator.cs" />
+    <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\PaperManagementStorageProfile.cs" />
+    <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\UserManagementStorageProfile.cs" />
     <Compile Include="ExportManagement\CsvFile.cs" />
     <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
     <Compile Include="ExportManagement\Interfaces\IExportFile.cs" />
@@ -120,6 +127,7 @@
     <Compile Include="StorageFasade\CriteriaFasade.cs" />
     <Compile Include="StorageFasade\DatafieldFasade.cs" />
     <Compile Include="StorageFasade\IFasade.cs" />
+    <Compile Include="AutosysServer\Mapping\Profiles\WebApiProfile\UserManagementDTOProfile.cs" />
     <Compile Include="StorageFasade\PaperFasade.cs" />
     <Compile Include="StorageFasade\PhaseFasade.cs" />
     <Compile Include="StorageFasade\ProtocolFasade.cs" />
@@ -151,6 +159,16 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Storage\Storage.csproj">
+      <Project>{390d70e5-5e15-4344-915a-d570f5bca74d}</Project>
+      <Name>Storage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApi\WebApi.csproj">
+      <Project>{b9d7d263-0fa5-46e1-bbd8-53822b6877cd}</Project>
+      <Name>WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
