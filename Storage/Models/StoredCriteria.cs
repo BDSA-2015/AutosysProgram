@@ -18,14 +18,14 @@ namespace Storage.Models
 
         [Required]
         [StringLength(50)]
-        [Index(IsUnique = true)] // Used to delete Criteria in Phase 
+        [Index(IsUnique = true)] // Used to delete Criteria by name in Phase 
         public string Name { get; set; }
 
         [Required]
         [StringLength(50)]
         public string Description { get; set; }
 
-        [NotMapped] // Not mapped in database but created dynamically 
+        [Required]
         public virtual StoredDataField DataField { get; set; }
     }
 

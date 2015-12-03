@@ -17,7 +17,6 @@ namespace Storage.Entities
     [Table("DataField")]
     public class StoredDataField : IEntity
     {
-
         public enum Type
         {
             String,
@@ -25,7 +24,7 @@ namespace Storage.Entities
             Enumeration,
             Flags,
             Resource
-        }
+        } 
         
         [Key]
         public int Id { get; set; }
@@ -49,8 +48,8 @@ namespace Storage.Entities
             private set { FieldType = EnumExtensions.ParseEnum<Type>(value); }
         }
 
-        // TODO Boolean conversion in EF? 
-        public bool IsModifiable { get; set; }
+        // TODO Map to bool in StudyManagement 
+        public string IsModifiable { get; set; }
 
     }
 

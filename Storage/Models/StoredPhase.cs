@@ -21,7 +21,7 @@ namespace Storage.Entities
         [Key]
         public int Id { get; set; }
 
-        public bool IsFinished { get; set; } // TODO Boolean in EF and required data annotation
+        public string IsFinished { get; set; } // TODO Boolean in EF and required data annotation
 
         public virtual List<StoredCriteria> Criteria { get; set; }
 

@@ -33,7 +33,7 @@ namespace Storage.Entities
 
         public int Year { get; set; }
 
-        public string Month { get; set; } // TODO CHECK DATA TYPE 
+        public string Month { get; set; } 
 
         [StringLength(400)]
         public string Volume { get; set; }
@@ -43,9 +43,9 @@ namespace Storage.Entities
         [StringLength(400)]
         public string Abstract { get; set; }
 
-        public string Doi { get; set; } // TODO CHECK DATA TYPE 
+        public string Doi { get; set; } 
 
-        public string ISSN { get; set; } // TODO CHECK DATA TYPE 
+        public string ISSN { get; set; } 
 
     }
 
