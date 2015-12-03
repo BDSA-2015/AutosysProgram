@@ -19,7 +19,15 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
         public enum CriteriaOperation {Less,Equals,Greater,Contains, Regex}
 
-        
+        /// <summary>
+        /// The criterias relation. Less and Greater refer to a criteria which can be compared numericly, while Equals refer to either a string comparison or a numerical comparison.
+        /// </summary>
+        public CriteriaOperation ComparionsonType { get; set; }
+
+        /// <summary>
+        /// The Criteiria which will be used to choose which papers are relevant for the study
+        /// </summary>
+        public string CriteriaValue { get; set; }
 
         /// <summary>
         /// The Criteria name, Can be used to associate a defualt type of limitation with a certain name
