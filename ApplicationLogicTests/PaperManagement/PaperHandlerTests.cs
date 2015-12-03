@@ -117,7 +117,7 @@ namespace ApplicationLogicTests.PaperManagement
         /// Tests the import of an empty bibtex file using a papervalidator with a default field checker
         /// </summary>
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void DefaultImportEmptyTypeBibtex()
         {
             //Arrange

@@ -111,7 +111,6 @@
     <Compile Include="PaperManagement\Interfaces\IParser.cs" />
     <Compile Include="PaperManagement\Interfaces\IFieldChecker.cs" />
     <Compile Include="PaperManagement\PaperHandler.cs" />
-    <Compile Include="PaperManagement\PaperManagementFacade.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
     <Compile Include="ProtocolManagement\ProtocolHandler.cs" />
     <Compile Include="Program.cs" />
