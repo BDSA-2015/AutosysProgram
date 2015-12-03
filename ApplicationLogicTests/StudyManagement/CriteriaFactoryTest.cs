@@ -32,7 +32,7 @@ namespace ApplicationLogicTests.StudyManagement
 
 
             expectedState.Name = "Summary-Contians-Computer science";
-            expectedState.CriteriaTarget = "Summary";
+            expectedState.Tag = "Summary";
             expectedState.Description = "Used to find usage of the word 'Computer science'";
             expectedState.Requirement = expectedRelation;
 
@@ -58,7 +58,7 @@ namespace ApplicationLogicTests.StudyManagement
 
             expectedState.Name = "Year-isGreaterThan-1990";
             expectedState.Description = "Used to find books released after 1990";
-            expectedState.CriteriaTarget = "ReleaseYear";
+            expectedState.Tag = "ReleaseYear";
             expectedState.Requirement = expectedRelation;
 
             //Act
@@ -83,7 +83,7 @@ namespace ApplicationLogicTests.StudyManagement
 
             expectedState.Name = "Year-isLessThan-1990";
             expectedState.Description = "Used to find books released before 1990";
-            expectedState.CriteriaTarget = "ReleaseYear";
+            expectedState.Tag = "ReleaseYear";
             expectedState.Requirement = expectedRelation;
 
             //Act
@@ -107,7 +107,7 @@ namespace ApplicationLogicTests.StudyManagement
 
             expectedState.Name = "Year-Equals-1990";
             expectedState.Description = "Used to find books released in 1990";
-            expectedState.CriteriaTarget = "ReleaseYear";
+            expectedState.Tag = "ReleaseYear";
             expectedState.Requirement = expectedRelation;
 
             //Act
@@ -131,7 +131,7 @@ namespace ApplicationLogicTests.StudyManagement
 
             expectedState.Name = "Year-Equals-1990";
             expectedState.Description = "Used to find books released in 1990";
-            expectedState.CriteriaTarget = "ReleaseYear";
+            expectedState.Tag = "ReleaseYear";
             expectedState.Requirement = expectedRelation;
 
             //Act

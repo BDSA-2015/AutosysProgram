@@ -49,7 +49,7 @@ namespace ApplicationLogics.StudyManagement
         {
             EmptyStringChecker(substring);
 
-            critera.CriteriaTarget = bibTexTagName;
+            critera.Tag = bibTexTagName;
             critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Contains;
             critera.Requirement.Criteria = substring;           
         }
@@ -61,14 +61,14 @@ namespace ApplicationLogics.StudyManagement
         {
             EmptyStringChecker(value);
 
-            critera.CriteriaTarget = bibTexTagName;
+            critera.Tag = bibTexTagName;
             critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Equals;
             critera.Requirement.Criteria = value;
         }
 
         public void SetSearchCriteria_equals(Criteria critera, string bibTexTagName, int value)
         {
-            critera.CriteriaTarget = bibTexTagName;
+            critera.Tag = bibTexTagName;
             critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Equals;
             critera.Requirement.Criteria = ""+value;
         }
@@ -78,7 +78,7 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
         public void SetSearchCriteria_LessThan(Criteria critera, string bibTexTagName, int value)
         {
-            critera.CriteriaTarget = bibTexTagName;
+            critera.Tag = bibTexTagName;
             critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Less;
             critera.Requirement.Criteria = ""+value;
         }
@@ -89,7 +89,7 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
         public void SetSearchCriteria_GreaterThan(Criteria critera, string bibTexTagName, int value)
         {
-            critera.CriteriaTarget = bibTexTagName;
+            critera.Tag = bibTexTagName;
             critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Greater;
             critera.Requirement.Criteria = "" + value;
         }
