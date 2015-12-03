@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationLogics.ProtocolManagement;
+using ApplicationLogics.StorageFasade.Interface;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class ProtocolFasade : IFasade<Protocol>
+    public class ProtocolFacade : IFacade<Protocol>
     {
         public int Create(Protocol item)
         {

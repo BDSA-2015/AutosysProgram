@@ -3,36 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ApplicationLogics.StudyManagement;
+using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.UserManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class DatafieldFasade : IFasade<DataField>
+    public class TeamFacade : IFacade<Team>
     {
-        public int Create(DataField item)
+        public int Create(Team item)
         {
             throw new NotImplementedException();
         }
 
-        public DataField Read(int id)
+        public void Delete(Team item)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<DataField> Read()
+        public IEnumerable<Team> Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(DataField item)
+        public Team Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(DataField item)
+        public void Update(Team item)
         {
             throw new NotImplementedException();
         }
     }
-
 }

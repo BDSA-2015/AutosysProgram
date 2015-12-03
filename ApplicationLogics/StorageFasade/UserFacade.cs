@@ -3,33 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.UserManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class TeamFasade : IFasade<Team>
+    public class UserFacade : IFacade<User>
     {
-        public int Create(Team item)
+
+        public int Create(User item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Team item)
+        public User Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Team> Read()
+        public IEnumerable<User> Read()
         {
             throw new NotImplementedException();
         }
 
-        public Team Read(int id)
+        public void Update(User item)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Team item)
+        public void Delete(User item)
         {
             throw new NotImplementedException();
         }

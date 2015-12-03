@@ -3,35 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ApplicationLogics.StudyManagement;
+using ApplicationLogics.PaperManagement;
+using ApplicationLogics.StorageFasade.Interface;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class RoleFasade : IFasade<Role>
+    public class PaperFacade : IFacade<Paper>
     {
-        public int Create(Role item)
+        public int Create(Paper item)
         {
             throw new NotImplementedException();
         }
 
-        public Role Read(int id)
+        public void Delete(Paper item)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Role> Read()
+        public IEnumerable<Paper> Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Role item)
+        public Paper Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Role item)
+        public void Update(Paper item)
         {
             throw new NotImplementedException();
         }
     }
+
 }
