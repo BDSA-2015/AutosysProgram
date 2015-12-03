@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Storage.Repository;
 using Storage.Repository.Interface;
 
 namespace Storage.Models
@@ -11,15 +10,15 @@ namespace Storage.Models
     /// </summary>
     public class StoredRole : IEntity
     {
+        [Key]
+        public int Id { get; set; }
+
         public enum Type
         {
             Validator,
             Reviewer
         }
-
-        [Key]
-        public int Id { get; set; }
-
+        
         public Type RoleType { get; set; }
 
         /// <summary>
@@ -32,6 +31,7 @@ namespace Storage.Models
             get { return RoleType.ToString(); }
             private set { RoleType = EnumExtensions.ParseEnum<Type>(value); }
         }
+
     }
 
 }

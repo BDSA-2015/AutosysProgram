@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Storage.Repository;
 using Storage.Repository.Interface;
 
 namespace Storage.Models
@@ -13,7 +12,6 @@ namespace Storage.Models
     [Table("DataField")]
     public class StoredDataField : IEntity
     {
-
         public enum Type
         {
             String,
@@ -21,7 +19,7 @@ namespace Storage.Models
             Enumeration,
             Flags,
             Resource
-        }
+        } 
         
         [Key]
         public int Id { get; set; }
@@ -45,8 +43,7 @@ namespace Storage.Models
             private set { FieldType = EnumExtensions.ParseEnum<Type>(value); }
         }
 
-        // TODO Boolean conversion in EF? 
-        public bool IsModifiable { get; set; }
+        public string IsModifiable { get; set; }
 
     }
 

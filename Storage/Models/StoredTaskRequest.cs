@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Storage.Models;
-using Storage.Repository;
+using Storage.Entities;
 using Storage.Repository.Interface;
 
-namespace Storage.Entities
+namespace Storage.Models
 {
 
     /// <summary>
@@ -42,6 +37,9 @@ namespace Storage.Entities
         [NotMapped]
         public Type TaskType { get; set; }
 
+        [NotMapped]
+        public Progress TaskProgress { get; set; }
+
         /// <summary>
         /// Used to map the enum Type as a string. 
         /// </summary>
@@ -53,9 +51,6 @@ namespace Storage.Entities
             private set { TaskType = EnumExtensions.ParseEnum<Type>(value); }
         }
 
-        [NotMapped]
-        public Type TaskProgress { get; set; }
-
         /// <summary>
         /// Used to map the enum Progress as a string. 
         /// </summary>
@@ -64,16 +59,16 @@ namespace Storage.Entities
         public string ProgressString
         {
             get { return TaskProgress.ToString(); }
-            private set { TaskProgress = EnumExtensions.ParseEnum<Type>(value); } // TODO Shouldnt it ParseEnum<Progress> 
+            private set { TaskProgress = EnumExtensions.ParseEnum<Progress>(value); }
         }
 
         public string Description { get; set; }
 
         [Required]
-        public virtual List<StoredDataField> NonModifiableDatafields { get; set; }
+        public virtual ICollection<StoredDataField> NonModifiableDatafields { get; set; }
 
         [Required]
-        public virtual List<StoredDataField> ModifiableDatafields { get; set; }
+        public virtual ICollection<StoredDataField> ModifiableDatafields { get; set; }
     }
 
 }

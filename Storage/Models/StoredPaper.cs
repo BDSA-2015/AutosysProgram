@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Storage.Repository;
 using Storage.Repository.Interface;
 
 namespace Storage.Models
@@ -16,20 +15,25 @@ namespace Storage.Models
         public int Id { get; set; }
 
         [StringLength(400)]
+        [Required]
         public string Type { get; set; }
 
         [StringLength(400)]
+        [Required]
         public string Author { get; set; }
 
         [StringLength(400)]
+        [Required]
         public string Title { get; set; }
 
         [StringLength(400)]
+        [Required]
         public string BookTitle { get; set; }
 
+        [Required]
         public int Year { get; set; }
 
-        public string Month { get; set; } // TODO CHECK DATA TYPE 
+        public string Month { get; set; } 
 
         [StringLength(400)]
         public string Volume { get; set; }
@@ -39,9 +43,11 @@ namespace Storage.Models
         [StringLength(400)]
         public string Abstract { get; set; }
 
-        public string Doi { get; set; } // TODO CHECK DATA TYPE 
+        [StringLength(50)]
+        public string Doi { get; set; } 
 
-        public string ISSN { get; set; } // TODO CHECK DATA TYPE 
+        [StringLength(50)]
+        public string ISSN { get; set; } 
 
     }
 
