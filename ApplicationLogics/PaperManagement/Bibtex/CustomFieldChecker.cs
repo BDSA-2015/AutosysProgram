@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using ApplicationLogics.PaperManagement.Interfaces;
 
 namespace ApplicationLogics.PaperManagement.Bibtex
 {
     /// <summary>
     /// Class for creating FieldCheckers with a custom designed regex
     /// </summary>
-    public class CustomFieldChecker
+    public class CustomFieldChecker : IFieldChecker
     {
         //Regular expression to for matching a bibtex field
         private readonly Regex _regex;

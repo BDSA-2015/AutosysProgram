@@ -122,6 +122,8 @@
     <Compile Include="ExportManagement\ExportHandler.cs" />
     <Compile Include="ExportManagement\ExportType.cs" />
     <Compile Include="ExportManagement\PDFConverter.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="StudyManagement\BibTexFileSearcher.cs" />
     <Compile Include="StorageFasade\CriteriaFasade.cs" />
     <Compile Include="StorageFasade\DatafieldFasade.cs" />
     <Compile Include="StorageFasade\IFasade.cs" />
@@ -137,6 +139,8 @@
     <Compile Include="ExportManagement\Interfaces\IExportFile.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
+    <Compile Include="StudyManagement\CriteriaHandler.cs" />
+    <Compile Include="StudyManagement\CriteriaRelation.cs" />
     <Compile Include="StudyManagement\DataField.cs" />
     <Compile Include="StudyManagement\Phase.cs" />
     <Compile Include="StudyManagement\Role.cs" />

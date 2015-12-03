@@ -17,6 +17,7 @@ namespace Storage.Entities
     [Table("DataField")]
     public class StoredDataField : IEntity
     {
+
         public enum Type
         {
             String,
@@ -25,7 +26,7 @@ namespace Storage.Entities
             Flags,
             Resource
         }
-
+        
         [Key]
         public int Id { get; set; }
 

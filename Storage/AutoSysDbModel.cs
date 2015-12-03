@@ -2,6 +2,7 @@ using System;
 using System.Data.Entity;
 using System.Linq;
 using Storage.Entities;
+using Storage.Models;
 
 namespace Storage
 {
