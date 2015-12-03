@@ -15,8 +15,7 @@ namespace ApplicationLogics.StudyManagement
         /// The Criteiria which will be used to choose which papers are relevant for the study
         /// </summary>
         public string Criteria { get; set; }
-        public CriteriaRelation()
-        { }
+        
 
     }
 }

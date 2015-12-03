@@ -9,7 +9,7 @@ namespace ApplicationLogics.StudyManagement
     /// <summary>
     /// This class is meant for Creating new Criterias
     /// </summary>
-    public  class CriteriaHandler
+    public  class CriteriaFactory
     {
         
 
@@ -17,8 +17,12 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         /// Create an empty criteria. Specify its purpose with AddRelation method
         /// </summary>
-         public Criteria CreateCriteria(string name, string description)
+         public Criteria CreateEmptyCriteria(string name, string description)
         {
+            EmptyStringChecker(name);
+            EmptyStringChecker(description);
+
+
             var criteria = new Criteria();
             criteria.Name = name;
             criteria.Description = description;
@@ -43,7 +47,11 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
         public void SetSearchCriteria_ContainsString(Criteria critera, string bibTexTagName, string substring)
         {
-            throw new NotImplementedException();
+            EmptyStringChecker(substring);
+
+            critera.CriteriaTarget = bibTexTagName;
+            critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Contains;
+            critera.Requirement.Criteria = substring;           
         }
 
         /// <summary>
@@ -51,7 +59,18 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
         public void SetSearchCriteria_equals(Criteria critera, string bibTexTagName, string value)
         {
-            throw new NotImplementedException();
+            EmptyStringChecker(value);
+
+            critera.CriteriaTarget = bibTexTagName;
+            critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Equals;
+            critera.Requirement.Criteria = value;
+        }
+
+        public void SetSearchCriteria_equals(Criteria critera, string bibTexTagName, int value)
+        {
+            critera.CriteriaTarget = bibTexTagName;
+            critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Equals;
+            critera.Requirement.Criteria = ""+value;
         }
 
         /// <summary>
@@ -59,7 +78,9 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
         public void SetSearchCriteria_LessThan(Criteria critera, string bibTexTagName, int value)
         {
-            throw new NotImplementedException();
+            critera.CriteriaTarget = bibTexTagName;
+            critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Less;
+            critera.Requirement.Criteria = ""+value;
         }
 
 
@@ -68,15 +89,27 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
         public void SetSearchCriteria_GreaterThan(Criteria critera, string bibTexTagName, int value)
         {
-            throw new NotImplementedException();
+            critera.CriteriaTarget = bibTexTagName;
+            critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Greater;
+            critera.Requirement.Criteria = "" + value;
         }
 
         /// <summary>
         /// Set the Criteria to search for papers which have a bibtex tag with a value Which match .
         /// </summary>
-        public void SetSearchCriteria_Regex(Criteria critera, string bibTexTagName, string substring)
+        public void SetSearchCriteria_Regex(Criteria critera, string bibTexTagName, string regexPattern)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Throws an argumentException if a empty string is found
+        /// </summary>
+        /// <param name="varialbe"></param>
+        private void EmptyStringChecker(string varialbe)
+        {
+            if(varialbe.Length==0)
+                throw new ArgumentException();
         }
     }
 }

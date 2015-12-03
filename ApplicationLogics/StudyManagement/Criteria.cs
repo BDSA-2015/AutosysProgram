@@ -27,7 +27,7 @@ namespace ApplicationLogics.StudyManagement
         public string Name { get; set; }
 
         /// <summary>
-        /// A short description of the Criterias purpose.
+        /// A short description of the Criterias purpose adn functionality.
         /// </summary>
         public string Description { get; set; }
 
