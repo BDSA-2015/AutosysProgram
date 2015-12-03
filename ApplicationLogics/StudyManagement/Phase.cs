@@ -18,7 +18,7 @@ namespace ApplicationLogics.StudyManagement
     public class Phase 
     {
         /// <summary>
-        /// Still in the not implemented. This is a placeholder variable until we figur out how we get access to the papers from the database
+        /// Still not implemented. This is a placeholder variable until we figur out how we get access to the papers from the database
       
         /// </summary>
         private List<Paper> reports { get;  set; }
