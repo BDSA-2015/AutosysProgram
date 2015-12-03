@@ -1,5 +1,6 @@
 ﻿using ApplicationLogics.AutosysServer.Mapping.Profiles;
 using ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfiles;
+using ApplicationLogics.AutosysServer.Mapping.Profiles.WebApiProfile;
 using AutoMapper;
 
 namespace ApplicationLogics.AutosysServer.Mapping

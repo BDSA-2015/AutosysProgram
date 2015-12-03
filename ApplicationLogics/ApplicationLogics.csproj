@@ -138,6 +138,7 @@
     <Compile Include="StorageFasade\UserFacade.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\CriteriaFactory.cs" />
+    <Compile Include="StudyManagement\CriteriaLimitation.cs" />
     <Compile Include="StudyManagement\DataField.cs" />
     <Compile Include="StudyManagement\Phase.cs" />
     <Compile Include="StudyManagement\Role.cs" />

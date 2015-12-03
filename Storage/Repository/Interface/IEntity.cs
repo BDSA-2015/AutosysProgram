@@ -1,4 +1,4 @@
-﻿namespace ApplicationLogics.Repository
+﻿namespace Storage.Repository.Interface
 {
     /// <summary>
     /// This interface is used to map different entities.
