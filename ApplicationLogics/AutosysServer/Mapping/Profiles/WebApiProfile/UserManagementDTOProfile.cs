@@ -11,7 +11,7 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles
     /// https://github.com/AutoMapper/AutoMapper/wiki/Configuration
     /// http://stackoverflow.com/questions/6825244/where-to-place-automapper-createmaps
     /// </summary>
-    public class UserManagementMappingProfile : Profile
+    public class UserAndTeamDTOProfile : Profile
     {
 
         /// <summary>

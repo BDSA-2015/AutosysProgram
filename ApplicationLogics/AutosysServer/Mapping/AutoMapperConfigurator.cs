@@ -1,4 +1,5 @@
 ﻿using ApplicationLogics.AutosysServer.Mapping.Profiles;
+using ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfiles;
 using AutoMapper;
 
 namespace ApplicationLogics.AutosysServer.Mapping
@@ -27,7 +28,13 @@ namespace ApplicationLogics.AutosysServer.Mapping
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.AddProfile(new UserManagementMappingProfile());
+                //ApplicationLogic Profiles
+                cfg.AddProfile(new UserManagementStorageProfile());
+
+
+                //WebApi Profiles
+                cfg.AddProfile(new UserAndTeamDTOProfile());
+
             });
         }
     }
