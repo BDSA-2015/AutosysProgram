@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ApplicationLogics.Repository;
 
-namespace Storage.Entities
+namespace Storage.Models
 {
 
     /// <summary>
@@ -25,7 +20,23 @@ namespace Storage.Entities
         public string Name { get; set; }
 
         [Required]
-        public int[] UserIDs { get; set; }
+        public int[] UserIds { get; set; } // TODO convert string to int array like below 
+
+        /*
+            public string InternalData { get; set; }
+            public double[] Data
+            {
+                get
+                {
+                    return Array.ConvertAll(InternalData.Split(';'), Double.Parse);                
+                }
+                set
+                {
+                    _data = value;
+                    InternalData = String.Join(";", _data.Select(p => p.ToString()).ToArray());
+                }
+            }
+        */
 
         [StringLength(400)]
         public string Metadata { get; set; }

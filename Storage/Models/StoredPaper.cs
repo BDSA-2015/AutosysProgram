@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ApplicationLogics.Repository;
 
-namespace Storage.Entities
+namespace Storage.Models
 {
 
     /// <summary>
@@ -20,17 +15,22 @@ namespace Storage.Entities
         public int Id { get; set; }
 
         [StringLength(400)]
+        [Required]
         public string Type { get; set; }
 
         [StringLength(400)]
+        [Required]
         public string Author { get; set; }
 
         [StringLength(400)]
+        [Required]
         public string Title { get; set; }
 
         [StringLength(400)]
+        [Required]
         public string BookTitle { get; set; }
 
+        [Required]
         public int Year { get; set; }
 
         public string Month { get; set; } 
@@ -43,8 +43,10 @@ namespace Storage.Entities
         [StringLength(400)]
         public string Abstract { get; set; }
 
+        [StringLength(50)]
         public string Doi { get; set; } 
 
+        [StringLength(50)]
         public string ISSN { get; set; } 
 
     }

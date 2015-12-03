@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ApplicationLogics.Repository;
 using Storage.Models;
 
@@ -21,17 +17,28 @@ namespace Storage.Entities
         [Key]
         public int Id { get; set; }
 
-        public string IsFinished { get; set; } // TODO Boolean in EF and required data annotation
+        public virtual StoredStudy Study { get; set; }
 
-        public virtual List<StoredCriteria> Criteria { get; set; }
+        public virtual ICollection<StoredPaper> Reports { get; set; }
 
-        public virtual Dictionary<StoredTaskRequest, List<StoredUser>> AssignedTask { get; set; }
+        public ICollection<StoredCriteria> ExclusionCriteria { get; set; }
 
-        public virtual Dictionary<StoredUser, StoredRole> AssignedRole { get; set; }
+        /// <summary>
+        /// This list contains Criteria, which each report must contain.
+        /// </summary>
+        public ICollection<StoredCriteria> InclusionCriteria { get; set; }
 
-        public virtual List<StoredTaskRequest> UnassignedTasks { get; set; }
+        public string IsFinished { get; set; } 
 
-        public virtual List<StoredPhase> DependentPhases { get; set; }
+        public virtual ICollection<StoredCriteria> Criteria { get; set; }
+
+        public virtual IDictionary<StoredTaskRequest, List<StoredUser>> AssignedTask { get; set; }
+
+        public virtual IDictionary<StoredUser, StoredRole> AssignedRole { get; set; }
+
+        public virtual ICollection<StoredTaskRequest> UnassignedTasks { get; set; }
+
+        public virtual ICollection<StoredPhase> DependentPhases { get; set; }
 
     }
 

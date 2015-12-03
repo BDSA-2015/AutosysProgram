@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ApplicationLogics.Repository;
-using Storage.Models;
 
-namespace Storage.Entities
+namespace Storage.Models
 {
 
     /// <summary>
@@ -23,9 +18,9 @@ namespace Storage.Entities
         [Required][StringLength(400)]
         public string Description { get; set; }
 
-        public virtual List<StoredCriteria> InclusionCriteria { get; set; }
+        public virtual ICollection<StoredCriteria> InclusionCriteria { get; set; }
 
-        public virtual List<StoredCriteria> ExclusionCriteria { get; set; }
+        public virtual ICollection<StoredCriteria> ExclusionCriteria { get; set; }
 
     }
 

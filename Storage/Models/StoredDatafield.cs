@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ApplicationLogics.Repository;
 
-namespace Storage.Entities
+namespace Storage.Models
 {
 
     /// <summary>
@@ -48,7 +43,6 @@ namespace Storage.Entities
             private set { FieldType = EnumExtensions.ParseEnum<Type>(value); }
         }
 
-        // TODO Map to bool in StudyManagement 
         public string IsModifiable { get; set; }
 
     }

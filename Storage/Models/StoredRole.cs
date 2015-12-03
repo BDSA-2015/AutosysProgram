@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ApplicationLogics.Repository;
 
-namespace Storage.Entities
+namespace Storage.Models
 {
 
     /// <summary>
@@ -15,15 +10,15 @@ namespace Storage.Entities
     /// </summary>
     public class StoredRole : IEntity
     {
+        [Key]
+        public int Id { get; set; }
+
         public enum Type
         {
             Validator,
             Reviewer
         }
-
-        [Key]
-        public int Id { get; set; }
-
+        
         public Type RoleType { get; set; }
 
         /// <summary>
@@ -36,6 +31,7 @@ namespace Storage.Entities
             get { return RoleType.ToString(); }
             private set { RoleType = EnumExtensions.ParseEnum<Type>(value); }
         }
+
     }
 
 }
