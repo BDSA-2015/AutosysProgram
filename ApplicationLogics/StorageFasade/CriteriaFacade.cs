@@ -7,7 +7,7 @@ using ApplicationLogics.StudyManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class CriteriaFasade : IFasade<Criteria>
+    public class CriteriaFacade : IFacade<Criteria>
     {
         public int Create(Criteria item)
         {

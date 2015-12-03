@@ -3,33 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ApplicationLogics.StudyManagement;
+using ApplicationLogics.ProtocolManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class DatafieldFasade : IFasade<DataField>
+    public class ProtocolFacade : IFacade<Protocol>
     {
-        public int Create(DataField item)
+        public int Create(Protocol item)
         {
             throw new NotImplementedException();
         }
 
-        public DataField Read(int id)
+        public Protocol Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<DataField> Read()
+        public IEnumerable<Protocol> Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(DataField item)
+        public void Update(Protocol item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(DataField item)
+        public void Delete(Protocol item)
         {
             throw new NotImplementedException();
         }

@@ -11,7 +11,7 @@ namespace ApplicationLogics.StorageFasade
     /// This interface outlines the CRUD methods that the storage repository class will be able to perform.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IFasade<T> 
+    public interface IFacade<T> 
     {
         int Create(T item);
         T Read(int id);

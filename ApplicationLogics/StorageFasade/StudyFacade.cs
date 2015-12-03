@@ -3,36 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ApplicationLogics.PaperManagement;
+using ApplicationLogics.StudyManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class PaperFasade : IFasade<Paper>
+    public class StudyFacade : IFacade<Study>
     {
-        public int Create(Paper item)
+        public int Create(Study item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Paper item)
+        public Study Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Paper> Read()
+        public IEnumerable<Study> Read()
         {
             throw new NotImplementedException();
         }
 
-        public Paper Read(int id)
+        public void Update(Study item)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Paper item)
+        public void Delete(Study item)
         {
             throw new NotImplementedException();
         }
     }
-
 }

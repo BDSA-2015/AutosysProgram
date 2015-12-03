@@ -3,35 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ApplicationLogics.UserManagement;
+using ApplicationLogics.StudyManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class TeamFasade : IFasade<Team>
+    public class TaskRequestFacade : IFacade<TaskRequest>
     {
-        public int Create(Team item)
+        public int Create(TaskRequest item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Team item)
+        public TaskRequest Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Team> Read()
+        public IEnumerable<TaskRequest> Read()
         {
             throw new NotImplementedException();
         }
 
-        public Team Read(int id)
+        public void Update(TaskRequest item)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Team item)
+        public void Delete(TaskRequest item)
         {
             throw new NotImplementedException();
         }
     }
+
 }

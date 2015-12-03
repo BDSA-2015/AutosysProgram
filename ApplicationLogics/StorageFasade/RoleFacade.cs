@@ -7,7 +7,7 @@ using ApplicationLogics.StudyManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class RoleFasade : IFasade<Role>
+    public class RoleFacade : IFacade<Role>
     {
         public int Create(Role item)
         {

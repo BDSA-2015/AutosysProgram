@@ -7,31 +7,32 @@ using ApplicationLogics.StudyManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class StudyFasade : IFasade<Study>
+    public class DatafieldFacade : IFacade<DataField>
     {
-        public int Create(Study item)
+        public int Create(DataField item)
         {
             throw new NotImplementedException();
         }
 
-        public Study Read(int id)
+        public DataField Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Study> Read()
+        public IEnumerable<DataField> Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Study item)
+        public void Update(DataField item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Study item)
+        public void Delete(DataField item)
         {
             throw new NotImplementedException();
         }
     }
+
 }
