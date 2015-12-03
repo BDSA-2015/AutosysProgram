@@ -10,6 +10,9 @@ using ApplicationLogics.UserManagement.Utils;
 
 namespace ApplicationLogics.UserManagement
 {
+    /// <summary>
+    /// This class is responsible for user operations
+    /// </summary>
     public class UserHandler
     {
         private readonly IFasade<User> _storage;
@@ -33,10 +36,9 @@ namespace ApplicationLogics.UserManagement
         /// <summary>
         /// Creates a user with information from a userDTo
         /// </summary>
-        /// <param name="userDto">userDto from webapi</param>
-        public void CreateUser(SystematicStudyService.Models.User userDto)
+        /// <param name="user">User object</param>
+        public void CreateUser(User user)
         {
-            var user = new User();//TODO User Mapper to convert user
             if (!UserValidator.ValidateEnteredUserInformation(user))
                 throw new ArgumentException("Input may not be null, whitespace or empty");
 
@@ -47,16 +49,19 @@ namespace ApplicationLogics.UserManagement
         /// Edit and update an existing user
         /// </summary>
         /// <param name="id">id of user to update</param>
-        public void EditUser(int id) //TODO ID's are not used in FACADE AND REPO. This may need to be changed
+        public void EditUser(int oldId, User user) 
         {
-            throw new NotImplementedException();
+            if (!UserValidator.ValidateEnteredUserInformation(user)) throw new ArgumentException("User data is invalid");
+            if (!UserValidator.ValidateExistence(oldId, _storage)) throw new ArgumentException("User does not exist");
+
+            _storage.Update(user);
         }
 
         /// <summary>
         /// Delete an existing user
         /// </summary>
         /// <param name="id">id of user to delete.</param>
-        public void DeleteUser(int id) //TODO ID's are not used in FACADE AND REPO. This may need to be changed
+        public void DeleteUser(int id)
         {
             if (id < 0)
                 throw new ArgumentException("Id may not be less than 0");

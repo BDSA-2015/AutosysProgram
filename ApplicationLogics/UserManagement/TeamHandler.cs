@@ -24,7 +24,7 @@ namespace ApplicationLogics.UserManagement
         /// Validates if a team exists in database.
         /// </summary>
         /// <param name="id">team Id</param>
-        /// <returns>bool</returns>
+        /// <returns>bool of team existence</returns>
         public bool ValidateTeam(int id)
         {
             return TeamValidator.ValidateExistence(id, _storage);
@@ -33,10 +33,9 @@ namespace ApplicationLogics.UserManagement
         /// <summary>
         /// Creates a new team
         /// </summary>
-        /// <param name="teamDto"> dto Item from webAPI</param>
-        public void Create(SystematicStudyService.Models.Team teamDto)
+        /// <param name="team"> Team Object</param>
+        public void Create(Team team)
         {
-            var team = new Team(); //TODO User Mapper to convert team
             if (!TeamValidator.ValidateEnteredTeamData(team))
                 throw new ArgumentException("Team data is invalid");
 
@@ -56,9 +55,8 @@ namespace ApplicationLogics.UserManagement
             _storage.Delete(team);
         }
 
-        public void Update(int oldId, SystematicStudyService.Models.Team teamDto)
+        public void Update(int oldId, Team team)
         {
-            var team = new Team(); //TODO Use Automapper
             if (!TeamValidator.ValidateEnteredTeamData(team)) throw new ArgumentException("Team data is invalid");
             if (!TeamValidator.ValidateExistence(oldId, _storage)) throw new ArgumentException("Team does not exist");
 
