@@ -28,7 +28,7 @@ namespace ApplicationLogicTests.ExportManagement
         //    var pdfData = Convert.ToBase64String(pdfFile.Bytes);
 
         //    //Assert
-        //    Assert.AreEqual(ExportType.PDF, pdfFile.Type);
+        //    Assert.AreEqual(ExportType.PDF, pdfFile.FilterType);
         //    Assert.AreEqual("", pdfData);
         //}
 
@@ -48,7 +48,7 @@ namespace ApplicationLogicTests.ExportManagement
         //    var pdfData = Convert.ToBase64String(pdfFile.Bytes);
 
         //    //Assert
-        //    Assert.AreEqual(ExportType.PDF, pdfFile.Type);
+        //    Assert.AreEqual(ExportType.PDF, pdfFile.FilterType);
         //    Assert.AreEqual("criteria criteria", pdfData);
         //}
 
@@ -70,7 +70,7 @@ namespace ApplicationLogicTests.ExportManagement
         //    CsvFile csvFile = converter.Convert(protocol) as CsvFile;
 
         //    //Assert
-        //    Assert.AreEqual(ExportType.PDF, csvFile.Type);
+        //    Assert.AreEqual(ExportType.PDF, csvFile.FilterType);
         //    Assert.AreEqual("criteria0,criteria1,criteria2", csvFile.ExclusionData);
         //    Assert.AreEqual("criteria0,criteria1,criteria2", csvFile.InclusionData);
         //}

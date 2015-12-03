@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 using ApplicationLogics.Repository;
+using Storage.Entities;
 
-namespace Storage.Entities
+namespace Storage.Models
 {
     
     /// <summary>
@@ -22,6 +18,7 @@ namespace Storage.Entities
 
         [Required]
         [StringLength(50)]
+        [Index(IsUnique = true)] // Used to delete Criteria in Phase 
         public string Name { get; set; }
 
         [Required]

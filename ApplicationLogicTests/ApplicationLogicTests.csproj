@@ -71,6 +71,7 @@
     <Compile Include="Mapping\Stub\ObjectManyProperties.cs" />
     <Compile Include="Mapping\Stub\ObjectSameOneProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudyManagement\CriteriaFactoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ApplicationLogics\ApplicationLogics.csproj">
