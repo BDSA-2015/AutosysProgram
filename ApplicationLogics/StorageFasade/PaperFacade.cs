@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationLogics.PaperManagement;
+using ApplicationLogics.StorageFasade.Interface;
 
 namespace ApplicationLogics.StorageFasade
 {
