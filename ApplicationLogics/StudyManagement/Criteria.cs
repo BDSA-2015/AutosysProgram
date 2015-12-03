@@ -27,6 +27,17 @@ namespace ApplicationLogics.StudyManagement
         }
 
         /// <summary>
+        /// Used to determine whether the criteria should include or exclude data.
+        /// </summary>
+        public enum CriteriaType
+        {
+            Inclusion,
+            Exclusion
+        }
+
+        public CriteriaType Type { get; set; }
+
+        /// <summary>
         /// The type of comparison used to 
         /// </summary>
         public CriteriaOperation ComparisonType { get; set; }

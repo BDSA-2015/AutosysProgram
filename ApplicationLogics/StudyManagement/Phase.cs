@@ -18,15 +18,7 @@ namespace ApplicationLogics.StudyManagement
     /// </summary>
     public class Phase 
     {
-        /// <summary>
-        /// Used to determine whether the criteria should include or exclude data.
-        /// </summary>
-        public enum CriteriaType
-        {
-            Inclusion,
-            Exclusion
-        }
-
+       
         private List<Paper> Reports { get;  set; }
 
         /// <summary>
