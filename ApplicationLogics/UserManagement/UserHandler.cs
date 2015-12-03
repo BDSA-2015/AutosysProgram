@@ -4,6 +4,7 @@
 
 using System;
 using ApplicationLogics.StorageFasade;
+using ApplicationLogics.StorageFasade.Interface;
 
 namespace ApplicationLogics.UserManagement
 {
