@@ -116,7 +116,6 @@
     <Compile Include="ExportManagement\ExportHandler.cs" />
     <Compile Include="ExportManagement\ExportType.cs" />
     <Compile Include="ExportManagement\PDFConverter.cs" />
-    <Compile Include="Repository\IRepository.cs" />
     <Compile Include="StudyManagement\BibTexFileSearcher.cs" />
     <Compile Include="StorageFasade\CriteriaFasade.cs" />
     <Compile Include="StorageFasade\DatafieldFasade.cs" />
