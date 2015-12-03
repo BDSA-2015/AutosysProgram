@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using ApplicationLogics.Repository;
+using Storage.Repository.Interface;
 
-namespace Storage.Persistence
+namespace Storage.Repository
 {
 
     /// <summary>

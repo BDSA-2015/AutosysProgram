@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using ApplicationLogics.StorageFasade;
 using ApplicationLogics.UserManagement.Entities;
 using ApplicationLogics.UserManagement.Utils;
+using ApplicationLogics.StorageFasade.Interface;
 
 namespace ApplicationLogics.UserManagement
 {
@@ -15,11 +16,11 @@ namespace ApplicationLogics.UserManagement
     /// </summary>
     public class UserHandler
     {
-        private readonly IFasade<User> _storage;
-
-        public UserHandler(IFasade<User> storage)
+        private IFacade<User> _storage;
+        public UserHandler(IFacade<User> storage)
         {
             _storage = storage;
+
         }
 
 

@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.Repository;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
@@ -11,7 +12,7 @@ using Storage.Entities;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class UserFasade : IFasade<User>
+    public class UserFacade : IFacade<User>
     {
         private readonly IRepository<StoredUser> _userRepository; 
 

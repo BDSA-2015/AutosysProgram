@@ -5,7 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ApplicationLogics.Repository;
+using Storage.Models;
+using Storage.Repository;
+using Storage.Repository.Interface;
 
 namespace Storage.Entities
 {

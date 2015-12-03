@@ -3,35 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.StudyManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class StudyFasade : IFasade<Study>
+    public class CriteriaFacade : IFacade<Criteria>
     {
-        public int Create(Study item)
+        public int Create(Criteria item)
         {
             throw new NotImplementedException();
         }
 
-        public Study Read(int id)
+        public Criteria Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Study> Read()
+        public IEnumerable<Criteria> Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Study item)
+        public void Update(Criteria item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Study item)
+        public void Delete(Criteria item)
         {
             throw new NotImplementedException();
         }
     }
+
 }

@@ -3,43 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ApplicationLogics.Repository;
-using ApplicationLogics.UserManagement;
-using Storage.Entities;
+using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.StudyManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class TeamFasade : IFasade<Team>
+    public class PhaseFacade : IFacade<Phase>
     {
-
-        public TeamFasade(IRepository<StoredTeam> repository)
-        {
-            
-        }
-
-        public int Create(Team item)
+        public int Create(Phase item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Team item)
+        public Phase Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Team> Read()
+        public IEnumerable<Phase> Read()
         {
             throw new NotImplementedException();
         }
 
-        public Team Read(int id)
+        public void Update(Phase item)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Team item)
+        public void Delete(Phase item)
         {
             throw new NotImplementedException();
         }
     }
+
 }

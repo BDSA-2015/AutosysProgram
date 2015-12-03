@@ -3,33 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.StudyManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class RoleFasade : IFasade<Role>
+    public class StudyFacade : IFacade<Study>
     {
-        public int Create(Role item)
+        public int Create(Study item)
         {
             throw new NotImplementedException();
         }
 
-        public Role Read(int id)
+        public Study Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Role> Read()
+        public IEnumerable<Study> Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Role item)
+        public void Update(Study item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Role item)
+        public void Delete(Study item)
         {
             throw new NotImplementedException();
         }
