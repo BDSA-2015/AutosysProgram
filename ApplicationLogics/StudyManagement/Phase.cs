@@ -74,12 +74,12 @@ namespace ApplicationLogics.StudyManagement
         /// Add an exclusion criteria to the dependentPhase.
         /// </summary>
         /// <param name="criteria"></param>
-        public void AddCriteria(Criteria criteria, CriteriaType type)
+        public void AddCriteria(Criteria criteria, Criteria.Type type)
         {
-            if (type == CriteriaType.Exclusion) 
+            if (type == Criteria.Type.Exclusion) 
                 throw new NotImplementedException(); // Create exclusion criteria
 
-            else if (type == CriteriaType.Inclusion)
+            else if (type == Criteria.Type.Inclusion)
                 throw new NotImplementedException(); // Create inclusion criteria 
 
             throw new NotImplementedException();

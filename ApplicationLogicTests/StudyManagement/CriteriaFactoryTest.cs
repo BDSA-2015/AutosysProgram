@@ -22,19 +22,15 @@ namespace ApplicationLogicTests.StudyManagement
         [TestMethod]
         public void CriteriaFactory_SetSearchCriteria_ContainsString_AreObjectChangedCorrectly()
         {
-            //Setup
-            
-            Criteria expectedState = new Criteria();
-            CriteriaRelation expectedRelation = new CriteriaRelation();
-
-            expectedRelation.Criteria = "Computer science";
-            expectedRelation.ComparionsonType = Criteria.CriteriaOperation.Contains;
-
-
-            expectedState.Name = "Summary-Contians-Computer science";
-            expectedState.Tag = "Summary";
-            expectedState.Description = "Used to find usage of the word 'Computer science'";
-            expectedState.Requirement = expectedRelation;
+            // Arrange 
+            Criteria criteria = new Criteria
+            {
+                Value = "Computer science",
+                ComparisonType = Criteria.Operation.Contains,
+                Name = "Summary-Contians-Computer science",
+                Tag = "Summary",
+                Description = "Used to find usage of the word 'Computer science'"
+            };
 
             //Act
             criteria = criteriaFactory.CreateEmptyCriteria("Summary-Contians-Computer science", "Used to find usage of the word 'Computer science'");
@@ -42,104 +38,89 @@ namespace ApplicationLogicTests.StudyManagement
             
             //Test
 
-            Assert.IsTrue(criteria.Equals(expectedState));
+            Assert.IsTrue(criteria.Equals(criteria));
         }
 
 
         [TestMethod]
         public void CriteriaFactory_SetSearchCriteria_GreaterThan_AreObjectChangedCorrectly()
         {
-            Criteria expectedState = new Criteria();
-            CriteriaRelation expectedRelation = new CriteriaRelation();
+            // Arrange
+            Criteria expectedState = new Criteria
+            {
 
-            expectedRelation.Criteria = "1990";
-            expectedRelation.ComparionsonType = Criteria.CriteriaOperation.Greater;
+                Value = "1990",
+                ComparisonType = Criteria.Operation.Greater,
+                Name = "Year-isGreaterThan-1990",
+                Description = "Used to find books released after 1990",
+                Tag = "ReleaseYear",
+            };
 
-
-            expectedState.Name = "Year-isGreaterThan-1990";
-            expectedState.Description = "Used to find books released after 1990";
-            expectedState.Tag = "ReleaseYear";
-            expectedState.Requirement = expectedRelation;
-
-            //Act
+            // Act
             criteria = criteriaFactory.CreateEmptyCriteria("Year-isGreaterThan-1990", "Used to find books released after 1990");
             criteriaFactory.SetSearchCriteria_GreaterThan(criteria, "ReleaseYear", 1990);
 
-            //Test
-
+            // Test
             Assert.IsTrue(criteria.Equals(expectedState));
-
         }
 
         [TestMethod]
         public void CriteriaFactory_SetSearchCriteria_LessThan_AreObjectChangedCorrectly()
         {
-            Criteria expectedState = new Criteria();
-            CriteriaRelation expectedRelation = new CriteriaRelation();
-
-            expectedRelation.Criteria = "1990";
-            expectedRelation.ComparionsonType = Criteria.CriteriaOperation.Less;
-
-
-            expectedState.Name = "Year-isLessThan-1990";
-            expectedState.Description = "Used to find books released before 1990";
-            expectedState.Tag = "ReleaseYear";
-            expectedState.Requirement = expectedRelation;
-
+            Criteria expectedState = new Criteria
+            {
+                Value = "1990",
+                ComparisonType = Criteria.Operation.Less,
+                Name = "Year-isLessThan-1990",
+                Description = "Used to find books released before 1990",
+                Tag = "ReleaseYear",
+            };
+            
             //Act
             criteria = criteriaFactory.CreateEmptyCriteria("Year-isLessThan-1990", "Used to find books released before 1990");
             criteriaFactory.SetSearchCriteria_LessThan(criteria, "ReleaseYear", 1990);
 
             //Test
-
             Assert.IsTrue(criteria.Equals(expectedState));
         }
 
         [TestMethod]
         public void CriteriaFactory_SetSearchCriteria_Equals_AreObjectChangedCorrectly()
         {
-            Criteria expectedState = new Criteria();
-            CriteriaRelation expectedRelation = new CriteriaRelation();
-
-            expectedRelation.Criteria = "1990";
-            expectedRelation.ComparionsonType = Criteria.CriteriaOperation.Equals;
-
-
-            expectedState.Name = "Year-Equals-1990";
-            expectedState.Description = "Used to find books released in 1990";
-            expectedState.Tag = "ReleaseYear";
-            expectedState.Requirement = expectedRelation;
+            Criteria expectedState = new Criteria
+            {
+                Value = "1990",
+                ComparisonType = Criteria.Operation.Equals,
+                Name = "Year-Equals-1990",
+                Description = "Used to find books released in 1990",
+                Tag = "ReleaseYear",
+            };
 
             //Act
             criteria = criteriaFactory.CreateEmptyCriteria("Year-Equals-1990", "Used to find books released in 1990");
-            criteriaFactory.SetSearchCriteria_equals(criteria, "ReleaseYear", 1990);
+            criteriaFactory.SetSearchCriteria_Equals(criteria, "ReleaseYear", 1990);
 
             //Test
-
             Assert.IsTrue(criteria.Equals(expectedState));
         }
 
         [TestMethod]
         public void CriteriaFactory_SetSearchCriteria_Equals_AreObjectChangedCorrectly_TestedWithAStringInsteadOfInt()
         {
-            Criteria expectedState = new Criteria();
-            CriteriaRelation expectedRelation = new CriteriaRelation();
-
-            expectedRelation.Criteria = "1990";
-            expectedRelation.ComparionsonType = Criteria.CriteriaOperation.Equals;
-
-
-            expectedState.Name = "Year-Equals-1990";
-            expectedState.Description = "Used to find books released in 1990";
-            expectedState.Tag = "ReleaseYear";
-            expectedState.Requirement = expectedRelation;
+            Criteria expectedState = new Criteria
+            {
+                Value = "1990", 
+                ComparisonType = Criteria.Operation.Equals,
+                Name = "Year-Equals-1990",
+                Description = "Used to find books released in 1990",
+                Tag = "ReleaseYear"
+            }; 
 
             //Act
             criteria = criteriaFactory.CreateEmptyCriteria("Year-Equals-1990", "Used to find books released in 1990");
-            criteriaFactory.SetSearchCriteria_equals(criteria, "ReleaseYear", "1990");
+            criteriaFactory.SetSearchCriteria_Equals(criteria, "ReleaseYear", "1990");
 
             //Test
-
             Assert.IsTrue(criteria.Equals(expectedState));
         }
 
@@ -150,7 +131,6 @@ namespace ApplicationLogicTests.StudyManagement
         {
             //Setup
             Criteria expectedState = new Criteria();
-            CriteriaRelation expectedRelation = new CriteriaRelation();
 
             //Act
             criteria = criteriaFactory.CreateEmptyCriteria("","Used get Books which is written by a Auther which starts with 'A'");
@@ -162,8 +142,7 @@ namespace ApplicationLogicTests.StudyManagement
         {
             //Setup
             Criteria expectedState = new Criteria();
-            CriteriaRelation expectedRelation = new CriteriaRelation();
-
+        
             //Act
             criteria = criteriaFactory.CreateEmptyCriteria("Books-Auther-Names A", "");
         }
@@ -196,7 +175,7 @@ namespace ApplicationLogicTests.StudyManagement
             //Setup
             criteria = criteriaFactory.CreateEmptyCriteria("someName", "SomeDescription");
 
-            criteriaFactory.SetSearchCriteria_equals(criteria,"",4);
+            criteriaFactory.SetSearchCriteria_Equals(criteria,"",4);
         }
 
         [TestMethod]
@@ -206,7 +185,7 @@ namespace ApplicationLogicTests.StudyManagement
             //Setup
             criteria = criteriaFactory.CreateEmptyCriteria("someName", "SomeDescription");
 
-            criteriaFactory.SetSearchCriteria_equals(criteria, "Auther", "");
+            criteriaFactory.SetSearchCriteria_Equals(criteria, "Auther", "");
         }
     }
 }

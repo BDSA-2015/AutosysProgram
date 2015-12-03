@@ -35,12 +35,12 @@ namespace ApplicationLogics.StudyManagement
         /// <param name="criteria">
         /// Criteria set for search. 
         /// </param>
-        /// <param name="criteriaType">
+        /// <param name="type">
         /// Either an inclusion or exclusion criteria. 
         /// </param>
-        public void SetSearchCriteria(Criteria criteria, Criteria.CriteriaType criteriaType)
+        public void SetSearchCriteria(Criteria criteria, Criteria.Type type)
         {
-            criteria.Type = criteriaType;
+            criteria.FilterType = type;
         }
 
 
@@ -61,7 +61,7 @@ namespace ApplicationLogics.StudyManagement
             EmptyStringChecker(substring);
 
             criteria.Tag = bibTexTagName;
-            criteria.ComparisonType = Criteria.CriteriaOperation.Contains;
+            criteria.ComparisonType = Criteria.Operation.Contains;
             criteria.Value = substring;           
         }
 
@@ -82,7 +82,7 @@ namespace ApplicationLogics.StudyManagement
             EmptyStringChecker(value);
 
             criteria.Tag = bibTexTagName;
-            criteria.ComparisonType = Criteria.CriteriaOperation.Equals;
+            criteria.ComparisonType = Criteria.Operation.Equals;
             criteria.Value = value;
         }
 
@@ -90,7 +90,7 @@ namespace ApplicationLogics.StudyManagement
         public void SetSearchCriteria_Equals(Criteria criteria, string bibTexTagName, int value) 
         {
             criteria.Tag = bibTexTagName;
-            criteria.ComparisonType = Criteria.CriteriaOperation.Equals;
+            criteria.ComparisonType = Criteria.Operation.Equals;
             criteria.Value = ""+value;
         }
 
@@ -109,7 +109,7 @@ namespace ApplicationLogics.StudyManagement
         public void SetSearchCriteria_LessThan(Criteria criteria, string bibTexTagName, int value)
         {
             criteria.Tag = bibTexTagName;
-            criteria.ComparisonType = Criteria.CriteriaOperation.Less;
+            criteria.ComparisonType = Criteria.Operation.Less;
             criteria.Value = ""+value;
         }
 
@@ -128,7 +128,7 @@ namespace ApplicationLogics.StudyManagement
         public void SetSearchCriteria_GreaterThan(Criteria criteria, string bibTexTagName, int value)
         {
             criteria.Tag = bibTexTagName;
-            criteria.ComparisonType = Criteria.CriteriaOperation.Greater;
+            criteria.ComparisonType = Criteria.Operation.Greater;
             criteria.Value = "" + value;
         }
 

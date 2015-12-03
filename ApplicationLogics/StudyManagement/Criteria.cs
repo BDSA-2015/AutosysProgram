@@ -17,7 +17,7 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         /// Defines which operation to use for comparison. 
         /// </summary>
-        public enum CriteriaOperation
+        public enum Operation
         {
             Less, // Numerical comparison 
             Equals, // String comparison 
@@ -29,18 +29,18 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         /// Used to determine whether the criteria should include or exclude data.
         /// </summary>
-        public enum CriteriaType
+        public enum Type
         {
             Inclusion,
             Exclusion
         }
 
-        public CriteriaType Type { get; set; }
+        public Type FilterType { get; set; }
 
         /// <summary>
         /// The type of comparison used to 
         /// </summary>
-        public CriteriaOperation ComparisonType { get; set; }
+        public Operation ComparisonType { get; set; }
 
         /// <summary>
         /// The actual value used to retrieve relevant papers for a given study upon comparison. 

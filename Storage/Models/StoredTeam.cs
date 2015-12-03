@@ -17,7 +17,6 @@ namespace Storage.Entities
     [Table("Team")]
     public class StoredTeam : IEntity
     {
-        private int _data;
 
         [Key]
         public int Id { get; set; }
@@ -25,23 +24,11 @@ namespace Storage.Entities
         [Required][StringLength(50)]
         public string Name { get; set; }
 
-        [Required][StringLength(400)]
+        [Required]
+        public int[] UserIDs { get; set; }
+
+        [StringLength(400)]
         public string Metadata { get; set; }
-
-        public string InternalData { get; set; }
-
-        public int[] UserIDs 
-        {
-            get
-            {
-                return Array.ConvertAll(InternalData.Split(';'), Int32.Parse);
-            }
-            set
-            {
-                //_data = value;
-                // InternalData = String.Join(";", _data.Select(p => p.ToString()).ToArray()); // TODO FIX THIS 
-            }
-        }
 
     }
 
