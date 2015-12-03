@@ -5,6 +5,7 @@
 using ApplicationLogics.UserManagement;
 using AutoMapper;
 using Storage.Entities;
+using Storage.Models;
 
 namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfiles
 {

@@ -1,7 +1,7 @@
 ﻿using ApplicationLogics.UserManagement;
 using AutoMapper;
 
-namespace ApplicationLogics.AutosysServer.Mapping.Profiles
+namespace ApplicationLogics.AutosysServer.Mapping.Profiles.WebApiProfile
 {
     /// <summary>
     /// This class is an Automapper profile that
