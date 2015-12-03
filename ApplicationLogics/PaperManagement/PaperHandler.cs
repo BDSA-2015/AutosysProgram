@@ -16,9 +16,9 @@ namespace ApplicationLogics.PaperManagement
     {
         //Used to generate Bibtex files, which later is stored as Papers in the database
         private IParser _parser;
-        private IFasade<Paper> _papers; 
+        private PaperFacade _papers; 
 
-        public PaperHandler(IParser parser, IFasade<Paper> papers)
+        public PaperHandler(IParser parser, PaperFacade papers)
         {
             _parser = parser;
             _papers = papers;
@@ -29,7 +29,7 @@ namespace ApplicationLogics.PaperManagement
         /// </summary>
         /// <param name="file">The bibtex file which is parsed to the program</param>
         /// <returns>A List of Papers which was valid for parsing</returns>
-        public void ImportPaper(string file)
+        public List<int> ImportPaper(string file)
         {
             throw new NotImplementedException();
         }

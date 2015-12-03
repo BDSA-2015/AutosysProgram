@@ -3,33 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.StudyManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class PhaseFasade : IFasade<Phase>
+    public class DatafieldFacade : IFacade<DataField>
     {
-        public int Create(Phase item)
+        public int Create(DataField item)
         {
             throw new NotImplementedException();
         }
 
-        public Phase Read(int id)
+        public DataField Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Phase> Read()
+        public IEnumerable<DataField> Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Phase item)
+        public void Update(DataField item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Phase item)
+        public void Delete(DataField item)
         {
             throw new NotImplementedException();
         }

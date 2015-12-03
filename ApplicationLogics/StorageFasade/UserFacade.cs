@@ -3,38 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ApplicationLogics.PaperManagement;
-using ApplicationLogics.PaperManagement.Bibtex;
-using ApplicationLogics.Repository;
+using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.UserManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class PaperFasade : IFasade<Paper>
+    public class UserFacade : IFacade<User>
     {
-        public int Create(Paper item)
+
+        public int Create(User item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Paper item)
+        public User Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Paper> Read()
+        public IEnumerable<User> Read()
         {
             throw new NotImplementedException();
         }
 
-        public Paper Read(int id)
+        public void Update(User item)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Paper item)
+        public void Delete(User item)
         {
             throw new NotImplementedException();
         }
     }
-
 }

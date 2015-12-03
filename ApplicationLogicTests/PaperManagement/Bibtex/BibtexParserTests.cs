@@ -28,7 +28,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ParseDefaultInputPaperTest(string field, string data)
         {
             //Arrange
-            var file = Properties.Resources.valid;
+            var file = Properties.Resources.valid1;
             var fileString = System.Text.Encoding.Default.GetString(file);
 
             //Act
@@ -45,7 +45,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ParseDefaultValidatorMissingAuthorTypeInputTest()
         {
             //Arrange
-            var bibtexInput = Properties.Resources.missingAuthor;
+            var bibtexInput = Properties.Resources.missingauthor1;
             var invalidFile = System.Text.Encoding.Default.GetString(bibtexInput);
             //Act
             var papers = _parser.Parse(invalidFile);
@@ -56,7 +56,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ParseDefaultValidatorMissingStartInputTest()
         {
             //Arrange
-            var bibtexInput = Properties.Resources.missingStartTag;
+            var bibtexInput = Properties.Resources.missingstarttag1;
             var invalidFile = System.Text.Encoding.Default.GetString(bibtexInput);
             var papers = _parser.Parse(invalidFile);
         }
@@ -66,7 +66,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ParseDefaultValidatorMissingBracketTypeInputTest()
         {
             //Arrange
-            var bibtexInput = Properties.Resources.missingBrackets;
+            var bibtexInput = Properties.Resources.missingbrackets1;
             var invalidFile = System.Text.Encoding.Default.GetString(bibtexInput);
             //Act
             var papers = _parser.Parse(invalidFile);

@@ -63,9 +63,9 @@ namespace ApplicationLogicTests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] bibtex {
+        internal static byte[] _3bibtex {
             get {
-                object obj = ResourceManager.GetObject("bibtex", resourceCulture);
+                object obj = ResourceManager.GetObject("_3bibtex", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace ApplicationLogicTests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] missingAuthor {
+        internal static byte[] bibtex1 {
             get {
-                object obj = ResourceManager.GetObject("missingAuthor", resourceCulture);
+                object obj = ResourceManager.GetObject("bibtex1", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace ApplicationLogicTests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] missingBrackets {
+        internal static byte[] emptybibtex {
             get {
-                object obj = ResourceManager.GetObject("missingBrackets", resourceCulture);
+                object obj = ResourceManager.GetObject("emptybibtex", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace ApplicationLogicTests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] missingStartTag {
+        internal static byte[] missingauthor1 {
             get {
-                object obj = ResourceManager.GetObject("missingStartTag", resourceCulture);
+                object obj = ResourceManager.GetObject("missingauthor1", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -103,9 +103,29 @@ namespace ApplicationLogicTests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] valid {
+        internal static byte[] missingbrackets1 {
             get {
-                object obj = ResourceManager.GetObject("valid", resourceCulture);
+                object obj = ResourceManager.GetObject("missingbrackets1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] missingstarttag1 {
+            get {
+                object obj = ResourceManager.GetObject("missingstarttag1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] valid1 {
+            get {
+                object obj = ResourceManager.GetObject("valid1", resourceCulture);
                 return ((byte[])(obj));
             }
         }

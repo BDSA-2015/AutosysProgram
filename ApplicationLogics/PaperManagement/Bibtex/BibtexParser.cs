@@ -48,6 +48,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
                     string type = match.Groups[1].Value;
                     Dictionary<string, string> fields = ParsePaper(match.Groups[3].Value);
                     var paper = new Paper(type, fields);
+                    paper.ResourceRef = key;
 
                     if (!_validator.IsPaperValid(paper))
                     {

@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ApplicationLogics.Repository;
+using System.Data;
 using Storage.Entities;
+using Storage.Repository;
+using Storage.Repository.Interface;
 
 namespace Storage.Models
 {
@@ -17,6 +19,7 @@ namespace Storage.Models
 
         [Required]
         [StringLength(50)]
+        [Index(IsUnique = true)] // Used to delete Criteria in Phase 
         public string Name { get; set; }
 
         [Required]

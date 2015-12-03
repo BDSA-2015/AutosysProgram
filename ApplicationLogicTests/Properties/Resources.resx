@@ -118,19 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="bibtex" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\papermanagement\bibtex\resources\bibtex.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="bibtex1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bibtex1.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="missingAuthor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\papermanagement\bibtex\resources\missingauthor.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="missingauthor1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\missingauthor1.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="missingBrackets" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\papermanagement\bibtex\resources\missingbrackets.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="missingbrackets1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\missingbrackets1.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="missingStartTag" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\papermanagement\bibtex\resources\missingstarttag.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="missingstarttag1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\missingstarttag1.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="valid" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\papermanagement\bibtex\resources\valid.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="valid1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\valid1.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="emptybibtex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\emptybibtex.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_3bibtex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\3bibtex.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

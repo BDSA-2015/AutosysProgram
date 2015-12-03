@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.UserManagement;
 
 namespace ApplicationLogics.StorageFasade
 {
-    public class TeamFasade : IFasade<Team>
+    public class TeamFacade : IFacade<Team>
     {
         public int Create(Team item)
         {

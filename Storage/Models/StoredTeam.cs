@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ApplicationLogics.Repository;
+using Storage.Repository;
+using Storage.Repository.Interface;
 
-namespace Storage.Entities
+namespace Storage.Models
 {
 
     /// <summary>
@@ -17,29 +13,18 @@ namespace Storage.Entities
     [Table("Team")]
     public class StoredTeam : IEntity
     {
+
         [Key]
         public int Id { get; set; }
 
         [Required][StringLength(50)]
         public string Name { get; set; }
 
-        [Required][StringLength(400)]
+        [Required]
+        public int[] UserIDs { get; set; }
+
+        [StringLength(400)]
         public string Metadata { get; set; }
-
-        public string InternalData { get; set; }
-
-        public int[] UserIDs 
-        {
-            get
-            {
-                return Array.ConvertAll(InternalData.Split(';'), Int32.Parse);
-            }
-            set
-            {
-                //_data = value;
-                // InternalData = String.Join(";", _data.Select(p => p.ToString()).ToArray()); // TODO FIX THIS 
-            }
-        }
 
     }
 

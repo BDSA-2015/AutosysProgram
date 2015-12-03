@@ -2,10 +2,10 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-using System;
 using System.Collections.Generic;
+using Storage.Repository.Interface;
 
-namespace ApplicationLogics.Repository
+namespace Storage.Repository
 {
     /// <summary>
     /// This interface outlines the CRUD methods that the storage repository class will be able to perform.

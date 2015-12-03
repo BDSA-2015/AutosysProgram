@@ -21,7 +21,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
         /// <summary>
         /// A reference to the resource associated with this Paper (e.g. A PDF, or CSV file...)
         /// </summary>
-        public int ResourceRef { get; set; }
+        public string ResourceRef { get; set; }
 
         /// <summary>
         /// Constructor for creating a Paper based on a bibtex file entry type and fields

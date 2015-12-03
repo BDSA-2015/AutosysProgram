@@ -4,15 +4,16 @@
 
 using System;
 using ApplicationLogics.StorageFasade;
+using ApplicationLogics.StorageFasade.Interface;
 
 namespace ApplicationLogics.UserManagement
 {
     public class UserHandler
     {
         private readonly UserValidator _userValidator;
-        private IFasade<User> _storage;
+        private IFacade<User> _storage;
 
-        public UserHandler(IFasade<User> storage)
+        public UserHandler(IFacade<User> storage)
         {
             _userValidator = new UserValidator();
             _storage = storage;
