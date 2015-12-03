@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Storage.Repository;
 using Storage.Repository.Interface;
 
 namespace Storage.Models

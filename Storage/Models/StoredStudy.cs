@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Storage.Models;
-using Storage.Repository;
+using Storage.Entities;
 using Storage.Repository.Interface;
 
-namespace Storage.Entities
+namespace Storage.Models
 {
 
     /// <summary>
@@ -29,7 +24,7 @@ namespace Storage.Entities
         [Required][StringLength(400)]
         public string Description { get; set; }
 
-        public virtual List<StoredPhase> Phases { get; set; }
+        public virtual ICollection<StoredPhase> Phases { get; set; }
 
     }
 
