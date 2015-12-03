@@ -48,7 +48,8 @@ namespace ApplicationLogics.UserManagement
         /// <summary>
         /// Edit and update an existing user
         /// </summary>
-        /// <param name="id">id of user to update</param>
+        /// <param name="oldId">id of user to update</param>
+        /// <param name="user">User object</param>
         public void EditUser(int oldId, User user) 
         {
             if (!UserValidator.ValidateEnteredUserInformation(user)) throw new ArgumentException("User data is invalid");

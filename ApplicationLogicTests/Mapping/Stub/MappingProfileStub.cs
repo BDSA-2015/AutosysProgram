@@ -1,9 +1,19 @@
-﻿using ApplicationLogics.StorageFasade.Mapper;
+﻿using AutoMapper;
 
 namespace ApplicationLogicTests.Mapping.Stub
 {
-    public class BaseMapperStub :IMap
+    /// <summary>
+    /// This profile will be used for testing. It will map all the testing objects
+    /// so automapper can be tested
+    /// </summary>
+    public class MappingProfileStub : Profile
     {
+
+        protected override void Configure()
+        {
+            CreateMappings();
+        }
+
         public void CreateMappings()
         {
             //Mapping DTO to object with same properties

@@ -67,8 +67,9 @@
     <Compile Include="ExportManagement\CSVConverterTests.cs" />
     <Compile Include="ExportManagement\ExportHandlerTests.cs" />
     <Compile Include="ExportManagement\PDFConverterTests.cs" />
-    <Compile Include="Mapping\BaseMapperTests.cs" />
-    <Compile Include="Mapping\Stub\BaseMapperStub.cs" />
+    <Compile Include="Mapping\AutoMapperTests.cs" />
+    <Compile Include="Mapping\Stub\AutoMaperConfiguratorStub.cs" />
+    <Compile Include="Mapping\Stub\MappingProfileStub.cs" />
     <Compile Include="Mapping\Stub\ObjectDifferentProperty.cs" />
     <Compile Include="Mapping\Stub\ObjectDto.cs" />
     <Compile Include="Mapping\Stub\ObjectManyProperties.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="UserManagement\TeamValidatorTests.cs" />
     <Compile Include="UserManagement\UserHandlerTests.cs" />
     <Compile Include="UserManagement\UserTest.cs" />
+    <Compile Include="StudyManagement\CriteriaFactoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ApplicationLogics\ApplicationLogics.csproj">

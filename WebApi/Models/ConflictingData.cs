@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using SystematicStudyService.Models;
 
-namespace WebApi.Models
+namespace SystematicStudyService.Models
 {
     /// <summary>
     /// Represents data of one user provided for a <see cref="DataField" />, used to indicate conflicting data between users.

@@ -21,19 +21,18 @@ namespace StorageTests
         public void CheckConnection()
         {
             bool result; 
-
             try
             {
                 _dbContext.Database.Connection.Open();
                 _dbContext.Database.Connection.Close();
+                result = true;
             }
             catch (SqlException e)
             {
                 Console.WriteLine(e.Message);
                 result = false;
             }
-            result = true;
-
+            
             Assert.AreEqual(true, result);
         }
 

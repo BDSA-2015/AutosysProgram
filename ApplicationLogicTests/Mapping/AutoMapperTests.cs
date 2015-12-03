@@ -1,23 +1,23 @@
-﻿using System;
-using ApplicationLogics.StorageFasade.Mapper;
-using ApplicationLogics.StorageFasade.Mapping;
-using ApplicationLogicTests.Mapping.Stub;
+﻿using ApplicationLogicTests.Mapping.Stub;
 using AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApplicationLogicTests.Mapping
 {
+    /// <summary>
+    /// This class will test the automapper and its functionalities.
+    /// It will basically test various ways of mappings and also 
+    /// if AutoMapper is configured correct.
+    /// </summary>
     [TestClass]
-    public class BaseMapperTests
+    public class AutoMapperTests
     {
 
-        private IMap _mapper;
         private ObjectDto _objectDto;
         [TestInitialize]
         public void Initialize()
         {
-            _mapper = new BaseMapperStub();
-            _mapper.CreateMappings();
+            AutoMaperConfiguratorStub.Configure();
             _objectDto = new ObjectDto() {Name="John Doe"};
         }
 
@@ -25,7 +25,7 @@ namespace ApplicationLogicTests.Mapping
         /// Test mapping of two objects with same property names
         /// </summary>
         [TestMethod]
-        public void DtoToObjectWithSamePropertyTest()
+        public void Map_SameProperty_ValidTarget_Test()
         {
             //Arrange
             var target = new ObjectSameOneProperty();
@@ -45,7 +45,7 @@ namespace ApplicationLogicTests.Mapping
         /// the transfer
         /// </summary>
         [TestMethod]
-        public void DtoToObjectWithDifferentPropertyNameTest()
+        public void Map_DifferentPropertyName_ValidTarget_Test()
         {
             //Arrange
             var target = new ObjectDifferentProperty();
@@ -64,7 +64,7 @@ namespace ApplicationLogicTests.Mapping
         /// two properties. EG FirstName and LastName.
         /// </summary>
         [TestMethod]
-        public void DtoToObjectWithManyPropertiesTest()
+        public void Map_ManyProperties_ValidTarget_Test()
         {
             //Arrange
             var target = new ObjectManyProperties();
@@ -80,9 +80,15 @@ namespace ApplicationLogicTests.Mapping
 
 
 
-
+        /// <summary>
+        /// This test utilize AutoMapper's own Assert method
+        /// that dry run all configured type maps and throw
+        /// AutoMapperConfigurationException for each problem.
+        /// If no exception are thrown, the automapper has been 
+        /// correctly created
+        /// </summary>
         [TestMethod]
-        public void ValidConfigurationTest()
+        public void AutoMapper_Configuration_Valid_Test()
         {
             Mapper.AssertConfigurationIsValid();
         }
