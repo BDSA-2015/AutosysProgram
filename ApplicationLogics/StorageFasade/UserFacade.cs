@@ -10,8 +10,12 @@ namespace ApplicationLogics.StorageFasade
 {
     public class UserFacade : IFacade<User>
     {
-        private readonly IRepository<StoredUser> _userRepository; 
+        private readonly IRepository<StoredUser> _userRepository;
 
+        /// <summary>
+        /// This class is responsible for the communication between application logic layer and storage layer.
+        /// This class will handle Users and convert them the the propriate object that are to be propagated
+        /// </summary>
         public UserFacade(IRepository<StoredUser> userRepository)
         {
             _userRepository = userRepository;
@@ -50,12 +54,19 @@ namespace ApplicationLogics.StorageFasade
            return userList;
         }
 
+        /// <summary>
+        /// Converts user to storage entity and update it.
+        /// </summary>
+        /// <param name="user">User object</param>
         public void Update(User user)
         {
-            //TODO How to retrieve specific user from database without any ID?
-            throw new NotImplementedException();
+            _userRepository.Update(AutoMapper.Mapper.Map<StoredUser>(user));
         }
 
+        /// <summary>
+        /// Delete given user from database.
+        /// </summary>
+        /// <param name="user">User Object</param>
         public void Delete(User user)
         {
             var toDelete = Read(user.Id);
