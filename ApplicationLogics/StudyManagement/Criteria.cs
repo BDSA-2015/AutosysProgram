@@ -2,8 +2,6 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-using ApplicationLogics.PaperManagement.Interfaces;
-
 namespace ApplicationLogics.StudyManagement
 {
 
@@ -26,15 +24,6 @@ namespace ApplicationLogics.StudyManagement
             Greater, // Numerical comparison 
             Contains,
             Regex // Not currently supported 
-        }
-
-        /// <summary>
-        /// Used to determine whether the criteria should include or exclude a given set of papers. 
-        /// </summary>
-        public enum CriteriaType
-        {
-            Inclusion,
-            Exclusion
         }
 
         /// <summary>
@@ -62,7 +51,6 @@ namespace ApplicationLogics.StudyManagement
         /// By way of example, a tag {Title} could be targetted in the criteria through a string comparison. 
         /// </summary>
         public string Tag { get; set; } // TODO Replace with reference to Tag entity class 
-
     }
 
 }

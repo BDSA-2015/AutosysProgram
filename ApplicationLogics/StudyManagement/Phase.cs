@@ -18,13 +18,21 @@ namespace ApplicationLogics.StudyManagement
     /// </summary>
     public class Phase 
     {
+        /// <summary>
+        /// Used to determine whether the criteria should include or exclude data.
+        /// </summary>
+        public enum CriteriaType
+        {
+            Inclusion,
+            Exclusion
+        }
 
         private List<Paper> Reports { get;  set; }
 
         /// <summary>
         /// This list contains Criteria, which each report cannot contain.
         /// </summary>
-        public List< Criteria> ExclusionCriteria { get; set; }
+        public List<Criteria> ExclusionCriteria { get; set; }
 
         /// <summary>
         /// This list contains Criteria, which each report must contain.
@@ -74,34 +82,27 @@ namespace ApplicationLogics.StudyManagement
         /// Add an exclusion criteria to the phase.
         /// </summary>
         /// <param name="criteria"></param>
-        public void AddExclusionCriteria(Criteria criteria)
+        public void AddCriteria(Criteria criteria, CriteriaType type)
         {
+            if (type == CriteriaType.Exclusion) 
+                throw new NotImplementedException(); // Create exclusion criteria
+
+            else if (type == CriteriaType.Inclusion)
+                throw new NotImplementedException(); // Create inclusion criteria 
+
             throw new NotImplementedException();
         }
         /// <summary>
-        /// Remove an exclusion criteria from this phase and only this phase
+        /// Remove a criteria from this phase. 
         /// </summary>
-        /// <param name="criteriaName"></param>
-        public void RemoveExclusionCriteria(string criteriaName)
+        /// <param name="criteriaName">
+        /// Name of the criteria to delete. 
+        /// </param>
+        public void RemoveCriteria(string criteriaName)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Add inclusion criteria to this phase and only this phase
-        /// </summary>
-        /// <param name="criteria"></param>
-        public void AddInclusionCriteria(Criteria criteria)
-        {
-            throw new NotImplementedException();
-        }
-        /// <summary>
-        /// Remove Inclusion criteria to this phase and only this phase
-        /// </summary>
-        /// <param name="criteriaName"></param>
-        public void RemoveInclusionCriteria(string criteriaName)
-        {
-            throw new NotImplementedException();
-        }
+       
         /// <summary>
         /// Add another user to the task
         /// </summary>
