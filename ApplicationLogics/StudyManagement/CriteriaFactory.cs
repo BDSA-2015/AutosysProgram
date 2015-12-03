@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 namespace ApplicationLogics.StudyManagement
 {
     /// <summary>
-    /// This class is meant for Creating new Criterias
+    /// This class is used to create new Criteria. 
     /// </summary>
     public  class CriteriaFactory
     {
         
-
-
         /// <summary>
         /// Create an empty criteria. Specify its purpose with AddRelation method
         /// </summary>
@@ -22,94 +20,145 @@ namespace ApplicationLogics.StudyManagement
             EmptyStringChecker(name);
             EmptyStringChecker(description);
 
-
-            var criteria = new Criteria();
-            criteria.Name = name;
-            criteria.Description = description;
+            var criteria = new Criteria
+            {
+                Name = name,
+                Description = description
+            };
 
             return criteria;
         }
 
-
         /// <summary>
-        /// Defines a Criteria which search for a specific item
+        /// Defines a search criteria used to either include or exclude data. 
         /// </summary>
-        /// <param name="critera">The Criteria you which to modify</param>
-        /// <param name="itemToSearchFor">THe item you you wish to search for</param>
-        public void setSearchCriteria(Criteria critera, CriteriaRelation itemToSearchFor)
+        /// <param name="criteria">
+        /// Criteria set for search. 
+        /// </param>
+        /// <param name="criteriaType">
+        /// Either an inclusion or exclusion criteria. 
+        /// </param>
+        public void SetSearchCriteria(Criteria criteria, Criteria.CriteriaType criteriaType)
         {
-            critera.Requirement = itemToSearchFor;
+            criteria.Type = criteriaType;
         }
 
 
         /// <summary>
-        /// Set the Criteria to search for papers which have a bibtex tag with a value which contains this string
+        /// Set the Criteria for data (paper) containing a bibtex tag with a value containing the string.
         /// </summary>
-        public void SetSearchCriteria_ContainsString(Criteria critera, string bibTexTagName, string substring)
+        /// <param name="criteria">
+        /// Criteria used to search in data with. 
+        /// </param>
+        /// <param name="bibTexTagName">
+        /// Name of a given bibtex tag that we want to check. 
+        /// </param>
+        /// <param name="substring">
+        /// The string checked for if contained in field from tag. 
+        /// </param>
+        public void SetSearchCriteria_ContainsString(Criteria criteria, string bibTexTagName, string substring)
         {
             EmptyStringChecker(substring);
 
-            critera.CriteriaTarget = bibTexTagName;
-            critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Contains;
-            critera.Requirement.Criteria = substring;           
+            criteria.Tag = bibTexTagName;
+            criteria.ComparisonType = Criteria.CriteriaOperation.Contains;
+            criteria.Value = substring;           
         }
 
         /// <summary>
-        /// Set the Criteria to search for papers which have a bibtex tag with a value which equals this string.
+        /// Set the Criteria to search for papers, which have a bibtex tag with a value which equals this string.
         /// </summary>
-        public void SetSearchCriteria_equals(Criteria critera, string bibTexTagName, string value)
+        /// <param name="criteria">
+        /// Criteria used to search with. 
+        /// </param>
+        /// <param name="bibTexTagName">
+        /// Name of bibtex tag. 
+        /// </param>
+        /// <param name="value">
+        /// Value to compare with. 
+        /// </param>
+        public void SetSearchCriteria_Equals(Criteria criteria, string bibTexTagName, string value)
         {
             EmptyStringChecker(value);
 
-            critera.CriteriaTarget = bibTexTagName;
-            critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Equals;
-            critera.Requirement.Criteria = value;
+            criteria.Tag = bibTexTagName;
+            criteria.ComparisonType = Criteria.CriteriaOperation.Equals;
+            criteria.Value = value;
         }
 
-        public void SetSearchCriteria_equals(Criteria critera, string bibTexTagName, int value)
+        // TODO explain documentation and difference of int and string value in overloaded method 
+        public void SetSearchCriteria_Equals(Criteria criteria, string bibTexTagName, int value) 
         {
-            critera.CriteriaTarget = bibTexTagName;
-            critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Equals;
-            critera.Requirement.Criteria = ""+value;
+            criteria.Tag = bibTexTagName;
+            criteria.ComparisonType = Criteria.CriteriaOperation.Equals;
+            criteria.Value = ""+value;
         }
 
         /// <summary>
-        /// Set the Criteria to search for papers which have a bibtex tag with a value which less than the given value.
+        /// Set the Criteria to search for papers which have a bibtex tag with a value less than the given value.
         /// </summary>
-        public void SetSearchCriteria_LessThan(Criteria critera, string bibTexTagName, int value)
+        /// <param name="criteria">
+        /// Criteria used to search with. 
+        /// </param>
+        /// <param name="bibTexTagName">
+        /// The type of bibtex tag used in the Criteria. 
+        /// </param>
+        /// <param name="value">
+        /// Value used to compare with a value within the bibtex tag. 
+        /// </param>
+        public void SetSearchCriteria_LessThan(Criteria criteria, string bibTexTagName, int value)
         {
-            critera.CriteriaTarget = bibTexTagName;
-            critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Less;
-            critera.Requirement.Criteria = ""+value;
-        }
-
-
-        /// <summary>
-        /// Set the Criteria to search for papers which have a bibtex tag with a value which Greater than the given value.
-        /// </summary>
-        public void SetSearchCriteria_GreaterThan(Criteria critera, string bibTexTagName, int value)
-        {
-            critera.CriteriaTarget = bibTexTagName;
-            critera.Requirement.ComparionsonType = Criteria.CriteriaOperation.Greater;
-            critera.Requirement.Criteria = "" + value;
+            criteria.Tag = bibTexTagName;
+            criteria.ComparisonType = Criteria.CriteriaOperation.Less;
+            criteria.Value = ""+value;
         }
 
         /// <summary>
-        /// Set the Criteria to search for papers which have a bibtex tag with a value Which match .
+        /// Set the Criteria to search for papers containing a bibtex tag with a value greater than the given value.
         /// </summary>
+        /// <param name="criteria">
+        /// Criteria used to search with. 
+        /// </param>
+        /// <param name="bibTexTagName">
+        /// Bibtex tag containing a value to compare with. 
+        /// </param>
+        /// <param name="value">
+        /// Value used to compare with other value within bibtex tag. 
+        /// </param>
+        public void SetSearchCriteria_GreaterThan(Criteria criteria, string bibTexTagName, int value)
+        {
+            criteria.Tag = bibTexTagName;
+            criteria.ComparisonType = Criteria.CriteriaOperation.Greater;
+            criteria.Value = "" + value;
+        }
+
+        /// <summary>
+        /// Set the Criteria to search for papers which have a bibtex tag with a value that match a certain pattern.
+        /// </summary>
+        /// <param name="critera">
+        /// - Insert here - 
+        /// </param>
+        /// <param name="bibTexTagName">
+        /// - Insert here - 
+        /// </param>
+        /// <param name="regexPattern">
+        /// - Insert here - 
+        /// </param>
         public void SetSearchCriteria_Regex(Criteria critera, string bibTexTagName, string regexPattern)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Throws an argumentException if a empty string is found
+        /// Throws an argumentException if a. empty string is found.
         /// </summary>
-        /// <param name="varialbe"></param>
-        private void EmptyStringChecker(string varialbe)
+        /// <param name="inputString"></param>
+        private void EmptyStringChecker(string inputString)
         {
-            if(varialbe.Length==0)
-                throw new ArgumentException();
+            if(inputString.Length==0)
+                throw new ArgumentException("The string cannot be empty.");
         }
+
     }
+
 }
