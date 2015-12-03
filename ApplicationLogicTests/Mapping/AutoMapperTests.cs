@@ -25,7 +25,7 @@ namespace ApplicationLogicTests.Mapping
         /// Test mapping of two objects with same property names
         /// </summary>
         [TestMethod]
-        public void DtoToObjectWithSamePropertyTest()
+        public void Map_SameProperty_ValidTarget_Test()
         {
             //Arrange
             var target = new ObjectSameOneProperty();
@@ -45,7 +45,7 @@ namespace ApplicationLogicTests.Mapping
         /// the transfer
         /// </summary>
         [TestMethod]
-        public void DtoToObjectWithDifferentPropertyNameTest()
+        public void Map_DifferentPropertyName_ValidTarget_Test()
         {
             //Arrange
             var target = new ObjectDifferentProperty();
@@ -64,7 +64,7 @@ namespace ApplicationLogicTests.Mapping
         /// two properties. EG FirstName and LastName.
         /// </summary>
         [TestMethod]
-        public void DtoToObjectWithManyPropertiesTest()
+        public void Map_ManyProperties_ValidTarget_Test()
         {
             //Arrange
             var target = new ObjectManyProperties();
@@ -88,7 +88,7 @@ namespace ApplicationLogicTests.Mapping
         /// correctly created
         /// </summary>
         [TestMethod]
-        public void ValidConfigurationTest()
+        public void AutoMapper_Configuration_Valid_Test()
         {
             Mapper.AssertConfigurationIsValid();
         }

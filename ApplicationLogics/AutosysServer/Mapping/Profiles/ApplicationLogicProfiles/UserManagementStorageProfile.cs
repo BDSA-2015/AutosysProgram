@@ -10,7 +10,7 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfi
 {
     /// <summary>
     /// This profile sets the mapping between
-    /// StoredUser and StoredTeam Entities to Application logic user and team.
+    /// Applicationlogic objects and Stored Entities for Usermanagement subsystem
     /// </summary>
     internal class UserManagementStorageProfile : Profile
     {
