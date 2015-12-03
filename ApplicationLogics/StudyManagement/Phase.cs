@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using ApplicationLogics.PaperManagement;
+using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.UserManagement;
 
 
@@ -47,7 +48,6 @@ namespace ApplicationLogics.StudyManagement
 
         public void GetPapersWhichMatchCriterias()
         {
-            BibTexFile file = new BibTexFile();
             throw new NotImplementedException();
         }
 

@@ -12,14 +12,14 @@ namespace ApplicationLogics.PaperManagement.Bibtex
     public class FieldValidator
     {
         //Holds fields and the associated checkers to be used when validating them
-        private readonly Dictionary<DefaultEnumField, IFieldChecker> _checkers;
+        private readonly Dictionary<string, IFieldChecker> _checkers;
 
         //Default field checker used when non is specified in the constructor
-        private readonly IFieldChecker _defaultChecker = new DefaultFieldChecker();
+        private readonly IFieldChecker _defaultChecker = new FieldChecker();
     
-        public FieldValidator(Dictionary<DefaultEnumField, IFieldChecker> checkers = null)
+        public FieldValidator(Dictionary<string, IFieldChecker> checkers = null)
         {
-            _checkers = checkers ?? new Dictionary<DefaultEnumField, IFieldChecker>();
+            _checkers = checkers ?? new Dictionary<string, IFieldChecker>();
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
         /// <param name="fieldData">The data in the bibtex file associated with the bibtex field in the file</param>
         /// <param name="type">The type of the bibtex field</param>
         /// <returns>True if the data of the bibtex field is valid otherwise false</returns>
-        public bool IsFieldValid(string fieldData, DefaultEnumField type)
+        public bool IsFieldValid(string fieldData, string type)
         {
             if (string.IsNullOrEmpty(fieldData))
             {

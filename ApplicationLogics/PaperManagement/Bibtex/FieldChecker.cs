@@ -8,7 +8,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
     /// Class for creating a default field checker which will be used whenever a client does not specify any 
     /// custom field checkers
     /// </summary>
-    public class DefaultFieldChecker : IFieldChecker
+    public class FieldChecker : IFieldChecker
     {
         //Matches all strings without a new line at the beginning or in between characters.
         readonly Regex _r = new Regex("^.*$");

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.PaperManagement.Interfaces;
+using ApplicationLogics.StorageFasade;
 
 namespace ApplicationLogics.PaperManagement
 {
@@ -15,10 +16,12 @@ namespace ApplicationLogics.PaperManagement
     {
         //Used to generate Bibtex files, which later is stored as Papers in the database
         private IParser _parser;
+        private IFasade<Paper> _papers; 
 
-        public PaperHandler(IParser parser)
+        public PaperHandler(IParser parser, IFasade<Paper> papers)
         {
             _parser = parser;
+            _papers = papers;
         }
 
         /// <summary>
@@ -26,7 +29,7 @@ namespace ApplicationLogics.PaperManagement
         /// </summary>
         /// <param name="file">The bibtex file which is parsed to the program</param>
         /// <returns>A List of Papers which was valid for parsing</returns>
-        public List<Paper> ImportPaper(string file)
+        public void ImportPaper(string file)
         {
             throw new NotImplementedException();
         }

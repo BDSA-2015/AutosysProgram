@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationLogics.PaperManagement;
 using ApplicationLogics.PaperManagement.Bibtex;
+using ApplicationLogics.Repository;
 
 namespace ApplicationLogics.StorageFasade
 {

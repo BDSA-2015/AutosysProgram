@@ -77,7 +77,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="PaperManagement\Bibtex\BibtexParserTests.cs" />
-    <Compile Include="PaperManagement\Bibtex\CostumFieldCheckerTests.cs" />
     <Compile Include="PaperManagement\Bibtex\DefaultFieldCheckerTests.cs" />
     <Compile Include="PaperManagement\Bibtex\DefaultPaperCheckerTests.cs" />
     <Compile Include="PaperManagement\Bibtex\FieldValidatorTests.cs" />
@@ -89,12 +88,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ApplicationLogics\ApplicationLogics.csproj">
-      <Project>{C10EB25D-DE01-4D48-A5D9-A28E69F9325D}</Project>
-      <Name>ApplicationLogics</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -112,6 +105,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ApplicationLogics\ApplicationLogics.csproj">
+      <Project>{C10EB25D-DE01-4D48-A5D9-A28E69F9325D}</Project>
+      <Name>ApplicationLogics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ApplicationLogics\ApplicationLogics.csproj">
       <Project>{C10EB25D-DE01-4D48-A5D9-A28E69F9325D}</Project>
       <Name>ApplicationLogics</Name>

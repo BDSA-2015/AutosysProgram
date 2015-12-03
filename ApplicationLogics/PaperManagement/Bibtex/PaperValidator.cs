@@ -13,15 +13,15 @@ namespace ApplicationLogics.PaperManagement.Bibtex
         /// <summary>
         /// A collection of bibliography entries and their associated Paper checkers
         /// </summary>
-        readonly Dictionary<DefaultEnumEntry, IPaperChecker> _checkers;
+        readonly Dictionary<string, IPaperChecker> _checkers;
         /// <summary>
         /// A default Paper checker to make sure a checker always exists for a PaperValidator
         /// </summary>
         readonly IPaperChecker _defaultChecker = new DefaultPaperChecker();
 
-        public PaperValidator(Dictionary<DefaultEnumEntry, IPaperChecker> checkers = null)
+        public PaperValidator(Dictionary<string, IPaperChecker> checkers = null)
         {
-            _checkers = checkers ?? new Dictionary<DefaultEnumEntry, IPaperChecker>();
+            _checkers = checkers ?? new Dictionary<string, IPaperChecker>();
         }
 
         /// <summary>

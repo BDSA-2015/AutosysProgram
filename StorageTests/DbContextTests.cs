@@ -21,7 +21,6 @@ namespace StorageTests
         public void CheckConnection()
         {
             bool result; 
-            Assert.AreEqual();
             try
             {
                 _dbContext.Database.Connection.Open();

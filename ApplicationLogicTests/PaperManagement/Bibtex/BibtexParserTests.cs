@@ -19,13 +19,13 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             _parser = new BibtexParser(new PaperValidator());
         }
 
-        [TestCase(DefaultEnumField.Author, "William, Funstuff")]
-        [TestCase(DefaultEnumField.Booktitle, "ITU student anno 2015")]
-        [TestCase(DefaultEnumField.Title, "A student's thoughts on programming")]
-        [TestCase(DefaultEnumField.Year, "2015")]
-        [TestCase(DefaultEnumField.Month, "Aug")]
-        [TestCase(DefaultEnumField.Volume, "1")]
-        public void ParseDefaultInputPaperTest(DefaultEnumField field, string data)
+        [TestCase("athor", "William, Funstuff")]
+        [TestCase("booktitle", "ITU student anno 2015")]
+        [TestCase("title", "A student's thoughts on programming")]
+        [TestCase("year", "2015")]
+        [TestCase("month", "Aug")]
+        [TestCase("volume", "1")]
+        public void ParseDefaultInputPaperTest(string field, string data)
         {
             //Arrange
             var file = Properties.Resources.valid;
@@ -37,7 +37,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             //Assert
             var validPaper = papers[0];
 
-            Assert.AreEqual(validPaper.DefaultFields[field], data);
+            Assert.AreEqual(validPaper.Fields[field], data);
         }
 
         [TestMethod()]

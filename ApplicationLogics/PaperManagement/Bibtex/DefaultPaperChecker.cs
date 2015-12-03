@@ -12,7 +12,12 @@ namespace ApplicationLogics.PaperManagement.Bibtex
     public class DefaultPaperChecker : IPaperChecker
     {
         //Validates fields against a default field checker
-        readonly FieldValidator _validator = new FieldValidator();
+        readonly FieldValidator _validator;
+
+        public DefaultPaperChecker(FieldValidator validator = null)
+        {
+            _validator = validator ?? new FieldValidator();
+        }
 
         /// <summary>
         /// Method for validating a Paper for parsing in a BibtexParser
@@ -25,15 +30,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
             {
                 throw new ArgumentNullException("The given Paper cannot be null");
             }
-            if (paper.DefaultFields.ContainsKey(DefaultEnumField.Author) && paper.DefaultFields.ContainsKey(DefaultEnumField.Year) && 
-                (paper.DefaultFields.ContainsKey(DefaultEnumField.Title) || paper.DefaultFields.ContainsKey(DefaultEnumField.Booktitle)))
-            {
-                return paper.DefaultFields.All(field => _validator.IsFieldValid(field.Value, field.Key));
-            }
-            else
-            {
-                return false;
-            }
+                return paper.Fields.All(field => _validator.IsFieldValid(field.Value, field.Key));
         }
     }
 }

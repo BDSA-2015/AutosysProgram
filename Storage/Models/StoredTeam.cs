@@ -17,8 +17,6 @@ namespace Storage.Entities
     [Table("Team")]
     public class StoredTeam : IEntity
     {
-        private int _data;
-
         [Key]
         public int Id { get; set; }
 

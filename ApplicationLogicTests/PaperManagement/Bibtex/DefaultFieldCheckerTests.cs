@@ -11,7 +11,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ValidateValidInputTest()
         {
             //Arrange
-            DefaultFieldChecker checker = new DefaultFieldChecker();
+            FieldChecker checker = new FieldChecker();
             var bibtexInput1 = "T";
             var bibtexInput2 = "Testing";
             var bibtexInput3 = "Testing Space";
@@ -32,7 +32,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ValidateNewLineInputTest()
         {
             //Arrange
-            DefaultFieldChecker checker = new DefaultFieldChecker();
+            FieldChecker checker = new FieldChecker();
             var bibtexInput1 = "\nTest";
             var bibtexInput2 = "Something\n more";
 
@@ -46,7 +46,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ValidateEmptyInputTest()
         {
             //Arrange
-            DefaultFieldChecker checker = new DefaultFieldChecker();
+            FieldChecker checker = new FieldChecker();
             var bibtexInput1 = "";
             
             //Assert
@@ -58,7 +58,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ValidateNullInputTest()
         {
             //Arrange
-            DefaultFieldChecker checker = new DefaultFieldChecker();
+            FieldChecker checker = new FieldChecker();
 
             //Act
             checker.Validate(null);
