@@ -4,10 +4,9 @@
 
 using System;
 using System.Collections.Generic;
-using ApplicationLogics.StorageFasade;
+using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.UserManagement.Entities;
 using ApplicationLogics.UserManagement.Utils;
-using ApplicationLogics.StorageFasade.Interface;
 
 namespace ApplicationLogics.UserManagement
 {
@@ -16,11 +15,11 @@ namespace ApplicationLogics.UserManagement
     /// </summary>
     public class UserHandler
     {
-        private IFacade<User> _storage;
+        private readonly IFacade<User> _storage;
+
         public UserHandler(IFacade<User> storage)
         {
             _storage = storage;
-
         }
 
 
@@ -51,9 +50,10 @@ namespace ApplicationLogics.UserManagement
         /// </summary>
         /// <param name="oldId">id of user to update</param>
         /// <param name="user">User object</param>
-        public void EditUser(int oldId, User user) 
+        public void EditUser(int oldId, User user)
         {
-            if (!UserValidator.ValidateEnteredUserInformation(user)) throw new ArgumentException("User data is invalid");
+            if (!UserValidator.ValidateEnteredUserInformation(user))
+                throw new ArgumentException("User data is invalid");
             if (!UserValidator.ValidateExistence(oldId, _storage)) throw new ArgumentException("User does not exist");
 
             _storage.Update(user);

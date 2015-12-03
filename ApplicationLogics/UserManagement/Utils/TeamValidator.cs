@@ -1,7 +1,8 @@
 ﻿// TeamValidator.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
-using ApplicationLogics.StorageFasade;
+
+using ApplicationLogics.StorageFasade.Interface;
 
 namespace ApplicationLogics.UserManagement.Utils
 {
@@ -16,7 +17,7 @@ namespace ApplicationLogics.UserManagement.Utils
         /// <param name="teamId">team to find</param>
         /// <param name="teamFasade">Storage location</param>
         /// <returns>Existence of team</returns>
-        public static bool ValidateExistence(int teamId, IFasade<Team> teamFasade)
+        public static bool ValidateExistence(int teamId, IFacade<Team> teamFasade)
         {
             if (teamId < 0) return false;
             var team = teamFasade.Read(teamId);

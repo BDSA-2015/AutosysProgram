@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ApplicationLogics.StorageFasade.Interface;
-using ApplicationLogics.Repository;
-using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
-using Storage.Entities;
+using Storage.Models;
+using Storage.Repository;
 
 namespace ApplicationLogics.StorageFasade
 {
@@ -16,7 +12,7 @@ namespace ApplicationLogics.StorageFasade
     {
         private readonly IRepository<StoredUser> _userRepository; 
 
-        public UserFasade(IRepository<StoredUser> userRepository)
+        public UserFacade(IRepository<StoredUser> userRepository)
         {
             _userRepository = userRepository;
         }
@@ -43,7 +39,7 @@ namespace ApplicationLogics.StorageFasade
         }
 
         /// <summary>
-        /// Returns an Enumable set of users
+        /// Returns an Enumerable set of users
         /// </summary>
         /// <returns>Enumerable set of users</returns>
         public IEnumerable<User> Read()

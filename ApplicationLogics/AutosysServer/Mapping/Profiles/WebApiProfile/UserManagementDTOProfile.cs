@@ -1,4 +1,5 @@
 ﻿using ApplicationLogics.UserManagement;
+using ApplicationLogics.UserManagement.Entities;
 using AutoMapper;
 
 namespace ApplicationLogics.AutosysServer.Mapping.Profiles.WebApiProfile

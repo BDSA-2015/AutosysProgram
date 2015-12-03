@@ -1,9 +1,10 @@
-﻿// TeamHandler.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
+﻿// TeamHandler.cs is a part of Autosys project in BDSA-2015. Created: 03, 12, 2015.
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
+
 using System;
 using System.Collections.Generic;
-using ApplicationLogics.StorageFasade;
+using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.UserManagement.Utils;
 
 namespace ApplicationLogics.UserManagement
@@ -13,9 +14,9 @@ namespace ApplicationLogics.UserManagement
     /// </summary>
     internal class TeamHandler
     {
-        private readonly IFasade<Team> _storage;
+        private readonly IFacade<Team> _storage;
 
-        public TeamHandler(IFasade<Team> storage)
+        public TeamHandler(IFacade<Team> storage)
         {
             _storage = storage;
         }
@@ -55,14 +56,22 @@ namespace ApplicationLogics.UserManagement
             _storage.Delete(team);
         }
 
+        /// <summary>
+        ///     Updates existing team with new team informations
+        /// </summary>
+        /// <param name="oldId"> id of existing team</param>
+        /// <param name="team"> Team object</param>
         public void Update(int oldId, Team team)
         {
             if (!TeamValidator.ValidateEnteredTeamData(team)) throw new ArgumentException("Team data is invalid");
             if (!TeamValidator.ValidateExistence(oldId, _storage)) throw new ArgumentException("Team does not exist");
-
             _storage.Update(team);
         }
 
+        /// <summary>
+        /// Returns every teams stored in database
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Team> GetAllTeams()
         {
             return _storage.Read();

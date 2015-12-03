@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.UserManagement;
 using Storage.Entities;
+using Storage.Models;
+using Storage.Repository;
 
 namespace ApplicationLogics.StorageFasade
 {
     public class TeamFacade : IFacade<Team>
     {
 
-        public TeamFasade(IRepository<StoredTeam> repository)
+        public TeamFacade(IRepository<StoredTeam> repository)
         {
             
         }

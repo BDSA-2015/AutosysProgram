@@ -5,11 +5,17 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApplicationLogicTests.UserManagement
 {
+    /// <summary>
+    /// This class test the user in application logic.
+    /// </summary>
     [TestClass]
     public class UserTest
     {
+        /// <summary>
+        /// Creates a valid user.
+        /// </summary>
         [TestMethod]
-        public void CreateUserTest()
+        public void CreateUser_NewUser_Valid_Test()
         {
             //Arrange
             const string expectedName = "Name";

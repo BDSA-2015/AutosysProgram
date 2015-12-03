@@ -1,11 +1,14 @@
-﻿using System;
-using ApplicationLogics.Repository;
+﻿// UserHandlerTests.cs is a part of Autosys project in BDSA-2015. Created: 03, 12, 2015.
+// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
+// Jacob Mullit Møiniche.
+
+using ApplicationLogics.AutosysServer.Mapping;
 using ApplicationLogics.StorageFasade;
-using ApplicationLogics.StorageFasade.Mapping;
 using ApplicationLogics.UserManagement.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Storage.Entities;
+using Storage.Models;
+using Storage.Repository;
 
 namespace ApplicationLogicTests.UserManagement
 {
@@ -15,24 +18,26 @@ namespace ApplicationLogicTests.UserManagement
     [TestClass]
     public class UserHandlerTests
     {
-
         [TestInitialize]
         public void Initialize()
         {
-            var mapper = new BaseMapper();
+            AutoMapperConfigurator.Configure();
         }
 
+        /// <summary>
+        /// Test when a user can be created
+        /// </summary>
         [TestMethod]
-        public void CreateUserTest()
+        public void CreateUser_Success_Test()
         {
             //Arrange 
             var repositoryMock = new Mock<IRepository<StoredUser>>();
-            var storedUser = new StoredUser(){ Name = "name", MetaData = "metaData"};
-            var expectedReturnId = 0;
+            var storedUser = new StoredUser {Name = "name", MetaData = "metaData"};
+            const int expectedReturnId = 0;
             repositoryMock.Setup(r => r.Create(storedUser)).Returns(expectedReturnId);
-            var userFacade = new UserFasade(repositoryMock.Object);
+            var userFacade = new UserFacade(repositoryMock.Object);
 
-            var user = new User() { Name = "name", Metadata = "metaData" };
+            var user = new User {Name = "name", Metadata = "metaData"};
 
             //Act
             var actualId = userFacade.Create(user);
@@ -42,22 +47,23 @@ namespace ApplicationLogicTests.UserManagement
             Assert.IsTrue(expectedReturnId == actualId);
         }
 
+        /// <summary>
+        /// Test if a user can be deleted.
+        /// </summary>
         [TestMethod]
-        public void DeleteUserTest()
+        public void DeleteUser_Success_Test()
         {
             //Arrange
             var repositoryMock = new Mock<IRepository<StoredUser>>();
-            var storedUser = new StoredUser() {Id = 0, Name = "name", MetaData = "metaData" };
+            var storedUser = new StoredUser {Id = 0, Name = "name", MetaData = "metaData"};
             repositoryMock.Setup(r => r.Delete(storedUser));
             repositoryMock.Setup(r => r.Read(storedUser.Id)).Returns(storedUser);
-            var userFacade = new UserFasade(repositoryMock.Object);
+            var userFacade = new UserFacade(repositoryMock.Object);
 
             //Act
-            var user = new User() {Id = 0, Name = "name", Metadata = "metaData" };
+            var user = new User {Id = 0, Name = "name", Metadata = "metaData"};
 
             userFacade.Delete(user);
-
-
         }
     }
 }

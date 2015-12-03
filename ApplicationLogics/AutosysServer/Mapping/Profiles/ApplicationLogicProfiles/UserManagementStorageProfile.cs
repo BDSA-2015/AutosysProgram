@@ -3,6 +3,7 @@
 // Jacob Mullit Møiniche.
 
 using ApplicationLogics.UserManagement;
+using ApplicationLogics.UserManagement.Entities;
 using AutoMapper;
 using Storage.Entities;
 using Storage.Models;
