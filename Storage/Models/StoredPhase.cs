@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ApplicationLogics.Repository;
 using Storage.Models;
+using Storage.Repository.Interface;
 
 namespace Storage.Entities
 {

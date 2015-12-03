@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using ApplicationLogics.Repository;
 using Storage.Entities;
+using Storage.Repository.Interface;
 
 namespace Storage.Models
 {

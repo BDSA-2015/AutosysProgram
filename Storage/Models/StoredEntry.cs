@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Storage.Repository.Interface;
 
 namespace Storage.Models
 {
@@ -7,7 +8,7 @@ namespace Storage.Models
     /// <summary>
     /// This entity is used to store papers containing a given entry field from parsing a bibtex file. 
     /// </summary>
-    public class StoredEntry
+    public class StoredEntry : IEntity
     {
 
         [Key]
