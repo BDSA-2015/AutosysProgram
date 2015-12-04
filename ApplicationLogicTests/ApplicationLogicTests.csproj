@@ -75,9 +75,9 @@
     <Compile Include="Mapping\Stub\ObjectManyProperties.cs" />
     <Compile Include="Mapping\Stub\ObjectSameOneProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserManagement\TeamHandlerTests.cs" />
+    <Compile Include="UserManagement\TeamFacadeTests.cs" />
     <Compile Include="UserManagement\TeamValidatorTests.cs" />
-    <Compile Include="UserManagement\UserHandlerTests.cs" />
+    <Compile Include="UserManagement\UserFacadeTests.cs" />
     <Compile Include="UserManagement\UserTest.cs" />
     <Compile Include="StudyManagement\CriteriaFactoryTest.cs" />
   </ItemGroup>

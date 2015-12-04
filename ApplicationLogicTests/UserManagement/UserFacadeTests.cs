@@ -16,7 +16,7 @@ namespace ApplicationLogicTests.UserManagement
     /// Test for the userHandler class
     /// </summary>
     [TestClass]
-    public class UserHandlerTests
+    public class UserFacadeTests
     {
         [TestInitialize]
         public void Initialize()
