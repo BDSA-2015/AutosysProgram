@@ -37,9 +37,8 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+    <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -47,6 +46,10 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.0.5797.27534, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.0.0\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -98,31 +101,28 @@
     <Compile Include="AutosysServer\Mapping\AutoMapperConfigurator.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\PaperManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\UserManagementStorageProfile.cs" />
-    <Compile Include="ExportManagement\CsvFile.cs" />
-    <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
-    <Compile Include="ExportManagement\Interfaces\IExportFile.cs" />
-    <Compile Include="ExportManagement\PdfFile.cs" />
-    <Compile Include="PaperManagement\BibTexFile.cs" />
-    <Compile Include="PaperManagement\BibtexParser.cs" />
-    <Compile Include="PaperManagement\FieldTag.cs" />
-    <Compile Include="PaperManagement\Interfaces\IChecker.cs" />
-    <Compile Include="PaperManagement\Interfaces\IFile.cs" />
-    <Compile Include="PaperManagement\Interfaces\ITag.cs" />
-    <Compile Include="PaperManagement\Interfaces\IValidator.cs" />
-    <Compile Include="PaperManagement\PaperHandler.cs" />
-    <Compile Include="PaperManagement\ItemTag.cs" />
-    <Compile Include="PaperManagement\TagChecker.cs" />
+    <Compile Include="PaperManagement\Bibtex\BibtexParser.cs" />
+    <Compile Include="PaperManagement\Bibtex\DefaultPaperChecker.cs" />
+    <Compile Include="PaperManagement\Bibtex\FieldChecker.cs" />
+    <Compile Include="PaperManagement\Bibtex\FieldValidator.cs" />
+    <Compile Include="PaperManagement\Bibtex\Paper.cs" />
+    <Compile Include="PaperManagement\Bibtex\PaperValidator.cs" />
+    <Compile Include="PaperManagement\Interfaces\IPaperChecker.cs" />
     <Compile Include="PaperManagement\Interfaces\IParser.cs" />
-    <Compile Include="PaperManagement\TagValidator.cs" />
+    <Compile Include="PaperManagement\Interfaces\IFieldChecker.cs" />
+    <Compile Include="PaperManagement\PaperHandler.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
     <Compile Include="ProtocolManagement\ProtocolHandler.cs" />
-    <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ExportManagement\CsvFile.cs" />
+    <Compile Include="ExportManagement\PdfFile.cs" />
     <Compile Include="ExportManagement\CSVConverter.cs" />
     <Compile Include="ExportManagement\ExportHandler.cs" />
     <Compile Include="ExportManagement\ExportType.cs" />
     <Compile Include="ExportManagement\PDFConverter.cs" />
+    <Compile Include="ExportManagement\Interfaces\IExportFile.cs" />
+    <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
     <Compile Include="StudyManagement\BibTexFileSearcher.cs" />
     <Compile Include="StorageFasade\CriteriaFacade.cs" />
     <Compile Include="StorageFasade\DatafieldFacade.cs" />

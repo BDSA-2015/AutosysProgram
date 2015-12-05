@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using SystematicStudyService.Controllers;
+using WebApi.Controllers;
 
 namespace SystematicStudyService.Models
 {

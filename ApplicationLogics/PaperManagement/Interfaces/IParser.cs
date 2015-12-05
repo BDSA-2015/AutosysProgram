@@ -1,11 +1,18 @@
-﻿// IParser.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
-// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
-// Jacob Mullit Møiniche.
+﻿using System.Collections.Generic;
+using ApplicationLogics.PaperManagement.Bibtex;
 
 namespace ApplicationLogics.PaperManagement.Interfaces
 {
+    /// <summary>
+    /// Interface for Parsers used to parsing files into the program
+    /// </summary>
     public interface IParser
     {
-        IFile Parse(string data);
+        /// <summary>
+        /// Method for parsing imported files as strings
+        /// </summary>
+        /// <param name="data">The file to be parsed</param>
+        /// <returns>A list of Papers holding information according to the parsed file</returns>
+        List<Paper> Parse(string data);
     }
 }

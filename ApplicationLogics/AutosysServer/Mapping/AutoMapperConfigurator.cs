@@ -32,9 +32,11 @@ namespace ApplicationLogics.AutosysServer.Mapping
                 //ApplicationLogic Profiles
                 cfg.AddProfile(new UserManagementStorageProfile());
 
-
                 //WebApi Profiles
                 cfg.AddProfile(new UserAndTeamDTOProfile());
+
+                //PaperManagement Profiles
+                cfg.AddProfile(new PaperManagementStorageProfile());
 
             });
         }

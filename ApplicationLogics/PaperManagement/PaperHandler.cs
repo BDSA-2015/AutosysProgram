@@ -1,50 +1,51 @@
-﻿// PaperHandler.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
-// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
-// Jacob Mullit Møiniche.
-
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.PaperManagement.Interfaces;
+using ApplicationLogics.StorageFasade;
+using NUnit.Framework.Constraints;
 
 namespace ApplicationLogics.PaperManagement
 {
-
     /// <summary>
-    /// This class is used to create papers based on e.g. a BibTex file or other document types. 
+    /// Class for handling all functionality associated with creating and importing Papers into the program
     /// </summary>
     public class PaperHandler
     {
-        // Used to generate Bibtex files later stored as a Paper
-        private IParser parser { get; set; }
+        //Used to generate Bibtex files, which later is stored as Papers in the database
+        private IParser _parser;
+        private PaperFacade _paperFacade; 
 
-        /// <summary>
-        /// Create a empty Paper.
-        /// </summary>
-        public Paper CreatePaper()
+        public PaperHandler(IParser parser, PaperFacade paperFacade)
         {
-            throw new NotImplementedException();
+            _parser = parser;
+            _paperFacade = paperFacade;
         }
 
         /// <summary>
-        /// Create a Paper based on a BibTex file.
+        /// Creates a List of Paper based on an imported BibTex file which is parsed to the program.
         /// </summary>
-        /// <param name="file"></param>
-        public Paper CreatePaper(BibTexFile file)
+        /// <param name="file">The bibtex file which is parsed to the program</param>
+        /// <returns>A List of Papers which was valid for parsing</returns>
+        public List<int> ImportPaper(string file)
         {
-            throw new NotImplementedException();
-        }
+            if (string.IsNullOrEmpty(file))
+            {
+                throw new ArgumentNullException("The given bibtex file cannot be null nor empty");
+            }
 
-        /// <summary>
-        /// Create a Paper based on a document
-        /// </summary>
-        /// <param name="document">
-        /// Document used to create a paper. 
-        /// </param>
-        /// <returns> 
-        /// Paper based on an automated analysis of the file
-        /// </returns>
-        public Paper LoadFile(string document)
-        {
-            throw new NotImplementedException();
+            var paperIds = new List<int>();
+
+            foreach (var paper in _parser.Parse(file))
+            {
+                paperIds.Add(_paperFacade.Create(paper));
+            }
+
+            return paperIds;
         }
+       
     }
 }
