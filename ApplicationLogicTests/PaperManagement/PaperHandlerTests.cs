@@ -20,6 +20,7 @@ namespace ApplicationLogicTests.PaperManagement
         public void Initialize()
         {
             mockRepo = new Mock<IRepository<StoredPaper>>();
+            AutoMapper.Mapper.CreateMap<Paper, StoredPaper>();
         }
 
         /// <summary>
@@ -43,7 +44,6 @@ namespace ApplicationLogicTests.PaperManagement
 
             var paper = new Paper("article", fieldTypes, fieldValues);
 
-            AutoMapper.Mapper.CreateMap<Paper, StoredPaper>();
             var mapperPaper = AutoMapper.Mapper.Map<StoredPaper>(paper);
             mockRepo.Setup(r => r.Create(mapperPaper)).Returns(mapperPaper.Id);
 
