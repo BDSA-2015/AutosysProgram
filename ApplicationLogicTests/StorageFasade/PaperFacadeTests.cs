@@ -1,16 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ApplicationLogics.StorageFasade;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ApplicationLogics.PaperManagement.Bibtex;
+using ApplicationLogics.StorageFasade;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Storage.Models;
 using Storage.Repository;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace ApplicationLogics.StorageFasade.Tests
+namespace ApplicationLogicTests.StorageFasade
 {
     [TestClass()]
     public class PaperFacadeTests
@@ -26,21 +24,24 @@ namespace ApplicationLogics.StorageFasade.Tests
         }
 
         /// <summary>
-        /// Test the creation of a single paper, by mocking the database which should store the paper
+        /// Test the creation of a single paper, by checking the paperId 
         /// </summary>
         [TestMethod()]
         public void CreatePaperTest()
         {
             //Arrange
+            AutoMapper.Mapper.CreateMap<Paper, StoredPaper>();
             var storedPaper = new StoredPaper() {Id = 0, Type = "article"};
             mockRepo.Setup(r => r.Create(storedPaper)).Returns(storedPaper.Id);
-            var fields = new Dictionary<string, string>()
-            {
-                {"author", "Will Nance" },
-                {"year", "1905" },
-                {"title", "My book" }
-            };
-            var paper = new Paper("article", fields);
+            var fieldTypes = new List<string>();
+            fieldTypes.Add("author");
+            fieldTypes.Add("title");
+            fieldTypes.Add("year");
+            var fieldValues = new List<string>();
+            fieldValues.Add("Will BeGood");
+            fieldValues.Add("1905");
+           
+            var paper = new Paper("article", fieldTypes, fieldValues);
 
             //Act
             var paperId = _facade.Create(paper);
@@ -64,7 +65,12 @@ namespace ApplicationLogics.StorageFasade.Tests
         [TestMethod()]
         public void DeleteTest()
         {
-            throw new NotImplementedException();
+            //Arrange
+           
+            //Act
+            
+            //Assert
+            
         }
 
         [TestMethod()]

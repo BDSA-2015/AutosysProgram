@@ -13,13 +13,16 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         {
             //Arrange
             DefaultPaperChecker checker = new DefaultPaperChecker();
-            var fields = new Dictionary<string, string>
-            {
-                {"year", "2015"},
-                {"year", "William McSomething"},
-                {"year", "Insatiate Your Dreams"}
-            };
-            var paper = new Paper("year", fields);
+            var fieldTypes = new List<string>();
+            fieldTypes.Add("author");
+            fieldTypes.Add("title");
+            fieldTypes.Add("year");
+            var fieldValues = new List<string>();
+            fieldValues.Add("William McSomething");
+            fieldValues.Add("Insatiate Your Dreams");
+            fieldValues.Add("2015");
+            
+            var paper = new Paper("year", fieldTypes, fieldValues);
 
             //Assert
             Assert.IsTrue(checker.Validate(paper));
@@ -30,8 +33,11 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         {
             //Arrange
             DefaultPaperChecker checker = new DefaultPaperChecker();
-            var fields = new Dictionary<string, string> {{"author", "\nInvalid"}};
-            var paper = new Paper("phdthesis", fields);
+            var fieldTypes = new List<string>();
+            fieldTypes.Add("author");
+            var fieldValues = new List<string>();
+            fieldValues.Add("\nInvalid");
+            var paper = new Paper("phdthesis", fieldTypes, fieldValues);
 
             //Assert
             Assert.IsFalse(checker.Validate(paper));

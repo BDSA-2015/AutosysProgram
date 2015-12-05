@@ -32,14 +32,18 @@ namespace ApplicationLogicTests.PaperManagement
             var validator = new PaperValidator();
             var parser = new BibtexParser(validator);
 
-            var fields = new Dictionary<string, string>()
-            {
-                {"author", "Will Nance" },
-                {"year", "1905" },
-                {"title", "My book" }
-            };
-            var paper = new Paper("article", fields);
+            var fieldTypes = new List<string>();
+            fieldTypes.Add("author");
+            fieldTypes.Add("title");
+            fieldTypes.Add("year");
+            var fieldValues = new List<string>();
+            fieldValues.Add("Will Newman");
+            fieldValues.Add("My book");
+            fieldValues.Add("1905");
 
+            var paper = new Paper("article", fieldTypes, fieldValues);
+
+            AutoMapper.Mapper.CreateMap<Paper, StoredPaper>();
             var mapperPaper = AutoMapper.Mapper.Map<StoredPaper>(paper);
             mockRepo.Setup(r => r.Create(mapperPaper)).Returns(mapperPaper.Id);
 
@@ -65,29 +69,35 @@ namespace ApplicationLogicTests.PaperManagement
             var validator = new PaperValidator();
             var parser = new BibtexParser(validator);
 
-            var fields1 = new Dictionary<string, string>()
-            {
-                {"author", "Xavier D ecoret"},
-                {"title", "PyBiTex"},
-                {"year", "2003"},
-            };
-            var fields2 = new Dictionary<string, string>()
-            {
-                {"author", "Xavier D ecoret"},
-                {"title", "A {bunch {of} braces {in}} title"},
-                {"year", "2003"}
-            };
-            var fields3 = new Dictionary<string, string>()
-            {
-                {"author", "Simon the saint Templar"},
-                {"title", "Something nice"},
-                {"year", "2012"}
-            };
-
+            var fieldTypes1 = new List<string>();
+            fieldTypes1.Add("author");
+            fieldTypes1.Add("title");
+            fieldTypes1.Add("year");
+            var fieldValues1 = new List<string>();
+            fieldValues1.Add("Xavier D ecoret");
+            fieldValues1.Add("PyBiTex");
+            fieldValues1.Add("2003");
+            var fieldTypes2 = new List<string>();
+            fieldTypes2.Add("author");
+            fieldTypes2.Add("title");
+            fieldTypes2.Add("year");
+            var fieldValues2 = new List<string>();
+            fieldValues2.Add("Xavier D ecoret");
+            fieldValues2.Add("A {bunch {of} braces {in}} title");
+            fieldValues2.Add("1700");
+            var fieldTypes3 = new List<string>();
+            fieldTypes3.Add("author");
+            fieldTypes3.Add("title");
+            fieldTypes3.Add("year");
+            var fieldValues3 = new List<string>();
+            fieldValues3.Add("Simon the saint Templar");
+            fieldValues3.Add("Something nice");
+            fieldValues3.Add("700");
+            
             //Testing papers
-            var paper1 = new Paper("article", fields1);
-            var paper2 = new Paper("article", fields2);
-            var paper3 = new Paper("article", fields3);
+            var paper1 = new Paper("article", fieldTypes1, fieldValues1);
+            var paper2 = new Paper("article", fieldTypes2, fieldValues2);
+            var paper3 = new Paper("article", fieldTypes3, fieldValues3);
 
             //paper1 mock setup
             var mapperPaper1 = AutoMapper.Mapper.Map<StoredPaper>(paper1);

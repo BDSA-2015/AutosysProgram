@@ -46,8 +46,8 @@ namespace ApplicationLogics.PaperManagement.Bibtex
                 {
                     string key = match.Groups[2].Value;
                     string type = match.Groups[1].Value;
-                    Dictionary<string, string> fields = ParsePaper(match.Groups[3].Value);
-                    var paper = new Paper(type, fields);
+                    List<List<string>> fields = ParsePaper(match.Groups[3].Value);
+                    var paper = new Paper(type, fields[0], fields[1]);
                     paper.ResourceRef = key;
 
                     if (!_validator.IsPaperValid(paper))
@@ -71,13 +71,13 @@ namespace ApplicationLogics.PaperManagement.Bibtex
         /// </summary>
         /// <param name="fieldData">Bibtex field data associated with a specific bibtex item</param>
         /// <returns></returns>
-        private Dictionary<string, string> ParsePaper(string fieldData)
+        private List<List<string>> ParsePaper(string fieldData)
         {
             //Most of the code is from AS1 in BDSA 2015
             var matchCollection = _fieldRegex.Matches(fieldData);
 
             
-            var fields = new Dictionary<string, string>();
+            var fields = new List<List<string>>();
 
             // Iterate over every field.
             foreach (Match match in matchCollection)
@@ -85,10 +85,11 @@ namespace ApplicationLogics.PaperManagement.Bibtex
                 try
                 {
                     // Get the field type and value.
-                    var key = match.Groups[1].Value;
+                    var type = match.Groups[1].Value;
                     var value = match.Groups[2].Value;
 
-                    fields.Add(key, value);
+                    fields[0].Add(type);
+                    fields[1].Add(value);
                 }
                 catch (ArgumentException e)
                 {

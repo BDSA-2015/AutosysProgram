@@ -22,7 +22,12 @@ namespace ApplicationLogics.StorageFasade
 
         public int Create(Paper item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                throw new ArgumentNullException("The given Paper cannot be null");
+            }
+            var storedPaper = AutoMapper.Mapper.Map<StoredPaper>(item);
+            return _papers.Create(storedPaper);
         }
 
         public void Delete(Paper item)

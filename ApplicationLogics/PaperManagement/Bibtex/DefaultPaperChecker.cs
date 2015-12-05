@@ -20,7 +20,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
         }
 
         /// <summary>
-        /// Method for validating a Paper for parsing in a BibtexParser
+        /// Method for validating a Paper for parsing in a BibtexParser. All fields must be valid for the Paper to pass
         /// </summary>
         /// <param name="paper">The Paper which is to be validated for parsing</param>
         /// <returns>True if the Paper is valid otherwise false</returns>
@@ -30,7 +30,14 @@ namespace ApplicationLogics.PaperManagement.Bibtex
             {
                 throw new ArgumentNullException("The given Paper cannot be null");
             }
-                return paper.Fields.All(field => _validator.IsFieldValid(field.Value, field.Key));
+            for (int i = 0; i < paper.FieldTypes.Count; i++)
+            {
+                if (!_validator.IsFieldValid(paper.FieldTypes.ElementAt(i), paper.FieldValues.ElementAt(i)))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

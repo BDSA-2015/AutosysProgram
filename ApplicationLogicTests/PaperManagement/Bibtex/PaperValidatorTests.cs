@@ -14,13 +14,15 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         {
             //Arrange
             var validator = new PaperValidator();
-            var fields = new Dictionary<string, string>()
-            {
-                {"author", "Professor Clever"},
-                {"year", "2015"},
-                {"title", "How to see sharp" }
-            };
-            var paper = new Paper("article", fields);
+            var fieldTypes = new List<string>();
+            fieldTypes.Add("author");
+            fieldTypes.Add("title");
+            fieldTypes.Add("year");
+            var fieldValues = new List<string>();
+            fieldValues.Add("Professor Clever");
+            fieldValues.Add("How to see sharp");
+            fieldValues.Add("2015");
+            var paper = new Paper("article", fieldTypes, fieldValues);
 
             //Assert
             Assert.IsTrue(validator.IsPaperValid(paper));
@@ -31,12 +33,14 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         {
             //Arrange
             var validator = new PaperValidator();
-            var fields = new Dictionary<string, string>()
-            {
-                {"year", "2015"},
-                {"booktitle", "How to see sharp" }
-            };
-            var paper = new Paper("article", fields);
+            var fieldTypes = new List<string>();
+            fieldTypes.Add("title");
+            fieldTypes.Add("year");
+            var fieldValues = new List<string>();
+            fieldValues.Add("How to see sharp");
+            fieldValues.Add("2015");
+          
+            var paper = new Paper("article", fieldTypes, fieldValues);
 
             //Assert
             Assert.IsFalse(validator.IsPaperValid(paper));
@@ -47,12 +51,14 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         {
             //Arrange
             var validator = new PaperValidator();
-            var fields = new Dictionary<string, string>()
-            {
-                {"author", "Professor Clever"},
-                {"year", "2015"},
-            };
-            var paper = new Paper("article", fields);
+            var fieldTypes = new List<string>();
+            fieldTypes.Add("author");
+            fieldTypes.Add("year");
+            var fieldValues = new List<string>();
+            fieldValues.Add("Professor Clever");
+            fieldValues.Add("2015");
+           
+            var paper = new Paper("article", fieldTypes, fieldValues);
 
             //Assert
             Assert.IsFalse(validator.IsPaperValid(paper));
@@ -63,12 +69,14 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         {
             //Arrange
             var validator = new PaperValidator();
-            var fields = new Dictionary<string, string>()
-            {
-                {"author", "Professor Clever"},
-                {"booktitle", "How to see sharp" }
-            };
-            var paper = new Paper("article", fields);
+            var fieldTypes = new List<string>();
+            fieldTypes.Add("author");
+            fieldTypes.Add("title");
+            var fieldValues = new List<string>();
+            fieldValues.Add("Professor Clever");
+            fieldValues.Add("How to see sharp");
+            
+            var paper = new Paper("article", fieldTypes, fieldValues);
 
             //Assert
             Assert.IsFalse(validator.IsPaperValid(paper));

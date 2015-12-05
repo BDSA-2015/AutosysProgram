@@ -13,10 +13,12 @@ namespace ApplicationLogics.PaperManagement.Bibtex
         public string Type;
 
         /// <summary>
-        /// A collection of the bibtex fields and their associated values in the bibliographic item (e.g. Author, Year...)
-        /// The collection only holds information associated with the default bibtex fields
+        /// A collection of the bibtex field types (e.g. Author, Year...)
+        /// The collection only holds information associated with the default bibtex field types
         /// </summary>
-        public readonly IReadOnlyDictionary<string, string> Fields;
+        public readonly IReadOnlyCollection<string> FieldTypes;
+
+        public readonly IReadOnlyCollection<string> FieldValues; 
 
         /// <summary>
         /// A reference to the resource associated with this Paper (e.g. A PDF, or CSV file...)
@@ -27,12 +29,14 @@ namespace ApplicationLogics.PaperManagement.Bibtex
         /// Constructor for creating a Paper based on a bibtex file entry type and fields
         /// </summary>
         /// <param name="type">The type of Paper which is associated with the entry type of the bibtex file it is created from</param>
-        /// <param name="fields">Default fields which are being set depending on 
+        /// <param name="fieldTypes">Collection of bibtex fieldtypes from an imported bibtex file
         /// which fields are contained in the associated bibtex file</param>
-        public Paper(string type, IReadOnlyDictionary<string, string> fields)
+        /// <param name="fieldValues">Collection of bibtex field values associated with a field type from an imported bibtex file</param>
+        public Paper(string type, IReadOnlyCollection<string> fieldTypes, IReadOnlyCollection<string> fieldValues)
         {
             Type = type;
-            Fields = fields;
+            FieldTypes = fieldTypes;
+            FieldValues = fieldValues;
         }
     }
 

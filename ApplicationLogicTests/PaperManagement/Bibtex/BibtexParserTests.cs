@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using ApplicationLogics.PaperManagement.Bibtex;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
@@ -30,14 +31,18 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             //Arrange
             var file = Properties.Resources.valid1;
             var fileString = System.Text.Encoding.Default.GetString(file);
+            var fieldTypes = new List<string>();
+            var fieldValues = new List<string>();
 
             //Act
             var papers = _parser.Parse(fileString);
+            fieldTypes.Add(field);
+            fieldValues.Add(data);
 
             //Assert
             var validPaper = papers[0];
 
-            Assert.AreEqual(validPaper.Fields[field], data);
+            Assert.IsTrue(field == fieldTypes.ElementAt(0) && data == fieldValues.ElementAt(1));
         }
 
         [TestMethod()]
