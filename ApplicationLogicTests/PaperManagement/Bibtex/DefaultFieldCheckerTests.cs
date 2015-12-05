@@ -4,9 +4,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApplicationLogicTests.PaperManagement.Bibtex
 {
+    /// <summary>
+    /// Class for testing the checking of bibtex fields using the field checker 
+    /// predefined in the system
+    /// </summary>
     [TestClass()]
     public class DefaultFieldCheckerTests
     {
+        /// <summary>
+        /// Tests bibtex field syntaxes which should be valid
+        /// </summary>
         [TestMethod()]
         public void ValidateValidInputTest()
         {
@@ -28,6 +35,11 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             Assert.IsTrue(checker.Validate(bibtexInput6));
         }
 
+        /// <summary>
+        /// Tests bibtex fields containing new lines
+        /// Bibtex files with new lines in the beginning or middle of text
+        /// should be invalid
+        /// </summary>
         [TestMethod()]
         public void ValidateNewLineInputTest()
         {
@@ -41,6 +53,9 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             Assert.IsFalse(checker.Validate(bibtexInput2));
         }
 
+        /// <summary>
+        /// Tests empty string bibtex fields which should be invalid
+        /// </summary>
         [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ValidateEmptyInputTest()
@@ -53,6 +68,9 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             Assert.IsFalse(checker.Validate(bibtexInput1));
         }
 
+        /// <summary>
+        /// Tests null input which should be invalid
+        /// </summary>
         [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ValidateNullInputTest()

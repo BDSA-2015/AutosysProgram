@@ -11,6 +11,9 @@ using Storage.Repository;
 
 namespace ApplicationLogicTests.PaperManagement
 {
+    /// <summary>
+    /// Class for testing the PaperHandler which handles import of papers
+    /// </summary>
     [TestClass()]
     public class PaperHandlerTests
     {

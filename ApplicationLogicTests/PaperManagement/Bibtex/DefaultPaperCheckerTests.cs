@@ -5,9 +5,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApplicationLogicTests.PaperManagement.Bibtex
 {
+    /// <summary>
+    /// Class for testing the validation of Papers through the predefined 
+    /// paper checker
+    /// </summary>
     [TestClass()]
     public class DefaultPaperCheckerTests
     {
+        /// <summary>
+        /// Tests papers which should hold a valid bibtex type and valid fields
+        /// </summary>
         [TestMethod()]
         public void ValidateValidInputTest()
         {
@@ -28,6 +35,9 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             Assert.IsTrue(checker.Validate(paper));
         }
 
+        /// <summary>
+        /// Tests papers which should hold an invalid bibtex type and invalid fields
+        /// </summary>
         [TestMethod()]
         public void ValidateInvalidFieldTest()
         {

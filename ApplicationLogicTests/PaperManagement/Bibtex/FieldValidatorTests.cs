@@ -4,9 +4,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApplicationLogicTests.PaperManagement.Bibtex
 {
+    /// <summary>
+    /// Class for testing the field validator for bibtex fields
+    /// </summary>
     [TestClass()]
     public class FieldValidatorTests
     {
+        /// <summary>
+        /// Tests bibtex fields which should be valid using a field validator
+        /// with a default field checker.
+        /// </summary>
         [TestMethod()]
         public void IsFieldValidDefaultTest()
         {
@@ -21,6 +28,10 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
 
         }
 
+        /// <summary>
+        /// Tests bibtex fields which should be invalid using a field validator
+        /// with a default field checker.
+        /// </summary>
         [TestMethod()]
         public void IsFieldInvalidDefaultTest()
         {
@@ -35,6 +46,9 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
 
         }
 
+        /// <summary>
+        /// Tests bibtex fields with empty information which should be invalid
+        /// </summary>
         [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
         public void IsFieldValidEmptyDefaultTest()
@@ -47,6 +61,9 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
 
         }
 
+        /// <summary>
+        /// Tests for null input which should be invalid
+        /// </summary>
         [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
         public void IsFieldValidNullDefaultTest()

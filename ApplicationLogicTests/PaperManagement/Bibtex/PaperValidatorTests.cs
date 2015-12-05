@@ -5,10 +5,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApplicationLogicTests.PaperManagement.Bibtex
 {
+    /// <summary>
+    /// Class for testing the validation of Papers
+    /// </summary>
     [TestClass()]
     public class PaperValidatorTests
     {
-
+        /// <summary>
+        /// Tests the validation of a Paper with the minimum number of
+        /// bibtex fields which should be valid
+        /// </summary>
         [TestMethod()]
         public void IsPaperValidRequiredFieldsTest()
         {
@@ -28,6 +34,10 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             Assert.IsTrue(validator.IsPaperValid(paper));
         }
 
+        /// <summary>
+        /// Tests the validation of a paper which should be invalid
+        /// because of a missing author bibtex field
+        /// </summary>
         [TestMethod()]
         public void IsPaperValidMissingAuthorTest()
         {
@@ -46,6 +56,10 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             Assert.IsFalse(validator.IsPaperValid(paper));
         }
 
+        /// <summary>
+        /// Tests the validation of a paper which should be invalid
+        /// because of a missing title bibtex field
+        /// </summary>
         [TestMethod()]
         public void IsPaperValidMissingTitleTest()
         {
@@ -64,6 +78,10 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             Assert.IsFalse(validator.IsPaperValid(paper));
         }
 
+        /// <summary>
+        /// Tests the validation of a paper which should be invalid
+        /// because of a missing year bibtex field
+        /// </summary>
         [TestMethod()]
         public void IsPaperValidMissingYearTest()
         {
@@ -82,6 +100,9 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             Assert.IsFalse(validator.IsPaperValid(paper));
         }
 
+        /// <summary>
+        /// Tests null input which should be invalid
+        /// </summary>
         [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
         public void IsPaperValidNullTest()

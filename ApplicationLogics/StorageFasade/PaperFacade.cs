@@ -13,6 +13,7 @@ namespace ApplicationLogics.StorageFasade
 {
     public class PaperFacade : IFacade<Paper>
     {
+        //TODO Write purpose of class
         private IRepository<StoredPaper> _papers;
 
         public PaperFacade(IRepository<StoredPaper> papers)

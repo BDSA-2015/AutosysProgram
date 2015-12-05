@@ -9,6 +9,9 @@ using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace ApplicationLogicTests.PaperManagement.Bibtex
 {
+    /// <summary>
+    /// Class for testing the parsing of bibtex files into the program
+    /// </summary>
     [TestClass()]
     public class BibtexParserTests
     {
@@ -20,6 +23,11 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             _parser = new BibtexParser(new PaperValidator());
         }
 
+        /// <summary>
+        /// Tests the parsing of a bibtex file using a default field checker
+        /// </summary>
+        /// <param name="field">The type of a bibtex field</param>
+        /// <param name="data">The data associated with a bibtex field</param>
         [TestCase("athor", "William, Funstuff")]
         [TestCase("booktitle", "ITU student anno 2015")]
         [TestCase("title", "A student's thoughts on programming")]
@@ -40,11 +48,12 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             fieldValues.Add(data);
 
             //Assert
-            var validPaper = papers[0];
-
             Assert.IsTrue(field == fieldTypes.ElementAt(0) && data == fieldValues.ElementAt(1));
         }
 
+        /// <summary>
+        /// Tests the parsing of a bibtex file where the author field is missing
+        /// </summary>
         [TestMethod()]
         [ExpectedException(typeof(InvalidDataException))]
         public void ParseDefaultValidatorMissingAuthorTypeInputTest()
@@ -56,6 +65,9 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             var papers = _parser.Parse(invalidFile);
         }
 
+        /// <summary>
+        /// Tests the parsing of a bibtex file where the start @ tag is missing
+        /// </summary>
         [TestMethod()]
         [ExpectedException(typeof(InvalidDataException))]
         public void ParseDefaultValidatorMissingStartInputTest()
@@ -66,6 +78,9 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             var papers = _parser.Parse(invalidFile);
         }
 
+        /// <summary>
+        /// Tests the parsing of a bibtex file where the enclosing brackets are missing
+        /// </summary>
         [TestMethod()]
         [ExpectedException(typeof(InvalidDataException))]
         public void ParseDefaultValidatorMissingBracketTypeInputTest()
