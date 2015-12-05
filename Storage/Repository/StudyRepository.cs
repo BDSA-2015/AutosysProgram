@@ -14,12 +14,12 @@ namespace Storage.Repository
     /// </summary>
     public class StudyRepository : IRepository<StoredStudy>
     {
-        public int Create(StoredStudy item)
+        public int Create(StoredStudy user)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(StoredStudy item)
+        public void Delete(StoredStudy user)
         {
             throw new NotImplementedException();
         }
@@ -34,7 +34,7 @@ namespace Storage.Repository
             throw new NotImplementedException();
         }
 
-        public void Update(StoredStudy item)
+        public void Update(StoredStudy updatedUser)
         {
             throw new NotImplementedException();
         }

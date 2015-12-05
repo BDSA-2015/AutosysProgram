@@ -13,10 +13,10 @@ namespace Storage.Repository
     /// <typeparam name="T"></typeparam>
     public interface IRepository<T> where T : IEntity
     {
-        int Create(T item);
+        int Create(T user);
         T Read(int id);
         IEnumerable<T> Read();
-        void Update(T item);
-        void Delete(T item);
+        void Update(T updatedUser);
+        void Delete(T user);
     }
 }

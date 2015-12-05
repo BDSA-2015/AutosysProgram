@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using Storage.Models;
 using StorageTests;
 
@@ -19,29 +21,46 @@ namespace Storage.Repository
             _context = context;
         }
 
-        public int Create(StoredUser item)
+        public int Create(StoredUser user)
         {
-            throw new NotImplementedException();
+            _context.Users.Add(user);
+            _context.SaveChanges();
+            return user.Id;
         }
 
-        public void Delete(StoredUser item)
+        public void Delete(StoredUser user)
         {
-            throw new NotImplementedException();
+            _context.Users.Remove(user);
+            _context.SaveChanges();
         }
 
         public IEnumerable<StoredUser> Read()
         {
-            throw new NotImplementedException();
+            return _context.Users.ToList();
         }
 
         public StoredUser Read(int id)
         {
-            throw new NotImplementedException();
+            return _context.Users.Find(1);
         }
 
-        public void Update(StoredUser item)
+        public void Update(StoredUser updatedUser)
         {
-            throw new NotImplementedException();
+            var entity = _context.Users.Find(updatedUser.Id);
+
+            if (entity != null)
+            {
+                entity.Name = updatedUser.Name;
+                entity.MetaData = updatedUser.MetaData;
+            }
+
+            /* Entry not mockable
+            _context.Users.Attach(updatedUser);
+            var entry = _context.Entry(updatedUser);
+            entry.State = EntityState.Modified;
+            */ 
+  
+            _context.SaveChanges();
         }
     }
 }

@@ -14,12 +14,12 @@ namespace Storage.Repository
     /// </summary>
     public class TeamRepository : IRepository<StoredTeam>
     {
-        public int Create(StoredTeam item)
+        public int Create(StoredTeam user)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(StoredTeam item)
+        public void Delete(StoredTeam user)
         {
             throw new NotImplementedException();
         }
@@ -34,7 +34,7 @@ namespace Storage.Repository
             throw new NotImplementedException();
         }
 
-        public void Update(StoredTeam item)
+        public void Update(StoredTeam updatedUser)
         {
             throw new NotImplementedException();
         }

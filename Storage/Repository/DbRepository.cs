@@ -19,11 +19,11 @@ namespace Storage.Repository
             _dbContext = context;
         }
 
-        public int Create(T item)
+        public int Create(T user)
         {
-            _dbContext.Set<T>().Add(item);
+            _dbContext.Set<T>().Add(user);
             _dbContext.SaveChanges();
-            return item.Id;
+            return user.Id;
         }
 
         public T Read(int id)
@@ -36,15 +36,15 @@ namespace Storage.Repository
             return _dbContext.Set<T>();
         }
 
-        public void Update(T item)
+        public void Update(T updatedUser)
         {
-            _dbContext.Set<T>().Attach(item);
-            _dbContext.Entry<T>(item).State = EntityState.Modified;
+            _dbContext.Set<T>().Attach(updatedUser);
+            _dbContext.Entry<T>(updatedUser).State = EntityState.Modified;
         }
 
-        public void Delete(T item)
+        public void Delete(T user)
         {
-            _dbContext.Set<T>().Remove(item);
+            _dbContext.Set<T>().Remove(user);
             _dbContext.SaveChanges();
         }
 

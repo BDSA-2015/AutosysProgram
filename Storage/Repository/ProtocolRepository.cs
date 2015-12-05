@@ -13,7 +13,7 @@ namespace Storage.Repository
     /// </summary>
     public class ProtocolRepository : IRepository<StoredProtocol>
     {
-        public int Create(StoredProtocol item)
+        public int Create(StoredProtocol user)
         {
             throw new NotImplementedException();
         }
@@ -28,12 +28,12 @@ namespace Storage.Repository
             throw new NotImplementedException();
         }
 
-        public void Update(StoredProtocol item)
+        public void Update(StoredProtocol updatedUser)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(StoredProtocol item)
+        public void Delete(StoredProtocol user)
         {
             throw new NotImplementedException();
         }
