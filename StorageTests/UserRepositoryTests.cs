@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Linq;
-using Storage;
 using Storage.Models;
 using Storage.Repository;
 
@@ -33,7 +30,8 @@ namespace StorageTests
 
             _data = new List<StoredUser>
             {
-                new StoredUser { Id = 1, Name = "William Parker", MetaData = "Researcher" }
+                new StoredUser { Id = 1, Name = "William Parker", MetaData = "Researcher" },
+                new StoredUser { Id = 2, Name = "Trudy Jones", MetaData = "Researcher" }
             };
 
             _set = MockUtility.CreateMockDbSet(_data, u => u.Id);
@@ -53,10 +51,83 @@ namespace StorageTests
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void Create_SaveChanges_IsCalled()
         {
-
+            var user = new StoredUser();
+            _repository.Create(user);
+            _context.Verify(r => r.SaveChanges(), Times.Once);
         }
+
+        [TestMethod]
+        public void Create_ReturnsId_NewId()
+        {
+            var user = new StoredUser { Name = "Steve", MetaData = "Validator" };
+            var id = _repository.Create(user);
+            Assert.AreEqual(3, id);
+        }
+
+        [TestMethod]
+        public void Update_SaveChanges_IsCalled()
+        {
+            var user = new StoredUser { Id = 1 };
+            _repository.Update(user);
+            _context.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod]
+        public void Update_NewName()
+        {
+            var user = new StoredUser {Id = 1, Name = "User"};
+            _repository.Update(user);
+            var researcher = _data[0];
+            Assert.AreEqual("User", researcher.Name);
+        }
+
+        [TestMethod]
+        public void Update_NewMetaData()
+        {
+            var user = new StoredUser { Id = 1, MetaData = "Validator" };
+            _repository.Update(user);
+            var researcher = _data[0];
+            Assert.AreEqual("Validator", researcher.MetaData);
+        }
+
+        [TestMethod]
+        public void Delete_RemovesUser()
+        {
+            var user = _data[0];
+            _repository.Delete(user);
+            Assert.IsFalse(_data.Any(u => u.Id == 1));
+        }
+
+        [TestMethod]
+        public void Delete_SaveChanges_IsCalled()
+        {
+            var user = _data[0];
+            _repository.Delete(user);
+            _context.Verify(repo => repo.SaveChanges(), Times.Once);
+        }
+
+        /*
+        [TestMethod]
+        public void GetById()
+        {
+            var secondUser = _repository.Get(1);
+            Assert.AreEqual("William Parker", secondUser.Name);
+        }
+        */
+
+        /*
+        [TestMethod]
+        public void GetByName()
+        {
+            using (var repository = new UserRepository(_context.Object))
+            {
+                var roles = repository.Get('W').ToList();
+                Assert.AreEqual("William Parker", roles[0].Name);
+            }
+        }
+        */
 
     }
 
