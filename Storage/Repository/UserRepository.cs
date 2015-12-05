@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Storage.Entities;
 using Storage.Models;
+using StorageTests;
 
 namespace Storage.Repository
 {
@@ -12,8 +9,16 @@ namespace Storage.Repository
     /// <summary>
     /// This class outlines the CRUD operations used to store users in the database. 
     /// </summary>
-    public class UserRepository : IRepository<StoredUser> 
+    public class UserRepository : IRepository<StoredUser>
     {
+
+        private readonly IUserContext _context;
+
+        public UserRepository(IUserContext context)
+        {
+            _context = context;
+        }
+
         public int Create(StoredUser item)
         {
             throw new NotImplementedException();
