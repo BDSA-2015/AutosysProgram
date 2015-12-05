@@ -8,6 +8,10 @@ using Storage.Models;
 
 namespace Storage.Repository
 {
+
+    /// <summary>
+    /// This class outlines the CRUD operations used to store teams in the database. 
+    /// </summary>
     public class TeamRepository : IRepository<StoredTeam>
     {
         public int Create(StoredTeam item)

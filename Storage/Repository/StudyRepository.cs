@@ -8,6 +8,10 @@ using Storage.Models;
 
 namespace Storage.Repository
 {
+
+    /// <summary>
+    /// This class outlines the CRUD operations used to store Studies in the database. 
+    /// </summary>
     public class StudyRepository : IRepository<StoredStudy>
     {
         public int Create(StoredStudy item)

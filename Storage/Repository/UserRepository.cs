@@ -8,6 +8,10 @@ using Storage.Models;
 
 namespace Storage.Repository
 {
+
+    /// <summary>
+    /// This class outlines the CRUD operations used to store users in the database. 
+    /// </summary>
     public class UserRepository : IRepository<StoredUser> 
     {
         public int Create(StoredUser item)

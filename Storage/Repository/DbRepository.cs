@@ -7,7 +7,7 @@ namespace Storage.Repository
 
     /// <summary>
     /// This class implements the IRepository interface outlining the CRUD operations to be used in the database. 
-    /// These are used specifically on a given Dbcontext set in the main method in the Program class. 
+    /// These are used specifically on a given Dbcontext set in the AutoSysDbModel.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class DbRepository<T> : IRepository<T> where T : class, IEntity
