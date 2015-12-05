@@ -34,7 +34,7 @@ namespace ApplicationLogics.UserManagement.Utils
             return
                 team.Id>=0 &&
                 !string.IsNullOrWhiteSpace(team.Name) &&
-                !string.IsNullOrWhiteSpace(team.Metadata) &&
+                !string.IsNullOrWhiteSpace(team.MetaData) &&
                 (team.UserIDs.Length > 0);
         }
     }

@@ -24,7 +24,7 @@ namespace Storage.Models
         public int[] UserIDs { get; set; }
 
         [StringLength(400)]
-        public string Metadata { get; set; }
+        public string MetaData { get; set; }
 
     }
 

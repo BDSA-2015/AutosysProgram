@@ -2,6 +2,7 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using System;
 using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.UserManagement.Entities;
 
@@ -27,7 +28,12 @@ namespace ApplicationLogics.UserManagement.Utils
         /// <returns>validation of user information</returns>
         internal static bool ValidateEnteredUserInformation(User user)
         {
-            return !string.IsNullOrEmpty(user.Name) && !string.IsNullOrEmpty(user.Metadata);
+            return !string.IsNullOrEmpty(user.Name) && !string.IsNullOrEmpty(user.MetaData);
+        }
+
+        internal static bool ValidateId(int id)
+        {
+            return id < 0;
         }
     }
 }

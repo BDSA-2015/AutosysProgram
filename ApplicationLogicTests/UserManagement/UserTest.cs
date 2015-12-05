@@ -22,10 +22,10 @@ namespace ApplicationLogicTests.UserManagement
             const string expectedMeta = "metaData";
 
             //Act
-            var user = new User() {Name= expectedName, Metadata = expectedMeta};
+            var user = new User() {Name= expectedName, MetaData = expectedMeta};
 
             //Assert
-            Assert.AreEqual(expectedName,user.Name,expectedMeta,user.Metadata);
+            Assert.AreEqual(expectedName,user.Name,expectedMeta);
             
         }
     }

@@ -25,7 +25,7 @@ namespace ApplicationLogicTests.UserManagement
         public void ValidateEnteredDate_ValidData_Success_Test()
         {
             //Arrange
-            var validTeam = new Team {Id = 0, Name = "Name", Metadata = "Data", UserIDs = new[] {0, 1}};
+            var validTeam = new Team {Id = 0, Name = "Name", MetaData = "Data", UserIDs = new[] {0, 1}};
 
             //Act
             var result = TeamValidator.ValidateEnteredTeamData(validTeam);
@@ -41,7 +41,7 @@ namespace ApplicationLogicTests.UserManagement
         public void InvalidDataInTeamTest_invalidID_ReturnFalse_Test()
         {
             //Arrange
-            var validTeam = new Team {Id = -1, Name = "Name", Metadata = "Data", UserIDs = new[] {0, 1}};
+            var validTeam = new Team {Id = -1, Name = "Name", MetaData = "Data", UserIDs = new[] {0, 1}};
 
             //Act
             var result = TeamValidator.ValidateEnteredTeamData(validTeam);
@@ -58,7 +58,7 @@ namespace ApplicationLogicTests.UserManagement
         public void InvalidDataInTeamTest_EmptyString_ReturnFalse_Test()
         {
             //Arrange
-            var validTeam = new Team {Id = 0, Name = "", Metadata = "", UserIDs = new[] {0, 1}};
+            var validTeam = new Team {Id = 0, Name = "", MetaData = "", UserIDs = new[] {0, 1}};
 
             //Act
             var result = TeamValidator.ValidateEnteredTeamData(validTeam);
@@ -75,7 +75,7 @@ namespace ApplicationLogicTests.UserManagement
         public void InvalidDataInTeamTest_WhiteSpace_ReturnFalse_Test()
         {
             //Arrange
-            var validTeam = new Team {Id = 0, Name = " ", Metadata = " ", UserIDs = new[] {0, 1}};
+            var validTeam = new Team {Id = 0, Name = " ", MetaData = " ", UserIDs = new[] {0, 1}};
 
             //Act
             var result = TeamValidator.ValidateEnteredTeamData(validTeam);
@@ -91,7 +91,7 @@ namespace ApplicationLogicTests.UserManagement
         public void InvalidDataInTeamTest_NoUserIDs_ReturnFalse_Test()
         {
             //Arrange
-            var validTeam = new Team {Id = 0, Name = " ", Metadata = " ", UserIDs = new int[10]};
+            var validTeam = new Team {Id = 0, Name = " ", MetaData = " ", UserIDs = new int[10]};
 
             //Act
             var result = TeamValidator.ValidateEnteredTeamData(validTeam);
@@ -109,7 +109,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var id = 0;
             var repositoryMock = new Mock<IRepository<StoredTeam>>();
-            var storedTeam = new StoredTeam {Id = 0, Name = "name", Metadata = "metaData", UserIDs = new[] {1, 2, 3}};
+            var storedTeam = new StoredTeam {Id = 0, Name = "name", MetaData = "metaData", UserIDs = new[] {1, 2, 3}};
             repositoryMock.Setup(r => r.Read(id)).Returns(storedTeam);
 
             var teamFacade = new TeamFacade(repositoryMock.Object);
@@ -130,7 +130,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var id = 0;
             var repositoryMock = new Mock<IRepository<StoredTeam>>();
-            var storedTeam = new StoredTeam {Id = 0, Name = "name", Metadata = "metaData", UserIDs = new[] {1, 2, 3}};
+            var storedTeam = new StoredTeam {Id = 0, Name = "name", MetaData = "metaData", UserIDs = new[] {1, 2, 3}};
             repositoryMock.Setup(r => r.Read(id));
 
             var teamFacade = new TeamFacade(repositoryMock.Object);

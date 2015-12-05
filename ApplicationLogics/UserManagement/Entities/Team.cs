@@ -13,6 +13,7 @@ namespace ApplicationLogics.UserManagement
         public int Id { get; set; }
         public string Name { get; set; }
         public int[] UserIDs { get; set; }
-        public string Metadata { get; set; }
+        public string MetaData { get; set; }
+
     }
 }

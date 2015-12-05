@@ -40,11 +40,16 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfi
         /// </summary>
         private void CreateTeamMappings()
         {
-            //StoredUser to User
-            Mapper.CreateMap<StoredTeam, Team>();
+            //StoredTeam to Team
+            Mapper.CreateMap<StoredTeam, Team>()
+                .ForMember(target => target.UserIDs,
+                            opt => opt.MapFrom(storedTeam => storedTeam.UserIDs));
 
-            //User to StoredUser
-            Mapper.CreateMap<Team, StoredTeam>();
+
+            //Team to StoredTeam
+            Mapper.CreateMap<Team, StoredTeam>()
+                .ForMember(user => user.UserIDs,
+                            opt => opt.MapFrom(storedUser => storedUser.UserIDs));
         }
     }
 }

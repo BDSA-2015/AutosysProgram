@@ -23,26 +23,20 @@ namespace ApplicationLogics.UserManagement
         }
 
 
-        /// <summary>
-        /// Validates if a user is valid.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns>a boolean if a user is valid</returns>
-        public bool ValidateUser(int userId)
-        {
-            return UserValidator.ValidateExistence(userId, _storage);
-        }
+        
 
         /// <summary>
         /// Creates a user with information from a userDTo
         /// </summary>
         /// <param name="user">User object</param>
-        public void CreateUser(User user)
+        public int CreateUser(User user)
         {
+            if(user == null) 
+                throw new ArgumentException("User is null");
             if (!UserValidator.ValidateEnteredUserInformation(user))
                 throw new ArgumentException("Input may not be null, whitespace or empty");
 
-            _storage.Create(user);
+            return _storage.Create(user);
         }
 
         /// <summary>
@@ -52,9 +46,12 @@ namespace ApplicationLogics.UserManagement
         /// <param name="user">User object</param>
         public void EditUser(int oldId, User user)
         {
+            if(!UserValidator.ValidateId(oldId))
+                throw new ArgumentException("Id is not valid");
             if (!UserValidator.ValidateEnteredUserInformation(user))
                 throw new ArgumentException("User data is invalid");
-            if (!UserValidator.ValidateExistence(oldId, _storage)) throw new ArgumentException("User does not exist");
+            if (!UserValidator.ValidateExistence(oldId, _storage))
+                throw new ArgumentException("User does not exist");
 
             _storage.Update(user);
         }
@@ -65,8 +62,9 @@ namespace ApplicationLogics.UserManagement
         /// <param name="id">id of user to delete.</param>
         public void DeleteUser(int id)
         {
-            if (id < 0)
-                throw new ArgumentException("Id may not be less than 0");
+
+            if (!UserValidator.ValidateExistence(id, _storage))
+                throw new ArgumentException("User does not exist");
 
             var userToDelete = _storage.Read(id);
             if (userToDelete != null)
@@ -83,6 +81,9 @@ namespace ApplicationLogics.UserManagement
         /// <returns></returns>
         public User ReadUser(int id)
         {
+            if (!UserValidator.ValidateId(id))
+                throw new ArgumentException("Id is not valid");
+
             return _storage.Read(id);
         }
 

@@ -12,6 +12,6 @@ namespace ApplicationLogics.UserManagement.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Metadata { get; set; }
+        public string MetaData { get; set; }
     }
 }

@@ -71,7 +71,7 @@ namespace ApplicationLogics.StorageFasade
         {
             var toDelete = Read(user.Id);
             if(toDelete == null) throw new NullReferenceException("User does not exist");
-            if (user.Name != toDelete.Name && user.Metadata != toDelete.Metadata) throw new ArgumentException("User has been updated");
+            if (user.Name != toDelete.Name && user.MetaData != toDelete.MetaData) throw new ArgumentException("User has been updated");
             var storedUserToDelete = AutoMapper.Mapper.Map<StoredUser>(toDelete);
             _userRepository.Delete(storedUserToDelete);
 
