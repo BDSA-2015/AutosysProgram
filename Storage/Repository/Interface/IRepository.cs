@@ -15,9 +15,9 @@ namespace Storage.Repository.Interface
     public interface IRepository<T> where T : IEntity
     {
         Task<int> Create(T user);
-        T Read(int id);
+        Task<T> Read(int id);
         IQueryable Read();
-        void Update(T updatedUser);
-        void Delete(T user);
+        Task<bool> Update(T user);
+        Task<bool> Delete(T user);
     }
 }
