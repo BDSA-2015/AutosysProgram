@@ -31,7 +31,7 @@ namespace ApplicationLogicTests.UserManagement
         {
             AutoMapperConfigurator.Configure();
             _repositoryMock = new Mock<IRepository<StoredTeam>>();
-            _storedTeam = new StoredTeam {Name = "name", MetaData = "metaData", UserIDs = new[] {1, 2, 3}};
+            _storedTeam = new StoredTeam {Name = "name", MetaData = "metaData", UserIds = new[] {1, 2, 3}};
             _team = new Team {Name = "name", MetaData = "metaData", UserIDs = new[] {1, 2, 3}};
         }
 
@@ -177,7 +177,7 @@ namespace ApplicationLogicTests.UserManagement
                 Assert.IsTrue(expectedTeam.Name == returnedTeam.Name);
                 Assert.IsTrue(expectedTeam.MetaData == returnedTeam.MetaData);
                 Assert.IsTrue(expectedTeam.Id == returnedTeam.Id);
-                Assert.IsTrue(expectedTeam.UserIDs.Length == returnedTeam.UserIDs.Length);
+                Assert.IsTrue(expectedTeam.UserIds.Length == returnedTeam.UserIDs.Length);
                 counter++;
             }
         }

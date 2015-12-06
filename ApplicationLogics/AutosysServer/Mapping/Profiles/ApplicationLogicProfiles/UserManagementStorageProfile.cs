@@ -43,12 +43,12 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfi
             //StoredTeam to Team
             Mapper.CreateMap<StoredTeam, Team>()
                 .ForMember(target => target.UserIDs,
-                            opt => opt.MapFrom(storedTeam => storedTeam.UserIDs));
+                            opt => opt.MapFrom(storedTeam => storedTeam.UserIds));
 
 
             //Team to StoredTeam
             Mapper.CreateMap<Team, StoredTeam>()
-                .ForMember(user => user.UserIDs,
+                .ForMember(user => user.UserIds,
                             opt => opt.MapFrom(storedUser => storedUser.UserIDs));
         }
     }
