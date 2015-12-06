@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Storage.Repository;
 using Storage.Repository.Interface;
 
 namespace Storage.Models
@@ -21,7 +20,23 @@ namespace Storage.Models
         public string Name { get; set; }
 
         [Required]
-        public int[] UserIDs { get; set; }
+        public int[] UserIds { get; set; } // TODO convert string to int array like below 
+
+        /*
+            public string InternalData { get; set; }
+            public double[] Data
+            {
+                get
+                {
+                    return Array.ConvertAll(InternalData.Split(';'), Double.Parse);                
+                }
+                set
+                {
+                    _data = value;
+                    InternalData = String.Join(";", _data.Select(p => p.ToString()).ToArray());
+                }
+            }
+        */
 
         [StringLength(400)]
         public string MetaData { get; set; }

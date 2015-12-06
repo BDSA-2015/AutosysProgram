@@ -19,8 +19,10 @@ namespace ApplicationLogics.StudyManagement
     /// </summary>
     public class Phase 
     {
-       
-        private List<Paper> Reports { get;  set; }
+     
+        public Study Study { get; set; }
+
+        public List<Paper> Reports { get;  set; }
 
         /// <summary>
         /// This list contains Criteria, which each report cannot contain.
@@ -58,7 +60,7 @@ namespace ApplicationLogics.StudyManagement
         public List<Phase> DependentPhases { get; set; }
     
         /// <summary>
-        /// Used to dertermine if a criteria has been assinged in a dependentPhase.
+        /// Used to dertermine if a criteria has been assigned in a dependentPhase.
         /// Either occurs in the InclusionList or ExclusionList
         /// </summary>
         /// <param name="criteria">
