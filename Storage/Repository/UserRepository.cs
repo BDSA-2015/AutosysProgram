@@ -18,61 +18,61 @@ namespace Storage.Repository
         private readonly IUserContext _context;
 
         // Used for mocking 
-        public UserRepository(IUserContext context)
+        public UserRepository(IUserContext _context)
         {
-            _context = context;
+            _context = _context;
         }
         */
 
-        private readonly AutoSysDbModel context;
+        private readonly AutoSysDbModel _context;
 
         public UserRepository(AutoSysDbModel context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public UserRepository(){}
 
         public int Create(StoredUser user)
         {
-            using (var context = new AutoSysDbModel())
+            using (_context)
             { 
-                context.Users.Add(user);
-                context.SaveChanges();
+                _context.Users.Add(user);
+                _context.SaveChanges();
                 return user.Id;
             }
         }
 
         public void Delete(StoredUser user)
         {
-            using (var context = new AutoSysDbModel())
+            using (_context)
             { 
-                context.Users.Remove(user);
-                context.SaveChanges();
+                _context.Users.Remove(user);
+                _context.SaveChanges();
             }
         }
 
         public IEnumerable<StoredUser> Read()
         {
-            using (var context = new AutoSysDbModel())
+            using (_context)
             { 
-                return context.Users.ToList();
+                return _context.Users.ToList();
             }
         }
 
         public StoredUser Read(int id)
         {
-            using (var context = new AutoSysDbModel())
+            using (_context)
             { 
-                return context.Users.Find(1);
+                return _context.Users.Find(1);
             }
         }
 
         public void Update(StoredUser updatedUser)
         {
-            using (var context = new AutoSysDbModel())
+            using (_context)
             { 
-                var entity = context.Users.Find(updatedUser.Id);
+                var entity = _context.Users.Find(updatedUser.Id);
 
                 if (entity != null)
                 {
@@ -80,7 +80,7 @@ namespace Storage.Repository
                 entity.MetaData = updatedUser.MetaData;
                 }
 
-                context.SaveChanges();
+                _context.SaveChanges();
                 /* Entry not mockable
                 _context.Users.Attach(updatedUser);
                 var entry = _context.Entry(updatedUser);

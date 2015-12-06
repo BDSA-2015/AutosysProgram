@@ -22,7 +22,7 @@ namespace StorageTests
     {
 
         private IList<StoredUser> _data;
-        private Mock<AutoSysDbModel> _context; // Interface instead of concrete AutoSysDbModel
+        private Mock<AutoSysDbModel> _context; // Could use IUserContext instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredUser>> _set;
         private UserRepository _repository;
 

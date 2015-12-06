@@ -21,6 +21,7 @@ namespace StorageTests
         /// This test is used to check whether the database connection works. 
         /// </summary>
         [TestMethod]
+        [Ignore]
         public void CheckConnection()
         {
             bool result; 
@@ -42,6 +43,7 @@ namespace StorageTests
         /// <summary>
         /// This test is used to check if the database can be created correctly. 
         /// </summary>
+        [Ignore]
         [TestMethod]
         public void CreateDatabase()
         {
