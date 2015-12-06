@@ -22,6 +22,8 @@ namespace Storage.Repository
             _context = context;
         }
 
+        public UserRepository(){}
+
         public int Create(StoredUser user)
         {
             using (var context = new AutoSysDbModel())
