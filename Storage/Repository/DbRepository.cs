@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Storage.Repository.Interface;
 
 namespace Storage.Repository
@@ -19,47 +22,61 @@ namespace Storage.Repository
             _dbContext = context;
         }
 
-        public int Create(T user)
-        {
-            using (_dbContext)
-            { 
-            _dbContext.Set<T>().Add(user);
-            _dbContext.SaveChanges();
-            return user.Id;
-            }
-        }
-
-        public T Read(int id)
-        {
-            using (_dbContext)
-            { 
-                return _dbContext.Set<T>().Find(id);
-            }
-        }
-
-        public IEnumerable<T> Read()
+        public async Task<int> Create(T user)
         {
             using (_dbContext)
             {
-                return _dbContext.Set<T>();
+                    _dbContext.Set<T>().Add(user);
+                    await _dbContext.SaveChangesAsync();
+                    return user.Id;
             }
         }
 
-        public void Update(T updatedUser)
+        public async Task<T> Read(int id)
         {
             using (_dbContext)
             { 
-                _dbContext.Set<T>().Attach(updatedUser);
-            _dbContext.Entry<T>(updatedUser).State = EntityState.Modified;
+                return await _dbContext.Set<T>().FindAsync(id);
             }
         }
 
-        public void Delete(T user)
+        public IQueryable Read()
         {
             using (_dbContext)
-            { 
-                _dbContext.Set<T>().Remove(user);
-            _dbContext.SaveChanges();
+            {
+                return _dbContext.Set<T>().AsQueryable();
+            }
+        }
+
+        public async Task<bool> Update(T user)
+        {
+            using (_dbContext)
+            {
+                var entity = await _dbContext.Set<T>().FindAsync(user.Id);
+
+                if (entity != null)
+                {
+                    _dbContext.Set<T>().Attach(user);
+                    _dbContext.Entry<T>(user).State = EntityState.Modified;
+                    return true;
+                }
+                else return false;
+            }
+        }
+
+        public async Task<bool> Delete(T user)
+        {
+            using (_dbContext)
+            {
+                var entity = await _dbContext.Set<T>().FindAsync(user.Id);
+
+                if (entity != null)
+                {
+                    _dbContext.Set<T>().Remove(user);
+                    await _dbContext.SaveChangesAsync();
+                    return true;
+                }
+                else return false;
             }
         }
 
