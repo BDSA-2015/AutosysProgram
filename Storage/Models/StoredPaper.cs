@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Storage.Repository.Interface;
 
@@ -14,40 +15,49 @@ namespace Storage.Models
         [Key]
         public int Id { get; set; }
 
-        [StringLength(400)]
         [Required]
         public string Type { get; set; }
-
-        [StringLength(400)]
+      
         [Required]
-        public string Author { get; set; }
-
-        [StringLength(400)]
-        [Required]
-        public string Title { get; set; }
-
-        [StringLength(400)]
-        [Required]
-        public string BookTitle { get; set; }
+        public virtual List<string> FieldTypes { get; set; }
 
         [Required]
-        public int Year { get; set; }
+        public virtual List<string> FieldValues { get; set; }
 
-        public string Month { get; set; } 
+        //[StringLength(400)]
+        //[Required]
+        //public string Type { get; set; }
 
-        [StringLength(400)]
-        public string Volume { get; set; }
+        //[StringLength(400)]
+        //[Required]
+        //public string Author { get; set; }
 
-        public int Pages { get; set; }
+        //[StringLength(400)]
+        //[Required]
+        //public string Title { get; set; }
 
-        [StringLength(400)]
-        public string Abstract { get; set; }
+        //[StringLength(400)]
+        //[Required]
+        //public string BookTitle { get; set; }
 
-        [StringLength(50)]
-        public string Doi { get; set; } 
+        //[Required]
+        //public int Year { get; set; }
 
-        [StringLength(50)]
-        public string ISSN { get; set; } 
+        //public string Month { get; set; } 
+
+        //[StringLength(400)]
+        //public string Volume { get; set; }
+
+        //public int Pages { get; set; }
+
+        //[StringLength(400)]
+        //public string Abstract { get; set; }
+
+        //[StringLength(50)]
+        //public string Doi { get; set; } 
+
+        //[StringLength(50)]
+        //public string ISSN { get; set; } 
 
     }
 

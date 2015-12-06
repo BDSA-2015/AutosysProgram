@@ -8,44 +8,41 @@ using ApplicationLogics.PaperManagement.Interfaces;
 
 namespace ApplicationLogics.PaperManagement
 {
-    public class Paper 
+
+    public class Paper
     {
         /// <summary>
-        /// Creates an empty paper with no values.
+        /// Constructor for creating a Paper based on a bibtex file entry type and fields
         /// </summary>
-        public Paper()
+        /// <param name="type">The type of Paper which is associated with the entry type of the bibtex file it is created from</param>
+        /// <param name="fieldTypes">Collection of bibtex fieldtypes from an imported bibtex file
+        /// which fields are contained in the associated bibtex file</param>
+        /// <param name="fieldValues">Collection of bibtex field values associated with a field type from an imported bibtex file</param>
+        public Paper(string type, IReadOnlyCollection<string> fieldTypes, IReadOnlyCollection<string> fieldValues)
         {
-            throw new NotImplementedException();
+            Type = type;
+            FieldTypes = fieldTypes;
+            FieldValues = fieldValues;
         }
 
         /// <summary>
-        /// Creates a Paper based on existing information.
+        /// The Entry type of the bibliographic item (e.g. Article, Book, Phdthesis...)
         /// </summary>
-        /// <param name="paperInformation"></param>
-        public Paper(Dictionary<ITag, List<string>> paperInformation)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Dictionary<ITag, List<string>> PaperInformation { get; protected set; }
+        public string Type;
 
         /// <summary>
-        /// Update information on paper or add addtional information on the Paper.
+        /// A collection of the bibtex field types (e.g. Author, Year...)
+        /// The collection only holds information associated with the default bibtex field types
         /// </summary>
-        /// <param name="itemTag"></param>
-        /// <param name="information"></param>
-        public void AddInformation(ITag itemTag, string information)
-        {
-            throw new NotImplementedException();
-        }
+        public readonly IReadOnlyCollection<string> FieldTypes;
+
+        public readonly IReadOnlyCollection<string> FieldValues; 
 
         /// <summary>
-        /// Remove information about a paper. This will remove all information about the specified Tag
-        /// (even if multiple information was stored under this Tag).
+        /// A reference to the resource associated with this Paper (e.g. A PDF, or CSV file...)
         /// </summary>
-        public void RemoveInformation()
-        {
-            throw new NotImplementedException();
-        }
+        public string ResourceRef { get; set; }
+
     }
+
 }
