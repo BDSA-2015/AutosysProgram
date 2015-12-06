@@ -3,6 +3,7 @@ using System.Data.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Linq;
+using Storage;
 using Storage.Models;
 using Storage.Repository;
 using Storage.Repository.Interface;
@@ -21,7 +22,7 @@ namespace StorageTests
     {
 
         private IList<StoredUser> _data;
-        private Mock<IUserContext> _context; // Interface instead of concrete AutoSysDbModel
+        private Mock<AutoSysDbModel> _context; // Interface instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredUser>> _set;
         private UserRepository _repository;
 
@@ -36,7 +37,7 @@ namespace StorageTests
             };
 
             _set = MockUtility.CreateMockDbSet(_data, u => u.Id);
-            var context = new Mock<IUserContext>();
+            var context = new Mock<AutoSysDbModel>();
             context.Setup(s => s.Users).Returns(_set.Object);
             context.Setup(s => s.SaveChanges()).Callback(() =>
             {

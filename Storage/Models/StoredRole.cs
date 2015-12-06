@@ -8,6 +8,7 @@ namespace Storage.Models
     /// <summary>
     /// This class represents the entity used to store Roles that define what tasks a user receives in a given phase.
     /// </summary>
+    [Table("Role")]
     public class StoredRole : IEntity
     {
         [Key]

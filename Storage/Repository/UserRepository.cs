@@ -14,12 +14,21 @@ namespace Storage.Repository
     public class UserRepository : IRepository<StoredUser>
     {
 
+        /*
         private readonly IUserContext _context;
 
         // Used for mocking 
         public UserRepository(IUserContext context)
         {
             _context = context;
+        }
+        */
+
+        private readonly AutoSysDbModel context;
+
+        public UserRepository(AutoSysDbModel context)
+        {
+            this.context = context;
         }
 
         public UserRepository(){}
@@ -63,23 +72,21 @@ namespace Storage.Repository
         {
             using (var context = new AutoSysDbModel())
             { 
-                var entity = _context.Users.Find(updatedUser.Id);
+                var entity = context.Users.Find(updatedUser.Id);
 
-            if (entity != null)
-            {
+                if (entity != null)
+                {
                 entity.Name = updatedUser.Name;
                 entity.MetaData = updatedUser.MetaData;
-            }
+                }
 
-            /* Entry not mockable
-            _context.Users.Attach(updatedUser);
-            var entry = _context.Entry(updatedUser);
-            entry.State = EntityState.Modified;
-            */ 
-  
-            _context.SaveChanges();
+                context.SaveChanges();
+                /* Entry not mockable
+                _context.Users.Attach(updatedUser);
+                var entry = _context.Entry(updatedUser);
+                entry.State = EntityState.Modified;
+                */
             }
-
         }
 
     }

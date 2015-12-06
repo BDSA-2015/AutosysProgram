@@ -12,18 +12,6 @@ namespace StorageTests
     public class DbRepositoryTests
     {
 
-        [TestInitialize]
-        public void Initialize()
-        {
-
-        }
-
-        [TestMethod]
-        public void TestMethod1()
-        {
-            throw new NotImplementedException();
-        }
-
     }
 
 }

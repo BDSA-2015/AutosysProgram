@@ -6,11 +6,7 @@ namespace StorageTests
     [TestClass]
     public class StudyRepositoryTests
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-            throw new NotImplementedException();
-        }
+       
 
     }
 
