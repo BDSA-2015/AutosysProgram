@@ -16,6 +16,7 @@ namespace Storage.Repository
 
         private readonly IUserContext _context;
 
+        // Used for mocking 
         public UserRepository(IUserContext context)
         {
             _context = context;
@@ -23,30 +24,44 @@ namespace Storage.Repository
 
         public int Create(StoredUser user)
         {
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            return user.Id;
+            using (var context = new AutoSysDbModel())
+            { 
+                context.Users.Add(user);
+                context.SaveChanges();
+                return user.Id;
+            }
         }
 
         public void Delete(StoredUser user)
         {
-            _context.Users.Remove(user);
-            _context.SaveChanges();
+            using (var context = new AutoSysDbModel())
+            { 
+                context.Users.Remove(user);
+                context.SaveChanges();
+            }
         }
 
         public IEnumerable<StoredUser> Read()
         {
-            return _context.Users.ToList();
+            using (var context = new AutoSysDbModel())
+            { 
+                return context.Users.ToList();
+            }
         }
 
         public StoredUser Read(int id)
         {
-            return _context.Users.Find(1);
+            using (var context = new AutoSysDbModel())
+            { 
+                return context.Users.Find(1);
+            }
         }
 
         public void Update(StoredUser updatedUser)
         {
-            var entity = _context.Users.Find(updatedUser.Id);
+            using (var context = new AutoSysDbModel())
+            { 
+                var entity = _context.Users.Find(updatedUser.Id);
 
             if (entity != null)
             {
@@ -61,6 +76,10 @@ namespace Storage.Repository
             */ 
   
             _context.SaveChanges();
+            }
+
         }
+
     }
+
 }
