@@ -15,29 +15,30 @@ namespace Storage.Repository
     /// </summary>
     public class TeamRepository : IRepository<StoredTeam>
     {
-        public int Create(StoredTeam user)
+        public Task<int> Create(StoredTeam user)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(StoredTeam user)
+        public Task<StoredTeam> Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<StoredTeam> Read()
+        public IQueryable Read()
         {
             throw new NotImplementedException();
         }
 
-        public StoredTeam Read(int id)
+        public Task<bool> Update(StoredTeam user)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(StoredTeam updatedUser)
+        public Task<bool> Delete(StoredTeam user)
         {
             throw new NotImplementedException();
         }
     }
+
 }

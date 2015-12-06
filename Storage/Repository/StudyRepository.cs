@@ -15,29 +15,30 @@ namespace Storage.Repository
     /// </summary>
     public class StudyRepository : IRepository<StoredStudy>
     {
-        public int Create(StoredStudy user)
+        public Task<int> Create(StoredStudy user)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(StoredStudy user)
+        public Task<StoredStudy> Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<StoredStudy> Read()
+        public IQueryable Read()
         {
             throw new NotImplementedException();
         }
 
-        public StoredStudy Read(int id)
+        public Task<bool> Update(StoredStudy user)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(StoredStudy updatedUser)
+        public Task<bool> Delete(StoredStudy user)
         {
             throw new NotImplementedException();
         }
     }
+
 }

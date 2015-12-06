@@ -14,29 +14,31 @@ namespace Storage.Repository
     /// </summary>
     public class ProtocolRepository : IRepository<StoredProtocol>
     {
-        public int Create(StoredProtocol user)
+        public Task<int> Create(StoredProtocol user)
         {
             throw new NotImplementedException();
         }
 
-        public StoredProtocol Read(int id)
+        public Task<StoredProtocol> Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<StoredProtocol> Read()
+        public IQueryable Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(StoredProtocol updatedUser)
+        public Task<bool> Update(StoredProtocol user)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(StoredProtocol user)
+        public Task<bool> Delete(StoredProtocol user)
         {
             throw new NotImplementedException();
         }
+
     }
+
 }

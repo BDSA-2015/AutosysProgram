@@ -15,29 +15,30 @@ namespace Storage.Repository
     /// </summary>
     public class TaskRepository : IRepository<StoredTaskRequest>
     {
-        public int Create(StoredTaskRequest user)
+        public Task<int> Create(StoredTaskRequest user)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(StoredTaskRequest user)
+        public Task<StoredTaskRequest> Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<StoredTaskRequest> Read()
+        public IQueryable Read()
         {
             throw new NotImplementedException();
         }
 
-        public StoredTaskRequest Read(int id)
+        public Task<bool> Update(StoredTaskRequest user)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(StoredTaskRequest updatedUser)
+        public Task<bool> Delete(StoredTaskRequest user)
         {
             throw new NotImplementedException();
         }
     }
+
 }

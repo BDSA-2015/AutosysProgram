@@ -44,11 +44,11 @@ namespace Storage.Repository
             }
         }
 
-        public async Task<bool> Delete(int userId)
+        public async Task<bool> Delete(StoredUser user)
         {
             using (_context)
             {
-                var userToDelete = await _context.Users.FindAsync(userId);
+                var userToDelete = await _context.Users.FindAsync(user);
 
                 if (userToDelete != null)
                 {
