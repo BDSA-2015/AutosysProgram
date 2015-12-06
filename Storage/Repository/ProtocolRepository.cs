@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Storage.Models;
+using Storage.Repository.Interface;
 
 namespace Storage.Repository
 {

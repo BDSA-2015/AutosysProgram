@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using Storage.Models;
 using Storage.Repository.Interface;
 
@@ -33,12 +34,12 @@ namespace Storage.Repository
 
         public UserRepository(){}
 
-        public int Create(StoredUser user)
+        public async Task<int> Create(StoredUser user)
         {
             using (_context)
             { 
                 _context.Users.Add(user);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return user.Id;
             }
         }

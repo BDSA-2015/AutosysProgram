@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Storage.Entities;
 using Storage.Models;
+using Storage.Repository.Interface;
 
 namespace Storage.Repository
 {
