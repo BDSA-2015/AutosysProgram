@@ -19,10 +19,10 @@ namespace Storage.Models
         public string Type { get; set; }
       
         [Required]
-        public virtual List<string> FieldTypes { get; set; }
+        public virtual ICollection<string> FieldTypes { get; set; }
 
         [Required]
-        public virtual List<string> FieldValues { get; set; }
+        public virtual ICollection<string> FieldValues { get; set; }
 
         //[StringLength(400)]
         //[Required]
