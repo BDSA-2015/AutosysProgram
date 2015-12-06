@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.UserManagement.Entities;
+using AutoMapper;
 using Storage.Models;
 using Storage.Repository;
 
@@ -28,7 +29,7 @@ namespace ApplicationLogics.StorageFasade
         /// <returns> int</returns>
         public int Create(User user)
         {
-            return _userRepository.Create(AutoMapper.Mapper.Map<StoredUser>(user));
+            return _userRepository.Create(Mapper.Map<StoredUser>(user));
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace ApplicationLogics.StorageFasade
         public User Read(int id)
         {
             var storedUser = _userRepository.Read(id);
-            return AutoMapper.Mapper.Map<User>(storedUser);
+            return Mapper.Map<User>(storedUser);
         }
 
         /// <summary>
@@ -48,10 +49,11 @@ namespace ApplicationLogics.StorageFasade
         /// <returns>Enumerable set of users</returns>
         public IEnumerable<User> Read()
         {
-           var storedUsers = _userRepository.Read();
+            var storedUsers = _userRepository.Read();
 
-           var userList = storedUsers.Select(AutoMapper.Mapper.Map<User>).ToList(); //Converts storedUsers to user and return as a list
-           return userList;
+            var userList = Enumerable.ToList(storedUsers.Select(Mapper.Map<User>));
+                //Converts storedUsers to user and return as a list
+            return userList;
         }
 
         /// <summary>
@@ -60,7 +62,7 @@ namespace ApplicationLogics.StorageFasade
         /// <param name="user">User object</param>
         public void Update(User user)
         {
-            _userRepository.Update(AutoMapper.Mapper.Map<StoredUser>(user));
+            _userRepository.Update(Mapper.Map<StoredUser>(user));
         }
 
         /// <summary>
@@ -70,11 +72,11 @@ namespace ApplicationLogics.StorageFasade
         public void Delete(User user)
         {
             var toDelete = Read(user.Id);
-            if(toDelete == null) throw new NullReferenceException("User does not exist");
-            if (user.Name != toDelete.Name && user.MetaData != toDelete.MetaData) throw new ArgumentException("User has been updated");
-            var storedUserToDelete = AutoMapper.Mapper.Map<StoredUser>(toDelete);
+            if (toDelete == null) throw new NullReferenceException("User does not exist");
+            if (user.Name != toDelete.Name && user.MetaData != toDelete.MetaData)
+                throw new ArgumentException("User has been updated");
+            var storedUserToDelete = Mapper.Map<StoredUser>(toDelete);
             _userRepository.Delete(storedUserToDelete);
-
         }
     }
 }

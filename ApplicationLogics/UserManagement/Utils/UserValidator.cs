@@ -28,12 +28,12 @@ namespace ApplicationLogics.UserManagement.Utils
         /// <returns>validation of user information</returns>
         internal static bool ValidateEnteredUserInformation(User user)
         {
-            return !string.IsNullOrEmpty(user.Name) && !string.IsNullOrEmpty(user.MetaData);
+            return !string.IsNullOrWhiteSpace(user.Name) && !string.IsNullOrWhiteSpace(user.MetaData);
         }
 
         internal static bool ValidateId(int id)
         {
-            return id < 0;
+            return id >= 0;
         }
     }
 }

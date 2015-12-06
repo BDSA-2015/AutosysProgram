@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.UserManagement;
+using AutoMapper;
 using Storage.Models;
 using Storage.Repository;
 
@@ -14,13 +15,11 @@ namespace ApplicationLogics.StorageFasade
     /// </summary>
     public class TeamFacade : IFacade<Team>
     {
-
-        private readonly IRepository<StoredTeam> _teamRepository;  
+        private readonly IRepository<StoredTeam> _teamRepository;
 
         public TeamFacade(IRepository<StoredTeam> repository)
         {
             _teamRepository = repository;
-
         }
 
         /// <summary>
@@ -30,7 +29,7 @@ namespace ApplicationLogics.StorageFasade
         /// <returns>Id of team</returns>
         public int Create(Team team)
         {
-            return _teamRepository.Create(AutoMapper.Mapper.Map<StoredTeam>(team));
+            return _teamRepository.Create(Mapper.Map<StoredTeam>(team));
         }
 
         /// <summary>
@@ -39,11 +38,10 @@ namespace ApplicationLogics.StorageFasade
         /// <param name="team">team object</param>
         public void Delete(Team team)
         {
-
             var toDelete = Read(team.Id);
             if (toDelete == null) throw new NullReferenceException("Team does not exist");
             if (!team.Equals(toDelete)) throw new ArgumentException("Team has been updated");
-            var storedteamToDelete = AutoMapper.Mapper.Map<StoredTeam>(toDelete);
+            var storedteamToDelete = Mapper.Map<StoredTeam>(toDelete);
             _teamRepository.Delete(storedteamToDelete);
         }
 
@@ -55,7 +53,8 @@ namespace ApplicationLogics.StorageFasade
         {
             var storedTeam = _teamRepository.Read();
 
-            var teams = storedTeam.Select(AutoMapper.Mapper.Map<Team>).ToList(); //Converts storedUsers to user and return as a list
+            var teams = Enumerable.ToList(storedTeam.Select(Mapper.Map<Team>));
+                //Converts storedUsers to user and return as a list
             return teams;
         }
 
@@ -67,7 +66,7 @@ namespace ApplicationLogics.StorageFasade
         public Team Read(int id)
         {
             var storedTeam = _teamRepository.Read(id);
-            return AutoMapper.Mapper.Map<Team>(storedTeam);
+            return Mapper.Map<Team>(storedTeam);
         }
 
         /// <summary>
@@ -76,7 +75,7 @@ namespace ApplicationLogics.StorageFasade
         /// <param name="team">team object</param>
         public void Update(Team team)
         {
-            _teamRepository.Update(AutoMapper.Mapper.Map<StoredTeam>(team));
+            _teamRepository.Update(Mapper.Map<StoredTeam>(team));
         }
     }
 }

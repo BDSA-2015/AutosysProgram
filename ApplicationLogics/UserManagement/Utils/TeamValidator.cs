@@ -37,5 +37,10 @@ namespace ApplicationLogics.UserManagement.Utils
                 !string.IsNullOrWhiteSpace(team.MetaData) &&
                 (team.UserIDs.Length > 0);
         }
+
+        internal static bool ValidateId(int id)
+        {
+            return id >= 0;
+        }
     }
 }

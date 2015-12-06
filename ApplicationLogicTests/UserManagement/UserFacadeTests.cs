@@ -8,6 +8,7 @@ using System.Linq;
 using ApplicationLogics.AutosysServer.Mapping;
 using ApplicationLogics.StorageFasade;
 using ApplicationLogics.UserManagement.Entities;
+using ApplicationLogicTests.UserManagement.Stub;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Storage.Models;
@@ -21,7 +22,6 @@ namespace ApplicationLogicTests.UserManagement
     [TestClass]
     public class UserFacadeTests
     {
-
         private Mock<IRepository<StoredUser>> _repositoryMock;
         private StoredUser _storedUser;
         private User _user;
@@ -31,8 +31,8 @@ namespace ApplicationLogicTests.UserManagement
         {
             AutoMapperConfigurator.Configure();
             _repositoryMock = new Mock<IRepository<StoredUser>>();
-            _storedUser = new StoredUser {Id = 0, Name = "name", MetaData = "metaData" };
-            _user = new User { Id = 0, Name = "name", MetaData = "metaData" };
+            _storedUser = new StoredUser {Id = 0, Name = "name", MetaData = "metaData"};
+            _user = new User {Id = 0, Name = "name", MetaData = "metaData"};
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace ApplicationLogicTests.UserManagement
             //Assert
             Assert.IsTrue(expectedReturnId == actualId);
         }
-        
+
         /// <summary>
         /// Test if read does not return null when given a valid user id
         /// </summary>
@@ -87,7 +87,7 @@ namespace ApplicationLogicTests.UserManagement
             var returnedUser = userFacade.Read(idToRead);
 
             //Assert
-            Assert.IsInstanceOfType(returnedUser,typeof(User));
+            Assert.IsInstanceOfType(returnedUser, typeof (User));
         }
 
 
@@ -109,7 +109,6 @@ namespace ApplicationLogicTests.UserManagement
             Assert.IsTrue(_user.Name == returnedUser.Name);
             Assert.IsTrue(_user.MetaData == returnedUser.MetaData);
             Assert.IsTrue(_user.Id == returnedUser.Id);
-
         }
 
         /// <summary>
@@ -137,10 +136,10 @@ namespace ApplicationLogicTests.UserManagement
         public void GetAllUsers_Valid_ReturnsCorrectNumberOfUsers_Test()
         {
             //Arrange
-            var user1 = new StoredUser { Name = "name1", MetaData = "metaData1" };
-            var user2 = new StoredUser { Name = "name2", MetaData = "metaData2" };
-            var user3 = new StoredUser { Name = "name3", MetaData = "metaData3" };
-            IEnumerable<StoredUser> list = new List<StoredUser> {user1,user2,user3};
+            var user1 = new StoredUser {Name = "name1", MetaData = "metaData1"};
+            var user2 = new StoredUser {Name = "name2", MetaData = "metaData2"};
+            var user3 = new StoredUser {Name = "name3", MetaData = "metaData3"};
+            IEnumerable<StoredUser> list = new List<StoredUser> {user1, user2, user3};
             _repositoryMock.Setup(r => r.Read()).Returns(list);
             var userFacade = new UserFacade(_repositoryMock.Object);
             var expectedCount = 3;
@@ -159,10 +158,10 @@ namespace ApplicationLogicTests.UserManagement
         public void GetAllUsers_Valid_ReturnsCorrectUsers_Test()
         {
             //Arrange
-            var user1 = new StoredUser { Name = "name1", MetaData = "metaData1" };
-            var user2 = new StoredUser { Name = "name2", MetaData = "metaData2" };
-            var user3 = new StoredUser { Name = "name3", MetaData = "metaData3" };
-            IEnumerable<StoredUser> list = new List<StoredUser> { user1, user2, user3 };
+            var user1 = new StoredUser {Name = "name1", MetaData = "metaData1"};
+            var user2 = new StoredUser {Name = "name2", MetaData = "metaData2"};
+            var user3 = new StoredUser {Name = "name3", MetaData = "metaData3"};
+            IEnumerable<StoredUser> list = new List<StoredUser> {user1, user2, user3};
             _repositoryMock.Setup(r => r.Read()).Returns(list);
             var userFacade = new UserFacade(_repositoryMock.Object);
 
@@ -189,16 +188,17 @@ namespace ApplicationLogicTests.UserManagement
         public void DeleteUser_Success_Test()
         {
             //Arrange
-            var repositoryMock = new Mock<IRepository<StoredUser>>();
-            var storedUser = new StoredUser {Id = 0, Name = "name", MetaData = "metaData"};
-            repositoryMock.Setup(r => r.Delete(storedUser));
-            repositoryMock.Setup(r => r.Read(storedUser.Id)).Returns(storedUser);
-            var userFacade = new UserFacade(repositoryMock.Object);
+            var toDeleteId = 0;
+            var user = new User {Id = toDeleteId, Name = "name", MetaData = "metaData"};
+            var userFacade = new UserFacade(new RepositoryStub<StoredUser>());
 
             //Act
-            var user = new User {Id = 0, Name = "name", MetaData = "metaData"};
-
+            userFacade.Create(user);
+            Assert.IsNotNull(userFacade.Read(toDeleteId));
             userFacade.Delete(user);
+
+            //Assert
+            Assert.IsNull(userFacade.Read(toDeleteId));
         }
 
 
@@ -207,7 +207,7 @@ namespace ApplicationLogicTests.UserManagement
         /// Exception must be thrown to pass test.
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof (NullReferenceException))]
         public void DeleteUser_Fail_UserDoesNotExist_Test()
         {
             //Arrange
@@ -215,7 +215,7 @@ namespace ApplicationLogicTests.UserManagement
             var toDeleteId = 0;
             repositoryMock.Setup(r => r.Read(toDeleteId));
             var userFacade = new UserFacade(repositoryMock.Object);
-            var user = new User { Id = toDeleteId, Name = "name", MetaData = "metaData"};
+            var user = new User {Id = toDeleteId, Name = "name", MetaData = "metaData"};
 
 
             //Act
@@ -223,19 +223,18 @@ namespace ApplicationLogicTests.UserManagement
 
             //Assert
             //Exception must be thrown
-
         }
 
         /// <summary>
         /// Test deleting a user that has been updated
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof (ArgumentException))]
         public void DeleteUser_Fail_UserToDeleteHasBeenUpdated_Test()
         {
             //Arrange
-            var storedUser = new StoredUser() { Id = 0, Name = "name"};
-            var user = new User() { Id = 0, Name = "Changed name", MetaData = "Changed metaData"};
+            var storedUser = new StoredUser {Id = 0, Name = "name"};
+            var user = new User {Id = 0, Name = "Changed name", MetaData = "Changed metaData"};
 
             var repositoryMock = new Mock<IRepository<StoredUser>>();
             repositoryMock.Setup(r => r.Read(user.Id)).Returns(storedUser);
@@ -246,7 +245,7 @@ namespace ApplicationLogicTests.UserManagement
             userFacade.Delete(user);
 
             //Assert
-            //Exception must be thrown
+                //Exception must be thrown
         }
     }
 }

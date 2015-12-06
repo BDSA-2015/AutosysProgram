@@ -8,6 +8,7 @@ using System.Linq;
 using ApplicationLogics.AutosysServer.Mapping;
 using ApplicationLogics.StorageFasade;
 using ApplicationLogics.UserManagement;
+using ApplicationLogicTests.UserManagement.Stub;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Storage.Models;
@@ -30,8 +31,8 @@ namespace ApplicationLogicTests.UserManagement
         {
             AutoMapperConfigurator.Configure();
             _repositoryMock = new Mock<IRepository<StoredTeam>>();
-            _storedTeam = new StoredTeam { Name = "name", MetaData = "metaData", UserIDs = new[] { 1, 2, 3 } };
-            _team = new Team { Name = "name", MetaData = "metaData", UserIDs = new[] { 1, 2, 3 } };
+            _storedTeam = new StoredTeam {Name = "name", MetaData = "metaData", UserIDs = new[] {1, 2, 3}};
+            _team = new Team {Name = "name", MetaData = "metaData", UserIDs = new[] {1, 2, 3}};
         }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace ApplicationLogicTests.UserManagement
             var returnedTeam = teamFacade.Read(idToRead);
 
             //Assert
-            Assert.IsInstanceOfType(returnedTeam, typeof(Team));
+            Assert.IsInstanceOfType(returnedTeam, typeof (Team));
         }
 
 
@@ -109,7 +110,6 @@ namespace ApplicationLogicTests.UserManagement
             Assert.IsTrue(_team.MetaData == returnedTeam.MetaData);
             Assert.IsTrue(_team.Id == returnedTeam.Id);
             Assert.IsTrue(_team.UserIDs.Length == returnedTeam.UserIDs.Length);
-
         }
 
         /// <summary>
@@ -137,10 +137,10 @@ namespace ApplicationLogicTests.UserManagement
         public void GetAllTeams_Valid_ReturnsCorrectNumberOfTeams_Test()
         {
             //Arrange
-            var team1 = new StoredTeam { Name = "name1", MetaData = "metaData1" };
-            var team2 = new StoredTeam { Name = "name2", MetaData = "metaData2" };
-            var team3 = new StoredTeam { Name = "name3", MetaData = "metaData3" };
-            IEnumerable<StoredTeam> list = new List<StoredTeam> { team1, team2, team3 };
+            var team1 = new StoredTeam {Name = "name1", MetaData = "metaData1"};
+            var team2 = new StoredTeam {Name = "name2", MetaData = "metaData2"};
+            var team3 = new StoredTeam {Name = "name3", MetaData = "metaData3"};
+            IEnumerable<StoredTeam> list = new List<StoredTeam> {team1, team2, team3};
             _repositoryMock.Setup(r => r.Read()).Returns(list);
             var teamFacade = new TeamFacade(_repositoryMock.Object);
             var expectedCount = 3;
@@ -159,10 +159,10 @@ namespace ApplicationLogicTests.UserManagement
         public void GetAllTeams_Valid_ReturnsCorrectTeams_Test()
         {
             //Arrange
-            var team1 = new StoredTeam { Name = "name1", MetaData = "metaData1" };
-            var team2 = new StoredTeam { Name = "name2", MetaData = "metaData2" };
-            var team3 = new StoredTeam { Name = "name3", MetaData = "metaData3" };
-            IEnumerable<StoredTeam> list = new List<StoredTeam> { team1, team2, team3 };
+            var team1 = new StoredTeam {Name = "name1", MetaData = "metaData1"};
+            var team2 = new StoredTeam {Name = "name2", MetaData = "metaData2"};
+            var team3 = new StoredTeam {Name = "name3", MetaData = "metaData3"};
+            IEnumerable<StoredTeam> list = new List<StoredTeam> {team1, team2, team3};
             _repositoryMock.Setup(r => r.Read()).Returns(list);
             var teamFacade = new TeamFacade(_repositoryMock.Object);
 
@@ -181,7 +181,6 @@ namespace ApplicationLogicTests.UserManagement
                 counter++;
             }
         }
-        
 
 
         /// <summary>
@@ -191,15 +190,16 @@ namespace ApplicationLogicTests.UserManagement
         public void DeleteTeam_Success_Test()
         {
             //Arrange 
-            _repositoryMock.Setup(r => r.Read(_storedTeam.Id)).Returns(_storedTeam);
-            _repositoryMock.Setup(r => r.Delete(_storedTeam));
-            var teamFacade = new TeamFacade(_repositoryMock.Object);
-
+            var teamFacade = new TeamFacade(new RepositoryStub<StoredTeam>());
+            var team = new Team() {Name = "name",MetaData = "data", UserIDs = new []{1,2}};
+            var toDeleteId = 0;
             //Act
-            teamFacade.Delete(_team); //BUG AUTOMAPPER EXCEPTION IS THROWN HERE...
+            teamFacade.Create(team);
+            Assert.IsNotNull(teamFacade.Read(toDeleteId));
+            teamFacade.Delete(team); //BUG AUTOMAPPER EXCEPTION IS THROWN HERE...
 
             //Assert
-            //Todo How mock if an item has been deleted?
+              Assert.IsNull(teamFacade.Read(toDeleteId));
         }
 
         /// <summary>
@@ -207,20 +207,19 @@ namespace ApplicationLogicTests.UserManagement
         /// Exception must be thrown to pass test.
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof (NullReferenceException))]
         public void DeleteTeam_Fail_TeamDoesNotExist_Test()
         {
             //Arrange
             var toDeleteId = 0;
             _repositoryMock.Setup(r => r.Read(toDeleteId));
             var teamFacade = new TeamFacade(_repositoryMock.Object);
-            
+
             //Act
             teamFacade.Delete(_team);
 
             //Assert
-                //Exception must be thrown
-
+            //Exception must be thrown
         }
 
         /// <summary>
@@ -232,15 +231,14 @@ namespace ApplicationLogicTests.UserManagement
         {
             //Arrange
             _repositoryMock.Setup(r => r.Read(_team.Id)).Returns(_storedTeam);
-            
+
             var teamFacade = new TeamFacade(_repositoryMock.Object);
 
             //Act
             teamFacade.Delete(_team);
 
             //Assert
-                //Exception must be thrown
+            //Exception must be thrown
         }
-
     }
 }

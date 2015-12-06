@@ -85,7 +85,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        ///     Test team with no user. Must return false to pass.
+        /// Test team with no user. Must return false to pass.
         /// </summary>
         [TestMethod]
         public void InvalidDataInTeamTest_NoUserIDs_ReturnFalse_Test()

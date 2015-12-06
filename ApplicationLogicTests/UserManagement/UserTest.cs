@@ -1,6 +1,4 @@
-﻿using System;
-using ApplicationLogics.UserManagement;
-using ApplicationLogics.UserManagement.Entities;
+﻿using ApplicationLogics.UserManagement.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApplicationLogicTests.UserManagement
@@ -22,11 +20,10 @@ namespace ApplicationLogicTests.UserManagement
             const string expectedMeta = "metaData";
 
             //Act
-            var user = new User() {Name= expectedName, MetaData = expectedMeta};
+            var user = new User {Name = expectedName, MetaData = expectedMeta};
 
             //Assert
-            Assert.AreEqual(expectedName,user.Name,expectedMeta);
-            
+            Assert.AreEqual(expectedName, user.Name, expectedMeta);
         }
     }
 }

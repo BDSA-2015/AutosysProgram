@@ -12,7 +12,7 @@ namespace ApplicationLogics.UserManagement
     /// <summary>
     /// Responsible for Team operations
     /// </summary>
-    internal class TeamHandler
+    public class TeamHandler
     {
         private readonly IFacade<Team> _storage;
 
@@ -35,12 +35,12 @@ namespace ApplicationLogics.UserManagement
         /// Creates a new team
         /// </summary>
         /// <param name="team"> Team Object</param>
-        public void Create(Team team)
+        public int Create(Team team)
         {
             if (!TeamValidator.ValidateEnteredTeamData(team))
                 throw new ArgumentException("Team data is invalid");
 
-            _storage.Create(team);
+           return _storage.Create(team);
         }
 
         /// <summary>
@@ -72,9 +72,20 @@ namespace ApplicationLogics.UserManagement
         /// Returns every teams stored in database
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Team> GetAllTeams()
+        public IEnumerable<Team> GetAll()
         {
             return _storage.Read();
+        }
+
+        /// <summary>
+        /// Returns every teams stored in database
+        /// </summary>
+        /// <returns></returns>
+        public Team Read(int id)
+        {
+            if(!TeamValidator.ValidateId(id))
+                throw new ArgumentException("Id is not valid");
+            return _storage.Read(id);
         }
     }
 }
