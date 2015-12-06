@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Storage.Models;
-using StorageTests;
+using Storage.Repository.Interface;
 
 namespace Storage.Repository
 {

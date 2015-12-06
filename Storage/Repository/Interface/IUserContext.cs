@@ -1,9 +1,8 @@
-﻿using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Security.Policy;
+﻿using System.Data.Entity;
+using System.Threading.Tasks;
 using Storage.Models;
 
-namespace StorageTests
+namespace Storage.Repository.Interface
 {
 
     /// <summary>

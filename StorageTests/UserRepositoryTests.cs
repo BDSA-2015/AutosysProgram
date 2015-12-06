@@ -5,6 +5,7 @@ using Moq;
 using System.Linq;
 using Storage.Models;
 using Storage.Repository;
+using Storage.Repository.Interface;
 
 namespace StorageTests
 {
