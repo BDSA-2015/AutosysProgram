@@ -8,10 +8,10 @@ namespace ApplicationLogics.PaperManagement.Bibtex
     /// Class for creating a default field checker which will be used whenever a client does not specify any 
     /// custom field checkers
     /// </summary>
-    public class FieldChecker : IFieldChecker
+    public class DefaultFieldChecker : IFieldChecker
     {
         //Matches all strings without a new line at the beginning or in between characters.
-        readonly Regex _r = new Regex("^.*$");
+        readonly Regex _regex = new Regex("^.*$");
 
         /// <summary>
         /// Method to validate bibtex fields when parsing bitex files to Paper objects
@@ -24,7 +24,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
             {
                 throw new ArgumentNullException("The given bibtex field cannot be null or empty");
             }
-            return _r.IsMatch(field);
+            return _regex.IsMatch(field);
         }
     }
 }

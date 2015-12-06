@@ -17,7 +17,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
         /// <summary>
         /// A default Paper checker to make sure a checker always exists for a PaperValidator
         /// </summary>
-        readonly IPaperChecker _defaultChecker = new DefaultPaperChecker();
+        readonly IPaperChecker _defaultChecker = new PaperChecker();
 
         public PaperValidator(Dictionary<string, IPaperChecker> checkers = null)
         {

@@ -81,6 +81,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="PaperManagement\Bibtex\BibtexParserTests.cs" />
+    <Compile Include="PaperManagement\Bibtex\CustomFieldCheckerTests.cs" />
     <Compile Include="PaperManagement\Bibtex\DefaultFieldCheckerTests.cs" />
     <Compile Include="PaperManagement\Bibtex\DefaultPaperCheckerTests.cs" />
     <Compile Include="PaperManagement\Bibtex\FieldValidatorTests.cs" />

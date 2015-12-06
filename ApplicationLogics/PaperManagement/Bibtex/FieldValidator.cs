@@ -15,7 +15,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
         private readonly Dictionary<string, IFieldChecker> _checkers;
 
         //Default field checker used when non is specified in the constructor
-        private readonly IFieldChecker _defaultChecker = new FieldChecker();
+        private readonly IFieldChecker _defaultChecker = new DefaultFieldChecker();
     
         public FieldValidator(Dictionary<string, IFieldChecker> checkers = null)
         {

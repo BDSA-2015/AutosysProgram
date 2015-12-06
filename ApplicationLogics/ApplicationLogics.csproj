@@ -102,8 +102,9 @@
     <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\PaperManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\UserManagementStorageProfile.cs" />
     <Compile Include="PaperManagement\Bibtex\BibtexParser.cs" />
-    <Compile Include="PaperManagement\Bibtex\DefaultPaperChecker.cs" />
-    <Compile Include="PaperManagement\Bibtex\FieldChecker.cs" />
+    <Compile Include="PaperManagement\Bibtex\CustomFieldChecker.cs" />
+    <Compile Include="PaperManagement\Bibtex\PaperChecker.cs" />
+    <Compile Include="PaperManagement\Bibtex\DefaultFieldChecker.cs" />
     <Compile Include="PaperManagement\Bibtex\FieldValidator.cs" />
     <Compile Include="PaperManagement\Bibtex\Paper.cs" />
     <Compile Include="PaperManagement\Bibtex\PaperValidator.cs" />

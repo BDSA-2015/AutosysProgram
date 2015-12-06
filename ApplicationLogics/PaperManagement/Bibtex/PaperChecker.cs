@@ -9,12 +9,12 @@ namespace ApplicationLogics.PaperManagement.Bibtex
     /// The default Paper checker which is chosen, when no custom validator is specified.
     /// All fields of the Paper need to be valid for the Paper to be valid.
     /// </summary>
-    public class DefaultPaperChecker : IPaperChecker
+    public class PaperChecker : IPaperChecker
     {
         //Validates fields against a default field checker
         readonly FieldValidator _validator;
 
-        public DefaultPaperChecker(FieldValidator validator = null)
+        public PaperChecker(FieldValidator validator = null)
         {
             _validator = validator ?? new FieldValidator();
         }

@@ -125,13 +125,7 @@ namespace ApplicationLogicTests.StorageFasade
             Assert.IsTrue(callBackPaper.FieldValues.ElementAt(2) == "1905");
         }
 
-        [TestMethod()]
-        public void DeleteNonexistingObject()
-        {
-            throw new NotImplementedException();
-        }
-
-        [TestMethod()]
+       [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
         public void DeleteNullTest()
         {

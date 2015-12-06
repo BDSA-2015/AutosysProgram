@@ -19,7 +19,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ValidateValidInputTest()
         {
             //Arrange
-            DefaultPaperChecker checker = new DefaultPaperChecker();
+            PaperChecker checker = new PaperChecker();
             var fieldTypes = new List<string>();
             fieldTypes.Add("author");
             fieldTypes.Add("title");
@@ -42,7 +42,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ValidateInvalidFieldTest()
         {
             //Arrange
-            DefaultPaperChecker checker = new DefaultPaperChecker();
+            PaperChecker checker = new PaperChecker();
             var fieldTypes = new List<string>();
             fieldTypes.Add("author");
             var fieldValues = new List<string>();
