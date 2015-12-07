@@ -1,10 +1,8 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Threading.Tasks;
 using Storage.Models;
-using StorageTests.Utility;
 
-namespace Storage.Repository.Interface
+namespace StorageTests.Utility
 {
 
     /// <summary>
