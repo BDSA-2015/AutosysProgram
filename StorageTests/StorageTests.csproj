@@ -72,13 +72,16 @@
   <ItemGroup>
     <Compile Include="DbContextTests.cs" />
     <Compile Include="DbRepositoryTests.cs" />
-    <Compile Include="MockUtility.cs" />
+    <Compile Include="Utility\IDbContext.cs" />
+    <Compile Include="Utility\IUserContext.cs" />
+    <Compile Include="Utility\MockUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudyRepositoryTests.cs" />
     <Compile Include="TeamRepositoryTests.cs" />
     <Compile Include="TaskRepositoryTests.cs" />
     <Compile Include="ProtocolRepositoryTests.cs" />
     <Compile Include="UserRepositoryTests.cs" />
+    <Compile Include="Utility\TestDbAsyncQueryProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

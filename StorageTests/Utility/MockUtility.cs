@@ -1,0 +1,105 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using Moq;
+
+namespace StorageTests
+{
+
+    /// <summary>
+    /// This utility class is used to mock db set tables used to test that the repositories write correctly to the database.
+    /// Credits goes to our lecturer, Rasmus Lystrøm who wrote the utility class during a lecture.
+    /// EF6 enables mocking Dbsets more easily: http://thedatafarm.com/data-access/how-ef6-enables-mocking-dbsets-more-easily/ 
+    /// </summary>
+    public static class MockUtility
+    {
+
+        /// <summary>
+        /// This helper method is used to create a mocked DbSet from a stored entity.
+        /// This is used in all repository tests to setup a mock for a given entity DbSet passed in a repository.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The entity collection to mock, e.g. users.  
+        /// </typeparam>
+        /// <param name="items">
+        /// Items to add to the collection, e.g. a list of users. 
+        /// </param>
+        /// <param name="key">
+        /// Id of the entity, e.g. 
+        /// </param>
+        /// <returns>
+        /// A Mock DbSet used to test repositories. 
+        /// </returns>
+        public static Mock<DbSet<T>> CreateMockDbSet<T>(ICollection<T> items, Func<T, int> key) where T : class
+        {
+            var data = items.AsQueryable();
+            var set = new Mock<DbSet<T>>();
+            set.As<IQueryable<T>>().Setup(m => m.Provider).Returns(data.Provider);
+            set.As<IQueryable<T>>().Setup(m => m.Expression).Returns(data.Expression);
+            set.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            set.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            set.Setup(m => m.Find(It.IsAny<object[]>())).Returns<object[]>(ids => items.FirstOrDefault(d => key(d) == (int)ids[0]));
+
+            set.Setup(m => m.Add(It.IsAny<T>())).Callback<T>(a => items.Add(a));
+            set.Setup(m => m.Remove(It.IsAny<T>())).Callback<T>(a => items.Remove(a));
+
+            return set;
+        }
+
+        /// <summary>
+        /// This helper method is used to create a mocked DbSet from a stored entity.
+        /// This is used in all repository tests to setup a mock for a given entity DbSet passed in a repository.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The entity collection to mock, e.g. users.  
+        /// </typeparam>
+        /// <param name="items">
+        /// Items to add to the collection, e.g. a list of users. 
+        /// </param>
+        /// <param name="key">
+        /// Id of the entity, e.g. 
+        /// </param>
+        /// <returns>
+        /// A Mock DbSet used to test async repositories. 
+        /// </returns>
+        public static Mock<DbSet<T>> CreateAsyncMockDbSet<T>(ICollection<T> items, Func<T, int> key) where T : class
+        {
+            var data = items.AsQueryable();
+            var set = new Mock<DbSet<T>>();
+            set.As<IQueryable<T>>().Setup(m => m.Provider).Returns(data.Provider);
+            set.As<IQueryable<T>>().Setup(m => m.Expression).Returns(data.Expression);
+            set.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            set.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            set.Setup(m => m.Find(It.IsAny<object[]>())).Returns<object[]>(ids => items.FirstOrDefault(d => key(d) == (int)ids[0]));
+
+            set.Setup(m => m.Add(It.IsAny<T>())).Callback<T>(a => items.Add(a));
+            set.Setup(m => m.Remove(It.IsAny<T>())).Callback<T>(a => items.Remove(a));
+
+            return set;
+        }
+
+        public static string GetConcatanted(string start, params string[] strings)
+        {
+            return null;
+        }
+
+        public static string Stuff(string start = "dfd", string end = null, int stuff = 42, DateTime? time = null)
+        {
+            return null;
+        }
+
+        public static void Func()
+        {
+            Stuff(end: "end");
+
+            GetConcatanted("foo");
+            GetConcatanted("start");
+            GetConcatanted(null);
+            GetConcatanted("foo", "bar", "foo1");
+            GetConcatanted("start", new[] { "foo", "bar", "foo1" });
+        }
+    }
+}
