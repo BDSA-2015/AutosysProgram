@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Threading.Tasks;
 using Moq;
 
 namespace StorageTests.Utility
@@ -67,18 +69,28 @@ namespace StorageTests.Utility
         public static Mock<DbSet<T>> CreateAsyncMockDbSet<T>(ICollection<T> items, Func<T, int> key) where T : class
         {
             var data = items.AsQueryable();
-            var set = new Mock<DbSet<T>>();
-            set.As<IQueryable<T>>().Setup(m => m.Provider).Returns(data.Provider);
-            set.As<IQueryable<T>>().Setup(m => m.Expression).Returns(data.Expression);
-            set.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            set.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            var mockSet = new Mock<DbSet<T>>();
 
-            set.Setup(m => m.Find(It.IsAny<object[]>())).Returns<object[]>(ids => items.FirstOrDefault(d => key(d) == (int)ids[0]));
+            mockSet.As<IDbAsyncEnumerable<T>>()
+                .Setup(m => m.GetAsyncEnumerator())
+                .Returns(new TestDbAsyncEnumerator<T>(data.GetEnumerator()));
 
-            set.Setup(m => m.Add(It.IsAny<T>())).Callback<T>(a => items.Add(a));
-            set.Setup(m => m.Remove(It.IsAny<T>())).Callback<T>(a => items.Remove(a));
+            mockSet.As<IQueryable<T>>()
+                .Setup(m => m.Provider)
+                .Returns(new TestDbAsyncQueryProvider<T>(data.Provider));
 
-            return set;
+            mockSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            //mockSet.Setup(m => m.FindAsync(It.IsAny<T>())).ReturnsAsync(Task.FromResult<T>(null)); // (ids => await items.SingleOrDefault(d => key(d) == (int) ids[0]));
+            //mockSet.Setup(m => m.SingleOrDefaultAsync(It.IsAny<object[]>())).Returns<object[]>(ids => await items.SingleOrDefault(d => key(d) == (int)ids[0]));
+            //mockSet.Setup(m => m.FindAsync(It.IsAny<T>())).ReturnsAsync(Task.FromResult(T.));
+
+            mockSet.Setup(m => m.Add(It.IsAny<T>())).Callback<T>(a => items.Add(a));
+            mockSet.Setup(m => m.Remove(It.IsAny<T>())).Callback<T>(a => items.Remove(a));
+
+            return mockSet;
         }
 
         public static string GetConcatanted(string start, params string[] strings)

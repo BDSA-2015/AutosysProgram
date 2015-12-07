@@ -26,7 +26,7 @@ namespace StorageTests
 
         private IList<StoredUser> _data;
         private Mock<AutoSysDbModel> _context; // Could use IUserContext instead of concrete AutoSysDbModel
-        private Mock<DbSet<StoredUser>> _set;
+        private Mock<DbSet<StoredUser>> _mockSet;
         private UserRepository _repository;
 
         /// <summary>
@@ -42,10 +42,11 @@ namespace StorageTests
                 new StoredUser { Id = 2, Name = "Trudy Jones", MetaData = "Researcher" }
             };
 
-            _set = MockUtility.CreateMockDbSet(_data, u => u.Id);
-            var context = new Mock<AutoSysDbModel>();
-            context.Setup(s => s.Users).Returns(_set.Object);
-            context.Setup(s => s.SaveChangesAsync()).Callback(() =>
+            _mockSet = MockUtility.CreateAsyncMockDbSet(_data, u => u.Id);
+
+            var mockContext = new Mock<AutoSysDbModel>();
+            mockContext.Setup(s => s.Users).Returns(_mockSet.Object);
+            mockContext.Setup(s => s.SaveChangesAsync()).Callback(() =>
             {
                 // Increment user ids automatically based on existing ids in mock data 
                 var max = _data.Max(u => u.Id);
@@ -55,7 +56,7 @@ namespace StorageTests
                 }
             });
 
-            _context = context;
+            _context = mockContext;
             _repository = new UserRepository(_context.Object);
         }
 
