@@ -4,6 +4,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApplicationLogicTests.PaperManagement.Bibtex
 {
+    /// <summary>
+    /// Test class for testing the validation of bibtex fields by a custom made fields checker, which is used by a field validator
+    /// </summary>
     [TestClass()]
     public class CustomFieldCheckerTests
     {
