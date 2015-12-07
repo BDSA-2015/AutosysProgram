@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -27,6 +28,9 @@ namespace StorageTests
         private Mock<DbSet<StoredUser>> _set;
         private UserRepository _repository;
 
+        /// <summary>
+        /// This method sets up data used to mock a collection of users in a DbContext used by the UserRepository. 
+        /// </summary>
         [TestInitialize]
         public void Initialize()
         {
@@ -40,8 +44,9 @@ namespace StorageTests
             _set = MockUtility.CreateMockDbSet(_data, u => u.Id);
             var context = new Mock<AutoSysDbModel>();
             context.Setup(s => s.Users).Returns(_set.Object);
-            context.Setup(s => s.SaveChanges()).Callback(() =>
+            context.Setup(s => s.SaveChangesAsync()).Callback(() =>
             {
+                // Increment user ids automatically based on existing ids in mock data 
                 var max = _data.Max(u => u.Id);
                 foreach (var user in _data.Where(u => u.Id == 0))
                 {
@@ -51,6 +56,32 @@ namespace StorageTests
 
             _context = context;
             _repository = new UserRepository(_context.Object);
+        }
+
+        /// <summary>
+        /// This test uses Moq to create a context and then creates a DbSet<StoredUser> </StoredUser>.
+        /// This is returned from the context's StoredUsers property. The context is used to create a new UserRepository, 
+        /// which is then used to create a new Stored User, using the Create method. 
+        /// Finally, the test verifies that the repository added a new user and called SaveChangesAsync on the context.
+        /// </summary>
+        /// <returns></returns>
+        [TestMethod]
+        public async Task Create_SavesUserInContext()
+        {
+            // Arrange 
+            var mockSet = new Mock<DbSet<StoredUser>>();
+
+            //var mockContext = new Mock<IUserContext>();
+            var mockContext = new Mock<AutoSysDbModel>();
+            mockContext.Setup(m => m.Users).Returns(mockSet.Object);
+
+            // Act 
+            var service = new UserRepository(mockContext.Object);
+            await service.Create(new StoredUser());
+
+            // Assert 
+            mockSet.Verify(m => m.Add(It.IsAny<StoredUser>()), Times.Once());
+            mockContext.Verify(m => m.SaveChangesAsync(), Times.Once());
         }
 
         [TestMethod]
@@ -64,15 +95,19 @@ namespace StorageTests
             });
         }
 
+        // CHECK THIS 
         [TestMethod]
-        public void Create_ReturnsId_NewId()
+        public async Task Create_ReturnsId_NewId()
         {
-            Task.Run(async () =>
-            {
+            //int result = 0;
+
+            //await Task.Run(async () =>
+            //{
                 var user = new StoredUser {Name = "Steve", MetaData = "Validator"};
                 var id =  await _repository.Create(user);
-                Assert.AreEqual(3, id);
-            });
+            //});
+
+            Assert.AreEqual(3, id);
         }
 
         [TestMethod]
@@ -87,38 +122,45 @@ namespace StorageTests
         }
 
         [TestMethod]
-        public void Update_NewName()
+        public async Task Update_NewName()
         {
-            Task.Run(async () =>
+            var user = new StoredUser { Id = 1, Name = "User", MetaData = "Validator" };
+
+            await Task.Run(async () =>
             {
-                var user = new StoredUser { Id = 1, Name = "User" };
                 await _repository.Update(user);
-                var researcher = _data[0];
-                Assert.AreEqual("User", researcher.Name);
             });
+
+            var researcher = _data[0];
+
+            Assert.AreEqual("User", researcher.Name);
         }
 
         [TestMethod]
         public void Update_NewMetaData()
         {
+            var researcher = _data[0];
+
             Task.Run(async () =>
             {
                 var user = new StoredUser {Id = 1, MetaData = "Validator"};
                 await _repository.Update(user);
-                var researcher = _data[0];
-                Assert.AreEqual("Validator", researcher.MetaData);
             });
+
+            Assert.AreEqual("Validator", researcher.MetaData);
         }
 
         [TestMethod]
         public void Delete_RemovesUser()
         {
+            var user = _data[0];
+
             Task.Run(async () =>
             {
-                var user = _data[0];
                 await _repository.Delete(user);
-                Assert.IsFalse(_data.Any(u => u.Id == 1));
             });
+
+            Assert.IsFalse(_data.Any(u => u.Id == 1));
         }
 
         [TestMethod]
@@ -129,7 +171,7 @@ namespace StorageTests
                 var user = _data[0];
                 await _repository.Delete(user);
                 _context.Verify(repo => repo.SaveChangesAsync(), Times.Once);
-            });
+            });  
         }
 
         /*
@@ -146,9 +188,7 @@ namespace StorageTests
         public void GetByName()
         {
             using (var repository = new UserRepository(_context.Object))
-            {
-                var roles = repository.Get('W').ToList();
-                Assert.AreEqual("William Parker", roles[0].Name);
+            {;
             }
         }
         */

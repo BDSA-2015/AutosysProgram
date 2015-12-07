@@ -19,18 +19,21 @@ namespace Storage.Repository
         private readonly IUserContext _context;
 
         // Used for mocking 
-        public UserRepository(IUserContext _context)
+        public UserRepository(IUserContext context)
         {
-            _context = _context;
+            _context = context;
         }
         */
+        
 
+        
         private readonly AutoSysDbModel _context;
 
         public UserRepository(AutoSysDbModel context)
         {
             _context = context;
         }
+        
 
         public UserRepository(){}
 
@@ -90,15 +93,17 @@ namespace Storage.Repository
             { 
                 var userToUpdate = await _context.Users.FindAsync(user.Id);
 
-                if (userToUpdate != null)
+                if (userToUpdate == null)
                 {
-                    userToUpdate.Name = user.Name;
-                    userToUpdate.MetaData = user.MetaData;
-                    await _context.SaveChangesAsync();
-                    return true;
+                    return false;
                 }
-                else return false;
-                
+
+                userToUpdate.Name = user.Name;
+                userToUpdate.MetaData = user.MetaData;
+                await _context.SaveChangesAsync();
+
+                return true;
+
                 /* Entry not mockable
                 _context.Users.Attach(user);
                 var entry = _context.Entry(user);
