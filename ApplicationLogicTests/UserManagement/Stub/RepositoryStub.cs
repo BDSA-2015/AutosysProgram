@@ -41,6 +41,7 @@ namespace ApplicationLogicTests.UserManagement.Stub
 
         public T Read(int id)
         {
+            
             return _database[id];
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ApplicationLogics.AutosysServer.Mapping;
 using ApplicationLogics.StorageFasade;
 using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.UserManagement;
@@ -21,6 +22,7 @@ namespace ApplicationLogicTests.UserManagement
         [TestInitialize]
         public void Initialize()
         {
+            AutoMapperConfigurator.Configure();
             _facadeMock = new Mock<IFacade<Team>>();
             _team = new Team() {Id = 0, MetaData = "Meta", Name = "name", UserIDs = new[] {1, 2}};
         }
@@ -112,6 +114,7 @@ namespace ApplicationLogicTests.UserManagement
         /// Test if an existing team is being deleted
         /// </summary>
         [TestMethod]
+        [ExpectedException(typeof(KeyNotFoundException))]
         public void DeleteTeam_Valid_Test()
         {
             //Arrange
@@ -126,7 +129,9 @@ namespace ApplicationLogicTests.UserManagement
             teamHandler.Delete(idToDelete);
 
             //Assert
-            Assert.IsNull(teamHandler.Read(idToDelete));
+            teamHandler.Read(idToDelete);
+                //Exception must be thrown to indicate that the team does not exist (ONLY FOR TESTING REPOSITORY STUB)
+
         }
 
         /// <summary>

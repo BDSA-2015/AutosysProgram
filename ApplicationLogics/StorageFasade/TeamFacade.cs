@@ -40,9 +40,15 @@ namespace ApplicationLogics.StorageFasade
         {
             var toDelete = Read(team.Id);
             if (toDelete == null) throw new NullReferenceException("Team does not exist");
-            if (!team.Equals(toDelete)) throw new ArgumentException("Team has been updated");
-            var storedteamToDelete = Mapper.Map<StoredTeam>(toDelete);
-            _teamRepository.Delete(storedteamToDelete);
+
+            if ((team.Id == toDelete.Id) && (team.MetaData == toDelete.MetaData) && (team.Name == toDelete.Name) &&
+                team.UserIDs.Equals(toDelete.UserIDs))
+            {
+                var storedteamToDelete = Mapper.Map<StoredTeam>(toDelete);
+                _teamRepository.Delete(storedteamToDelete);
+            }
+            else throw new ArgumentException("Team has been updated");
+
         }
 
         /// <summary>

@@ -19,7 +19,7 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfi
         protected override void Configure()
         {
             CreateUserMappings();
-            CreateUserMappings();
+            CreateTeamMappings();
         }
 
 

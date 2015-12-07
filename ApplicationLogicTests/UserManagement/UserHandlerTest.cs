@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ApplicationLogics.AutosysServer.Mapping;
 using ApplicationLogics.StorageFasade;
 using ApplicationLogics.StorageFasade.Interface;
 using ApplicationLogics.UserManagement;
@@ -22,6 +23,7 @@ namespace ApplicationLogicTests.UserManagement
         [TestInitialize]
         public void Initialize()
         {
+            AutoMapperConfigurator.Configure();
             _facadeMock = new Mock<IFacade<User>>();
             _user = new User() {Id=0, MetaData = "Meta", Name = "name"};
         }
@@ -124,6 +126,7 @@ namespace ApplicationLogicTests.UserManagement
         /// Test if an existing user is being deleted
         /// </summary>
         [TestMethod]
+        [ExpectedException(typeof(KeyNotFoundException))]
         public void DeleteUser_Valid_Test()
         {
             //Arrange
@@ -138,7 +141,8 @@ namespace ApplicationLogicTests.UserManagement
             userHandler.Delete(idToDelete);
 
             //Assert
-            Assert.IsNull(userHandler.Read(idToDelete));
+            userHandler.Read(idToDelete);
+                //Exception must be thrown to indicate that the user does not exist (ONLY FOR TESTING REPOSITORY STUB)
         }
 
         /// <summary>

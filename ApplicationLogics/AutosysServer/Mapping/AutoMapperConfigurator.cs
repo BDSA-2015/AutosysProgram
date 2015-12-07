@@ -37,6 +37,7 @@ namespace ApplicationLogics.AutosysServer.Mapping
                 cfg.AddProfile(new UserAndTeamDTOProfile());
 
             });
+            Mapper.AssertConfigurationIsValid();
         }
     }
 }
