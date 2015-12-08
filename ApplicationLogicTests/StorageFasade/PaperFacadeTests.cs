@@ -9,6 +9,7 @@ using Moq;
 using NUnit.Framework;
 using Storage.Models;
 using Storage.Repository;
+using Storage.Repository.Interface;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace ApplicationLogicTests.StorageFasade

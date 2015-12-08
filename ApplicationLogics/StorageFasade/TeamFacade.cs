@@ -6,6 +6,7 @@ using ApplicationLogics.UserManagement;
 using AutoMapper;
 using Storage.Models;
 using Storage.Repository;
+using Storage.Repository.Interface;
 
 namespace ApplicationLogics.StorageFasade
 {

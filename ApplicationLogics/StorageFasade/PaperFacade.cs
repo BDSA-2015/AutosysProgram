@@ -8,6 +8,7 @@ using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.StorageFasade.Interface;
 using Storage.Models;
 using Storage.Repository;
+using Storage.Repository.Interface;
 
 namespace ApplicationLogics.StorageFasade
 {

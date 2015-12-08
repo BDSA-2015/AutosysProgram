@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Storage.Models;
 using Storage.Repository;
+using Storage.Repository.Interface;
 
 namespace ApplicationLogicTests.UserManagement
 {

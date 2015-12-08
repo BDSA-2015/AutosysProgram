@@ -3,9 +3,8 @@
 // Jacob Mullit Møiniche.
 
 using System.Collections.Generic;
-using Storage.Repository.Interface;
 
-namespace Storage.Repository
+namespace Storage.Repository.Interface
 {
     /// <summary>
     /// This interface outlines the CRUD methods that the storage repository class will be able to perform.
