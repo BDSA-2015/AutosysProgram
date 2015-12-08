@@ -13,7 +13,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
     /// predefined in the system
     /// </summary>
     [TestClass()]
-    public class DefaultFieldCheckerTests
+    public class DefaultFieldCheckerValidInputTests
     {
         /// <summary>
         /// Tests bibtex field syntaxes which should be valid
@@ -28,7 +28,7 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         public void ValidateValidInputTest(string field)
         {
             //Arrange
-            DefaultFieldChecker checker = new DefaultFieldChecker();
+            var checker = new DefaultFieldChecker();
 
             //Assert
             Assert.IsTrue(checker.Validate(field));
