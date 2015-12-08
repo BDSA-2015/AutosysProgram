@@ -47,6 +47,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -91,12 +95,17 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DbContextTests.cs" />
-    <Compile Include="DbRepositoryTests.cs" />
+    <Compile Include="RepositoryTests\DbRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StudyRepositoryTests.cs" />
-    <Compile Include="TeamRepositoryTests.cs" />
-    <Compile Include="TaskRepositoryTests.cs" />
-    <Compile Include="UserRepositoryTests.cs" />
+    <Compile Include="RepositoryTests\StudyRepositoryTests.cs" />
+    <Compile Include="RepositoryTests\TeamRepositoryTests.cs" />
+    <Compile Include="RepositoryTests\TaskRepositoryTests.cs" />
+    <Compile Include="RepositoryTests\ProtocolRepositoryTests.cs" />
+    <Compile Include="RepositoryTests\UserRepositoryTests.cs" />
+    <Compile Include="Utility\DbRepositoryStub.cs" />
+    <Compile Include="Utility\IDbContext.cs" />
+    <Compile Include="Utility\MockUtility.cs" />
+    <Compile Include="Utility\TestDbAsyncQueryProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
