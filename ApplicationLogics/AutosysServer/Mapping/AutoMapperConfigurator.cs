@@ -35,6 +35,10 @@ namespace ApplicationLogics.AutosysServer.Mapping
                 //WebApi Profiles
                 cfg.AddProfile(new UserAndTeamDTOProfile());
 
+
+                //WebApi Profiles
+                cfg.AddProfile(new StudyManagementStorageProfile());
+                
                 //PaperManagement Profiles
                 cfg.AddProfile(new PaperManagementStorageProfile());
 
