@@ -25,7 +25,7 @@ namespace StorageTests.RepositoryTests
         private IList<StoredUser> _data;
         private Mock<AutoSysDbModel> _context; // Use IUserContext instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredUser>> _mockSet;
-        private DbRepositoryStub<StoredUser> _repository;
+        private UserRepositoryStub _repository;
 
         /// <summary>
         /// This method sets up data used to mock a collection of users in a DbContext used by the UserRepository. 
@@ -55,7 +55,7 @@ namespace StorageTests.RepositoryTests
             });
 
             _context = mockContext;
-            _repository = new DbRepositoryStub<StoredUser>(_context.Object);
+            _repository = new UserRepositoryStub(_context.Object);
         }
 
         /// <summary>
@@ -76,8 +76,8 @@ namespace StorageTests.RepositoryTests
             mockContext.Setup(m => m.Users).Returns(mockSet.Object);
 
             // Act 
-            ///var service = new UserRepository();
-            var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
+            var service = new UserRepositoryStub(mockContext.Object);
+            //var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
             int id = service.CreateOrUpdate(new StoredUser());
 
             // Assert 
@@ -105,8 +105,8 @@ namespace StorageTests.RepositoryTests
             var user = new StoredUser { Name = "Steven", MetaData = "Validator" };
 
             // Act 
-            var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
-            //var service = new UserRepository(mockContext.Object);
+            //var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
+            var service = new UserRepositoryStub(mockContext.Object);
             var id = service.CreateOrUpdate(user);
 
             Assert.AreEqual(0, _data[0].Id);
