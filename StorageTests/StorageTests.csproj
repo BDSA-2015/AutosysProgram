@@ -103,7 +103,9 @@
     <Compile Include="RepositoryTests\ProtocolRepositoryTests.cs" />
     <Compile Include="RepositoryTests\UserRepositoryTests.cs" />
     <Compile Include="Utility\DbRepositoryStub.cs" />
+    <Compile Include="Utility\UserRepository.cs" />
     <Compile Include="Utility\IDbContext.cs" />
+    <Compile Include="Utility\IUserContext.cs" />
     <Compile Include="Utility\MockUtility.cs" />
     <Compile Include="Utility\TestDbAsyncQueryProvider.cs" />
   </ItemGroup>

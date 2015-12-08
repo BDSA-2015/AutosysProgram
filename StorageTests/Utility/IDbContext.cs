@@ -10,9 +10,11 @@ namespace StorageTests.Utility
     /// <summary>
     /// This interface is used to mock a database context with a collection of stored entities. 
     /// </summary>
-    public interface IDbContext : IDisposable
+    public interface IDbContext : IDisposable 
     {
         DbSet<T> Set<T>() where T : class;
+
+        int SaveChanges();
 
         Task<int> SaveChangesAsync();
 
@@ -25,5 +27,7 @@ namespace StorageTests.Utility
         /// <returns></returns>
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class, IEntity; 
     }
+
+
 
 }

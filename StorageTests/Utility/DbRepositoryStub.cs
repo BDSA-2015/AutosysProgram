@@ -1,21 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using Storage;
 using Storage.Repository.Interface;
+using StorageTests.Utility;
 
-namespace StorageTests.Utility
+namespace Storage.Repository
 {
 
     /// <summary>
-    /// This is a test stub of the generic DbRepository in storage used to mock the repository with an interface instead of a concrete DbContext. 
+    /// this is a test stub  
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class DbRepositoryStub<T> : IRepository<T> where T : class, IEntity
     {
 
-        private readonly IDbContext _context;
+        private IDbContext _context;
 
-        // Used for mocking 
         public DbRepositoryStub(IDbContext context)
         {
             _context = context;
@@ -29,7 +28,7 @@ namespace StorageTests.Utility
         /// </param>
         public virtual int CreateOrUpdate(T item)
         {
-            using (var _context = new AutoSysDbModel())
+            using (_context)
             {
                 var entity = _context.Set<T>().Find(item.Id);
 
@@ -60,9 +59,9 @@ namespace StorageTests.Utility
         /// </param>
         public virtual T Read(int id)
         {
-            using (var context = new AutoSysDbModel())
+            using (_context)
             {
-                return context.Set<T>().Find(id);
+                return _context.Set<T>().Find(id);
             }
         }
 
@@ -71,9 +70,9 @@ namespace StorageTests.Utility
         /// </summary>
         public virtual IEnumerable<T> Read()
         {
-            using (var context = new AutoSysDbModel())
+            using (_context)
             {
-                return context.Set<T>();
+                return _context.Set<T>();
             }
         }
 
@@ -85,15 +84,15 @@ namespace StorageTests.Utility
         /// </param>
         public virtual void UpdateIfExists(T item)
         {
-            using (var context = new AutoSysDbModel())
+            using (_context)
             {
-                var entity = context.Set<T>().Find(item.Id);
+                var entity = _context.Set<T>().Find(item.Id);
 
                 if (entity != null)
                 {
-                    context.Set<T>().Attach(item);
-                    context.Entry<T>(item).State = EntityState.Modified;
-                    context.SaveChanges();
+                    _context.Set<T>().Attach(item);
+                    _context.Entry<T>(item).State = EntityState.Modified;
+                    _context.SaveChanges();
                 }
             }
         }
@@ -106,14 +105,14 @@ namespace StorageTests.Utility
         /// </param>
         public virtual void DeleteIfExists(T item)
         {
-            using (var context = new AutoSysDbModel())
+            using (_context)
             {
-                var entity = context.Set<T>().Find(item.Id);
+                var entity = _context.Set<T>().Find(item.Id);
 
                 if (entity != null)
                 {
-                    context.Set<T>().Remove(item);
-                    context.SaveChanges();
+                    _context.Set<T>().Remove(item);
+                    _context.SaveChanges();
                 }
             }
         }
