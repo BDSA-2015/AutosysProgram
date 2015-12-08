@@ -13,9 +13,9 @@ namespace Storage.Repository
     public class DbRepositoryStub<T> : IRepository<T> where T : class, IEntity
     {
 
-        private AutoSysDbModel _context;
+        private IDbContext _context;
 
-        public DbRepositoryStub(AutoSysDbModel context)
+        public DbRepositoryStub(IDbContext context)
         {
             _context = context;
         }

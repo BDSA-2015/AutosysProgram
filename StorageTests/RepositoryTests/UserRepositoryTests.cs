@@ -23,9 +23,9 @@ namespace StorageTests.RepositoryTests
     {
 
         private IList<StoredUser> _data;
-        private Mock<AutoSysDbModel> _context; // Use IUserContext instead of concrete AutoSysDbModel
+        private Mock<Utility.IUserContext> _context; // Use IUserContext instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredUser>> _mockSet;
-        private DbRepositoryStub<StoredUser> _repository;
+        private UserRepositoryStub _repository;
 
         /// <summary>
         /// This method sets up data used to mock a collection of users in a DbContext used by the UserRepository. 
@@ -42,7 +42,7 @@ namespace StorageTests.RepositoryTests
 
             _mockSet = MockUtility.CreateMockDbSet(_data, u => u.Id);
 
-            var mockContext = new Mock<AutoSysDbModel>();
+            var mockContext = new Mock<IUserContext>();
             mockContext.Setup(s => s.Users).Returns(_mockSet.Object);
             mockContext.Setup(s => s.SaveChanges()).Callback(() =>
             {
@@ -55,7 +55,7 @@ namespace StorageTests.RepositoryTests
             });
 
             _context = mockContext;
-            _repository = new DbRepositoryStub<StoredUser>(_context.Object);
+            _repository = new UserRepositoryStub(_context.Object);
         }
 
         /// <summary>
@@ -70,21 +70,18 @@ namespace StorageTests.RepositoryTests
         {
             // Arrange 
             var mockSet = new Mock<DbSet<StoredUser>>();
-
-            var mockContext = new Mock<AutoSysDbModel>();
-            //var mockContext = new Mock<AutoSysDbModel>();
+            var mockContext = new Mock<IUserContext>();
             mockContext.Setup(m => m.Users).Returns(mockSet.Object);
 
             // Act 
-            ///var service = new UserRepository();
-            var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
+            var service = new UserRepositoryStub(mockContext.Object);
+            //var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
             int id = service.CreateOrUpdate(new StoredUser());
 
             // Assert 
             mockSet.Verify(m => m.Add(It.IsAny<StoredUser>()), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
 
-            Assert.AreEqual(0, _data[0].Id);
         }
 
         [TestMethod]
@@ -100,16 +97,36 @@ namespace StorageTests.RepositoryTests
         {
             // Arrange 
             var mockSet = new Mock<DbSet<StoredUser>>();
-            var mockContext = new Mock<AutoSysDbModel>();
+            var mockContext = new Mock<IUserContext>();
             mockContext.Setup(m => m.Users).Returns(mockSet.Object);
             var user = new StoredUser { Name = "Steven", MetaData = "Validator" };
 
             // Act 
-            var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
-            //var service = new UserRepository(mockContext.Object);
+            //var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
+            var service = new UserRepositoryStub(mockContext.Object);
             var id = service.CreateOrUpdate(user);
 
-            Assert.AreEqual(0, _data[0].Id);
+            Assert.AreEqual(0, user.Id);
+        }
+
+        [TestMethod]
+        public void CreateMultipleUsers_ReturnsId_Incremented()
+        {
+            // Arrange 
+            var mockSet = new Mock<DbSet<StoredUser>>();
+            var mockContext = new Mock<IUserContext>();
+            mockContext.Setup(m => m.Users).Returns(mockSet.Object);
+            var user = new StoredUser { Name = "Steven", MetaData = "Validator" };
+            var secondUser = new StoredUser {Name = "William", MetaData = "Researcher"};
+
+            // Act 
+            //var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
+            var service = new UserRepositoryStub(mockContext.Object);
+            var id = service.CreateOrUpdate(user);
+            var secondId = service.CreateOrUpdate(secondUser);
+
+            // Assert
+            Assert.AreEqual(1, secondUser.Id);
         }
 
         [TestMethod]
@@ -174,24 +191,13 @@ namespace StorageTests.RepositoryTests
             _context.Verify(repo => repo.SaveChanges(), Times.Once);
         }
 
-        /*
+
         [TestMethod]
         public void GetById()
         {
-            var secondUser = _repository.Get(1);
+            var secondUser = _repository.Read(1);
             Assert.AreEqual("William Parker", secondUser.Name);
         }
-        */
-
-        /*
-        [TestMethod]
-        public void GetByName()
-        {
-            using (var repository = new UserRepository(_context.Object))
-            {;
-            }
-        }
-        */
 
     }
 

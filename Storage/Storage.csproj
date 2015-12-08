@@ -58,12 +58,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repository\AsyncDbRepository.cs" />
     <Compile Include="AutoSysDbModel.cs" />
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Repository\DbRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Interface\IAsyncRepository.cs" />
     <Compile Include="Repository\Interface\IEntity.cs" />
     <Compile Include="Repository\Interface\IRepository.cs" />
     <Compile Include="Models\StoredCriteria.cs" />

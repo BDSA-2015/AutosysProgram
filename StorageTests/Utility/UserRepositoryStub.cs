@@ -6,19 +6,24 @@ using Storage.Repository.Interface;
 
 namespace StorageTests.Utility
 {
+
+    /// <summary>
+    /// This is a test stub of the generic DbRepository in storage used to mock the repository with an interface instead of a concrete DbContext. 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class UserRepositoryStub : IRepository<StoredUser> // Before : DbRepository<StoredUser> 
     {
 
-        private AutoSysDbModel _context;
+        private IUserContext _context;
 
-        public UserRepositoryStub(AutoSysDbModel context)
+        public UserRepositoryStub(IUserContext context)
         {
             _context = context;
         }
 
         public int CreateOrUpdate(StoredUser user)
         {
-            using (var _context = new AutoSysDbModel())
+            using (_context)
             {
                 var entity = _context.Users.Find(user.Id);
 
@@ -41,45 +46,45 @@ namespace StorageTests.Utility
 
         public StoredUser Read(int id)
         {
-            using (var context = new AutoSysDbModel())
+            using (_context)
             {
-                return context.Users.Find(id);
+                return _context.Users.Find(id);
             }
         }
 
         public IEnumerable<StoredUser> Read()
         {
-            using (var context = new AutoSysDbModel())
+            using (_context)
             {
-                return context.Users.AsEnumerable();
+                return _context.Users.AsEnumerable();
             }
         }
 
         public void UpdateIfExists(StoredUser user)
         {
-            using (var context = new AutoSysDbModel())
+            using (_context)
             {
-                var entity = context.Users.Find(user.Id);
+                var entity = _context.Users.Find(user.Id);
 
                 if (entity != null)
                 {
                     entity.Name = user.Name;
                     entity.MetaData = user.MetaData;
-                    context.SaveChanges();
+                    _context.SaveChanges();
                 }
             }
         }
 
         public void DeleteIfExists(StoredUser user)
         {
-            using (var context = new AutoSysDbModel())
+            using (_context)
             {
-                var entity = context.Users.Find(user.Id);
+                var entity = _context.Users.Find(user.Id);
 
                 if (entity != null)
                 {
-                    context.Users.Remove(entity);
-                    context.SaveChanges();
+                    _context.Users.Remove(entity);
+                    _context.SaveChanges();
                 }
             }
         }
