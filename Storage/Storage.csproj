@@ -78,6 +78,7 @@
     <Compile Include="Models\StoredTaskRequest.cs" />
     <Compile Include="Models\StoredTeam.cs" />
     <Compile Include="Models\StoredUser.cs" />
+    <Compile Include="Repository\ProtocolRepository.cs" />
     <Compile Include="Repository\StudyRepository.cs" />
     <Compile Include="Repository\TaskRepository.cs" />
     <Compile Include="Repository\TeamRepository.cs" />

@@ -8,31 +8,9 @@ using Storage.Models;
 
 namespace Storage.Repository
 {
-    public class TaskRepository : IRepository<StoredTaskRequest>
+    public class TaskRepository : DbRepository<StoredTaskRequest>
     {
-        public int CreateOrUpdate(StoredTaskRequest item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteIfExists(StoredTaskRequest item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<StoredTaskRequest> Read()
-        {
-            throw new NotImplementedException();
-        }
-
-        public StoredTaskRequest Read(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateIfExists(StoredTaskRequest item)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
+
 }

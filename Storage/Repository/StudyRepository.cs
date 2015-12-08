@@ -8,31 +8,9 @@ using Storage.Models;
 
 namespace Storage.Repository
 {
-    public class StudyRepository : IRepository<StoredStudy>
+    public class StudyRepository : DbRepository<StoredStudy>
     {
-        public int CreateOrUpdate(StoredStudy item)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void DeleteIfExists(StoredStudy item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<StoredStudy> Read()
-        {
-            throw new NotImplementedException();
-        }
-
-        public StoredStudy Read(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateIfExists(StoredStudy item)
-        {
-            throw new NotImplementedException();
-        }
     }
+
 }

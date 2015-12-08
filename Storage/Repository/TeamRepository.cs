@@ -8,31 +8,9 @@ using Storage.Models;
 
 namespace Storage.Repository
 {
-    public class TeamRepository : IRepository<StoredTeam>
+    public class TeamRepository : DbRepository<StoredTeam>
     {
-        public int CreateOrUpdate(StoredTeam item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteIfExists(StoredTeam item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<StoredTeam> Read()
-        {
-            throw new NotImplementedException();
-        }
-
-        public StoredTeam Read(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateIfExists(StoredTeam item)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
+
 }
