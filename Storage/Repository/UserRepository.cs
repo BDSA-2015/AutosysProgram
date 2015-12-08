@@ -10,12 +10,12 @@ namespace Storage.Repository
 {
     public class UserRepository : IRepository<StoredUser> 
     {
-        public int Create(StoredUser item)
+        public int CreateOrUpdate(StoredUser item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(StoredUser item)
+        public void DeleteIfExists(StoredUser item)
         {
             throw new NotImplementedException();
         }
@@ -30,7 +30,7 @@ namespace Storage.Repository
             throw new NotImplementedException();
         }
 
-        public void Update(StoredUser item)
+        public void UpdateIfExists(StoredUser item)
         {
             throw new NotImplementedException();
         }

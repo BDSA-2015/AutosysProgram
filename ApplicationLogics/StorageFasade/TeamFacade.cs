@@ -29,7 +29,7 @@ namespace ApplicationLogics.StorageFasade
         /// <returns>Id of team</returns>
         public int Create(Team team)
         {
-            return _teamRepository.Create(Mapper.Map<StoredTeam>(team));
+            return _teamRepository.CreateOrUpdate(Mapper.Map<StoredTeam>(team));
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace ApplicationLogics.StorageFasade
                 team.UserIDs.Equals(toDelete.UserIDs))
         {
                 var storedteamToDelete = Mapper.Map<StoredTeam>(toDelete);
-                _teamRepository.Delete(storedteamToDelete);
+                _teamRepository.DeleteIfExists(storedteamToDelete);
             }
             else throw new ArgumentException("Team has been updated");
 
@@ -81,7 +81,7 @@ namespace ApplicationLogics.StorageFasade
         /// <param name="team">team object</param>
         public void Update(Team team)
         {
-            _teamRepository.Update(Mapper.Map<StoredTeam>(team));
+            _teamRepository.UpdateIfExists(Mapper.Map<StoredTeam>(team));
         }
     }
 }

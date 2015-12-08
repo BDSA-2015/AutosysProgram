@@ -10,12 +10,12 @@ namespace Storage.Repository
 {
     public class TeamRepository : IRepository<StoredTeam>
     {
-        public int Create(StoredTeam item)
+        public int CreateOrUpdate(StoredTeam item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(StoredTeam item)
+        public void DeleteIfExists(StoredTeam item)
         {
             throw new NotImplementedException();
         }
@@ -30,7 +30,7 @@ namespace Storage.Repository
             throw new NotImplementedException();
         }
 
-        public void Update(StoredTeam item)
+        public void UpdateIfExists(StoredTeam item)
         {
             throw new NotImplementedException();
         }

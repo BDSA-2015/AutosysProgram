@@ -10,12 +10,12 @@ namespace Storage.Repository
 {
     public class TaskRepository : IRepository<StoredTaskRequest>
     {
-        public int Create(StoredTaskRequest item)
+        public int CreateOrUpdate(StoredTaskRequest item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(StoredTaskRequest item)
+        public void DeleteIfExists(StoredTaskRequest item)
         {
             throw new NotImplementedException();
         }
@@ -30,7 +30,7 @@ namespace Storage.Repository
             throw new NotImplementedException();
         }
 
-        public void Update(StoredTaskRequest item)
+        public void UpdateIfExists(StoredTaskRequest item)
         {
             throw new NotImplementedException();
         }

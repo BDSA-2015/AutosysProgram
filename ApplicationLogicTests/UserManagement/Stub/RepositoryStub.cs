@@ -20,7 +20,7 @@ namespace ApplicationLogicTests.UserManagement.Stub
             _database = new Dictionary<int, T>();
         }
 
-        public int Create(T item)
+        public int CreateOrUpdate(T item)
         {
             item.Id = _id;
             _id++;
@@ -29,7 +29,7 @@ namespace ApplicationLogicTests.UserManagement.Stub
             return item.Id;
         }
 
-        public void Delete(T item)
+        public void DeleteIfExists(T item)
         {
             _database.Remove(item.Id);
         }
@@ -45,7 +45,7 @@ namespace ApplicationLogicTests.UserManagement.Stub
             return _database[id];
         }
 
-        public void Update(T item)
+        public void UpdateIfExists(T item)
         {
             _database.Remove(item.Id);
             _database.Add(item.Id, item);

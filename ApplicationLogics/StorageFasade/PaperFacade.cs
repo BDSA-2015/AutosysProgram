@@ -28,7 +28,7 @@ namespace ApplicationLogics.StorageFasade
                 throw new ArgumentNullException("The given Paper cannot be null");
             }
             var storedPaper = AutoMapper.Mapper.Map<StoredPaper>(item);
-            return _papers.Create(storedPaper);
+            return _papers.CreateOrUpdate(storedPaper);
         }
 
         public void Delete(Paper item)
@@ -38,7 +38,7 @@ namespace ApplicationLogics.StorageFasade
                 throw new ArgumentNullException("The given Paper cannot be null");
             }
             var storedPaper = AutoMapper.Mapper.Map<StoredPaper>(item);
-            _papers.Delete(storedPaper);
+            _papers.DeleteIfExists(storedPaper);
         }
 
         public IEnumerable<Paper> Read()
@@ -66,7 +66,7 @@ namespace ApplicationLogics.StorageFasade
                 throw new ArgumentNullException("The given Paper cannot be null");
             }
 
-            _papers.Update(AutoMapper.Mapper.Map<StoredPaper>(item));
+            _papers.UpdateIfExists(AutoMapper.Mapper.Map<StoredPaper>(item));
         }
     }
 

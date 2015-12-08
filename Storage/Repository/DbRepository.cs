@@ -13,18 +13,44 @@ namespace Storage.Repository
     /// <typeparam name="T"></typeparam>
     public class DbRepository<T> : IRepository<T> where T : class, IEntity
     {
-        
-        public virtual int Create(T item)
+
+        /// <summary>
+        /// Creates an item from a given Dbset in the <see cref="AutoSysDbModel"/>, e.g. Stored Users.
+        /// </summary>
+        /// <param name="item">
+        /// Entity to create.
+        /// </param>
+        public virtual int CreateOrUpdate(T item)
         {
             using (var context = new AutoSysDbModel())
-            { 
-                context.Set<T>().Add(item);
-                context.SaveChanges();
-                return item.Id;
+            {
+                var entity = context.Set<T>().Find(item.Id);
+
+                if (entity == null)
+                {
+                    context.Set<T>().Add(item);
+                    context.SaveChanges();
+                    return item.Id;
+                }
+
+                else
+                {
+                    context.Set<T>().Attach(item);
+                    context.Entry<T>(item).State = EntityState.Modified;
+                    context.SaveChanges();
+                    return item.Id;
+                }
+
             }
 
         }
 
+        /// <summary>
+        /// Reads a specific item from a given DbSet based on its id. 
+        /// </summary>
+        /// <param name="id">
+        /// Entity with given id. 
+        /// </param>
         public virtual T Read(int id)
         {
             using (var context = new AutoSysDbModel())
@@ -33,6 +59,9 @@ namespace Storage.Repository
             }
         }
 
+        /// <summary>
+        /// Reads all stored items in a given DbSet. 
+        /// </summary>
         public virtual IEnumerable<T> Read()
         {
             using (var context = new AutoSysDbModel())
@@ -41,21 +70,44 @@ namespace Storage.Repository
             }
         }
 
-        public virtual void Update(T item)
+        /// <summary>
+        /// Updates an item from a given Dbset in the <see cref="AutoSysDbModel"/>, e.g. Stored Users.
+        /// </summary>
+        /// <param name="item">
+        /// Entity to update.
+        /// </param>
+        public virtual void UpdateIfExists(T item)
         {
             using (var context = new AutoSysDbModel())
             {
-                context.Set<T>().Attach(item);
-                context.Entry<T>(item).State = EntityState.Modified;
+                var entity = context.Set<T>().Find(item.Id);
+
+                if (entity != null)
+                { 
+                    context.Set<T>().Attach(item);
+                    context.Entry<T>(item).State = EntityState.Modified;
+                    context.SaveChanges();
+                }
             }
         }
 
-        public virtual void Delete(T item)
+        /// <summary>
+        /// Deletes an item from a given Dbset in the <see cref="AutoSysDbModel"/>, e.g. Stored Users.
+        /// </summary>
+        /// <param name="item">
+        /// Entity to delete. 
+        /// </param>
+        public virtual void DeleteIfExists(T item)
         {
             using (var context = new AutoSysDbModel())
             {
+                var entity = context.Set<T>().Find(item.Id);
+
+                if (entity != null)
+                { 
                 context.Set<T>().Remove(item);
                 context.SaveChanges();
+                }
             }
         }
 

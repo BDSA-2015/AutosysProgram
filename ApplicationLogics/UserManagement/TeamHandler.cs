@@ -44,7 +44,7 @@ namespace ApplicationLogics.UserManagement
         }
 
         /// <summary>
-        /// Delete a team from database
+        /// DeleteIfExists a team from database
         /// </summary>
         /// <param name="id">id of team</param>
         public void Delete(int id)

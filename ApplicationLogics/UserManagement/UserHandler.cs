@@ -65,7 +65,7 @@ namespace ApplicationLogics.UserManagement
         }
 
         /// <summary>
-        /// Delete an existing user
+        /// DeleteIfExists an existing user
         /// </summary>
         /// <param name="id">id of user to delete.</param>
         public void Delete(int id)
