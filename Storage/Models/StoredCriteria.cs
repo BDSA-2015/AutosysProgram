@@ -69,11 +69,13 @@ namespace Storage.Models
         /// </summary>
         public string Value { get; set; }
 
+        /*
         /// <summary>
         /// This represents the bibtex tag affected by a given criteria.
         /// By way of example, a tag {Title} could be targetted in the criteria through a string comparison. 
         /// </summary>
         public virtual StoredTag Tag { get; set; } // TODO Replace with reference to Tag entity class 
+        */
 
         [Required]
         [StringLength(50)]
