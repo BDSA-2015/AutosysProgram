@@ -12,11 +12,11 @@ namespace Storage.Repository
     /// <typeparam name="T"></typeparam>
     public class DbRepository<T> : IRepository<T> where T : class, IEntity
     {
-        private DbContext _dbContext;
+        private DbContext _dbContext; //TODO We may want to create our own DB context that implements dbContext
 
-        public DbRepository(DbContext context)
+        public DbRepository()
         {
-            _dbContext = context;
+            //TODO removed creation of DBContext since we want to keep disposing after use.
         }
 
         public int Create(T item)
@@ -24,6 +24,7 @@ namespace Storage.Repository
             _dbContext.Set<T>().Add(item);
             _dbContext.SaveChanges();
             return item.Id;
+          
         }
 
         public T Read(int id)

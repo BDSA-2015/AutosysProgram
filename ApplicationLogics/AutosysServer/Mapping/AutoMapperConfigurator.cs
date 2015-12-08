@@ -43,6 +43,7 @@ namespace ApplicationLogics.AutosysServer.Mapping
                 cfg.AddProfile(new PaperManagementStorageProfile());
 
             });
+            Mapper.AssertConfigurationIsValid();
         }
     }
 }

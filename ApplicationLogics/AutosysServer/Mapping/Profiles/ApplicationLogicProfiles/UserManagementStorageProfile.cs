@@ -3,6 +3,7 @@
 // Jacob Mullit Møiniche.
 
 using ApplicationLogics.UserManagement;
+using ApplicationLogics.UserManagement.Entities;
 using AutoMapper;
 using Storage.Entities;
 using Storage.Models;
@@ -18,7 +19,7 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfi
         protected override void Configure()
         {
             CreateUserMappings();
-            CreateUserMappings();
+            CreateTeamMappings();
         }
 
 
@@ -39,11 +40,16 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfi
         /// </summary>
         private void CreateTeamMappings()
         {
-            //StoredUser to User
-            Mapper.CreateMap<StoredTeam, Team>();
+            //StoredTeam to Team
+            Mapper.CreateMap<StoredTeam, Team>()
+                .ForMember(target => target.UserIDs,
+                            opt => opt.MapFrom(storedTeam => storedTeam.UserIds));
 
-            //User to StoredUser
-            Mapper.CreateMap<Team, StoredTeam>();
+
+            //Team to StoredTeam
+            Mapper.CreateMap<Team, StoredTeam>()
+                .ForMember(user => user.UserIds,
+                            opt => opt.MapFrom(storedUser => storedUser.UserIDs));
         }
     }
 }

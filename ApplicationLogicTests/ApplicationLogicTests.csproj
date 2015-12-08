@@ -121,7 +121,15 @@
     <Compile Include="Mapping\Stub\ObjectDto.cs" />
     <Compile Include="Mapping\Stub\ObjectManyProperties.cs" />
     <Compile Include="Mapping\Stub\ObjectSameOneProperty.cs" />
+    <Compile Include="Mapping\AutoMapperConfiguratorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserManagement\Stub\RepositoryStub.cs" />
+    <Compile Include="UserManagement\TeamFacadeTests.cs" />
+    <Compile Include="UserManagement\TeamValidatorTests.cs" />
+    <Compile Include="UserManagement\TeamHandlerTests.cs" />
+    <Compile Include="UserManagement\UserHandlerTest.cs" />
+    <Compile Include="UserManagement\UserFacadeTests.cs" />
+    <Compile Include="UserManagement\UserTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -158,8 +166,12 @@
       <Name>ApplicationLogics</Name>
     </ProjectReference>
     <ProjectReference Include="..\Storage\Storage.csproj">
-      <Project>{390D70E5-5E15-4344-915A-D570F5BCA74D}</Project>
+      <Project>{390d70e5-5e15-4344-915a-d570f5bca74d}</Project>
       <Name>Storage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApi\WebApi.csproj">
+      <Project>{b9d7d263-0fa5-46e1-bbd8-53822b6877cd}</Project>
+      <Name>WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
