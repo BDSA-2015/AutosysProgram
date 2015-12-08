@@ -17,7 +17,11 @@ namespace StorageTests
             _dbContext = new AutoSysDbModel();
         }
 
+        /// <summary>
+        /// This test is used to check whether the database connection works. 
+        /// </summary>
         [TestMethod]
+        [Ignore]
         public void CheckConnection()
         {
             bool result; 
@@ -36,7 +40,10 @@ namespace StorageTests
             Assert.AreEqual(true, result);
         }
 
-
+        /// <summary>
+        /// This test is used to check if the database can be created correctly. 
+        /// </summary>
+        [Ignore]
         [TestMethod]
         public void CreateDatabase()
         {

@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Storage.Repository.Interface;
 
 namespace Storage.Repository
@@ -7,7 +10,7 @@ namespace Storage.Repository
 
     /// <summary>
     /// This class implements the IRepository interface outlining the CRUD operations to be used in the database. 
-    /// These are used specifically on a given Dbcontext set in the main method in the Program class. 
+    /// These are used specifically on a given Dbcontext set in the AutoSysDbModel.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class DbRepository<T> : IRepository<T> where T : class, IEntity
@@ -19,33 +22,62 @@ namespace Storage.Repository
             _dbContext = context;
         }
 
-        public int Create(T item)
+        public async Task<int> Create(T user)
         {
-            _dbContext.Set<T>().Add(item);
-            _dbContext.SaveChanges();
-            return item.Id;
+            using (_dbContext)
+            {
+                    _dbContext.Set<T>().Add(user);
+                    await _dbContext.SaveChangesAsync();
+                    return user.Id;
+            }
         }
 
-        public T Read(int id)
+        public async Task<T> Read(int id)
         {
-            return _dbContext.Set<T>().Find(id);
+            using (_dbContext)
+            { 
+                return await _dbContext.Set<T>().FindAsync(id);
+            }
         }
 
-        public IEnumerable<T> Read()
+        public IQueryable Read()
         {
-            return _dbContext.Set<T>();
+            using (_dbContext)
+            {
+                return _dbContext.Set<T>().AsQueryable();
+            }
         }
 
-        public void Update(T item)
+        public async Task<bool> Update(T user)
         {
-            _dbContext.Set<T>().Attach(item);
-            _dbContext.Entry<T>(item).State = EntityState.Modified;
+            using (_dbContext)
+            {
+                var entity = await _dbContext.Set<T>().FindAsync(user.Id);
+
+                if (entity != null)
+                {
+                    _dbContext.Set<T>().Attach(user);
+                    _dbContext.Entry<T>(user).State = EntityState.Modified;
+                    return true;
+                }
+                else return false;
+            }
         }
 
-        public void Delete(T item)
+        public async Task<bool> Delete(T user)
         {
-            _dbContext.Set<T>().Remove(item);
-            _dbContext.SaveChanges();
+            using (_dbContext)
+            {
+                var entity = await _dbContext.Set<T>().FindAsync(user.Id);
+
+                if (entity != null)
+                {
+                    _dbContext.Set<T>().Remove(user);
+                    await _dbContext.SaveChangesAsync();
+                    return true;
+                }
+                else return false;
+            }
         }
 
         public void Dispose()

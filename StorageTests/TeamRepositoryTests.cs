@@ -6,9 +6,8 @@ namespace StorageTests
     [TestClass]
     public class TeamRepositoryTests
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-        }
+
+
     }
+
 }

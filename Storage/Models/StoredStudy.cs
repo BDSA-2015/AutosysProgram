@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Storage.Entities;
 using Storage.Repository.Interface;
 
@@ -10,6 +11,7 @@ namespace Storage.Models
     /// This class represents entity used to store a study, the whole work process from initiating a research to narrowing down relevant research evidence. 
     /// A study consists of diﬀerent phases where data is continuously synthesized and approved by users with different roles. 
     /// </summary>
+    [Table("Study")]
     public class StoredStudy : IEntity
     {
         [Key]
