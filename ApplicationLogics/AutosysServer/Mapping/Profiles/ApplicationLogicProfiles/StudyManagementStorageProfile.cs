@@ -19,22 +19,23 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfi
             CreateCriteriaMappings();
             CreatePhaseMappings();
             CreateDatafieldMapping();
+            CreateRoleMapping();
+            CreateStudyMapping();
+            CreateTaskRequestMapping();
         }
 
         /// <summary>
-        /// Creates mappings between user and storedUser
+        /// Creates a mapping between the the database representation of the Criteria and the Criteira in the model
         /// </summary>
         private void CreateCriteriaMappings()
         {
-            //StoredUser to User
             Mapper.CreateMap<StoredCriteria, Criteria>();
 
-            //User to StoredUser
             Mapper.CreateMap<Criteria, StoredCriteria>();
         }
 
         /// <summary>
-        /// Creates mappings between team and storedTeam
+        /// Creates a mapping between the the database representation of the Phase and the Phase in the model
         /// </summary>
         private void CreatePhaseMappings()
         {
@@ -44,25 +45,33 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfi
             //User to StoredUser
             Mapper.CreateMap<Phase, StoredPhase>();
         }
-
+        /// <summary>
+        /// Creates a mapping between the the database representation of the Datafield and the Datafield in the model
+        /// </summary>
         private void CreateDatafieldMapping()
         {
             Mapper.CreateMap<DataField, StoredDataField>();
             Mapper.CreateMap<StoredDataField, DataField>();
         }
-
+        /// <summary>
+        /// Creates a mapping between the the database representation of the Role and the Role in the model
+        /// </summary>
         private void CreateRoleMapping()
         {
             Mapper.CreateMap<Role,StoredRole>();
             Mapper.CreateMap<StoredRole, Role>();
         }
-
+        /// <summary>
+        /// Creates a mapping between the the database representation of the Study and the Study in the model
+        /// </summary>
         private void CreateStudyMapping()
         {
             Mapper.CreateMap<Study, StoredStudy>();
             Mapper.CreateMap<StoredStudy, Study>();
         }
-
+        /// <summary>
+        /// Creates a mapping between the the database representation of the Task and the Task in the model
+        /// </summary>
         private void CreateTaskRequestMapping()
         {
             Mapper.CreateMap<TaskRequest,StoredTaskRequest>();
