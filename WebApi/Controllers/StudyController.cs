@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http;
 using SystematicStudyService.Models;
 
-namespace SystematicStudyService.Controllers
+namespace WebApi.Controllers
 {
     /// <summary>
     /// Controller to access information about a study.

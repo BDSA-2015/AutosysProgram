@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using ApplicationLogics.PaperManagement;
+using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
 

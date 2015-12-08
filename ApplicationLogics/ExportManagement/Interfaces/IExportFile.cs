@@ -7,7 +7,7 @@ namespace ApplicationLogics.ExportManagement.Interfaces
     /// <summary>
     /// Interface for ExportFiles generated from an existing Protocol.
     /// </summary>
-    public interface IExportFile 
+    public interface IExportFile
     {
         int Origin { get; set; }
         string Description { get; set; }

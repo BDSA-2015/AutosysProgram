@@ -21,9 +21,9 @@ namespace Storage.Repository
 
         public int Create(T item)
         {
-                _dbContext.Set<T>().Add(item);
-                _dbContext.SaveChanges();
-                return item.Id;
+            _dbContext.Set<T>().Add(item);
+            _dbContext.SaveChanges();
+            return item.Id;
           
         }
 

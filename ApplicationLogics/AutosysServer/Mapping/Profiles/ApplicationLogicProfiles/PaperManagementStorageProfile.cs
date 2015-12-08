@@ -2,7 +2,9 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using ApplicationLogics.PaperManagement.Bibtex;
 using AutoMapper;
+using Storage.Models;
 
 namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfiles
 {
@@ -21,7 +23,11 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfi
 
         private void CreatePaperMappings()
         {
-            //AutoMapper.Mapper.CreateMap<StoredPaper, Paper>(); TODO DEFINE YOUR OWN specialized paper.
+            //Paper to StoredPaper
+            Mapper.CreateMap<Paper, StoredPaper>();
+
+            //StoredPaper to Paper
+            Mapper.CreateMap<StoredPaper, Paper>();
         }
          
     }

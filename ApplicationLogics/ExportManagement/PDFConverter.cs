@@ -29,7 +29,6 @@ namespace ApplicationLogics.ExportManagement
         {
             var exportFile = new PdfFile();
             exportFile.Description = protocol.Description;
-            // exportFile.Origin = protocol.Id;
             exportFile.Bytes = System.Convert.FromBase64String(ConvertInclusionData(protocol));
             return exportFile;
         }
