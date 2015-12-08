@@ -13,7 +13,8 @@ namespace ApplicationLogics.PaperManagement.Bibtex
     {
         //Validates fields against a default field checker
         readonly FieldValidator _validator;
-
+        
+        //FieldValidator is nullable. If is null a vali
         public PaperChecker(FieldValidator validator = null)
         {
             _validator = validator ?? new FieldValidator();

@@ -14,16 +14,32 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         /// Tests the validation a single string which should be valid using a custom made regular expression
         /// </summary>
         [TestMethod()]
-        public void ValidateTest()
+        public void ValidateCostumCheckerValidInputTest()
         {
             //Arrange
-            var checker = new CustomFieldChecker("[Will]");
+            var checker = new CustomFieldChecker("Will");
 
             //Act
             var input = "William Swuer";
 
             //Assert
             Assert.IsTrue(checker.Validate(input));
+        }
+
+        /// <summary>
+        /// Tests the validation a single string which should be valid using a custom made regular expression
+        /// </summary>
+        [TestMethod()]
+        public void ValidateInvalidInputTest()
+        {
+            //Arrange
+            var checker = new CustomFieldChecker("Simone");
+
+            //Act
+            var input = "Simon Swuer";
+
+            //Assert
+            Assert.IsFalse(checker.Validate(input));
         }
 
         /// <summary>

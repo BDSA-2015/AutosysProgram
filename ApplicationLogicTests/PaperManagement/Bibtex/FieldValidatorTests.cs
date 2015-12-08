@@ -5,7 +5,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ApplicationLogicTests.PaperManagement.Bibtex
 {
     /// <summary>
-    /// Class for testing the field validator for bibtex fields
+    /// Class for testing the field validator which is used by a PaperChecker
+    ///  to validate all fields contained in a Paper
     /// </summary>
     [TestClass()]
     public class FieldValidatorTests

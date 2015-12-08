@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using ApplicationLogics.PaperManagement.Bibtex;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace ApplicationLogicTests.PaperManagement.Bibtex
 {
-    /// <summary>
+   /// <summary>
     /// Class for testing the checking of bibtex fields using the field checker 
     /// predefined in the system
     /// </summary>
@@ -14,25 +18,20 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
         /// <summary>
         /// Tests bibtex field syntaxes which should be valid
         /// </summary>
+        [TestCase("T")]
+        [TestCase("Testing")]
+        [TestCase("Testing Space")]
+        [TestCase("Testing Numbers 123")]
+        [TestCase("Testing Symbols !@#$%^&*()_+?|>\\/,.;':\"][}{")]
+        [TestCase("Something\n")]
         [TestMethod()]
-        public void ValidateValidInputTest()
+        public void ValidateValidInputTest(string field)
         {
             //Arrange
             DefaultFieldChecker checker = new DefaultFieldChecker();
-            var bibtexInput1 = "T";
-            var bibtexInput2 = "Testing";
-            var bibtexInput3 = "Testing Space";
-            var bibtexInput4 = "Testing Numbers 123";
-            var bibtexInput5 = "Testing Symbols !@#$%^&*()_+?|>\\/,.;':\"][}{";
-            var bibtexInput6 = "Something\n";
 
             //Assert
-            Assert.IsTrue(checker.Validate(bibtexInput1));
-            Assert.IsTrue(checker.Validate(bibtexInput2));
-            Assert.IsTrue(checker.Validate(bibtexInput3));
-            Assert.IsTrue(checker.Validate(bibtexInput4));
-            Assert.IsTrue(checker.Validate(bibtexInput5));
-            Assert.IsTrue(checker.Validate(bibtexInput6));
+            Assert.IsTrue(checker.Validate(field));
         }
 
         /// <summary>

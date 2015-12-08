@@ -248,7 +248,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NUnit/3.0.0": {
+      "NUnit/3.0.1": {
         "compile": {
           "lib/dotnet/nunit.framework.dll": {}
         },
@@ -1881,7 +1881,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NUnit/3.0.0": {
+      "NUnit/3.0.1": {
         "compile": {
           "lib/dotnet/nunit.framework.dll": {}
         },
@@ -3547,7 +3547,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NUnit/3.0.0": {
+      "NUnit/3.0.1": {
         "compile": {
           "lib/dotnet/nunit.framework.dll": {}
         },
@@ -5218,7 +5218,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NUnit/3.0.0": {
+      "NUnit/3.0.1": {
         "compile": {
           "lib/dotnet/nunit.framework.dll": {}
         },
@@ -6884,7 +6884,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NUnit/3.0.0": {
+      "NUnit/3.0.1": {
         "compile": {
           "lib/dotnet/nunit.framework.dll": {}
         },
@@ -8555,7 +8555,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NUnit/3.0.0": {
+      "NUnit/3.0.1": {
         "compile": {
           "lib/dotnet/nunit.framework.dll": {}
         },
@@ -10221,7 +10221,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NUnit/3.0.0": {
+      "NUnit/3.0.1": {
         "compile": {
           "lib/dotnet/nunit.framework.dll": {}
         },
@@ -12358,8 +12358,8 @@
         "tools/install.ps1"
       ]
     },
-    "NUnit/3.0.0": {
-      "sha512": "/7lqdUb+/e1NAd3NDhY05ppjQUieAamnUxHzhKgaxWVNyTJqhdR0z73MXNc2VV2dignM4MieF3Tzs1wXsWx8/w==",
+    "NUnit/3.0.1": {
+      "sha512": "Fhz2Flnzlb+HjVxTK+W3dNAb9FUIbGxUp/G6jTTL487lBxInaDOWigNGzWbj1Ipjb87ix77heBCzrsVhk8+X8w==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -12378,7 +12378,7 @@
         "LICENSE.txt",
         "NOTICES.txt",
         "NUnit.nuspec",
-        "package/services/metadata/core-properties/45d9d63e089a4fbb8ffafab5905528b3.psmdcp"
+        "package/services/metadata/core-properties/59ec910f17c54b6493a6276f36784454.psmdcp"
       ]
     },
     "System.AppContext/4.0.0": {
@@ -15085,7 +15085,7 @@
       "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
       "Newtonsoft.Json >= 7.0.1",
-      "NUnit >= 3.0.0"
+      "NUnit >= 3.0.1"
     ],
     "UAP,Version=v10.0": []
   }

@@ -19,6 +19,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
         /// </summary>
         readonly IPaperChecker _defaultChecker = new PaperChecker();
 
+        //checkers is nullable, set to new empty Dictionary if non is defined
         public PaperValidator(Dictionary<string, IPaperChecker> checkers = null)
         {
             _checkers = checkers ?? new Dictionary<string, IPaperChecker>();
