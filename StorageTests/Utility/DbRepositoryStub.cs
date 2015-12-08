@@ -57,8 +57,8 @@ namespace StorageTests.Utility
                 if (entity != null)
                 {
                     _context.Set<T>().Attach(item);
-                    //_context.Entry<T>(item).State = EntityState.Modified;
-                    _context.SaveChangesAsync();
+                    _context.Entry<T>(item).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
                     return true;
                 }
                 else return false;

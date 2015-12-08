@@ -27,7 +27,7 @@ namespace StorageTests
         private IList<StoredUser> _data;
         private Mock<IUserContext> _context; // Use IUserContext instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredUser>> _mockSet;
-        private UserRepository _repository;
+        private DbRepositoryStub<StoredUser> _repository;
 
         /// <summary>
         /// This method sets up data used to mock a collection of users in a DbContext used by the UserRepository. 
@@ -57,7 +57,7 @@ namespace StorageTests
             });
 
             _context = mockContext;
-            _repository = new UserRepository();
+            _repository = new DbRepositoryStub<StoredUser>(_context.Object);
         }
 
         /// <summary>
@@ -104,12 +104,12 @@ namespace StorageTests
         {
             // Arrange 
             var mockSet = new Mock<DbSet<StoredUser>>();
-            var mockContext = new Mock<AutoSysDbModel>();
+            var mockContext = new Mock<IUserContext>();
             mockContext.Setup(m => m.Users).Returns(mockSet.Object);
             var user = new StoredUser {Name = "Steven", MetaData = "Validator"};
 
             // Act 
-            var service = new UserRepository();
+            var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
             //var service = new UserRepository(mockContext.Object);
             var id = await service.Create(user);
 
