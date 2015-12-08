@@ -41,6 +41,7 @@ namespace ApplicationLogics.AutosysServer.Mapping
                 cfg.AddProfile(new StudyManagementStorageProfile());
                 
             });
+            Mapper.AssertConfigurationIsValid();
         }
     }
 }

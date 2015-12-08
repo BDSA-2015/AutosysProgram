@@ -26,7 +26,7 @@ namespace WebApi.Adapter
 
 
         //Originaly taken from TeamController
-        IEnumerable<Team> Get(string name = "");
+        IEnumerable<Team> GetTeam(string name = "");
 
         Team Get(int id);
 
@@ -38,6 +38,6 @@ namespace WebApi.Adapter
 
         //Orinaly taken from UserController
 
-        IEnumerable<User> Get(string name = "");
+        IEnumerable<User> GetUser(string name = "");
     }
 }

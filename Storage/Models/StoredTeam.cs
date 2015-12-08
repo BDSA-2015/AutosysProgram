@@ -39,7 +39,7 @@ namespace Storage.Models
         */
 
         [StringLength(400)]
-        public string Metadata { get; set; }
+        public string MetaData { get; set; }
 
     }
 

@@ -104,6 +104,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutosysServer\FacadeInjectionContainer.cs" />
     <Compile Include="AutosysServer\Mapping\AutoMapperConfigurator.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\StudyManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\PaperManagementStorageProfile.cs" />
@@ -156,16 +157,14 @@
     <Compile Include="StudyManagement\Study.cs" />
     <Compile Include="StudyManagement\StudyHandler.cs" />
     <Compile Include="StudyManagement\StudyManager.cs" />
-    <Compile Include="UserManagement\Manager.cs" />
-    <Compile Include="UserManagement\Researcher.cs" />
-    <Compile Include="UserManagement\Team.cs" />
-    <Compile Include="UserManagement\User.cs" />
+    <Compile Include="UserManagement\Entities\Team.cs" />
+    <Compile Include="UserManagement\Entities\User.cs" />
+    <Compile Include="UserManagement\TeamHandler.cs" />
     <Compile Include="UserManagement\UserHandler.cs" />
-    <Compile Include="UserManagement\UserValidator.cs" />
+    <Compile Include="UserManagement\Utils\TeamValidator.cs" />
+    <Compile Include="UserManagement\Utils\UserValidator.cs" />
     <Compile Include="AutosysServer\Adapter.cs" />
     <Compile Include="AutosysServer\MainHandler.cs" />
-    <Compile Include="AutosysServer\Request.cs" />
-    <Compile Include="AutosysServer\RequestHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
