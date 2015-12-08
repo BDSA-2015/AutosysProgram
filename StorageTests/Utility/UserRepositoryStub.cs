@@ -6,19 +6,24 @@ using Storage.Repository.Interface;
 
 namespace StorageTests.Utility
 {
+
+    /// <summary>
+    /// This is a test stub of the generic DbRepository in storage used to mock the repository with an interface instead of a concrete DbContext. 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class UserRepositoryStub : IRepository<StoredUser> // Before : DbRepository<StoredUser> 
     {
 
-        private AutoSysDbModel _context;
+        private IUserContext _context;
 
-        public UserRepositoryStub(AutoSysDbModel context)
+        public UserRepositoryStub(IUserContext context)
         {
             _context = context;
         }
 
         public int CreateOrUpdate(StoredUser user)
         {
-            using (_context = new AutoSysDbModel())
+            using (_context)
             {
                 var entity = _context.Users.Find(user.Id);
 
@@ -41,7 +46,7 @@ namespace StorageTests.Utility
 
         public StoredUser Read(int id)
         {
-            using (_context = new AutoSysDbModel())
+            using (_context)
             {
                 return _context.Users.Find(id);
             }
@@ -49,7 +54,7 @@ namespace StorageTests.Utility
 
         public IEnumerable<StoredUser> Read()
         {
-            using (_context = new AutoSysDbModel())
+            using (_context)
             {
                 return _context.Users.AsEnumerable();
             }
@@ -57,7 +62,7 @@ namespace StorageTests.Utility
 
         public void UpdateIfExists(StoredUser user)
         {
-            using (_context = new AutoSysDbModel())
+            using (_context)
             {
                 var entity = _context.Users.Find(user.Id);
 
@@ -72,7 +77,7 @@ namespace StorageTests.Utility
 
         public void DeleteIfExists(StoredUser user)
         {
-            using (_context = new AutoSysDbModel())
+            using (_context)
             {
                 var entity = _context.Users.Find(user.Id);
 

@@ -58,7 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncDbRepository.cs" />
+    <Compile Include="Repository\AsyncDbRepository.cs" />
     <Compile Include="AutoSysDbModel.cs" />
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Migrations\Configuration.cs" />
