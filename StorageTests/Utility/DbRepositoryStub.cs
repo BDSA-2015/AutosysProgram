@@ -13,9 +13,9 @@ namespace Storage.Repository
     public class DbRepositoryStub<T> : IRepository<T> where T : class, IEntity
     {
 
-        private IDbContext _context;
+        private AutoSysDbModel _context;
 
-        public DbRepositoryStub(IDbContext context)
+        public DbRepositoryStub(AutoSysDbModel context)
         {
             _context = context;
         }
@@ -30,22 +30,22 @@ namespace Storage.Repository
         {
             using (_context)
             {
-                var entity = _context.Set<T>().Find(item.Id);
+                //var entity = _context.Set<T>().Find(item.Id);
 
-                if (entity == null)
-                {
+                //if (entity == null)
+                //{
                     _context.Set<T>().Add(item);
                     _context.SaveChanges();
                     return item.Id;
-                }
+                //}
 
-                else
-                {
-                    _context.Set<T>().Attach(item);
-                    _context.Entry<T>(item).State = EntityState.Modified;
-                    _context.SaveChanges();
-                    return item.Id;
-                }
+                //else
+                //{
+                //    _context.Set<T>().Attach(item);
+                //    _context.Entry<T>(item).State = EntityState.Modified;
+                //    _context.SaveChanges();
+                //    return item.Id;
+                //}
 
             }
 

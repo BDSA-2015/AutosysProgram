@@ -108,6 +108,7 @@
     <Compile Include="Utility\IUserContext.cs" />
     <Compile Include="Utility\MockUtility.cs" />
     <Compile Include="Utility\TestDbAsyncQueryProvider.cs" />
+    <Compile Include="Utility\UserRepositoryStub.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

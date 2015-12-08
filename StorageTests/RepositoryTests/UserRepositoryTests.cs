@@ -23,7 +23,7 @@ namespace StorageTests.RepositoryTests
     {
 
         private IList<StoredUser> _data;
-        private Mock<IUserContext> _context; // Use IUserContext instead of concrete AutoSysDbModel
+        private Mock<AutoSysDbModel> _context; // Use IUserContext instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredUser>> _mockSet;
         private DbRepositoryStub<StoredUser> _repository;
 
@@ -42,7 +42,7 @@ namespace StorageTests.RepositoryTests
 
             _mockSet = MockUtility.CreateMockDbSet(_data, u => u.Id);
 
-            var mockContext = new Mock<IUserContext>();
+            var mockContext = new Mock<AutoSysDbModel>();
             mockContext.Setup(s => s.Users).Returns(_mockSet.Object);
             mockContext.Setup(s => s.SaveChanges()).Callback(() =>
             {
@@ -71,7 +71,7 @@ namespace StorageTests.RepositoryTests
             // Arrange 
             var mockSet = new Mock<DbSet<StoredUser>>();
 
-            var mockContext = new Mock<IUserContext>();
+            var mockContext = new Mock<AutoSysDbModel>();
             //var mockContext = new Mock<AutoSysDbModel>();
             mockContext.Setup(m => m.Users).Returns(mockSet.Object);
 
@@ -100,7 +100,7 @@ namespace StorageTests.RepositoryTests
         {
             // Arrange 
             var mockSet = new Mock<DbSet<StoredUser>>();
-            var mockContext = new Mock<IUserContext>();
+            var mockContext = new Mock<AutoSysDbModel>();
             mockContext.Setup(m => m.Users).Returns(mockSet.Object);
             var user = new StoredUser { Name = "Steven", MetaData = "Validator" };
 
