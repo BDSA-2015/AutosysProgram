@@ -110,7 +110,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var id = 0;
             var repositoryMock = new Mock<IRepository<StoredTeam>>();
-            var storedTeam = new StoredTeam {Id = 0, Name = "name", MetaData = "metaData", InternalUserIDs = new[] {1, 2, 3}};
+            var storedTeam = new StoredTeam {Id = 0, Name = "name", MetaData = "metaData", UserIds = new[] {1, 2, 3}};
             repositoryMock.Setup(r => r.Read(id)).Returns(storedTeam);
 
             var teamFacade = new TeamFacade(repositoryMock.Object);
@@ -131,7 +131,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var id = 0;
             var repositoryMock = new Mock<IRepository<StoredTeam>>();
-            var storedTeam = new StoredTeam {Id = 0, Name = "name", MetaData = "metaData", InternalUserIDs = new[] {1, 2, 3}};
+            var storedTeam = new StoredTeam {Id = 0, Name = "name", MetaData = "metaData", UserIds = new[] {1, 2, 3}};
             repositoryMock.Setup(r => r.Read(id));
 
             var teamFacade = new TeamFacade(repositoryMock.Object);
