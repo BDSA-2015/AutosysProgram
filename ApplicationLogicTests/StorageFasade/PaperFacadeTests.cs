@@ -9,6 +9,7 @@ using Moq;
 using NUnit.Framework;
 using Storage.Models;
 using Storage.Repository;
+using Storage.Repository.Interface;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace ApplicationLogicTests.StorageFasade
@@ -36,7 +37,7 @@ namespace ApplicationLogicTests.StorageFasade
         {
             //Arrange
             var storedPaper = new StoredPaper() {Id = 0, Type = "article"};
-            mockRepo.Setup(r => r.Create(storedPaper)).Returns(storedPaper.Id);
+            mockRepo.Setup(r => r.CreateOrUpdate(storedPaper)).Returns(storedPaper.Id);
             var fieldTypes = new List<string>();
             fieldTypes.Add("author");
             fieldTypes.Add("title");
@@ -61,7 +62,7 @@ namespace ApplicationLogicTests.StorageFasade
         {
             //Arrange
             var storedPaper = new StoredPaper() { Id = 0, Type = "article" };
-            mockRepo.Setup(r => r.Create(storedPaper)).Returns(storedPaper.Id);
+            mockRepo.Setup(r => r.CreateOrUpdate(storedPaper)).Returns(storedPaper.Id);
 
             //Act
             var paperId = _facade.Create(null);
@@ -82,7 +83,7 @@ namespace ApplicationLogicTests.StorageFasade
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             StoredPaper callBackPaper = null;
-            mockRepo.Setup(r => r.Delete(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
+            mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
             _facade.Delete(paper);
@@ -106,7 +107,7 @@ namespace ApplicationLogicTests.StorageFasade
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             StoredPaper callBackPaper = null;
-            mockRepo.Setup(r => r.Delete(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
+            mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
             _facade.Delete(paper);
@@ -219,7 +220,7 @@ namespace ApplicationLogicTests.StorageFasade
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             StoredPaper callBackPaper = null;
-            mockRepo.Setup(r => r.Update(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
+            mockRepo.Setup(r => r.UpdateIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
             _facade.Update(paper);
@@ -243,7 +244,7 @@ namespace ApplicationLogicTests.StorageFasade
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             StoredPaper callBackPaper = null;
-            mockRepo.Setup(r => r.Update(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
+            mockRepo.Setup(r => r.UpdateIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
             _facade.Update(paper);

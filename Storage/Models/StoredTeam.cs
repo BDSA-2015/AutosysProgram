@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Storage.Repository.Interface;
 
 namespace Storage.Models
@@ -19,24 +21,14 @@ namespace Storage.Models
         [Required][StringLength(50)]
         public string Name { get; set; }
 
-        [Required]
-        public int[] UserIds { get; set; } // TODO convert string to int array like below 
+        public int[] UserIds
+        {
+            get { return Array.ConvertAll(InternalUserIds.Split(','), Int32.Parse); }
+            set { InternalUserIds = String.Join(",", value.Select(ids => ids.ToString().ToArray())); }
+        }
 
-        /*
-            public string InternalData { get; set; }
-            public double[] Data
-            {
-                get
-                {
-                    return Array.ConvertAll(InternalData.Split(';'), Double.Parse);                
-                }
-                set
-                {
-                    _data = value;
-                    InternalData = String.Join(";", _data.Select(p => p.ToString()).ToArray());
-                }
-            }
-        */
+        [NotMapped]
+        public string InternalUserIds { get; set; } // Converts actual user ids from csv string to int [] in UserIDs. 
 
         [StringLength(400)]
         public string MetaData { get; set; }

@@ -13,6 +13,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Storage.Models;
 using Storage.Repository;
+using Storage.Repository.Interface;
 
 namespace ApplicationLogicTests.UserManagement
 {
@@ -43,7 +44,7 @@ namespace ApplicationLogicTests.UserManagement
         {
             //Arrange 
             const int expectedReturnId = 0;
-            _repositoryMock.Setup(r => r.Create(_storedUser)).Returns(expectedReturnId);
+            _repositoryMock.Setup(r => r.CreateOrUpdate(_storedUser)).Returns(expectedReturnId);
             var userFacade = new UserFacade(_repositoryMock.Object);
 
             //Act

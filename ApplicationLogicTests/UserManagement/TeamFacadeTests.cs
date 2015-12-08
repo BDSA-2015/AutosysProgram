@@ -13,6 +13,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Storage.Models;
 using Storage.Repository;
+using Storage.Repository.Interface;
 
 namespace ApplicationLogicTests.UserManagement
 {
@@ -45,7 +46,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange 
 
             const int expectedReturnId = 0;
-            _repositoryMock.Setup(r => r.Create(_storedTeam)).Returns(expectedReturnId);
+            _repositoryMock.Setup(r => r.CreateOrUpdate(_storedTeam)).Returns(expectedReturnId);
             var teamFacade = new TeamFacade(_repositoryMock.Object);
 
             //Act

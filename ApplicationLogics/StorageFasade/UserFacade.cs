@@ -6,6 +6,7 @@ using ApplicationLogics.UserManagement.Entities;
 using AutoMapper;
 using Storage.Models;
 using Storage.Repository;
+using Storage.Repository.Interface;
 
 namespace ApplicationLogics.StorageFasade
 {
@@ -29,7 +30,7 @@ namespace ApplicationLogics.StorageFasade
         /// <returns> int</returns>
         public int Create(User user)
         {
-            return _userRepository.Create(Mapper.Map<StoredUser>(user));
+            return _userRepository.CreateOrUpdate(Mapper.Map<StoredUser>(user));
         }
 
         /// <summary>
@@ -62,11 +63,11 @@ namespace ApplicationLogics.StorageFasade
         /// <param name="user">User object</param>
         public void Update(User user)
         {
-            _userRepository.Update(Mapper.Map<StoredUser>(user));
+            _userRepository.UpdateIfExists(Mapper.Map<StoredUser>(user));
         }
 
         /// <summary>
-        /// Delete given user from database.
+        /// DeleteIfExists given user from database.
         /// </summary>
         /// <param name="user">User Object</param>
         public void Delete(User user)
@@ -76,7 +77,7 @@ namespace ApplicationLogics.StorageFasade
             if (user.Name != toDelete.Name && user.MetaData != toDelete.MetaData)
                 throw new ArgumentException("User has been updated");
             var storedUserToDelete = Mapper.Map<StoredUser>(toDelete);
-            _userRepository.Delete(storedUserToDelete);
+            _userRepository.DeleteIfExists(storedUserToDelete);
         }
     }
 }

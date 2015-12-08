@@ -13,7 +13,7 @@ namespace ApplicationLogics.StudyManagement
     {
         
         /// <summary>
-        /// Create an empty criteria. Specify its purpose with AddRelation method
+        /// CreateOrUpdate an empty criteria. Specify its purpose with AddRelation method
         /// </summary>
          public Criteria CreateEmptyCriteria(string name, string description)
         {
