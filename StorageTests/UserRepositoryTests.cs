@@ -25,7 +25,7 @@ namespace StorageTests
     {
 
         private IList<StoredUser> _data;
-        private Mock<AutoSysDbModel> _context; // Could use IUserContext instead of concrete AutoSysDbModel
+        private Mock<IUserContext> _context; // Use IUserContext instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredUser>> _mockSet;
         private UserRepository _repository;
 
@@ -38,13 +38,13 @@ namespace StorageTests
 
             _data = new List<StoredUser>
             {
-                new StoredUser { Id = 1, Name = "William Parker", MetaData = "Researcher" },
-                new StoredUser { Id = 2, Name = "Trudy Jones", MetaData = "Researcher" }
-            };
+                new StoredUser {Id = 1, Name = "William Parker", MetaData = "Researcher"},
+                new StoredUser {Id = 2, Name = "Trudy Jones", MetaData = "Researcher"}
+            }; //.AsQueryable();
 
             _mockSet = MockUtility.CreateAsyncMockDbSet(_data, u => u.Id);
-
-            var mockContext = new Mock<AutoSysDbModel>();
+            
+            var mockContext = new Mock<IUserContext>();
             mockContext.Setup(s => s.Users).Returns(_mockSet.Object);
             mockContext.Setup(s => s.SaveChangesAsync()).Callback(() =>
             {
@@ -57,7 +57,7 @@ namespace StorageTests
             });
 
             _context = mockContext;
-            _repository = new UserRepository(_context.Object);
+            _repository = new UserRepository();
         }
 
         /// <summary>
@@ -78,7 +78,8 @@ namespace StorageTests
             mockContext.Setup(m => m.Users).Returns(mockSet.Object);
 
             // Act 
-            var service = new UserRepository(mockContext.Object);
+            var service = new UserRepository();
+            // var service = new UserRepository(mockContext.Object);
             await service.Create(new StoredUser());
 
             // Assert 
@@ -101,15 +102,27 @@ namespace StorageTests
         [TestMethod]
         public async Task Create_ReturnsId_NewId()
         {
-            //int result = 0;
+            // Arrange 
+            var mockSet = new Mock<DbSet<StoredUser>>();
+            var mockContext = new Mock<AutoSysDbModel>();
+            mockContext.Setup(m => m.Users).Returns(mockSet.Object);
+            var user = new StoredUser {Name = "Steven", MetaData = "Validator"};
 
-            //await Task.Run(async () =>
-            //{
-                var user = new StoredUser {Name = "Steve", MetaData = "Validator"};
-                var id =  await _repository.Create(user);
-            //});
+            // Act 
+            var service = new UserRepository();
+            //var service = new UserRepository(mockContext.Object);
+            var id = await service.Create(user);
 
-            Assert.AreEqual(3, id);
+            // Assert 
+            //mockSet.Verify(m => m.Add(It.IsAny<StoredUser>()), Times.Once());
+            //mockContext.Verify(m => m.SaveChangesAsync(), Times.Once());
+
+            // Assert
+            var newUser = _data[2];
+
+            //var user = new StoredUser {Name = "Steve", MetaData = "Validator"};
+            //var id =  await _repository.Create(user);
+            Assert.AreEqual(3, newUser.Id);
         }
 
         [TestMethod]

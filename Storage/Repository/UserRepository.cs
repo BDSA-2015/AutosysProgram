@@ -15,43 +15,25 @@ namespace Storage.Repository
     public class UserRepository : IRepository<StoredUser>
     {
 
-        /*
-        private readonly IUserContext _context;
-
-        // Used for mocking 
-        public UserRepository(IUserContext context)
-        {
-            _context = context;
-        }
-        */
-        
-
-        
-        private readonly AutoSysDbModel _context;
-
-        public UserRepository(AutoSysDbModel context)
-        {
-            _context = context;
-        }
-        
+        private AutoSysDbModel _context;
 
         public UserRepository(){}
 
-        public async Task<int> Create(StoredUser user)
+        public async Task<int> Create(StoredUser item)
         {
-            using (_context)
+            using (_context = new AutoSysDbModel())
             { 
-                _context.Users.Add(user);
+                _context.Users.Add(item);
                 await _context.SaveChangesAsync();
-                return user.Id;
+                return item.Id;
             }
         }
 
-        public async Task<bool> Delete(StoredUser user)
+        public async Task<bool> Delete(StoredUser item)
         {
-            using (_context)
+            using (_context = new AutoSysDbModel())
             {
-                var userToDelete = await _context.Users.FindAsync(user);
+                var userToDelete = await _context.Users.FindAsync(item);
 
                 if (userToDelete != null)
                 {
@@ -65,7 +47,7 @@ namespace Storage.Repository
 
         public IQueryable Read()
         {
-            using (_context)
+            using (_context = new AutoSysDbModel())
             {
                 return _context.Users.AsQueryable();
             }
@@ -73,7 +55,7 @@ namespace Storage.Repository
 
         public async Task<StoredUser> Read(int userId)
         {
-            using (_context)
+            using (_context = new AutoSysDbModel())
             {
                 var users = from u in _context.Users
                     where u.Id == userId
@@ -87,19 +69,19 @@ namespace Storage.Repository
             }
         }
 
-        public async Task<bool> Update(StoredUser user)
+        public async Task<bool> Update(StoredUser item)
         {
-            using (_context)
+            using (_context = new AutoSysDbModel())
             { 
-                var userToUpdate = await _context.Users.FindAsync(user.Id);
+                var userToUpdate = await _context.Users.FindAsync(item.Id);
 
                 if (userToUpdate == null)
                 {
                     return false;
                 }
 
-                userToUpdate.Name = user.Name;
-                userToUpdate.MetaData = user.MetaData;
+                userToUpdate.Name = item.Name;
+                userToUpdate.MetaData = item.MetaData;
                 await _context.SaveChangesAsync();
 
                 return true;

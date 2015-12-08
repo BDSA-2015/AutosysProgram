@@ -15,10 +15,6 @@ namespace Storage.Repository
     /// </summary>
     public class ProtocolRepository : DbRepository<StoredProtocol>
     {
-        public ProtocolRepository(DbContext context) : base(context)
-        {
-            
-        }
     }
 
 }

@@ -83,9 +83,10 @@ namespace StorageTests.Utility
             mockSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
-            //mockSet.Setup(m => m.FindAsync(It.IsAny<T>())).ReturnsAsync(Task.FromResult<T>(null)); // (ids => await items.SingleOrDefault(d => key(d) == (int) ids[0]));
-            //mockSet.Setup(m => m.SingleOrDefaultAsync(It.IsAny<object[]>())).Returns<object[]>(ids => await items.SingleOrDefault(d => key(d) == (int)ids[0]));
-            //mockSet.Setup(m => m.FindAsync(It.IsAny<T>())).ReturnsAsync(Task.FromResult(T.));
+            mockSet.Setup(m => m.Find(It.IsAny<object[]>())).Returns<object[]>(ids => items.FirstOrDefault(d => key(d) == (int)ids[0]));
+
+            // mockSet.Setup(m => m.FindAsync(It.IsAny<Task<object[]>>()))
+            //    .ReturnsAsync(ids => items.Single);
 
             mockSet.Setup(m => m.Add(It.IsAny<T>())).Callback<T>(a => items.Add(a));
             mockSet.Setup(m => m.Remove(It.IsAny<T>())).Callback<T>(a => items.Remove(a));

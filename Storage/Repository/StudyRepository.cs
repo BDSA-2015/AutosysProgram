@@ -13,32 +13,9 @@ namespace Storage.Repository
     /// <summary>
     /// This class outlines the CRUD operations used to store Studies in the database. 
     /// </summary>
-    public class StudyRepository : IRepository<StoredStudy>
+    public class StudyRepository : DbRepository<StoredStudy>
     {
-        public Task<int> Create(StoredStudy user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<StoredStudy> Read(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable Read()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> Update(StoredStudy user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> Delete(StoredStudy user)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 
 }

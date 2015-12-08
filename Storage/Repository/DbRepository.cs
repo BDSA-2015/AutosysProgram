@@ -15,74 +15,64 @@ namespace Storage.Repository
     /// <typeparam name="T"></typeparam>
     public class DbRepository<T> : IRepository<T> where T : class, IEntity
     {
-        private DbContext _dbContext;
 
-        public DbRepository(DbContext context)
+        public virtual async Task<int> Create(T item)
         {
-            _dbContext = context;
-        }
-
-        public async Task<int> Create(T user)
-        {
-            using (_dbContext)
+            using (var dbContext = new AutoSysDbModel())
             {
-                    _dbContext.Set<T>().Add(user);
-                    await _dbContext.SaveChangesAsync();
-                    return user.Id;
+                    dbContext.Set<T>().Add(item);
+                    await dbContext.SaveChangesAsync();
+                    return item.Id;
             }
         }
 
-        public async Task<T> Read(int id)
+        public virtual async Task<T> Read(int id)
         {
-            using (_dbContext)
+            using (var dbContext = new AutoSysDbModel())
             { 
-                return await _dbContext.Set<T>().FindAsync(id);
+                return await dbContext.Set<T>().FindAsync(id);
             }
         }
 
-        public IQueryable Read()
+        public virtual IQueryable Read()
         {
-            using (_dbContext)
+            using (var dbContext = new AutoSysDbModel())
             {
-                return _dbContext.Set<T>().AsQueryable();
+                return dbContext.Set<T>().AsQueryable();
             }
         }
 
-        public async Task<bool> Update(T user)
+        public virtual async Task<bool> Update(T item)
         {
-            using (_dbContext)
+            using (var dbContext = new AutoSysDbModel())
             {
-                var entity = await _dbContext.Set<T>().FindAsync(user.Id);
+                var entity = await dbContext.Set<T>().FindAsync(item.Id);
 
                 if (entity != null)
                 {
-                    _dbContext.Set<T>().Attach(user);
-                    _dbContext.Entry<T>(user).State = EntityState.Modified;
+                    dbContext.Set<T>().Attach(item);
+                    dbContext.Entry<T>(item).State = EntityState.Modified;
+                    await dbContext.SaveChangesAsync();
                     return true;
                 }
                 else return false;
             }
         }
 
-        public async Task<bool> Delete(T user)
+        public virtual async Task<bool> Delete(T item)
         {
-            using (_dbContext)
+            using (var dbContext = new AutoSysDbModel())
             {
-                var entity = await _dbContext.Set<T>().FindAsync(user.Id);
+                var entity = await dbContext.Set<T>().FindAsync(item.Id);
 
                 if (entity != null)
                 {
-                    _dbContext.Set<T>().Remove(user);
-                    await _dbContext.SaveChangesAsync();
+                    dbContext.Set<T>().Remove(item);
+                    await dbContext.SaveChangesAsync();
                     return true;
                 }
                 else return false;
             }
-        }
-
-        public void Dispose()
-        {
-            _dbContext.Dispose();
         }
 
     }

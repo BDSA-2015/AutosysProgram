@@ -14,10 +14,10 @@ namespace Storage.Repository.Interface
     /// <typeparam name="T"></typeparam>
     public interface IRepository<T> where T : IEntity
     {
-        Task<int> Create(T user);
+        Task<int> Create(T item);
         Task<T> Read(int id);
         IQueryable Read();
-        Task<bool> Update(T user);
-        Task<bool> Delete(T user);
+        Task<bool> Update(T item);
+        Task<bool> Delete(T item);
     }
 }
