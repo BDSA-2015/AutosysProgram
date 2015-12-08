@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutosysServer\Mapping\AutoMapperConfigurator.cs" />
+    <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\StudyManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\PaperManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\UserManagementStorageProfile.cs" />
     <Compile Include="ExportManagement\CsvFile.cs" />
