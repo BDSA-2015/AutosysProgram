@@ -43,7 +43,7 @@ namespace ApplicationLogics.StorageFasade
 
             if ((team.Id == toDelete.Id) && (team.MetaData == toDelete.MetaData) && (team.Name == toDelete.Name) &&
                 team.UserIDs.Equals(toDelete.UserIDs))
-            {
+        {
                 var storedteamToDelete = Mapper.Map<StoredTeam>(toDelete);
                 _teamRepository.Delete(storedteamToDelete);
             }
