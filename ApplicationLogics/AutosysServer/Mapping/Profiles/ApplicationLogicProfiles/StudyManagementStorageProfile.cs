@@ -18,6 +18,7 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfi
         {
             CreateCriteriaMappings();
             CreatePhaseMappings();
+            CreateDatafieldMapping();
         }
 
         /// <summary>
@@ -42,6 +43,30 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfi
 
             //User to StoredUser
             Mapper.CreateMap<Phase, StoredPhase>();
+        }
+
+        private void CreateDatafieldMapping()
+        {
+            Mapper.CreateMap<DataField, StoredDataField>();
+            Mapper.CreateMap<StoredDataField, DataField>();
+        }
+
+        private void CreateRoleMapping()
+        {
+            Mapper.CreateMap<Role,StoredRole>();
+            Mapper.CreateMap<StoredRole, Role>();
+        }
+
+        private void CreateStudyMapping()
+        {
+            Mapper.CreateMap<Study, StoredStudy>();
+            Mapper.CreateMap<StoredStudy, Study>();
+        }
+
+        private void CreateTaskRequestMapping()
+        {
+            Mapper.CreateMap<TaskRequest,StoredTaskRequest>();
+            Mapper.CreateMap<StoredTaskRequest, TaskRequest>();
         }
     }
 }
