@@ -35,6 +35,10 @@ namespace ApplicationLogics.PaperManagement.Bibtex
         /// <returns> Returns a List of Papers which matched the entry and field regexes.</returns>
         public List<Paper> Parse(string file)
         {
+            if (!_entryRegex.IsMatch(file))
+            {
+                throw new InvalidDataException($"The bibtex file {file} does not follow the bibtex syntax");
+            }
             //Most of the code is from AS1 BDSA 2015
             MatchCollection matchCollection = _entryRegex.Matches(file);
 
@@ -45,9 +49,9 @@ namespace ApplicationLogics.PaperManagement.Bibtex
                 try
                 {
                     string key = match.Groups[2].Value;
-                    string type = match.Groups[1].Value;
+                    string entry = match.Groups[1].Value;
                     List<List<string>> fields = ParsePaper(match.Groups[3].Value);
-                    var paper = new Paper(type, fields[0], fields[1]);
+                    var paper = new Paper(entry, fields[0], fields[1]);
                     paper.ResourceRef = key;
 
                     if (!_validator.IsPaperValid(paper))
@@ -77,7 +81,7 @@ namespace ApplicationLogics.PaperManagement.Bibtex
             var matchCollection = _fieldRegex.Matches(fieldData);
 
             
-            var fields = new List<List<string>>();
+            var fields = new List<List<string>>() {new List<string>(), new List<string>()};
 
             // Iterate over every field.
             foreach (Match match in matchCollection)

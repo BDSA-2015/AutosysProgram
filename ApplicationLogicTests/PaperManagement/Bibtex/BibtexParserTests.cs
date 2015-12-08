@@ -25,44 +25,20 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
 
         /// <summary>
         /// Tests the parsing of a bibtex file using a default field checker
+        /// by checking that the Paper is referring to the correct resource
         /// </summary>
-        /// <param name="field">The type of a bibtex field</param>
-        /// <param name="data">The data associated with a bibtex field</param>
-        [TestCase("athor", "William, Funstuff")]
-        [TestCase("booktitle", "ITU student anno 2015")]
-        [TestCase("title", "A student's thoughts on programming")]
-        [TestCase("year", "2015")]
-        [TestCase("month", "Aug")]
-        [TestCase("volume", "1")]
-        public void ParseDefaultInputPaperTest(string field, string data)
+        [TestMethod()]
+        public void ParseDefaultInputResourceRefPaperTest()
         {
             //Arrange
             var file = Properties.Resources.valid1;
             var fileString = System.Text.Encoding.Default.GetString(file);
-            var fieldTypes = new List<string>();
-            var fieldValues = new List<string>();
 
             //Act
             var papers = _parser.Parse(fileString);
-            fieldTypes.Add(field);
-            fieldValues.Add(data);
 
             //Assert
-            Assert.IsTrue(field == fieldTypes.ElementAt(0) && data == fieldValues.ElementAt(1));
-        }
-
-        /// <summary>
-        /// Tests the parsing of a bibtex file where the author field is missing
-        /// </summary>
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidDataException))]
-        public void ParseDefaultValidatorMissingAuthorTypeInputTest()
-        {
-            //Arrange
-            var bibtexInput = Properties.Resources.missingauthor1;
-            var invalidFile = System.Text.Encoding.Default.GetString(bibtexInput);
-            //Act
-            var papers = _parser.Parse(invalidFile);
+            Assert.IsTrue(papers.ElementAt(0).ResourceRef == "839269");
         }
 
         /// <summary>
@@ -75,6 +51,8 @@ namespace ApplicationLogicTests.PaperManagement.Bibtex
             //Arrange
             var bibtexInput = Properties.Resources.missingstarttag1;
             var invalidFile = System.Text.Encoding.Default.GetString(bibtexInput);
+
+            //Act
             var papers = _parser.Parse(invalidFile);
         }
 
