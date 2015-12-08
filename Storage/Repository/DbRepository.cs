@@ -7,51 +7,56 @@ namespace Storage.Repository
 
     /// <summary>
     /// This class implements the IRepository interface outlining the CRUD operations to be used in the database. 
-    /// These are used specifically on a given Dbcontext set in the main method in the Program class. 
+    /// These are used specifically on the AutoSysDbModel that implements a DbContext and holds DbSets for all stored model entities. 
+    /// This class is inherited by all entity based repositories. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class DbRepository<T> : IRepository<T> where T : class, IEntity
     {
-        private DbContext _dbContext; //TODO We may want to create our own DB context that implements dbContext
-
-        public DbRepository()
+        
+        public virtual int Create(T item)
         {
-            //TODO removed creation of DBContext since we want to keep disposing after use.
+            using (var context = new AutoSysDbModel())
+            { 
+                context.Set<T>().Add(item);
+                context.SaveChanges();
+                return item.Id;
+            }
+
         }
 
-        public int Create(T item)
+        public virtual T Read(int id)
         {
-            _dbContext.Set<T>().Add(item);
-            _dbContext.SaveChanges();
-            return item.Id;
-          
+            using (var context = new AutoSysDbModel())
+            {
+                return context.Set<T>().Find(id);
+            }
         }
 
-        public T Read(int id)
+        public virtual IEnumerable<T> Read()
         {
-            return _dbContext.Set<T>().Find(id);
+            using (var context = new AutoSysDbModel())
+            { 
+                return context.Set<T>();
+            }
         }
 
-        public IEnumerable<T> Read()
+        public virtual void Update(T item)
         {
-            return _dbContext.Set<T>();
+            using (var context = new AutoSysDbModel())
+            {
+                context.Set<T>().Attach(item);
+                context.Entry<T>(item).State = EntityState.Modified;
+            }
         }
 
-        public void Update(T item)
+        public virtual void Delete(T item)
         {
-            _dbContext.Set<T>().Attach(item);
-            _dbContext.Entry<T>(item).State = EntityState.Modified;
-        }
-
-        public void Delete(T item)
-        {
-            _dbContext.Set<T>().Remove(item);
-            _dbContext.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            _dbContext.Dispose();
+            using (var context = new AutoSysDbModel())
+            {
+                context.Set<T>().Remove(item);
+                context.SaveChanges();
+            }
         }
 
     }
