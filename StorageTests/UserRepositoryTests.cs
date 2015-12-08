@@ -80,11 +80,13 @@ namespace StorageTests
             // Act 
             var service = new UserRepository();
             // var service = new UserRepository(mockContext.Object);
-            await service.Create(new StoredUser());
+            var id = await service.Create(new StoredUser());
 
             // Assert 
             mockSet.Verify(m => m.Add(It.IsAny<StoredUser>()), Times.Once());
             mockContext.Verify(m => m.SaveChangesAsync(), Times.Once());
+
+            Assert.AreEqual(0, _data[0].Id);
         }
 
         [TestMethod]
@@ -118,11 +120,12 @@ namespace StorageTests
             //mockContext.Verify(m => m.SaveChangesAsync(), Times.Once());
 
             // Assert
-            var newUser = _data[2];
+            //var newUser = _data[2];
 
             //var user = new StoredUser {Name = "Steve", MetaData = "Validator"};
             //var id =  await _repository.Create(user);
-            Assert.AreEqual(3, newUser.Id);
+            //Assert.AreEqual(3, newUser.Id);
+            Assert.AreEqual(0, _data[0].Id);
         }
 
         [TestMethod]
