@@ -13,7 +13,7 @@ namespace StorageTests.RepositoryUnitTests
 {
 
     /// <summary>
-    /// This test class is used to test the Entity Framework UserRepository.
+    /// This test class is used to test the Entity Framework OldSyncUserRepository.
     /// The repository is a concrete implementation of the repository interface and is used to write data to a database.
     /// Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
     /// 
@@ -28,7 +28,7 @@ namespace StorageTests.RepositoryUnitTests
         private UserRepositoryStub _repository;
 
         /// <summary>
-        /// This method sets up data used to mock a collection of users in a DbContext used by the UserRepository. 
+        /// This method sets up data used to mock a collection of users in a DbContext used by the OldSyncUserRepository. 
         /// </summary>
         [TestInitialize]
         public void Initialize()
@@ -60,7 +60,7 @@ namespace StorageTests.RepositoryUnitTests
 
         /// <summary>
         /// This test uses Moq to create a context and then creates a DbSet<StoredUser> </StoredUser>.
-        /// This is returned from the context's StoredUsers property. The context is used to create a new UserRepository, 
+        /// This is returned from the context's StoredUsers property. The context is used to create a new OldSyncUserRepository, 
         /// which is then used to create a new Stored User, using the Create method. 
         /// Finally, the test verifies that the repository added a new user and called SaveChanges on the context.
         /// </summary>

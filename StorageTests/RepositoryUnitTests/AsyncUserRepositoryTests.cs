@@ -15,10 +15,9 @@ namespace StorageTests.RepositoryUnitTests
 {
 
     /// <summary>
-    /// This test class is used to test the Entity Framework UserRepository.
-    /// The repository is a concrete implementation of the repository interface and is used to write data to a database.
+    /// This test class is used to test the Entity Framework Async DbRepository used by all repositories.
+    /// The repository is a concrete implementation of the async IRepository interface and is used to write data to a database.
     /// Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
-    /// 
     /// </summary>
     [TestClass]
     public class AsyncUserRepositoryTests

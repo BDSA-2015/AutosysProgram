@@ -1,69 +1,135 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Storage.Models;
 using Storage.Repository.Interface;
 
 namespace Storage.Repository
 {
-    public class UserRepository : IRepository<StoredUser> // Before : DbRepository<StoredUser> 
+
+    /// <summary>
+    /// This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on users in the database. <see cref="StoredUser"/>
+    /// These are used specifically on a User DbSet in the AutoSysDbModel.
+    /// </summary>
+    public class UserRepository : IAsyncRepository<StoredUser>
     {
-        public int Create(StoredUser user)
+        private readonly IAutoSysContext _dbContext;
+
+        // Used for mocking 
+        public UserRepository(IAutoSysContext context)
         {
-            using (var context = new AutoSysDbModel())
-            {
-                if (user == null) throw new ArgumentNullException(nameof(user));
-
-                context.Users.Add(user);
-                context.SaveChanges();
-                return user.Id;
-
-            }
+            _dbContext = context;
         }
 
-        public StoredUser Read(int id)
+        /// <summary>
+        /// Creates a new user and returns its id. Throws an ArgumentNullException if the user to create is null. 
+        /// </summary>
+        /// <param name="user">
+        /// User to create. 
+        /// </param>
+        /// <returns>
+        /// True if user was created. 
+        /// </returns>
+        public virtual async Task<int> Create(StoredUser user)
         {
-            using (var context = new AutoSysDbModel())
-            {
-                return context.Users.Find(id);
-            }
+            if (user == null) throw new ArgumentNullException(nameof(user));
+
+            _dbContext.Attach(user); // Used for mocking
+            // _dbContext.Set<T>().Attach(user);
+            _dbContext.Add(user); // Used for mocking 
+            //_dbContext.Set<T>().Add(user);
+            await _dbContext.SaveChangesAsync();
+            return user.Id;
+
         }
 
-        public IEnumerable<StoredUser> Read()
+        /// <summary>
+        /// Returns a user based on its id.
+        /// </summary>
+        /// <param name="id">
+        /// Id of user to find. 
+        /// </param>
+        /// <returns>
+        /// User from id. 
+        /// </returns>
+        public virtual async Task<StoredUser> Read(int id)
         {
-            using (var context = new AutoSysDbModel())
-            {
-                return context.Users.AsEnumerable();
-            }
+
+            return await _dbContext.Set<StoredUser>().FindAsync(id);
+
         }
 
-        public void UpdateIfExists(StoredUser user)
+        /// <summary>
+        /// Returns all users. 
+        /// </summary>
+        /// <returns>
+        /// All users. 
+        /// </returns>
+        public virtual IQueryable<StoredUser> Read()
         {
-            using (var context = new AutoSysDbModel())
-            {
-                var entity = context.Users.Find(user.Id);
 
-                if (entity != null)
-                {
-                    entity.Name = user.Name;
-                    entity.MetaData = user.MetaData;
-                    context.SaveChanges();
-                }
-            }
+            return _dbContext.Set<StoredUser>().AsQueryable();
+
         }
 
-        public void DeleteIfExists(StoredUser user)
+        /// <summary>
+        /// Updates a user in the database if it already exists. If not, false is returned to indicate that no Update occurred.
+        /// If the user to update is null, an ArgumentNullException is thrown. 
+        /// </summary>
+        /// <param name="user">
+        /// User to update.
+        /// </param>
+        /// <returns>
+        /// True if user was updated, vice versa. 
+        /// </returns>
+        public virtual async Task<bool> Update(StoredUser user)
         {
-            using (var context = new AutoSysDbModel())
-            {
-                var entity = context.Users.Find(user.Id);
+            if (user == null) throw new ArgumentNullException(nameof(user));
 
-                if (entity != null)
-                {
-                    context.Users.Remove(entity);
-                    context.SaveChanges();
-                }
+            var userToUpdate = await _dbContext.Set<StoredUser>().FindAsync(user.Id);
+
+            if (userToUpdate != null)
+            {
+                _dbContext.Attach(user); // Used for mocking 
+                //_dbContext.Set<T>().Attach(user);
+                _dbContext.SetModified(user); // Used for mocking 
+                //dbContext.Entry<T>(user).State = EntityState.Modified; 
+                await _dbContext.SaveChangesAsync();
+                return true;
             }
+            else return false;
+
+        }
+
+        /// <summary>
+        /// Deletes a user based on its id. 
+        /// </summary>
+        /// <param name="id">
+        /// Id of user. 
+        /// </param>
+        /// <returns>
+        /// True if user was deleted, false if user does not exist. 
+        /// </returns>
+        public virtual async Task<bool> Delete(int id)
+        {
+            var userToDelete = await _dbContext.Set<StoredUser>().FindAsync(id);
+
+            if (userToDelete != null)
+            {
+                _dbContext.Set<StoredUser>().Remove(userToDelete);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            else return false;
+
+        }
+
+        /// <summary>
+        /// This method is used to dispose the context.
+        /// </summary>
+        public void Dispose()
+        {
+            _dbContext.Dispose();
         }
 
     }

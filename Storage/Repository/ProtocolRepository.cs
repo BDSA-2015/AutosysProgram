@@ -24,22 +24,22 @@ namespace Storage.Repository
         /// <summary>
         /// Creates a new protocol and returns its id. Throws an ArgumentNullException if the protocol to create is null. 
         /// </summary>
-        /// <param name="protocol">
+        /// <param name="user">
         /// Protocol to create. 
         /// </param>
         /// <returns>
         /// True if protocol was created. 
         /// </returns>
-        public virtual async Task<int> Create(StoredProtocol protocol)
+        public virtual async Task<int> Create(StoredProtocol user)
         {
-            if (protocol == null) throw new ArgumentNullException(nameof(protocol));
+            if (user == null) throw new ArgumentNullException(nameof(user));
 
-            _dbContext.Attach(protocol); // Used for mocking
+            _dbContext.Attach(user); // Used for mocking
             // _dbContext.Set<T>().Attach(protocol);
-            _dbContext.Add(protocol); // Used for mocking 
+            _dbContext.Add(user); // Used for mocking 
             //_dbContext.Set<T>().Add(protocol);
             await _dbContext.SaveChangesAsync();
-            return protocol.Id;
+            return user.Id;
 
         }
 
@@ -76,23 +76,23 @@ namespace Storage.Repository
         /// Updates an protocol in the database if it already exists. If not false is returned to indicate that no Update occurred.
         /// If the protocol to update is null an ArgumentNullException is thrown. 
         /// </summary>
-        /// <param name="protocol">
+        /// <param name="user">
         /// Protocol to update.
         /// </param>
         /// <returns>
         /// True if protocol was updated, vice versa. 
         /// </returns>
-        public virtual async Task<bool> Update(StoredProtocol protocol)
+        public virtual async Task<bool> Update(StoredProtocol user)
         {
-            if (protocol == null) throw new ArgumentNullException(nameof(protocol));
+            if (user == null) throw new ArgumentNullException(nameof(user));
 
-            var protocolToUpdate = await _dbContext.Set<StoredProtocol>().FindAsync(protocol.Id);
+            var protocolToUpdate = await _dbContext.Set<StoredProtocol>().FindAsync(user.Id);
 
             if (protocolToUpdate != null)
             {
-                _dbContext.Attach(protocol); // Used for mocking 
+                _dbContext.Attach(user); // Used for mocking 
                 //_dbContext.Set<T>().Attach(protocol);
-                _dbContext.SetModified(protocol); // Used for mocking 
+                _dbContext.SetModified(user); // Used for mocking 
                 //dbContext.Entry<T>(protocol).State = EntityState.Modified; 
                 await _dbContext.SaveChangesAsync();
                 return true;
