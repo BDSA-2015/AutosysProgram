@@ -40,6 +40,10 @@
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="BibtexLibrary, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BibtexLibrary.1.2.0\lib\net45\BibtexLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -101,16 +105,9 @@
     <Compile Include="AutosysServer\Mapping\AutoMapperConfigurator.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\PaperManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\UserManagementStorageProfile.cs" />
-    <Compile Include="PaperManagement\Bibtex\BibtexParser.cs" />
-    <Compile Include="PaperManagement\Bibtex\CustomFieldChecker.cs" />
-    <Compile Include="PaperManagement\Bibtex\PaperChecker.cs" />
-    <Compile Include="PaperManagement\Bibtex\DefaultFieldChecker.cs" />
-    <Compile Include="PaperManagement\Bibtex\FieldValidator.cs" />
-    <Compile Include="PaperManagement\Bibtex\Paper.cs" />
-    <Compile Include="PaperManagement\Bibtex\PaperValidator.cs" />
-    <Compile Include="PaperManagement\Interfaces\IPaperChecker.cs" />
-    <Compile Include="PaperManagement\Interfaces\IParser.cs" />
-    <Compile Include="PaperManagement\Interfaces\IFieldChecker.cs" />
+    <Compile Include="PaperManagement\BibtexParser.cs" />
+    <Compile Include="PaperManagement\IParser.cs" />
+    <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="PaperManagement\PaperHandler.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
     <Compile Include="ProtocolManagement\ProtocolHandler.cs" />

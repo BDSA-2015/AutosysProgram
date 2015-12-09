@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
-using ApplicationLogics.PaperManagement.Bibtex;
+using ApplicationLogics.PaperManagement;
 using ApplicationLogics.StorageFasade;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -164,7 +164,6 @@ namespace ApplicationLogicTests.StorageFasade
             paperCollection.Add(AutoMapper.Mapper.Map<StoredPaper>(paper4));
             paperCollection.Add(AutoMapper.Mapper.Map<StoredPaper>(paper5));
 
-            IEnumerable<Paper> callBackPaper = null;
             mockRepo.Setup(r => r.Read()).Returns(paperCollection);
 
             //Act

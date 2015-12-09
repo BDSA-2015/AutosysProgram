@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using ApplicationLogics.PaperManagement;
-using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.StorageFasade;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Newtonsoft.Json;
 using Storage.Models;
 using Storage.Repository;
 
@@ -17,24 +17,25 @@ namespace ApplicationLogicTests.PaperManagement
     [TestClass()]
     public class PaperHandlerTests
     {
-        private Mock<IRepository<StoredPaper>> mockRepo;
+        private Mock<IRepository<StoredPaper>> _mockRepo;
+        private PaperHandler _paperHandler;
 
         [TestInitialize()]
         public void Initialize()
         {
-            mockRepo = new Mock<IRepository<StoredPaper>>();
+            _mockRepo = new Mock<IRepository<StoredPaper>>();
             AutoMapper.Mapper.CreateMap<Paper, StoredPaper>();
+            _paperHandler = new PaperHandler(new BibtexParser(), new PaperFacade(_mockRepo.Object));
         }
 
         /// <summary>
-        /// Tests the import of a single paper using a papervalidator with a default field checker
+        /// Tests the import of a single bibtex file as a Paper
         /// </summary>
         [TestMethod()]
-        public void DefaultImportSinglePaperTest()
+        public void ImportSinglePaperTest()
         {
             //Arrange
-            var validator = new PaperValidator();
-            var parser = new BibtexParser(validator);
+            var parser = new BibtexParser();
 
             var fieldTypes = new List<string>();
             fieldTypes.Add("author");
@@ -48,30 +49,28 @@ namespace ApplicationLogicTests.PaperManagement
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             var mapperPaper = AutoMapper.Mapper.Map<StoredPaper>(paper);
-            mockRepo.Setup(r => r.Create(mapperPaper)).Returns(mapperPaper.Id);
+            _mockRepo.Setup(r => r.Create(mapperPaper)).Returns(mapperPaper.Id);
 
-            var paperHandler = new PaperHandler(parser, new PaperFacade(mockRepo.Object));
-            var file = Properties.Resources._3bibtex;
-            var stringFile = System.Text.Encoding.Default.GetString(file);
+            var file = "@book{839269," +
+                       "author = {Will Newman}," +
+                       "title = {My book}," +
+                       "year = {1905}}";
 
             //Act
-            var paperIds = paperHandler.ImportPaper(stringFile);
+            var paperIds = _paperHandler.ImportBibtex(file);
 
             //Assert
-            Assert.IsTrue(paperIds.Count == 1 && paperIds.First() == 0);
+            Assert.IsTrue(paperIds.Count() == 1 && paperIds.First() == 0);
 
         }
 
         /// <summary>
-        /// Tests the import of multiple papers using a papervalidator with a default field checker
+        /// Tests the import of multiple papers
         /// </summary>
         [TestMethod()]
-        public void DefaultImportPapers()
+        public void ImportMultiplePapers()
         {
             //Arrange
-            var validator = new PaperValidator();
-            var parser = new BibtexParser(validator);
-
             var fieldTypes1 = new List<string>();
             fieldTypes1.Add("author");
             fieldTypes1.Add("title");
@@ -104,62 +103,59 @@ namespace ApplicationLogicTests.PaperManagement
 
             //paper1 mock setup
             var mapperPaper1 = AutoMapper.Mapper.Map<StoredPaper>(paper1);
-            mockRepo.Setup(r => r.Create(mapperPaper1)).Returns(mapperPaper1.Id);
+            _mockRepo.Setup(r => r.Create(mapperPaper1)).Returns(mapperPaper1.Id);
 
             //paper2 mock setup
             var mapperPaper2 = AutoMapper.Mapper.Map<StoredPaper>(paper2);
-            mockRepo.Setup(r => r.Create(mapperPaper2)).Returns(mapperPaper2.Id);
+            _mockRepo.Setup(r => r.Create(mapperPaper2)).Returns(mapperPaper2.Id);
 
             //paper3 mock setup
             var mapperPaper3 = AutoMapper.Mapper.Map<StoredPaper>(paper3);
-            mockRepo.Setup(r => r.Create(mapperPaper3)).Returns(mapperPaper3.Id);
+            _mockRepo.Setup(r => r.Create(mapperPaper3)).Returns(mapperPaper3.Id);
 
-            var paperHandler = new PaperHandler(parser, new PaperFacade(mockRepo.Object));
-            var file = Properties.Resources._3bibtex;
-            var stringFile = System.Text.Encoding.Default.GetString(file);
+            var file = "@Article{py03," +
+                       "author = {Xavier D ecoret}," +
+                       "title = {PyBiTex}," +
+                       "year = {2003}}"+
+
+                       "@Article{key03," +
+                       "author = {Xavier D ecoret}," +
+                       "title = {A {bunch {of} braces {in}} title}," +
+                       "year = {2003}}"+
+
+                       "@Article{key01," +
+                       "author = {Simon the saint Templar}," +
+                       "title = {Something nice}," +
+                       "year = {700}}";
 
             //Act
-            var paperIDs = paperHandler.ImportPaper(stringFile);
+            var receivedFile = JsonConvert.SerializeObject(file);
+            var paperIDs = _paperHandler.ImportBibtex(JsonConvert.DeserializeObject<string>(receivedFile));
 
             //Assert
-            var checkList = new List<int>() {0, 1, 2};
-            Assert.IsTrue(paperIDs.Equals(checkList));
+            Assert.IsTrue(paperIDs.Count() == 3);
         }
 
         /// <summary>
-        /// Tests the import of an empty bibtex file using a papervalidator with a default field checker
+        /// Tests the import of a bibtex file which is null
         /// </summary>
         [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void DefaultImportEmptyTypeBibtex()
+        public void ImportNullBibtex()
         {
-            //Arrange
-            var validator = new PaperValidator();
-            var parser = new BibtexParser(validator);
-
-            var paperHandler = new PaperHandler(parser, new PaperFacade(mockRepo.Object));
-            var file = Properties.Resources.emptybibtex;
-            var stringFile = System.Text.Encoding.Default.GetString(file);
-
             //Act
-            paperHandler.ImportPaper(stringFile);
+            _paperHandler.ImportBibtex(null);
         }
 
         /// <summary>
-        /// Tests the import of a bibtex file which is null using a papervalidator with a default field checker
+        /// Tests the import of a bibtex file which is empty
         /// </summary>
         [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void DefaultImportNullBibtex()
+        public void ImportEmptyBibtex()
         {
-            //Arrange
-            var validator = new PaperValidator();
-            var parser = new BibtexParser(validator);
-
-            var paperHandler = new PaperHandler(parser, new PaperFacade(mockRepo.Object));
-
             //Act
-            paperHandler.ImportPaper(null);
+            _paperHandler.ImportBibtex("");
         }
     }
 }

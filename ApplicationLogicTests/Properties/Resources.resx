@@ -130,13 +130,13 @@
   <data name="missingstarttag1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\missingstarttag1.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="valid1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\valid1.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="emptybibtex" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\emptybibtex.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="_3bibtex" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\3bibtex.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="valid1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\valid1.bib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
