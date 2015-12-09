@@ -24,18 +24,18 @@ namespace Storage.Repository
         /// <summary>
         /// Creates a new T entity and returns its id. Throws an ArgumentNullException if the item to create is null. 
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="protocol"></param>
         /// <returns></returns>
-        public virtual async Task<int> Create(T item)
+        public virtual async Task<int> Create(T protocol)
         {
-            if (item == null) throw new ArgumentNullException(nameof(item));
+            if (protocol == null) throw new ArgumentNullException(nameof(protocol));
 
-            _dbContext.Attach(item); // Used for mocking
+            _dbContext.Attach(protocol); // Used for mocking
             // _dbContext.Set<T>().Attach(item);
-            _dbContext.Add(item); // Used for mocking 
+            _dbContext.Add(protocol); // Used for mocking 
             //_dbContext.Set<T>().Add(item);
             await _dbContext.SaveChangesAsync();
-            return item.Id;
+            return protocol.Id;
 
         }
 
@@ -70,23 +70,23 @@ namespace Storage.Repository
         /// Updates an item in the database if it already exists. If not false is returned to indicate that no Update occurred.
         /// If the item to update is null an ArgumentNullException is thrown. 
         /// </summary>
-        /// <param name="item">
+        /// <param name="protocol">
         /// Item to update.
         /// </param>
         /// <returns>
         /// True if item was updated, vice versa. 
         /// </returns>
-        public virtual async Task<bool> Update(T item)
+        public virtual async Task<bool> Update(T protocol)
         {
-            if (item == null) throw new ArgumentNullException(nameof(item));
+            if (protocol == null) throw new ArgumentNullException(nameof(protocol));
 
-            var entity = await _dbContext.Set<T>().FindAsync(item.Id);
+            var entity = await _dbContext.Set<T>().FindAsync(protocol.Id);
 
             if (entity != null)
             {
-                _dbContext.Attach(item); // Used for mocking 
+                _dbContext.Attach(protocol); // Used for mocking 
                 //_dbContext.Set<T>().Attach(item);
-                _dbContext.SetModified(item); // Used for mocking 
+                _dbContext.SetModified(protocol); // Used for mocking 
                 //dbContext.Entry<T>(item).State = EntityState.Modified; 
                 await _dbContext.SaveChangesAsync();
                 return true;

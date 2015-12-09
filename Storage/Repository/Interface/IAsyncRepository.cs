@@ -15,13 +15,13 @@ namespace Storage.Repository.Interface
     /// </typeparam>
     public interface IAsyncRepository<T> : IDisposable where T : class, IEntity
     {
-        Task<int> Create(T item);
+        Task<int> Create(T protocol);
 
         Task<T> Read(int id);
 
         IQueryable<T> Read();
 
-        Task<bool> Update(T item);
+        Task<bool> Update(T protocol);
 
         Task<bool> Delete(int id);
     }
