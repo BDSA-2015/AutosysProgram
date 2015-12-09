@@ -1,26 +1,31 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Storage.Repository.Interface;
 
-namespace Storage
+namespace Storage.Repository
 {
 
     /// <summary>
-    /// This class implements the IRepository interface outlining the CRUD operations to be used in the database. 
-    /// These are used specifically on a given Dbcontext set in the AutoSysDbModel.
+    /// This class implements the IAsyncRepository interface outlining the async CRUD operations to be used in the database. 
+    /// These are used specifically on a given DbSet in the AutoSysDbModel.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class AsyncDbRepository<T> : IAsyncRepository<T> where T : class, IEntity
     {
         private readonly IAutoSysContext _dbContext;
 
+        // Used for mocking 
         public AsyncDbRepository(IAutoSysContext context)
         {
             _dbContext = context;
         }
 
+        /// <summary>
+        /// Creates a new T entity and returns its id. Throws an ArgumentNullException if the item to create is null. 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public virtual async Task<int> Create(T item)
         {
             if (item == null) throw new ArgumentNullException(nameof(item));
@@ -34,6 +39,13 @@ namespace Storage
 
         }
 
+        /// <summary>
+        /// Returns an item based on its id.
+        /// </summary>
+        /// <param name="id">
+        /// Id of item to find. 
+        /// </param>
+        /// <returns></returns>
         public virtual async Task<T> Read(int id)
         {
 
@@ -41,6 +53,12 @@ namespace Storage
 
         }
 
+        /// <summary>
+        /// Returns all items of given type. 
+        /// </summary>
+        /// <returns>
+        /// All entities. 
+        /// </returns>
         public virtual IQueryable<T> Read()
         {
 
@@ -48,6 +66,16 @@ namespace Storage
 
         }
 
+        /// <summary>
+        /// Updates an item in the database if it already exists. If not false is returned to indicate that no Update occurred.
+        /// If the item to update is null an ArgumentNullException is thrown. 
+        /// </summary>
+        /// <param name="item">
+        /// Item to update.
+        /// </param>
+        /// <returns>
+        /// True if item was updated, vice versa. 
+        /// </returns>
         public virtual async Task<bool> Update(T item)
         {
             if (item == null) throw new ArgumentNullException(nameof(item));
@@ -67,6 +95,15 @@ namespace Storage
 
         }
 
+        /// <summary>
+        /// Deletes an item based on its id. 
+        /// </summary>
+        /// <param name="id">
+        /// Id of entity. 
+        /// </param>
+        /// <returns>
+        /// True if item was deleted, false if item does not exist. 
+        /// </returns>
         public virtual async Task<bool> Delete(int id)
         {
             var entity = await _dbContext.Set<T>().FindAsync(id);
@@ -81,6 +118,9 @@ namespace Storage
 
         }
 
+        /// <summary>
+        /// This method is used to dispose the context.
+        /// </summary>
         public void Dispose()
         {
             _dbContext.Dispose();
