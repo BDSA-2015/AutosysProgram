@@ -85,9 +85,6 @@ namespace StorageTests.Utility
             mockSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
-            mockSet.Setup(m => m.Find(It.IsAny<object[]>()))
-                .Returns<object[]>(ids => items.FirstOrDefault(d => key(d) == (int)ids[0]));
-
             mockSet.Setup(m => m.FindAsync(It.IsAny<object[]>())) // <Task<object[]>>
                 .Returns<object[]>(ids => Task.FromResult(items.FirstOrDefault(d => key(d) == (int)ids[0])));
 

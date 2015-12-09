@@ -9,6 +9,7 @@ namespace StorageTests.Utility
 
     /// <summary>
     /// This is a test stub of the generic DbRepository in storage used to mock the repository with an interface instead of a concrete DbContext. 
+    /// This is no longer used. Instead created interface to mock DbContext and inject in ctor in repository implementing IDisposable in all places used. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class UserRepositoryStub : IRepository<StoredUser> // Before : DbRepository<StoredUser> 
