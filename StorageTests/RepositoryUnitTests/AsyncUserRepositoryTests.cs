@@ -112,7 +112,7 @@ namespace StorageTests.RepositoryUnitTests
 
         /// <summary>
         /// Test is true for EF but not for mocked interface that requires setup.
-        /// This test is useless because it does not check logic but tests if EF correctly increments id.
+        /// This test is useless because it does not check logic but tests if EF correctly increments id and Mock works.
         /// </summary>
         /// <returns></returns>
         [TestMethod]
