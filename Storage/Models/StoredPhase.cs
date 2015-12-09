@@ -21,12 +21,9 @@ namespace Storage.Entities
 
         public virtual ICollection<StoredPaper> Reports { get; set; }
 
-        public ICollection<StoredCriteria> ExclusionCriteria { get; set; }
+        public virtual ICollection<StoredCriteria> ExclusionCriteria { get; set; }
 
-        /// <summary>
-        /// This list contains Criteria, which each report must contain.
-        /// </summary>
-        public ICollection<StoredCriteria> InclusionCriteria { get; set; }
+        public virtual ICollection<StoredCriteria> InclusionCriteria { get; set; }
 
         public string IsFinished { get; set; } 
 

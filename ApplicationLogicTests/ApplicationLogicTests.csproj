@@ -39,6 +39,14 @@
       <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="BibtexLibrary, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\BibtexLibrary.1.2.0\lib\net45\BibtexLibrary.dll</HintPath>
       <Private>True</Private>
@@ -116,7 +124,15 @@
     <Compile Include="Mapping\Stub\ObjectDto.cs" />
     <Compile Include="Mapping\Stub\ObjectManyProperties.cs" />
     <Compile Include="Mapping\Stub\ObjectSameOneProperty.cs" />
+    <Compile Include="Mapping\AutoMapperConfiguratorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserManagement\Stub\RepositoryStub.cs" />
+    <Compile Include="UserManagement\TeamFacadeTests.cs" />
+    <Compile Include="UserManagement\TeamValidatorTests.cs" />
+    <Compile Include="UserManagement\TeamHandlerTests.cs" />
+    <Compile Include="UserManagement\UserHandlerTest.cs" />
+    <Compile Include="UserManagement\UserFacadeTests.cs" />
+    <Compile Include="UserManagement\UserTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -153,8 +169,12 @@
       <Name>ApplicationLogics</Name>
     </ProjectReference>
     <ProjectReference Include="..\Storage\Storage.csproj">
-      <Project>{390D70E5-5E15-4344-915A-D570F5BCA74D}</Project>
+      <Project>{390d70e5-5e15-4344-915a-d570f5bca74d}</Project>
       <Name>Storage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApi\WebApi.csproj">
+      <Project>{b9d7d263-0fa5-46e1-bbd8-53822b6877cd}</Project>
+      <Name>WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

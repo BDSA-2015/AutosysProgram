@@ -3,9 +3,8 @@
 // Jacob Mullit Møiniche.
 
 using System.Collections.Generic;
-using Storage.Repository.Interface;
 
-namespace Storage.Repository
+namespace Storage.Repository.Interface
 {
     /// <summary>
     /// This interface outlines the CRUD methods that the storage repository class will be able to perform.
@@ -13,10 +12,10 @@ namespace Storage.Repository
     /// <typeparam name="T"></typeparam>
     public interface IRepository<T> where T : IEntity
     {
-        int Create(T item);
+        int CreateOrUpdate(T item);
         T Read(int id);
         IEnumerable<T> Read();
-        void Update(T item);
-        void Delete(T item);
+        void UpdateIfExists(T item);
+        void DeleteIfExists(T item);
     }
 }

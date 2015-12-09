@@ -16,18 +16,29 @@ namespace ApplicationLogics.AutosysServer
 {
     public class MainHandler
     {
-        //private IFasade<> _Storage; TODO WHAT TO GIVE MAINHANDLER AS OBJECT?
+        //private IFasade<> _Storage; TODO WHAT TO GIVE MAINHANDLER AS OBJECT? ==> Check Dependency Injection Container that has been created.
         private ExportHandler _exportHandler;
         private PaperHandler _paperHandler;
         private ProtocolHandler _protocolHandler;
-        private RequestHandler _requestHandler;
         private StudyHandler _studyHandler;
         private UserHandler _userHandler;
 
         public MainHandler()
         {
-            throw new NotImplementedException();
+            var injector = new FacadeInjectionContainer();
+            InitializeHandlers(injector);
         }
+
+        /// <summary>
+        /// Initialize Facades buy utilzing a dependency injection container
+        /// </summary>
+        /// <param name="injector"></param>
+        private void InitializeHandlers(FacadeInjectionContainer injector)
+        {
+            _userHandler = new UserHandler(injector.GetUserFasade());
+
+        }
+
 
         private void HandleRequest()
         {

@@ -14,9 +14,15 @@ namespace Storage.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required] public string Type { get; set; }
-        [Required] public IReadOnlyCollection<string> FieldTypes { get; set; }
-        [Required] public IReadOnlyCollection<string> FieldValues { get; set; } 
+
+        [Required]
+        public string Type { get; set; }
+
+        [Required]
+        public virtual ICollection<string> FieldTypes { get; set; }
+
+        [Required]
+        public virtual ICollection<string> FieldValues { get; set; }
 
         //[StringLength(400)]
         //[Required]
