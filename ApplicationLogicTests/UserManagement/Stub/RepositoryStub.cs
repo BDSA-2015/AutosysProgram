@@ -20,7 +20,7 @@ namespace ApplicationLogicTests.UserManagement.Stub
             _database = new Dictionary<int, T>();
         }
 
-        public int CreateOrUpdate(T item)
+        public int Create(T item)
         {
             item.Id = _id;
             _id++;

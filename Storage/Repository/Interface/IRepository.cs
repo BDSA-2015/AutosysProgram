@@ -12,7 +12,7 @@ namespace Storage.Repository.Interface
     /// <typeparam name="T"></typeparam>
     public interface IRepository<T> where T : IEntity
     {
-        int CreateOrUpdate(T item);
+        int Create(T item);
         T Read(int id);
         IEnumerable<T> Read();
         void UpdateIfExists(T item);

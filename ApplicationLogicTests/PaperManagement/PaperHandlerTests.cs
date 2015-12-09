@@ -49,7 +49,7 @@ namespace ApplicationLogicTests.PaperManagement
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             var mapperPaper = AutoMapper.Mapper.Map<StoredPaper>(paper);
-            mockRepo.Setup(r => r.CreateOrUpdate(mapperPaper)).Returns(mapperPaper.Id);
+            mockRepo.Setup(r => r.Create(mapperPaper)).Returns(mapperPaper.Id);
 
             var paperHandler = new PaperHandler(parser, new PaperFacade(mockRepo.Object));
             var file = Properties.Resources._3bibtex;
@@ -105,15 +105,15 @@ namespace ApplicationLogicTests.PaperManagement
 
             //paper1 mock setup
             var mapperPaper1 = AutoMapper.Mapper.Map<StoredPaper>(paper1);
-            mockRepo.Setup(r => r.CreateOrUpdate(mapperPaper1)).Returns(mapperPaper1.Id);
+            mockRepo.Setup(r => r.Create(mapperPaper1)).Returns(mapperPaper1.Id);
 
             //paper2 mock setup
             var mapperPaper2 = AutoMapper.Mapper.Map<StoredPaper>(paper2);
-            mockRepo.Setup(r => r.CreateOrUpdate(mapperPaper2)).Returns(mapperPaper2.Id);
+            mockRepo.Setup(r => r.Create(mapperPaper2)).Returns(mapperPaper2.Id);
 
             //paper3 mock setup
             var mapperPaper3 = AutoMapper.Mapper.Map<StoredPaper>(paper3);
-            mockRepo.Setup(r => r.CreateOrUpdate(mapperPaper3)).Returns(mapperPaper3.Id);
+            mockRepo.Setup(r => r.Create(mapperPaper3)).Returns(mapperPaper3.Id);
 
             var paperHandler = new PaperHandler(parser, new PaperFacade(mockRepo.Object));
             var file = Properties.Resources._3bibtex;

@@ -20,7 +20,7 @@ namespace Storage.Repository
         /// <param name="item">
         /// Entity to create.
         /// </param>
-        public virtual int CreateOrUpdate(T item)
+        public virtual int Create(T item)
         {
             using (var context = new AutoSysDbModel())
             {

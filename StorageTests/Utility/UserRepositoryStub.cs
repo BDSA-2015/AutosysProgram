@@ -21,7 +21,7 @@ namespace StorageTests.Utility
             _context = context;
         }
 
-        public int CreateOrUpdate(StoredUser user)
+        public int Create(StoredUser user)
         {
             using (_context)
             {

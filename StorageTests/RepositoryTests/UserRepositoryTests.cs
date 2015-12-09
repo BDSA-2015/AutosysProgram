@@ -76,7 +76,7 @@ namespace StorageTests.RepositoryTests
             // Act 
             var service = new UserRepositoryStub(mockContext.Object);
             //var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
-            int id = service.CreateOrUpdate(new StoredUser());
+            int id = service.Create(new StoredUser());
 
             // Assert 
             mockSet.Verify(m => m.Add(It.IsAny<StoredUser>()), Times.Once());
@@ -88,7 +88,7 @@ namespace StorageTests.RepositoryTests
         public void Create_SaveChanges_IsCalled()
         {
                 var user = new StoredUser();
-                var id = _repository.CreateOrUpdate(user);
+                var id = _repository.Create(user);
                 _context.Verify(r => r.SaveChanges(), Times.Once);
         }
 
@@ -104,7 +104,7 @@ namespace StorageTests.RepositoryTests
             // Act 
             //var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
             var service = new UserRepositoryStub(mockContext.Object);
-            var id = service.CreateOrUpdate(user);
+            var id = service.Create(user);
 
             Assert.AreEqual(0, user.Id);
         }
@@ -122,8 +122,8 @@ namespace StorageTests.RepositoryTests
             // Act 
             //var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
             var service = new UserRepositoryStub(mockContext.Object);
-            var id = service.CreateOrUpdate(user);
-            var secondId = service.CreateOrUpdate(secondUser);
+            var id = service.Create(user);
+            var secondId = service.Create(secondUser);
 
             // Assert
             Assert.AreEqual(1, secondUser.Id);
