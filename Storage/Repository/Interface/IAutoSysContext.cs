@@ -35,7 +35,10 @@ namespace Storage.Repository.Interface
 
         Task<int> SaveChangesAsync();
 
-        void SetModified<TEntity>(TEntity entity) where TEntity : class, IEntity; // 
+        // Used to allow mocking of dbContext.Entry<T>(item).State = EntityState.Modified; in Update method 
+        void SetModified<TEntity>(TEntity entity) where TEntity : class, IEntity; 
+        
+        // Used to allow mocking of Set method in DbContext  
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
     }
 
