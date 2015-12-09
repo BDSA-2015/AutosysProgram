@@ -102,6 +102,7 @@
     <Compile Include="RepositoryUnitTests\TeamRepositoryTests.cs" />
     <Compile Include="RepositoryUnitTests\TaskRepositoryTests.cs" />
     <Compile Include="RepositoryUnitTests\ProtocolRepositoryTests.cs" />
+    <Compile Include="RepositoryUnitTests\OldUserRepositoryTests.cs" />
     <Compile Include="RepositoryUnitTests\UserRepositoryTests.cs" />
     <Compile Include="Utility\IDbContext.cs" />
     <Compile Include="Utility\IUserContext.cs" />
