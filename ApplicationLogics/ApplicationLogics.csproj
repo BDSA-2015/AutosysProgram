@@ -109,9 +109,9 @@
   <ItemGroup>
     <Compile Include="AutosysServer\FacadeInjectionContainer.cs" />
     <Compile Include="AutosysServer\Mapping\AutoMapperConfigurator.cs" />
-    <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\StudyManagementStorageProfile.cs" />
-    <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\PaperManagementStorageProfile.cs" />
-    <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\UserManagementStorageProfile.cs" />
+    <Compile Include="AutosysServer\Mapping\Profiles\StudyManagementStorageProfile.cs" />
+    <Compile Include="AutosysServer\Mapping\Profiles\PaperManagementStorageProfile.cs" />
+    <Compile Include="AutosysServer\Mapping\Profiles\UserManagementStorageProfile.cs" />
     <Compile Include="PaperManagement\Bibtex\BibtexParser.cs" />
     <Compile Include="PaperManagement\Bibtex\CustomFieldChecker.cs" />
     <Compile Include="PaperManagement\Bibtex\PaperChecker.cs" />
@@ -139,7 +139,6 @@
     <Compile Include="StorageFasade\CriteriaFacade.cs" />
     <Compile Include="StorageFasade\DatafieldFacade.cs" />
     <Compile Include="StorageFasade\Interface\IFacade.cs" />
-    <Compile Include="AutosysServer\Mapping\Profiles\WebApiProfile\UserManagementDTOProfile.cs" />
     <Compile Include="StorageFasade\PaperFacade.cs" />
     <Compile Include="StorageFasade\PhaseFacade.cs" />
     <Compile Include="StorageFasade\ProtocolFacade.cs" />
@@ -175,10 +174,6 @@
     <ProjectReference Include="..\Storage\Storage.csproj">
       <Project>{390d70e5-5e15-4344-915a-d570f5bca74d}</Project>
       <Name>Storage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebApi\WebApi.csproj">
-      <Project>{b9d7d263-0fa5-46e1-bbd8-53822b6877cd}</Project>
-      <Name>WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

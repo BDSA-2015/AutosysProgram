@@ -185,6 +185,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\AutoMapperConfigurator.cs" />
+    <Compile Include="Mapping\Profiles\UserManagementDTOProfile.cs" />
     <Compile Include="Models\ConflictingData.cs" />
     <Compile Include="Models\DataField.cs" />
     <Compile Include="Models\Resource.cs" />
@@ -254,7 +256,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationLogics\ApplicationLogics.csproj">
+      <Project>{c10eb25d-de01-4d48-a5d9-a28e69f9325d}</Project>
+      <Name>ApplicationLogics</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Project_Readme.html" />
   </ItemGroup>

@@ -79,5 +79,7 @@ namespace ApplicationLogics.StorageFasade
             var storedUserToDelete = Mapper.Map<StoredUser>(toDelete);
             _userRepository.DeleteIfExists(storedUserToDelete);
         }
+
     }
+
 }

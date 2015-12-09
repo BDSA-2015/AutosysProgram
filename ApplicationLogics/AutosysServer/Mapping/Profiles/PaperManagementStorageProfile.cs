@@ -6,7 +6,7 @@ using ApplicationLogics.PaperManagement.Bibtex;
 using AutoMapper;
 using Storage.Models;
 
-namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfiles
+namespace ApplicationLogics.AutosysServer.Mapping.Profiles
 {
     /// <summary>
     /// This class will create mappings on application logic entities in 

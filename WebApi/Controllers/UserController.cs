@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using SystematicStudyService.Models;
+using ApplicationLogics.StorageFasade;
 
 namespace WebApi.Controllers
 {
@@ -12,9 +13,20 @@ namespace WebApi.Controllers
     [RoutePrefix("api/User")]
     public class UserController : ApiController
     {
-        private IDisposable _facade;
 
+        /*
+        private IDisposable _facade;
+         
         public UserController(IDisposable facade)
+        {
+            _facade = facade;
+        }
+        */
+
+        private readonly UserFacade _facade;
+
+        // Injecting a facade with IDisposable 
+        public UserController(UserFacade facade)
         {
             _facade = facade;
         }
@@ -86,7 +98,7 @@ namespace WebApi.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            _facade.Dispose();
+            // _facade.Dispose(); TODO make all interfaces down to db implement IDisposable 
             base.Dispose(disposing);
         }
     }

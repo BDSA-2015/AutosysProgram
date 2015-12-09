@@ -2,7 +2,7 @@
 using ApplicationLogics.UserManagement.Entities;
 using AutoMapper;
 
-namespace ApplicationLogics.AutosysServer.Mapping.Profiles.WebApiProfile
+namespace WebApi.Mapping.Profiles
 {
     /// <summary>
     /// This class is an Automapper profile that
@@ -12,14 +12,12 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles.WebApiProfile
     /// https://github.com/AutoMapper/AutoMapper/wiki/Configuration
     /// http://stackoverflow.com/questions/6825244/where-to-place-automapper-createmaps
     /// </summary>
-    public class UserAndTeamDTOProfile : Profile
+    public class UserAndTeamDtoProfile : Profile
     {
 
         /// <summary>
         /// Maps source to a destination object
         /// </summary>
-        /// <param name="source"> source object</param>
-        /// <param name="destination"> destination object</param>
         /// <returns>destination object</returns>
         protected override void Configure()
         {

@@ -6,6 +6,10 @@ using Storage.Models;
 
 namespace Storage.Repository.Interface
 {
+
+    /// <summary>
+    /// This interface is used to mock the DbContext, <see cref="AutoSysDbModel"/>
+    /// </summary>
     public interface IAutoSysContext : IDisposable
     {
 
@@ -36,9 +40,9 @@ namespace Storage.Repository.Interface
     }
 
     /// <summary>
-    /// This is used to "instantiate" the interface. 
+    /// This is used to "instantiate" the interface when mocking, <see cref="IAutoSysContext"/>.
     /// </summary>
-    class AutoSysContext : DbContext, IAutoSysContext
+    public class AutoSysContext : DbContext, IAutoSysContext
     {
         public AutoSysContext() : base("name=AutoSysDbModel")
         {
