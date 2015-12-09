@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using System.Web.Http;
 using SystematicStudyService.Models;
 
-namespace SystematicStudyService.Controllers
+namespace WebApi.Controllers
 {
+
     /// <summary>
     /// Controller to access and modify users.
     /// </summary>
     [RoutePrefix("api/User")]
     public class UserController : ApiController
     {
+        private IDisposable _facade;
+
+        public UserController(IDisposable facade)
+        {
+            _facade = facade;
+        }
+
         /// <summary>
         /// Get all users.
         /// </summary>
@@ -74,6 +82,12 @@ namespace SystematicStudyService.Controllers
         {
             // DELETE: api/User/5
             throw new NotImplementedException();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _facade.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

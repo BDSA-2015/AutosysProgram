@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repository\Interface\IAutoSysContext.cs" />
     <Compile Include="Repository\AsyncDbRepository.cs" />
     <Compile Include="AutoSysDbModel.cs" />
     <Compile Include="EnumExtensions.cs" />
