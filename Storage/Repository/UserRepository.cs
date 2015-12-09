@@ -73,7 +73,7 @@ namespace Storage.Repository
         }
 
         /// <summary>
-        /// Updates a user in the database if it already exists. If not, false is returned to indicate that no Update occurred.
+        /// Updates a user in the database if it already exists. If not, false is returned to indicate that no UpdateIfExists occurred.
         /// If the user to update is null, an ArgumentNullException is thrown. 
         /// </summary>
         /// <param name="user">
@@ -82,7 +82,7 @@ namespace Storage.Repository
         /// <returns>
         /// True if user was updated, vice versa. 
         /// </returns>
-        public virtual async Task<bool> Update(StoredUser user)
+        public virtual async Task<bool> UpdateIfExists(StoredUser user)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
 
@@ -110,7 +110,7 @@ namespace Storage.Repository
         /// <returns>
         /// True if user was deleted, false if user does not exist. 
         /// </returns>
-        public virtual async Task<bool> Delete(int id)
+        public virtual async Task<bool> DeleteIfExists(int id)
         {
             var userToDelete = await _dbContext.Set<StoredUser>().FindAsync(id);
 

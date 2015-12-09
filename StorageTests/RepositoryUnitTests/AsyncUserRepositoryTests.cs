@@ -145,7 +145,7 @@ namespace StorageTests.RepositoryUnitTests
             var user = new StoredUser { Id = 1 };
 
             // Act
-            await _repository.Update(user);
+            await _repository.UpdateIfExists(user);
 
             // Assert
             _context.Verify(r => r.SaveChangesAsync(), Times.Once);
@@ -158,7 +158,7 @@ namespace StorageTests.RepositoryUnitTests
             var user = new StoredUser { Id = 1, Name = "User", MetaData = "Validator" };
 
             // Act 
-            await _repository.Update(user);
+            await _repository.UpdateIfExists(user);
 
             // Assert
             _context.Verify(c => c.SetModified(user), Times.Once);
@@ -171,7 +171,7 @@ namespace StorageTests.RepositoryUnitTests
             var user = new StoredUser { Id = 1, Name = "User", MetaData = "Validator" };
 
             // Act 
-            await _repository.Update(user);
+            await _repository.UpdateIfExists(user);
 
             // Assert
             _context.Verify(c => c.Attach(user), Times.Once);
@@ -184,7 +184,7 @@ namespace StorageTests.RepositoryUnitTests
             var user = _data[0];
 
             // Act 
-            var id = await _repository.Delete(user.Id);
+            var id = await _repository.DeleteIfExists(user.Id);
 
             // Assert
             Assert.IsFalse(_data.Any(u => u.Id == 1));
@@ -197,7 +197,7 @@ namespace StorageTests.RepositoryUnitTests
             var user = _data[0];
 
             // Act
-            await _repository.Delete(user.Id);
+            await _repository.DeleteIfExists(user.Id);
 
             // Assert
             _context.Verify(repo => repo.SaveChangesAsync(), Times.Once);

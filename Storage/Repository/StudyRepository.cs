@@ -73,7 +73,7 @@ namespace Storage.Repository
         }
 
         /// <summary>
-        /// Updates an study in the database if it already exists. If not false is returned to indicate that no Update occurred.
+        /// Updates an study in the database if it already exists. If not false is returned to indicate that no UpdateIfExists occurred.
         /// If the study to update is null an ArgumentNullException is thrown. 
         /// </summary>
         /// <param name="user">
@@ -82,7 +82,7 @@ namespace Storage.Repository
         /// <returns>
         /// True if study was updated, vice versa. 
         /// </returns>
-        public virtual async Task<bool> Update(StoredStudy user)
+        public virtual async Task<bool> UpdateIfExists(StoredStudy user)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
 
@@ -110,7 +110,7 @@ namespace Storage.Repository
         /// <returns>
         /// True if study was deleted, false if study does not exist. 
         /// </returns>
-        public virtual async Task<bool> Delete(int id)
+        public virtual async Task<bool> DeleteIfExists(int id)
         {
             var studyToDelete = await _dbContext.Set<StoredStudy>().FindAsync(id);
 

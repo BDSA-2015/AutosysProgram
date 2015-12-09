@@ -148,7 +148,7 @@ namespace StorageTests.RepositoryUnitTests
             var protocol = new StoredProtocol { Id = 1 };
 
             // Act
-            await _repository.Update(protocol);
+            await _repository.UpdateIfExists(protocol);
 
             // Assert
             _context.Verify(r => r.SaveChangesAsync(), Times.Once);
@@ -161,7 +161,7 @@ namespace StorageTests.RepositoryUnitTests
             var protocol = new StoredProtocol{ Id = 1, Description = "New Description" };
 
             // Act 
-            await _repository.Update(protocol);
+            await _repository.UpdateIfExists(protocol);
 
             // Assert
             _context.Verify(c => c.SetModified(protocol), Times.Once);
@@ -174,7 +174,7 @@ namespace StorageTests.RepositoryUnitTests
             var protocol = new StoredProtocol { Id = 1, Description = "New Description" };
 
             // Act 
-            await _repository.Update(protocol);
+            await _repository.UpdateIfExists(protocol);
 
             // Assert
             _context.Verify(c => c.Attach(protocol), Times.Once);
@@ -187,7 +187,7 @@ namespace StorageTests.RepositoryUnitTests
             var protocol = _data[0];
 
             // Act 
-            var id = await _repository.Delete(protocol.Id);
+            var id = await _repository.DeleteIfExists(protocol.Id);
 
             // Assert
             Assert.IsFalse(_data.Any(p => p.Id == 1));
@@ -200,7 +200,7 @@ namespace StorageTests.RepositoryUnitTests
             var protocol = _data[0];
 
             // Act
-            await _repository.Delete(protocol.Id);
+            await _repository.DeleteIfExists(protocol.Id);
 
             // Assert
             _context.Verify(repo => repo.SaveChangesAsync(), Times.Once);

@@ -73,7 +73,7 @@ namespace Storage.Repository
         }
 
         /// <summary>
-        /// Updates an protocol in the database if it already exists. If not false is returned to indicate that no Update occurred.
+        /// Updates an protocol in the database if it already exists. If not false is returned to indicate that no UpdateIfExists occurred.
         /// If the protocol to update is null an ArgumentNullException is thrown. 
         /// </summary>
         /// <param name="user">
@@ -82,7 +82,7 @@ namespace Storage.Repository
         /// <returns>
         /// True if protocol was updated, vice versa. 
         /// </returns>
-        public virtual async Task<bool> Update(StoredProtocol user)
+        public virtual async Task<bool> UpdateIfExists(StoredProtocol user)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
 
@@ -110,7 +110,7 @@ namespace Storage.Repository
         /// <returns>
         /// True if protocol was deleted, false if protocol does not exist. 
         /// </returns>
-        public virtual async Task<bool> Delete(int id)
+        public virtual async Task<bool> DeleteIfExists(int id)
         {
             var protocolToDelete = await _dbContext.Set<StoredProtocol>().FindAsync(id);
 

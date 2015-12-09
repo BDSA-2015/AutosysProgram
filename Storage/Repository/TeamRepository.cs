@@ -82,7 +82,7 @@ namespace Storage.Repository
         /// <returns>
         /// True if team was updated, vice versa. 
         /// </returns>
-        public virtual async Task<bool> Update(StoredTeam user)
+        public virtual async Task<bool> UpdateIfExists(StoredTeam user)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
 
@@ -110,7 +110,7 @@ namespace Storage.Repository
         /// <returns>
         /// True if team was deleted, false if team does not exist. 
         /// </returns>
-        public virtual async Task<bool> Delete(int id)
+        public virtual async Task<bool> DeleteIfExists(int id)
         {
             var teamToDelete = await _dbContext.Set<StoredTeam>().FindAsync(id);
 

@@ -14,6 +14,7 @@ namespace ApplicationLogics.AutosysServer
     /// </summary>
     internal class FacadeInjectionContainer
     {
+        // TODO insert new async repository and make facade take this instead
         /// <summary>
         /// Returns a UserFacde that are used by userHandlers
         /// It creates a userFacade with specified repository
@@ -21,8 +22,9 @@ namespace ApplicationLogics.AutosysServer
         /// <returns></returns>
         public UserFacade GetUserFasade()
         {
-            var repository = new DbRepository<StoredUser>();
-            return new UserFacade(repository);
+            //var repository = new UserRepository<StoredUser>();
+            //return new UserFacade(repository);
+            return null;
         }
 
         //TODO Add your facades and how they are initialzied here

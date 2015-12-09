@@ -35,16 +35,16 @@ namespace Storage.Repository.Interface
 
         Task<int> SaveChangesAsync();
 
-        // Used to allow mocking of dbContext.Entry<T>(item).State = EntityState.Modified; in Update method 
+        // Used to allow mocking of dbContext.Entry<T>(item).State = EntityState.Modified; in UpdateIfExists method 
         void SetModified<TEntity>(TEntity entity) where TEntity : class, IEntity; 
         
         // Used to allow mocking of Set method in DbContext  
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
-        // Used to allow mocking of Attach when calling Update in DbContext 
+        // Used to allow mocking of Attach when calling UpdateIfExists in DbContext 
         void Attach<TEntity>(TEntity entity) where TEntity : class;
 
-        // Used to allow mocking of Attach when calling Update in DbContext 
+        // Used to allow mocking of Attach when calling UpdateIfExists in DbContext 
         void Add<TEntity>(TEntity entity) where TEntity : class; 
 
     }
@@ -71,7 +71,7 @@ namespace Storage.Repository.Interface
         public DbSet<StoredPaper> Papers { get; set; }
 
         /// <summary>
-        /// This allows mocking the Update functionality that is now hidden behind an interface. 
+        /// This allows mocking the UpdateIfExists functionality that is now hidden behind an interface. 
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
@@ -81,7 +81,7 @@ namespace Storage.Repository.Interface
         }
 
         /// <summary>
-        /// This allows mocking the "_dbContext.Set<T>().Attach(item);" in the Update functionality that is now hidden behind an interface. 
+        /// This allows mocking the "_dbContext.Set<T>().Attach(item);" in the UpdateIfExists functionality that is now hidden behind an interface. 
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>

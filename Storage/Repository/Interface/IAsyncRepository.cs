@@ -21,9 +21,9 @@ namespace Storage.Repository.Interface
 
         IQueryable<T> Read();
 
-        Task<bool> Update(T user);
+        Task<bool> UpdateIfExists(T user);
 
-        Task<bool> Delete(int id);
+        Task<bool> DeleteIfExists(int id);
     }
 
 }
