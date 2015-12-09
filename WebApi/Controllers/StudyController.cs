@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using SystematicStudyService.Models;
+using ApplicationLogics.StorageFasade;
 
 namespace WebApi.Controllers
 {
@@ -11,6 +12,24 @@ namespace WebApi.Controllers
     [RoutePrefix("api/Study")]
     public class StudyController : ApiController
     {
+
+        /*
+        private IDisposable _facade;
+         
+        public UserController(IDisposable facade)
+        {
+            _facade = facade;
+        }
+        */
+
+        private readonly StudyFacade _facade;
+
+        // Injecting a facade with IDisposable 
+        public StudyController(StudyFacade facade)
+        {
+            _facade = facade;
+        }
+
         /// <summary>
         /// Retrieve an overview of the specified study.
         /// </summary>

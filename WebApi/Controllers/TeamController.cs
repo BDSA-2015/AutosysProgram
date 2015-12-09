@@ -2,14 +2,33 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using SystematicStudyService.Models;
+using ApplicationLogics.StorageFasade;
 
-namespace SystematicStudyService.Controllers
+namespace WebApi.Controllers
 {
     /// <summary>
     /// Controller to access and modify teams.
     /// </summary>
     public class TeamController : ApiController
     {
+
+        /*
+        private IDisposable _facade;
+         
+        public UserController(IDisposable facade)
+        {
+            _facade = facade;
+        }
+        */
+
+        private readonly TeamFacade _facade;
+
+        // Injecting a facade with IDisposable 
+        public TeamController(TeamFacade facade)
+        {
+            _facade = facade;
+        }
+
         /// <summary>
         /// Get all teams.
         /// </summary>
