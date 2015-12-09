@@ -82,5 +82,11 @@ namespace WebApi.Controllers
             // DELETE: api/Team/5
             throw new NotImplementedException();
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            // _facade.Dispose(); TODO make all interfaces down to db implement IDisposable 
+            base.Dispose(disposing);
+        }
     }
 }
