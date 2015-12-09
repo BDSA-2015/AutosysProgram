@@ -10,7 +10,7 @@ using Storage.Models;
 using Storage.Repository.Interface;
 using StorageTests.Utility;
 
-namespace StorageTests.RepositoryTests
+namespace StorageTests.RepositoryUnitTests
 {
 
     /// <summary>

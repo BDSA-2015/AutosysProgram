@@ -6,7 +6,7 @@ using Moq;
 using Storage.Models;
 using StorageTests.Utility;
 
-namespace StorageTests.RepositoryTests
+namespace StorageTests.RepositoryUnitTests
 {
 
     /// <summary>
