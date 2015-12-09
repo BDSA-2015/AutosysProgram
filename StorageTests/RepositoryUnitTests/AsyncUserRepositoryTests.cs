@@ -71,9 +71,13 @@ namespace StorageTests.RepositoryUnitTests
         [TestMethod]
         public async Task Create_SaveChanged_IsCalled()
         {
+            // Arrange
             var user = new StoredUser();
+
+            // Act
             var id = await _repository.Create(user);
 
+            // Assert
             _context.Verify(c => c.SaveChangesAsync(), Times.Once);
 
         }

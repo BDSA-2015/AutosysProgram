@@ -11,7 +11,7 @@ namespace Storage.Repository.Interface
     /// This interface outlines the CRUD methods that the storage repository class will be able to perform.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IRepository<T> : IDisposable where T : class, IEntity
+    public interface IRepository<T> where T : class, IEntity
     {
         int Create(T item);
         T Read(int id);
