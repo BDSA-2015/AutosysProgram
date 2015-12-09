@@ -24,8 +24,11 @@ namespace Storage
         public virtual async Task<int> Create(T item)
         {
             if (item == null) throw new ArgumentNullException(nameof(item));
-           
-            _dbContext.Set<T>().Add(item);
+
+            _dbContext.Attach(item); // Used for mocking
+            // _dbContext.Set<T>().Attach(item);
+            _dbContext.Add(item); // Used for mocking 
+            //_dbContext.Set<T>().Add(item);
             await _dbContext.SaveChangesAsync();
             return item.Id;
 
@@ -47,14 +50,16 @@ namespace Storage
 
         public virtual async Task<bool> Update(T item)
         {
+            if (item == null) throw new ArgumentNullException(nameof(item));
 
             var entity = await _dbContext.Set<T>().FindAsync(item.Id);
 
             if (entity != null)
             {
-                _dbContext.Set<T>().Attach(item);
-                _dbContext.SetModified(item);
-                //dbContext.Entry<T>(item).State = EntityState.Modified;
+                _dbContext.Attach(item); // Used for mocking 
+                //_dbContext.Set<T>().Attach(item);
+                _dbContext.SetModified(item); // Used for mocking 
+                //dbContext.Entry<T>(item).State = EntityState.Modified; 
                 await _dbContext.SaveChangesAsync();
                 return true;
             }

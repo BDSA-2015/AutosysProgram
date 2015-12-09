@@ -3,7 +3,9 @@ using System.Data.Entity;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Storage;
 using Storage.Models;
+using Storage.Repository.Interface;
 using StorageTests.Utility;
 
 namespace StorageTests.RepositoryUnitTests
@@ -94,36 +96,42 @@ namespace StorageTests.RepositoryUnitTests
         {
             // Arrange 
             var mockSet = new Mock<DbSet<StoredUser>>();
-            var mockContext = new Mock<IUserContext>();
+            var mockContext = new Mock<IAutoSysContext>();
             mockContext.Setup(m => m.Users).Returns(mockSet.Object);
             var user = new StoredUser { Name = "Steven", MetaData = "Validator" };
 
             // Act 
-            //var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
-            var service = new UserRepositoryStub(mockContext.Object);
+            var service = new AsyncDbRepository<StoredUser>(mockContext.Object);
             var id = service.Create(user);
 
+            // Assert 
             Assert.AreEqual(0, user.Id);
         }
 
+        /// <summary>
+        /// Test is true for EF but not for mocked interface that requires setup.
+        /// This test is useless because it does not check logic but tests if EF correctly increments id.
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
+        [Ignore]
         public void CreateMultipleUsers_ReturnsId_Incremented()
         {
             // Arrange 
             var mockSet = new Mock<DbSet<StoredUser>>();
-            var mockContext = new Mock<IUserContext>();
+            var mockContext = new Mock<IAutoSysContext>();
             mockContext.Setup(m => m.Users).Returns(mockSet.Object);
+
             var user = new StoredUser { Name = "Steven", MetaData = "Validator" };
             var secondUser = new StoredUser {Name = "William", MetaData = "Researcher"};
 
             // Act 
-            //var service = new DbRepositoryStub<StoredUser>(mockContext.Object);
-            var service = new UserRepositoryStub(mockContext.Object);
+            var service = new AsyncDbRepository<StoredUser>(mockContext.Object);
             var id = service.Create(user);
             var secondId = service.Create(secondUser);
 
             // Assert
-            Assert.AreEqual(1, secondUser.Id);
+            Assert.AreEqual(1, secondUser.Id); // True for EF but not for mocked interface 
         }
 
         [TestMethod]

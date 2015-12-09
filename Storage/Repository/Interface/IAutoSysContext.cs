@@ -40,6 +40,13 @@ namespace Storage.Repository.Interface
         
         // Used to allow mocking of Set method in DbContext  
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
+
+        // Used to allow mocking of Attach when calling Update in DbContext 
+        void Attach<TEntity>(TEntity entity) where TEntity : class;
+
+        // Used to allow mocking of Attach when calling Update in DbContext 
+        void Add<TEntity>(TEntity entity) where TEntity : class; 
+
     }
 
     /// <summary>
@@ -63,8 +70,6 @@ namespace Storage.Repository.Interface
         public DbSet<StoredProtocol> Protocols { get; set; }
         public DbSet<StoredPaper> Papers { get; set; }
 
-
-
         /// <summary>
         /// This allows mocking the Update functionality that is now hidden behind an interface. 
         /// </summary>
@@ -75,5 +80,19 @@ namespace Storage.Repository.Interface
             Entry(entity).State = EntityState.Modified;
         }
 
+        /// <summary>
+        /// This allows mocking the "_dbContext.Set<T>().Attach(item);" in the Update functionality that is now hidden behind an interface. 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="entity"></param>
+        public void Attach<TEntity>(TEntity entity) where TEntity : class
+        {
+            Set<TEntity>().Attach(entity);
+        }
+
+        public void Add<TEntity>(TEntity entity) where TEntity : class
+        {
+            Set<TEntity>().Add(entity);
+        }
     }
 }
