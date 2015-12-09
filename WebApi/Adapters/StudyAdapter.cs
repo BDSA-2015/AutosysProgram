@@ -1,10 +1,15 @@
-﻿using System;
+﻿using ApplicationLogics.AutosysServer;
+using ApplicationLogics.StudyManagement;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.UI.WebControls;
 using SystematicStudyService.Models;
-using ApplicationLo
+
+
 
 namespace WebApi.Adapters
 {
@@ -14,6 +19,23 @@ namespace WebApi.Adapters
         public StudyOverview GetOverview(int id)
         {
             var database = new MainHandler();
+            StudyOverview overview = new StudyOverview();
+
+            var study = database.GetStudy(id);
+
+            overview.Name = study.Name;
+            
+            List<int> userIDs = new List<int>();
+
+            foreach(Phase phase in study.Phases )
+            {
+                
+            }
+            
+            
+           
+           
+            
             throw new NotImplementedException();
         }
         

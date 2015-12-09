@@ -19,7 +19,7 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         /// Determines task states; initialized, in progress or completed
         /// </summary>
-        public enum Progress
+        public enum s
         {
             NotStarted,
             Started,

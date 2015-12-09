@@ -29,6 +29,14 @@ namespace ApplicationLogics.AutosysServer
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Return a study coresponding to the given ID
+        /// </summary>
+        public Study GetStudy(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         private void HandleRequest()
         {
             throw new NotImplementedException(); //TODO Consider what parameters and how request are coming.
@@ -85,7 +93,7 @@ namespace ApplicationLogics.AutosysServer
         /// <param name="userId"> 
         /// If of user related to a given study.
         /// </param>
-        public List<Task> GetStudyOverview(int userId)
+        public List<TaskRequest> GetStudyOverview(int userId)
         {
             throw new NotImplementedException();
         }
@@ -130,7 +138,7 @@ namespace ApplicationLogics.AutosysServer
             throw new NotImplementedException();
         }
 
-        public List<Task> GetReviewableTasks(int userId, int studyId)
+        public List<TaskRequest> GetReviewableTasks(int userId, int studyId)
         {
             throw new NotImplementedException();
         }
