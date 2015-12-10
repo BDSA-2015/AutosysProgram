@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ApplicationLogics.PaperManagement.Bibtex
+namespace ApplicationLogics.PaperManagement
 {
     /// <summary>
     /// Class for holding bibtex file information to be stored in the database

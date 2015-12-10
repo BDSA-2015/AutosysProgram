@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationLogics.PaperManagement;
-using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.StorageFasade.Interface;
 using Storage.Models;
 using Storage.Repository;

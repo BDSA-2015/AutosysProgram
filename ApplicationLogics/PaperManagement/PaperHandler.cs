@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ApplicationLogics.PaperManagement.Bibtex;
-using ApplicationLogics.PaperManagement.Interfaces;
+using System.Web.WebPages;
 using ApplicationLogics.StorageFasade;
 using NUnit.Framework.Constraints;
 
@@ -30,22 +29,14 @@ namespace ApplicationLogics.PaperManagement
         /// </summary>
         /// <param name="file">The bibtex file which is parsed to the program</param>
         /// <returns>A List of Papers which was valid for parsing</returns>
-        public List<int> ImportPaper(string file)
+        public IEnumerable<int> ImportBibtex(string file)
         {
-            if (string.IsNullOrEmpty(file))
+            if (file.IsEmpty() || file == null)
             {
                 throw new ArgumentNullException("The given bibtex file cannot be null nor empty");
             }
 
-            var paperIds = new List<int>();
-
-            foreach (var paper in _parser.Parse(file))
-            {
-                paperIds.Add(_paperFacade.Create(paper));
-            }
-
-            return paperIds;
+            return _parser.Parse(file).Select(paper => _paperFacade.Create(paper));
         }
-       
     }
 }

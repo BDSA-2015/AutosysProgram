@@ -2,7 +2,7 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-using ApplicationLogics.PaperManagement.Bibtex;
+using ApplicationLogics.PaperManagement;
 using AutoMapper;
 using Storage.Models;
 
