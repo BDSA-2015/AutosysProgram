@@ -74,20 +74,19 @@ namespace Storage.Repository
         /// </returns>
         public virtual async Task<bool> UpdateIfExists(T user)
         {
-            if (user == null) throw new ArgumentNullException(nameof(user));
+            //if (user == null) throw new ArgumentNullException(nameof(user));
 
             var entity = await _dbContext.Set<T>().FindAsync(user.Id);
 
-            if (entity != null)
-            {
-                _dbContext.Attach(user); // Used for mocking 
-                //_dbContext.Set<T>().Attach(item);
-                _dbContext.SetModified(user); // Used for mocking 
-                //dbContext.Entry<T>(item).State = EntityState.Modified; 
-                await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            return false;
+            if (entity == null) return false;
+
+            _dbContext.Attach(user); // Used for mocking 
+            //_dbContext.Set<T>().Attach(item);
+            _dbContext.SetModified(user); // Used for mocking 
+            //dbContext.Entry<T>(item).State = EntityState.Modified; 
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
         /// <summary>
@@ -103,13 +102,12 @@ namespace Storage.Repository
         {
             var entity = await _dbContext.Set<T>().FindAsync(id);
 
-            if (entity != null)
-            {
-                _dbContext.Set<T>().Remove(entity);
-                await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            return false;
+            if (entity == null) return false;
+
+            _dbContext.Set<T>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
         /// <summary>

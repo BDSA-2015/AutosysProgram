@@ -24,22 +24,22 @@ namespace Storage.Repository
         /// <summary>
         ///     Creates a new study and returns its id. Throws an ArgumentNullException if the study to create is null.
         /// </summary>
-        /// <param name="user">
+        /// <param name="study">
         ///     Study to create.
         /// </param>
         /// <returns>
         ///     True if study was created.
         /// </returns>
-        public virtual async Task<int> Create(StoredStudy user)
+        public virtual async Task<int> Create(StoredStudy study)
         {
-            if (user == null) throw new ArgumentNullException(nameof(user));
+            if (study == null) throw new ArgumentNullException(nameof(study));
 
-            _dbContext.Attach(user); // Used for mocking
+            _dbContext.Attach(study); // Used for mocking
             // _dbContext.Set<T>().Attach(study);
-            _dbContext.Add(user); // Used for mocking 
+            _dbContext.Add(study); // Used for mocking 
             //_dbContext.Set<T>().Add(study);
             await _dbContext.SaveChangesAsync();
-            return user.Id;
+            return study.Id;
         }
 
         /// <summary>
@@ -72,28 +72,27 @@ namespace Storage.Repository
         ///     occurred.
         ///     If the study to update is null an ArgumentNullException is thrown.
         /// </summary>
-        /// <param name="user">
+        /// <param name="study">
         ///     Study to update.
         /// </param>
         /// <returns>
         ///     True if study was updated, vice versa.
         /// </returns>
-        public virtual async Task<bool> UpdateIfExists(StoredStudy user)
+        public virtual async Task<bool> UpdateIfExists(StoredStudy study)
         {
             // if (user == null) throw new ArgumentNullException(nameof(user)); // Todo handle in application logic 
 
-            var studyToUpdate = await _dbContext.Set<StoredStudy>().FindAsync(user.Id);
+            var studyToUpdate = await _dbContext.Set<StoredStudy>().FindAsync(study.Id);
 
-            if (studyToUpdate != null)
-            {
-                _dbContext.Attach(user); // Used for mocking 
-                //_dbContext.Set<T>().Attach(study);
-                _dbContext.SetModified(user); // Used for mocking 
-                //dbContext.Entry<T>(study).State = EntityState.Modified; 
-                await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            return false;
+            if (studyToUpdate == null) return false;
+
+            _dbContext.Attach(study); // Used for mocking 
+            //_dbContext.Set<T>().Attach(study);
+            _dbContext.SetModified(study); // Used for mocking 
+            //dbContext.Entry<T>(study).State = EntityState.Modified; 
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
         /// <summary>
@@ -109,13 +108,12 @@ namespace Storage.Repository
         {
             var studyToDelete = await _dbContext.Set<StoredStudy>().FindAsync(id);
 
-            if (studyToDelete != null)
-            {
-                _dbContext.Set<StoredStudy>().Remove(studyToDelete);
-                await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            return false;
+            if (studyToDelete == null) return false;
+
+            _dbContext.Set<StoredStudy>().Remove(studyToDelete);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
         /// <summary>

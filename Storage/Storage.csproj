@@ -64,7 +64,6 @@
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Repository\OldDbRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Interface\IAsyncRepository.cs" />
     <Compile Include="Repository\Interface\IEntity.cs" />

@@ -24,22 +24,22 @@ namespace Storage.Repository
         /// <summary>
         ///     Creates a new task and returns its id. Throws an ArgumentNullException if the task to create is null.
         /// </summary>
-        /// <param name="user">
+        /// <param name="task">
         ///     Task to create.
         /// </param>
         /// <returns>
         ///     True if task was created.
         /// </returns>
-        public virtual async Task<int> Create(StoredTaskRequest user)
+        public virtual async Task<int> Create(StoredTaskRequest task)
         {
-            if (user == null) throw new ArgumentNullException(nameof(user));
+            if (task == null) throw new ArgumentNullException(nameof(task));
 
-            _dbContext.Attach(user); // Used for mocking
+            _dbContext.Attach(task); // Used for mocking
             // _dbContext.Set<T>().Attach(task);
-            _dbContext.Add(user); // Used for mocking 
+            _dbContext.Add(task); // Used for mocking 
             //_dbContext.Set<T>().Add(task);
             await _dbContext.SaveChangesAsync();
-            return user.Id;
+            return task.Id;
         }
 
         /// <summary>
@@ -72,28 +72,27 @@ namespace Storage.Repository
         ///     occurred.
         ///     If the task to update is null, an ArgumentNullException is thrown.
         /// </summary>
-        /// <param name="user">
+        /// <param name="task">
         ///     Task to update.
         /// </param>
         /// <returns>
         ///     True if task was updated, vice versa.
         /// </returns>
-        public virtual async Task<bool> UpdateIfExists(StoredTaskRequest user)
+        public virtual async Task<bool> UpdateIfExists(StoredTaskRequest task)
         {
             // if (user == null) throw new ArgumentNullException(nameof(user)); // Todo handle in application logic 
 
-            var taskToUpdate = await _dbContext.Set<StoredTaskRequest>().FindAsync(user.Id);
+            var taskToUpdate = await _dbContext.Set<StoredTaskRequest>().FindAsync(task.Id);
 
-            if (taskToUpdate != null)
-            {
-                _dbContext.Attach(user); // Used for mocking 
-                //_dbContext.Set<T>().Attach(task);
-                _dbContext.SetModified(user); // Used for mocking 
-                //dbContext.Entry<T>(task).State = EntityState.Modified; 
-                await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            return false;
+            if (taskToUpdate == null) return false;
+
+            _dbContext.Attach(task); // Used for mocking 
+            //_dbContext.Set<T>().Attach(task);
+            _dbContext.SetModified(task); // Used for mocking 
+            //dbContext.Entry<T>(task).State = EntityState.Modified; 
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
         /// <summary>
@@ -109,13 +108,11 @@ namespace Storage.Repository
         {
             var userToDelete = await _dbContext.Set<StoredTaskRequest>().FindAsync(id);
 
-            if (userToDelete != null)
-            {
-                _dbContext.Set<StoredTaskRequest>().Remove(userToDelete);
-                await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            return false;
+            if (userToDelete == null) return false;
+
+            _dbContext.Set<StoredTaskRequest>().Remove(userToDelete);
+            await _dbContext.SaveChangesAsync();
+            return true;
         }
 
         /// <summary>
