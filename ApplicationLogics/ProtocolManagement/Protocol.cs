@@ -13,9 +13,7 @@ namespace ApplicationLogics.ProtocolManagement
     public class Protocol 
     {
         public string StudyName { get; set; }
-
         public List<Phase> Phases { get; set; }
-
         public string Description { get; set; } 
 
         public List<Criteria> InclusionCriteria { get; set; } // Update Csv tests and remove this  

@@ -40,6 +40,13 @@
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="BibtexLibrary">
+      <HintPath>..\packages\BibtexLibrary.1.2.0\lib\net45\BibtexLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.2.13.5.0\lib\net40-client\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -112,29 +119,17 @@
     <Compile Include="AutosysServer\Mapping\Profiles\StudyManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\PaperManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\UserManagementStorageProfile.cs" />
-    <Compile Include="PaperManagement\Bibtex\BibtexParser.cs" />
-    <Compile Include="PaperManagement\Bibtex\CustomFieldChecker.cs" />
-    <Compile Include="PaperManagement\Bibtex\PaperChecker.cs" />
-    <Compile Include="PaperManagement\Bibtex\DefaultFieldChecker.cs" />
-    <Compile Include="PaperManagement\Bibtex\FieldValidator.cs" />
-    <Compile Include="PaperManagement\Bibtex\Paper.cs" />
-    <Compile Include="PaperManagement\Bibtex\PaperValidator.cs" />
-    <Compile Include="PaperManagement\Interfaces\IPaperChecker.cs" />
-    <Compile Include="PaperManagement\Interfaces\IParser.cs" />
-    <Compile Include="PaperManagement\Interfaces\IFieldChecker.cs" />
+    <Compile Include="PaperManagement\BibtexParser.cs" />
+    <Compile Include="PaperManagement\IParser.cs" />
+    <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="PaperManagement\PaperHandler.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
     <Compile Include="ProtocolManagement\ProtocolHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ExportManagement\CsvFile.cs" />
-    <Compile Include="ExportManagement\PdfFile.cs" />
-    <Compile Include="ExportManagement\CSVConverter.cs" />
     <Compile Include="ExportManagement\ExportHandler.cs" />
-    <Compile Include="ExportManagement\ExportType.cs" />
-    <Compile Include="ExportManagement\PDFConverter.cs" />
-    <Compile Include="ExportManagement\Interfaces\IExportFile.cs" />
     <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
+    <Compile Include="ExportManagement\Converter\CsvConverter.cs" />
     <Compile Include="StudyManagement\BibTexFileSearcher.cs" />
     <Compile Include="StorageFasade\CriteriaFacade.cs" />
     <Compile Include="StorageFasade\DatafieldFacade.cs" />

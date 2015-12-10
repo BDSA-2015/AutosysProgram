@@ -2,8 +2,12 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using System;
+using System.IO;
+using System.Web.Http;
 using ApplicationLogics.ExportManagement.Interfaces;
 using ApplicationLogics.ProtocolManagement;
+using CsvHelper;
 using Newtonsoft.Json;
 
 namespace ApplicationLogics.ExportManagement
@@ -17,14 +21,12 @@ namespace ApplicationLogics.ExportManagement
 
         public string ExportCsvFile(Protocol protocol)
         {
-            _converter = new CsvConverter();
-            return JsonConvert.SerializeObject(_converter.Convert(protocol));
+            throw new NotImplementedException();
         }
 
         public string ExportPdfFile(Protocol protocol)
         {
-            _converter = new PdfConverter();
-            return JsonConvert.SerializeObject(_converter.Convert(protocol));
+            throw new NotImplementedException();
         }
     }
 }
