@@ -30,7 +30,7 @@ namespace Storage.Repository
         /// <returns>
         /// True if user was created. 
         /// </returns>
-        public virtual async Task<int> Create(StoredUser user)
+        public async Task<int> Create(StoredUser user)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
 
@@ -52,11 +52,9 @@ namespace Storage.Repository
         /// <returns>
         /// User from id. 
         /// </returns>
-        public virtual async Task<StoredUser> Read(int id)
+        public async Task<StoredUser> Read(int id)
         {
-
             return await _dbContext.Set<StoredUser>().FindAsync(id);
-
         }
 
         /// <summary>
@@ -65,7 +63,7 @@ namespace Storage.Repository
         /// <returns>
         /// All users. 
         /// </returns>
-        public virtual IQueryable<StoredUser> Read()
+        public IQueryable<StoredUser> Read()
         {
 
             return _dbContext.Set<StoredUser>().AsQueryable();
@@ -82,7 +80,7 @@ namespace Storage.Repository
         /// <returns>
         /// True if user was updated, vice versa. 
         /// </returns>
-        public virtual async Task<bool> UpdateIfExists(StoredUser user)
+        public async Task<bool> UpdateIfExists(StoredUser user)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
 
@@ -110,7 +108,7 @@ namespace Storage.Repository
         /// <returns>
         /// True if user was deleted, false if user does not exist. 
         /// </returns>
-        public virtual async Task<bool> DeleteIfExists(int id)
+        public async Task<bool> DeleteIfExists(int id)
         {
             var userToDelete = await _dbContext.Set<StoredUser>().FindAsync(id);
 
@@ -121,7 +119,6 @@ namespace Storage.Repository
                 return true;
             }
             else return false;
-
         }
 
         /// <summary>
