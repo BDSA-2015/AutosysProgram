@@ -19,7 +19,7 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         /// Determines task states; initialized, in progress or completed
         /// </summary>
-        public enum s
+        public enum State
         {
             NotStarted,
             Started,
@@ -32,6 +32,7 @@ namespace ApplicationLogics.StudyManagement
             HandleConflictingDatafields
         }
 
+        public State TaskState { get; set;}
         public string Description { get; set; }
 
         private List<DataField> NonModifiableDatafields { get; set; }
