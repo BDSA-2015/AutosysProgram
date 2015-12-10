@@ -62,7 +62,7 @@ namespace ApplicationLogics.ExportManagement.Converter
                 builder.Append($"{protocol.StudyName};{protocol.Description};Phase{i++};");
                 AppendCriteria(phase.ExclusionCriteria, builder);
                 AppendCriteria(phase.InclusionCriteria, builder);
-                AppendAssignedTasks(phase.AssignedTask, builder);
+                AppendAssignedTasks(phase.Tasks, builder);
                 AppendRoles(phase.AssignedRole, builder);
                 AppendResources(phase.Reports, builder);
             }

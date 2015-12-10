@@ -29,7 +29,7 @@ namespace ApplicationLogicTests.ExportManagement.Mock
                     ExclusionCriteria = CreateExclusionCriteria(),
                     InclusionCriteria = CreateInclusionCriteria(),
                     AssignedRole = CreateAssignedRoles(),
-                    AssignedTask = CreateAssignedTasks(),
+                    Tasks = CreateAssignedTasks(),
                     Reports = CreateReports()
                 },
                 new Phase()
@@ -37,7 +37,7 @@ namespace ApplicationLogicTests.ExportManagement.Mock
                     ExclusionCriteria = CreateExclusionCriteria(),
                     InclusionCriteria = CreateInclusionCriteria(),
                     AssignedRole = CreateAssignedRoles(),
-                    AssignedTask = CreateAssignedTasks(),
+                    Tasks = CreateAssignedTasks(),
                     Reports = CreateReports()
                 },
                 new Phase()
@@ -45,7 +45,7 @@ namespace ApplicationLogicTests.ExportManagement.Mock
                     ExclusionCriteria = CreateExclusionCriteria(),
                     InclusionCriteria = CreateInclusionCriteria(),
                     AssignedRole = CreateAssignedRoles(),
-                    AssignedTask = CreateAssignedTasks(),
+                    Tasks = CreateAssignedTasks(),
                     Reports = CreateReports()
                 }
             };
