@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using SystematicStudyService.Models;
+using ApplicationLogics.AutosysServer;
 using ApplicationLogics.StorageFasade;
+using ApplicationLogics.UserManagement;
 
 namespace WebApi.Controllers
 {
@@ -23,10 +25,10 @@ namespace WebApi.Controllers
         }
         */
 
-        private readonly UserFacade _facade;
+        private readonly MainHandler _facade;
 
         // Injecting a facade with IDisposable 
-        public UserController(UserFacade facade)
+        public UserController(MainHandler facade)
         {
             _facade = facade;
         }
@@ -96,6 +98,9 @@ namespace WebApi.Controllers
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Clean up, allows to release resources per request when using underlying logic to access database. 
+        /// </summary>
         protected override void Dispose(bool disposing)
         {
             // _facade.Dispose(); TODO make all interfaces down to db implement IDisposable 
