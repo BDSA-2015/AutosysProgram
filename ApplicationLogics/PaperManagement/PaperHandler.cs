@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.WebPages;
 using ApplicationLogics.StorageAdapter;
+using ApplicationLogics.StorageAdapter.Interface;
 
 namespace ApplicationLogics.PaperManagement
 {
@@ -12,11 +13,11 @@ namespace ApplicationLogics.PaperManagement
     /// </summary>
     public class PaperHandler
     {
-        private readonly PaperAdapter _paperAdapter;
+        private readonly IAdapter<Paper> _paperAdapter;
         //Used to generate Bibtex files, which later is stored as Papers in the database
         private readonly IParser _parser;
 
-        public PaperHandler(IParser parser, PaperAdapter paperAdapter)
+        public PaperHandler(IParser parser, IAdapter<Paper> paperAdapter)
         {
             _parser = parser;
             _paperAdapter = paperAdapter;
