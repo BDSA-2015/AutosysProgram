@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Entities;
 using AutoMapper;
@@ -32,6 +33,31 @@ namespace ApplicationLogics.StorageAdapter
             return _userRepository.Create(Mapper.Map<StoredUser>(user));
         }
 
+        Task<User> IAdapter<User>.Read(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        IQueryable<User> IAdapter<User>.Read()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<bool> IAdapter<User>.UpdateIfExists(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteIfExists(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<int> IAdapter<User>.Create(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     Reads storedUser and returns a user to the caller.
         /// </summary>
@@ -60,7 +86,7 @@ namespace ApplicationLogics.StorageAdapter
         ///     Converts user to storage entity and update it.
         /// </summary>
         /// <param name="user">User object</param>
-        public void Update(User user)
+        public void UpdateIfExists(User user)
         {
             _userRepository.UpdateIfExists(Mapper.Map<StoredUser>(user));
         }
@@ -69,7 +95,7 @@ namespace ApplicationLogics.StorageAdapter
         ///     DeleteIfExists given user from database.
         /// </summary>
         /// <param name="user">User Object</param>
-        public void Delete(User user)
+        public void DeleteIfExists(User user)
         {
             var toDelete = Read(user.Id);
             if (toDelete == null) throw new NullReferenceException("User does not exist");

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.StudyManagement;
 
@@ -7,27 +9,32 @@ namespace ApplicationLogics.StorageAdapter
 {
     public class DatafieldAdapter : IAdapter<DataField>
     {
-        public int Create(DataField item)
+        public void Dispose()
         {
             throw new NotImplementedException();
         }
 
-        public DataField Read(int id)
+        public Task<int> Create(DataField user)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<DataField> Read()
+        public Task<DataField> Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(DataField item)
+        public IQueryable<DataField> Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(DataField item)
+        public Task<bool> UpdateIfExists(DataField user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteIfExists(int id)
         {
             throw new NotImplementedException();
         }
@@ -36,10 +43,6 @@ namespace ApplicationLogics.StorageAdapter
         {
             throw new NotImplementedException();
         }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
     }
+
 }

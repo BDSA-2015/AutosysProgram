@@ -195,7 +195,7 @@ namespace ApplicationLogicTests.UserManagement
             //Act
             userFacade.Create(user);
             Assert.IsNotNull(userFacade.Read(toDeleteId));
-            userFacade.Delete(user);
+            userFacade.DeleteIfExists(user);
 
             //Assert
             Assert.IsNull(userFacade.Read(toDeleteId));
@@ -219,7 +219,7 @@ namespace ApplicationLogicTests.UserManagement
 
 
             //Act
-            userFacade.Delete(user);
+            userFacade.DeleteIfExists(user);
 
             //Assert
             //Exception must be thrown
@@ -242,7 +242,7 @@ namespace ApplicationLogicTests.UserManagement
             var userFacade = new UserAdapter(repositoryMock.Object);
 
             //Act
-            userFacade.Delete(user);
+            userFacade.DeleteIfExists(user);
 
             //Assert
             //Exception must be thrown

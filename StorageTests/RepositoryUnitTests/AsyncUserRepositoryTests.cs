@@ -25,7 +25,7 @@ namespace StorageTests.RepositoryUnitTests
 
         private IList<StoredUser> _data;
         private Mock<DbSet<StoredUser>> _mockSet;
-        private AsyncDbRepository<StoredUser> _repository;
+        private DbRepository<StoredUser> _repository;
 
         /// <summary>
         ///     This method sets up data used to mock a collection of users in a DbContext used by the UserRepository.
@@ -56,7 +56,7 @@ namespace StorageTests.RepositoryUnitTests
             }));
 
             _context = mockContext;
-            _repository = new AsyncDbRepository<StoredUser>(_context.Object);
+            _repository = new DbRepository<StoredUser>(_context.Object);
         }
 
         #region Old Tests 
@@ -96,7 +96,7 @@ namespace StorageTests.RepositoryUnitTests
             mockContext.Setup(m => m.Users).Returns(mockSet.Object);
 
             // Act 
-            var service = new AsyncDbRepository<StoredUser>(mockContext.Object);
+            var service = new DbRepository<StoredUser>(mockContext.Object);
             var id = await service.Create(new StoredUser());
 
             // Assert 
@@ -129,7 +129,7 @@ namespace StorageTests.RepositoryUnitTests
             var user = new StoredUser {Name = "Steven", MetaData = "Validator"};
 
             // Act 
-            var service = new AsyncDbRepository<StoredUser>(mockContext.Object);
+            var service = new DbRepository<StoredUser>(mockContext.Object);
             var id = await service.Create(user);
 
             // Assert 

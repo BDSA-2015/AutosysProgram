@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Utils;
 
@@ -35,7 +36,7 @@ namespace ApplicationLogics.UserManagement
         ///     Creates a new team
         /// </summary>
         /// <param name="team"> Team Object</param>
-        public int Create(Team team)
+        public Task<int> Create(Team team)
         {
             if (!TeamValidator.ValidateEnteredTeamData(team))
                 throw new ArgumentException("Team data is invalid");
@@ -53,7 +54,7 @@ namespace ApplicationLogics.UserManagement
                 throw new ArgumentException("Team does not exist");
 
             var team = _storage.Read(id);
-            _storage.Delete(team);
+            _storage.DeleteIfExists(team.Id);
         }
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace ApplicationLogics.UserManagement
         {
             if (!TeamValidator.ValidateEnteredTeamData(team)) throw new ArgumentException("Team data is invalid");
             if (!TeamValidator.ValidateExistence(oldId, _storage)) throw new ArgumentException("Team does not exist");
-            _storage.Update(team);
+            _storage.UpdateIfExists(team);
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace ApplicationLogics.UserManagement
         ///     Returns every teams stored in database
         /// </summary>
         /// <returns></returns>
-        public Team Read(int id)
+        public Task<Team> Read(int id)
         {
             if (!TeamValidator.ValidateId(id))
                 throw new ArgumentException("Id is not valid");

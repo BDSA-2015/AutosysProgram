@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using ApplicationLogics.PaperManagement;
 using ApplicationLogics.StorageAdapter.Interface;
 using AutoMapper;
@@ -28,7 +30,27 @@ namespace ApplicationLogics.StorageAdapter
             return _papers.Create(storedPaper);
         }
 
-        public void Delete(Paper item)
+        Task<Paper> IAdapter<Paper>.Read(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        IQueryable<Paper> IAdapter<Paper>.Read()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<bool> IAdapter<Paper>.UpdateIfExists(Paper user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteIfExists(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteIfExists(Paper item)
         {
             if (item == null)
             {
@@ -51,6 +73,11 @@ namespace ApplicationLogics.StorageAdapter
             }
         }
 
+        Task<int> IAdapter<Paper>.Create(Paper user)
+        {
+            throw new NotImplementedException();
+        }
+
         public Paper Read(int id)
         {
             if (id < 0)
@@ -61,7 +88,7 @@ namespace ApplicationLogics.StorageAdapter
             return Mapper.Map<Paper>(_papers.Read(id));
         }
 
-        public void Update(Paper item)
+        public void UpdateIfExists(Paper item)
         {
             if (item == null)
             {

@@ -198,7 +198,7 @@ namespace ApplicationLogicTests.UserManagement
             //Act
             teamFacade.Create(team);
             Assert.IsNotNull(teamFacade.Read(toDeleteId));
-            teamFacade.Delete(team);
+            teamFacade.DeleteIfExists(team);
 
             //Assert
             teamFacade.Read(toDeleteId);
@@ -219,7 +219,7 @@ namespace ApplicationLogicTests.UserManagement
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
-            teamFacade.Delete(_team);
+            teamFacade.DeleteIfExists(_team);
 
             //Assert
             //Exception must be thrown
@@ -246,7 +246,7 @@ namespace ApplicationLogicTests.UserManagement
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
-            teamFacade.Delete(_team);
+            teamFacade.DeleteIfExists(_team);
 
             //Assert
             //Exception must be thrown

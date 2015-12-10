@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ApplicationLogics.AutosysServer.Mapping;
 using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.StorageAdapter.Interface;
@@ -34,14 +35,14 @@ namespace ApplicationLogicTests.UserManagement
         public void CreateUser_Valid_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Create(_user)).Returns(_user.Id);
+            _facadeMock.Setup(r => r.Create(_user)).Returns(Task.FromResult(_user.Id));
             var userHandler = new UserHandler(_facadeMock.Object);
 
             //Act
-            var result = userHandler.Create(_user);
+            var user = userHandler.Create(_user);
 
             //Assert
-            Assert.IsTrue(result == _user.Id);
+            Assert.IsTrue(user.Result == _user.Id);
         }
 
         /// <summary>
@@ -170,7 +171,7 @@ namespace ApplicationLogicTests.UserManagement
         public void ReadUser_Valid_IsNotNull_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Read(_user.Id)).Returns(_user);
+            _facadeMock.Setup(r => r.Read(_user.Id)).Returns(Task.FromResult(_user));
             var userHandler = new UserHandler(_facadeMock.Object);
 
             //Act
@@ -187,7 +188,7 @@ namespace ApplicationLogicTests.UserManagement
         public void ReadUser_Valid_TypeOfUser_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Read(_user.Id)).Returns(_user);
+            _facadeMock.Setup(r => r.Read(_user.Id)).Returns(Task.FromResult(_user));
             var userHandler = new UserHandler(_facadeMock.Object);
 
             //Act
@@ -205,7 +206,7 @@ namespace ApplicationLogicTests.UserManagement
         public void ReadUser_Valid_CorrectInformation_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Read(_user.Id)).Returns(_user);
+            _facadeMock.Setup(r => r.Read(_user.Id)).Returns(Task.FromResult(_user));
             var userHandler = new UserHandler(_facadeMock.Object);
 
             //Act
@@ -213,8 +214,8 @@ namespace ApplicationLogicTests.UserManagement
 
             //Assert
             Assert.IsTrue(actualUser.Id == _user.Id);
-            Assert.IsTrue(actualUser.Name == _user.Name);
-            Assert.IsTrue(actualUser.MetaData == _user.MetaData);
+            Assert.IsTrue(actualUser.Result.Name == _user.Name);
+            Assert.IsTrue(actualUser.Result.MetaData == _user.MetaData);
         }
 
         /// <summary>
@@ -227,7 +228,7 @@ namespace ApplicationLogicTests.UserManagement
             var team1 = new User {Id = 0, Name = "User1", MetaData = "Meta1"};
             var team2 = new User {Id = 1, Name = "User2", MetaData = "Meta2"};
             var users = new List<User> {team1, team2};
-            _facadeMock.Setup(r => r.Read()).Returns(users);
+            _facadeMock.Setup(r => r.Read()).Returns(users.AsQueryable());
             var userHandler = new UserHandler(_facadeMock.Object);
 
             //Act

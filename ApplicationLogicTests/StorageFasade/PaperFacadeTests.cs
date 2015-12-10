@@ -83,7 +83,7 @@ namespace ApplicationLogicTests.StorageFasade
             mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
-            _adapter.Delete(paper);
+            _adapter.DeleteIfExists(paper);
 
             //Assert
             Assert.IsNotNull(callBackPaper);
@@ -107,7 +107,7 @@ namespace ApplicationLogicTests.StorageFasade
             mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
-            _adapter.Delete(paper);
+            _adapter.DeleteIfExists(paper);
 
             //Assert
             //TODO Make NUnit TestCase() work and reduce method to a single Assert
@@ -130,7 +130,7 @@ namespace ApplicationLogicTests.StorageFasade
             //Arrange
 
             //Act
-            _adapter.Delete(null);
+            _adapter.DeleteIfExists(null);
 
             //Assert
         }
@@ -217,7 +217,7 @@ namespace ApplicationLogicTests.StorageFasade
             mockRepo.Setup(r => r.UpdateIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
-            _adapter.Update(paper);
+            _adapter.UpdateIfExists(paper);
 
             //Assert
             Assert.IsNotNull(callBackPaper);
@@ -241,7 +241,7 @@ namespace ApplicationLogicTests.StorageFasade
             mockRepo.Setup(r => r.UpdateIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
-            _adapter.Update(paper);
+            _adapter.UpdateIfExists(paper);
 
             //Assert
             //TODO Make NUnit TestCase() work and reduce method to a single Assert
@@ -264,7 +264,7 @@ namespace ApplicationLogicTests.StorageFasade
             //Arrange
 
             //Act
-            _adapter.Update(null);
+            _adapter.UpdateIfExists(null);
 
             //Assert
         }

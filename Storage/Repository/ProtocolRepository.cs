@@ -7,7 +7,7 @@ using Storage.Repository.Interface;
 namespace Storage.Repository
 {
     /// <summary>
-    ///     This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on protocols in
+    ///     This class implements the IRepository interface outlining the async CRUD operations to be used on protocols in
     ///     the database. <see cref="StoredProtocol" />
     ///     These are used specifically on a Stored Protocol DbSet in the AutoSysDbModel.
     /// </summary>

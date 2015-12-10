@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ApplicationLogics.AutosysServer.Mapping;
 using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.StorageAdapter.Interface;
@@ -34,14 +35,14 @@ namespace ApplicationLogicTests.UserManagement
         public void CreateTeam_Valid_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Create(_team)).Returns(_team.Id);
+            _facadeMock.Setup(r => r.Create(_team)).Returns(Task.FromResult(_team.Id));
             var teamHandler = new TeamHandler(_facadeMock.Object);
 
             //Act
-            var result = teamHandler.Create(_team);
+            var team = teamHandler.Create(_team);
 
             //Assert
-            Assert.IsTrue(result == _team.Id);
+            Assert.IsTrue(team.Result == _team.Id);
         }
 
 
@@ -158,7 +159,7 @@ namespace ApplicationLogicTests.UserManagement
         public void ReadTeam_Valid_CorrectInformation_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Read(_team.Id)).Returns(_team);
+            _facadeMock.Setup(r => r.Read(_team.Id)).Returns(Task.FromResult(_team));
             var teamHandler = new TeamHandler(_facadeMock.Object);
 
             //Act
@@ -166,9 +167,9 @@ namespace ApplicationLogicTests.UserManagement
 
             //Assert
             Assert.IsTrue(actualTeam.Id == _team.Id);
-            Assert.IsTrue(actualTeam.Name == _team.Name);
-            Assert.IsTrue(actualTeam.MetaData == _team.MetaData);
-            Assert.IsTrue(actualTeam.UserIDs.Length == _team.UserIDs.Length);
+            Assert.IsTrue(actualTeam.Result.Name == _team.Name);
+            Assert.IsTrue(actualTeam.Result.MetaData == _team.MetaData);
+            Assert.IsTrue(actualTeam.Result.UserIDs.Length == _team.UserIDs.Length);
         }
 
         /// <summary>
@@ -181,7 +182,7 @@ namespace ApplicationLogicTests.UserManagement
             var team1 = new Team {Id = 0, Name = "Team1", MetaData = "Meta1", UserIDs = new[] {1}};
             var team2 = new Team {Id = 1, Name = "Team2", MetaData = "Meta2", UserIDs = new[] {2}};
             var teamList = new List<Team> {team1, team2};
-            _facadeMock.Setup(r => r.Read()).Returns(teamList);
+            _facadeMock.Setup(r => r.Read()).Returns(teamList.AsQueryable());
             var teamHandler = new TeamHandler(_facadeMock.Object);
 
             //Act

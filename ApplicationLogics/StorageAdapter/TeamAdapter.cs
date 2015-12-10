@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement;
 using AutoMapper;
@@ -32,11 +33,31 @@ namespace ApplicationLogics.StorageAdapter
             return _teamRepository.Create(Mapper.Map<StoredTeam>(team));
         }
 
+        Task<Team> IAdapter<Team>.Read(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        IQueryable<Team> IAdapter<Team>.Read()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<bool> IAdapter<Team>.UpdateIfExists(Team user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteIfExists(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     Deletes a team from database
         /// </summary>
         /// <param name="team">team object</param>
-        public void Delete(Team team)
+        public void DeleteIfExists(Team team)
         {
             var toDelete = Read(team.Id);
             if (toDelete == null) throw new NullReferenceException("Team does not exist");
@@ -68,6 +89,11 @@ namespace ApplicationLogics.StorageAdapter
             return teams;
         }
 
+        Task<int> IAdapter<Team>.Create(Team user)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     Reads a given team from a specific id
         /// </summary>
@@ -83,7 +109,7 @@ namespace ApplicationLogics.StorageAdapter
         ///     Updates an existing team in database
         /// </summary>
         /// <param name="team">team object</param>
-        public void Update(Team team)
+        public void UpdateIfExists(Team team)
         {
             _teamRepository.UpdateIfExists(Mapper.Map<StoredTeam>(team));
         }

@@ -6,17 +6,17 @@ using Storage.Repository.Interface;
 namespace Storage.Repository
 {
     /// <summary>
-    ///     This class implements the IAsyncRepository interface outlining the async CRUD operations to be used in the
+    ///     This class implements the IRepository interface outlining the async CRUD operations to be used in the
     ///     database.
     ///     These are used specifically on a given DbSet in the AutoSysDbModel.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class AsyncDbRepository<T> : IAsyncRepository<T> where T : class, IEntity
+    public class DbRepository<T> : IAsyncRepository<T> where T : class, IEntity
     {
         private readonly IAutoSysContext _dbContext;
 
         // Used for mocking 
-        public AsyncDbRepository(IAutoSysContext context)
+        public DbRepository(IAutoSysContext context)
         {
             _dbContext = context;
         }

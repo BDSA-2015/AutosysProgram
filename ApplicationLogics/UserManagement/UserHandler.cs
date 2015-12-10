@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Entities;
 using ApplicationLogics.UserManagement.Utils;
@@ -37,7 +38,7 @@ namespace ApplicationLogics.UserManagement
         ///     Creates a user with information from a userDTo
         /// </summary>
         /// <param name="user">User object</param>
-        public int Create(User user)
+        public Task<int> Create(User user)
         {
             if (user == null)
                 throw new ArgumentException("User is null");
@@ -61,7 +62,7 @@ namespace ApplicationLogics.UserManagement
             if (!UserValidator.ValidateExistence(oldId, _storage))
                 throw new ArgumentException("User does not exist");
 
-            _storage.Update(user);
+            _storage.UpdateIfExists(user);
         }
 
         /// <summary>
@@ -74,7 +75,7 @@ namespace ApplicationLogics.UserManagement
                 throw new ArgumentException("User does not exist");
 
             var userToDelete = _storage.Read(id);
-            _storage.Delete(userToDelete);
+            _storage.DeleteIfExists(userToDelete.Id);
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace ApplicationLogics.UserManagement
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public User Read(int id)
+        public Task<User> Read(int id)
         {
             if (!UserValidator.ValidateId(id))
                 throw new ArgumentException("Id is not valid");

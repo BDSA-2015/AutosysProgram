@@ -3,7 +3,8 @@
 // Jacob Mullit Møiniche.
 
 using System;
-using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ApplicationLogics.StorageAdapter.Interface
 {
@@ -13,13 +14,17 @@ namespace ApplicationLogics.StorageAdapter.Interface
     /// <typeparam name="T"></typeparam>
     public interface IAdapter<T> : IDisposable
     {
-        int Create(T item);
-        T Read(int id);
-        IEnumerable<T> Read();
-        void Update(T item);
-        void Delete(T item);
+        Task<int> Create(T user);
 
-        // Free to add functionality specific
+        Task<T> Read(int id);
+
+        IQueryable<T> Read();
+
+        Task<bool> UpdateIfExists(T user);
+
+        Task<bool> DeleteIfExists(int id);
+
+        // Adapter specific functionality 
         T Map(T item); // Convert entities to storage 
     }
 }
