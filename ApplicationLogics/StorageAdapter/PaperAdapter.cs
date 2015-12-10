@@ -38,6 +38,11 @@ namespace ApplicationLogics.StorageAdapter
             _papers.DeleteIfExists(storedPaper);
         }
 
+        public Paper Map(Paper item)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Paper> Read()
         {
             foreach (var storedPaper in _papers.Read())
@@ -64,6 +69,11 @@ namespace ApplicationLogics.StorageAdapter
             }
 
             _papers.UpdateIfExists(Mapper.Map<StoredPaper>(item));
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

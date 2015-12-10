@@ -31,5 +31,15 @@ namespace ApplicationLogics.StorageAdapter
         {
             throw new NotImplementedException();
         }
+
+        public Study Map(Study item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

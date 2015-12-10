@@ -31,5 +31,15 @@ namespace ApplicationLogics.StorageAdapter
         {
             throw new NotImplementedException();
         }
+
+        public DataField Map(DataField item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

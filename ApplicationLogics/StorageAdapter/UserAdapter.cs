@@ -78,5 +78,15 @@ namespace ApplicationLogics.StorageAdapter
             var storedUserToDelete = Mapper.Map<StoredUser>(toDelete);
             _userRepository.DeleteIfExists(storedUserToDelete);
         }
+
+        public User Map(User item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

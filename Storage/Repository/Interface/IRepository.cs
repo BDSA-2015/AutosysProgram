@@ -18,4 +18,5 @@ namespace Storage.Repository.Interface
         void UpdateIfExists(T item);
         void DeleteIfExists(T item);
     }
+
 }

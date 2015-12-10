@@ -31,5 +31,15 @@ namespace ApplicationLogics.StorageAdapter
         {
             throw new NotImplementedException();
         }
+
+        public TaskRequest Map(TaskRequest item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

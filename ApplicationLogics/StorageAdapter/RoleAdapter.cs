@@ -31,5 +31,15 @@ namespace ApplicationLogics.StorageAdapter
         {
             throw new NotImplementedException();
         }
+
+        public Role Map(Role item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

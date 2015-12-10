@@ -50,6 +50,11 @@ namespace ApplicationLogics.StorageAdapter
             else throw new ArgumentException("Team has been updated");
         }
 
+        public Team Map(Team item)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     Read all teams in database
         /// </summary>
@@ -81,6 +86,11 @@ namespace ApplicationLogics.StorageAdapter
         public void Update(Team team)
         {
             _teamRepository.UpdateIfExists(Mapper.Map<StoredTeam>(team));
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

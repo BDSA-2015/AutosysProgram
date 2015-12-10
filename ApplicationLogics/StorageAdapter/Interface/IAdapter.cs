@@ -2,6 +2,7 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using System;
 using System.Collections.Generic;
 
 namespace ApplicationLogics.StorageAdapter.Interface
@@ -10,7 +11,7 @@ namespace ApplicationLogics.StorageAdapter.Interface
     ///     This interface outlines the CRUD methods that the storage repository class will be able to perform.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IAdapter<T>
+    public interface IAdapter<T> : IDisposable
     {
         int Create(T item);
         T Read(int id);
@@ -18,8 +19,7 @@ namespace ApplicationLogics.StorageAdapter.Interface
         void Update(T item);
         void Delete(T item);
 
-        // T Map(T item);
-
         // Free to add functionality specific
+        T Map(T item); // Convert entities to storage 
     }
 }
