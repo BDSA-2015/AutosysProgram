@@ -1,34 +1,34 @@
-﻿using System;
-using System.Data.Entity;
-using System.Threading.Tasks;
-using Storage.Models;
+﻿//using System;
+//using System.Data.Entity;
+//using System.Threading.Tasks;
+//using Storage.Models;
 
-namespace StorageTests.Utility
-{
+//namespace StorageTests.Utility
+//{
 
-    /// <summary>
-    /// This interface is used to mock a DBContext with a DbSet of Stored Users. 
-    /// </summary>
-    public interface IUserContext : IDisposable // : IDbContext
-    {
-        DbSet<StoredUser> Users { get; set; }
+//    /// <summary>
+//    /// This interface is used to mock a DBContext with a DbSet of Stored Users. 
+//    /// </summary>
+//    public interface IUserContext : IDisposable // : IDbContext
+//    {
+//        DbSet<StoredUser> Users { get; set; }
 
-        int SaveChanges();
+//        int SaveChanges();
 
-        Task<int> SaveChangesAsync();
-    }
+//        Task<int> SaveChangesAsync();
+//    }
 
-    /*
-    public class UserContext : DbContext, IUserContext
-    {
-        public DbSet<StoredUser> Users { get; set; }
+//    /*
+//    public class UserContext : DbContext, IUserContext
+//    {
+//        public DbSet<StoredUser> Users { get; set; }
 
-        new public DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class, IEntity
-        {
-            throw new NotImplementedException();
-        }
-    }
-    */
+//        new public DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class, IEntity
+//        {
+//            throw new NotImplementedException();
+//        }
+//    }
+//    */
 
   
-}
+//}

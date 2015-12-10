@@ -13,17 +13,17 @@ namespace Storage.Repository.Interface
     /// <typeparam name="T">
     /// Entity written in database.
     /// </typeparam>
-    public interface IAsyncRepository<T> where T : class, IEntity
+    public interface IAsyncRepository<T> : IDisposable where T : class, IEntity
     {
-        Task<int> Create(T item);
+        Task<int> Create(T user);
 
         Task<T> Read(int id);
 
         IQueryable<T> Read();
 
-        Task<bool> Update(T item);
+        Task<bool> UpdateIfExists(T user);
 
-        Task<bool> Delete(int id);
+        Task<bool> DeleteIfExists(int id);
     }
 
 }

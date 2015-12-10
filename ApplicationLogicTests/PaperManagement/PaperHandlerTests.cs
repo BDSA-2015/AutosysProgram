@@ -50,7 +50,7 @@ namespace ApplicationLogicTests.PaperManagement
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             var mapperPaper = AutoMapper.Mapper.Map<StoredPaper>(paper);
-            _mockRepo.Setup(r => r.CreateOrUpdate(mapperPaper)).Returns(mapperPaper.Id);
+            _mockRepo.Setup(r => r.Create(mapperPaper)).Returns(mapperPaper.Id);
 
             var file = "@book{839269," +
                        "author = {Will Newman}," +
@@ -104,15 +104,15 @@ namespace ApplicationLogicTests.PaperManagement
 
             //paper1 mock setup
             var mapperPaper1 = AutoMapper.Mapper.Map<StoredPaper>(paper1);
-            _mockRepo.Setup(r => r.CreateOrUpdate(mapperPaper1)).Returns(mapperPaper1.Id);
+            _mockRepo.Setup(r => r.Create(mapperPaper1)).Returns(mapperPaper1.Id);
 
             //paper2 mock setup
             var mapperPaper2 = AutoMapper.Mapper.Map<StoredPaper>(paper2);
-            _mockRepo.Setup(r => r.CreateOrUpdate(mapperPaper2)).Returns(mapperPaper2.Id);
+            _mockRepo.Setup(r => r.Create(mapperPaper2)).Returns(mapperPaper2.Id);
 
             //paper3 mock setup
             var mapperPaper3 = AutoMapper.Mapper.Map<StoredPaper>(paper3);
-            _mockRepo.Setup(r => r.CreateOrUpdate(mapperPaper3)).Returns(mapperPaper3.Id);
+            _mockRepo.Setup(r => r.Create(mapperPaper3)).Returns(mapperPaper3.Id);
 
             var file = "@Article{py03," +
                        "author = {Xavier D ecoret}," +

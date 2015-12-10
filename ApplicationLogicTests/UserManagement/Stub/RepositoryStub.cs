@@ -9,7 +9,7 @@ namespace ApplicationLogicTests.UserManagement.Stub
     /// This class is a stub of a repository used for testing
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class RepositoryStub<T> : IRepository<T> where T : IEntity
+    public class RepositoryStub<T> : IRepository<T> where T : class, IEntity
     {
         private readonly Dictionary<int, T> _database;
         private int _id;
@@ -20,7 +20,7 @@ namespace ApplicationLogicTests.UserManagement.Stub
             _database = new Dictionary<int, T>();
         }
 
-        public int CreateOrUpdate(T item)
+        public int Create(T item)
         {
             item.Id = _id;
             _id++;

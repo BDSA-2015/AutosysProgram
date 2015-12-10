@@ -80,10 +80,10 @@ namespace ApplicationLogics.StudyManagement
         public void AddCriteria(Criteria criteria, Criteria.Type type)
         {
             if (type == Criteria.Type.Exclusion) 
-                throw new NotImplementedException(); // CreateOrUpdate exclusion criteria
+                throw new NotImplementedException(); // Create exclusion criteria
 
             else if (type == Criteria.Type.Inclusion)
-                throw new NotImplementedException(); // CreateOrUpdate inclusion criteria 
+                throw new NotImplementedException(); // Create inclusion criteria 
 
             throw new NotImplementedException();
         }

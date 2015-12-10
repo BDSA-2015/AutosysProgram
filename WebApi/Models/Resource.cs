@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using SystematicStudyService.Controllers;
 using WebApi.Controllers;
 
-namespace SystematicStudyService.Models
+namespace WebApi.Models
 {
     /// <summary>
     /// Describes a resource data field.

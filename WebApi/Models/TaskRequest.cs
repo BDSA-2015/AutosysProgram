@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace SystematicStudyService.Models
+namespace WebApi.Models
 {
     /// <summary>
     /// A requested task, part of a systematic study.
