@@ -45,8 +45,10 @@ namespace Storage.Repository.Interface
         void Attach<TEntity>(TEntity entity) where TEntity : class;
 
         // Used to allow mocking of Attach when calling UpdateIfExists in DbContext 
-        void Add<TEntity>(TEntity entity) where TEntity : class; 
+        void Add<TEntity>(TEntity entity) where TEntity : class;
 
+        // Used to allow mocking of Remove when calling DeleteIfExists in DbContext 
+        void Remove<TEntity>(TEntity entity) where TEntity : class;
     }
 
     /// <summary>
@@ -66,7 +68,7 @@ namespace Storage.Repository.Interface
         public DbSet<StoredDataField> Datafields { get; set; }
         public DbSet<StoredStudy> Studies { get; set; }
         public DbSet<StoredTeam> Teams { get; set; }
-        public DbSet<StoredUser> Users { get; set; }
+        public virtual DbSet<StoredUser> Users { get; set; }
         public DbSet<StoredProtocol> Protocols { get; set; }
         public DbSet<StoredPaper> Papers { get; set; }
 
@@ -90,9 +92,24 @@ namespace Storage.Repository.Interface
             Set<TEntity>().Attach(entity);
         }
 
+        /// <summary>
+        /// This allows mocking the "_dbContext.Set<T>().Add(item);" in the UpdateIfExists functionality that is now hidden behind an interface. 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="entity"></param>
         public void Add<TEntity>(TEntity entity) where TEntity : class
         {
             Set<TEntity>().Add(entity);
+        }
+
+        /// <summary>
+        /// This allows mocking the "_dbContext.Set<T>().Remove(item);" in the DeleteIfExists functionality that is now hidden behind an interface. 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="entity"></param>
+        public void Remove<TEntity>(TEntity entity) where TEntity : class
+        {
+            Set<TEntity>().Remove(entity);
         }
     }
 }

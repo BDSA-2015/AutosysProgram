@@ -23,7 +23,7 @@ namespace StorageTests.RepositoryUnitTests
     {
 
         private IList<StoredProtocol> _data;
-        private Mock<IAutoSysContext> _context; // Use IUserContext instead of concrete AutoSysDbModel
+        private Mock<IAutoSysContext> _context; // Use IAutoSys instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredProtocol>> _mockSet;
         private ProtocolRepository _repository;
 
@@ -36,8 +36,8 @@ namespace StorageTests.RepositoryUnitTests
 
             _data = new List<StoredProtocol>
             {
-                new StoredProtocol { Id = 1, Description = "Year Protocol", InclusionCriteria = new List<StoredCriteria> { }, ExclusionCriteria = new List<StoredCriteria> { } },
-                new StoredProtocol { Id = 2, Description = "Year Protocol", InclusionCriteria = new List<StoredCriteria> { }, ExclusionCriteria = new List<StoredCriteria> { } }
+                new StoredProtocol { Id = 1, Description = "Year Protocol" }, // TODO add phases
+                new StoredProtocol { Id = 2, Description = "Year Protocol" }
             };
 
             _mockSet = MockUtility.CreateAsyncMockDbSet(_data, u => u.Id);
@@ -59,6 +59,8 @@ namespace StorageTests.RepositoryUnitTests
             _context = mockContext;
             _repository = new ProtocolRepository(_context.Object);
         }
+
+        #region Old Tests 
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public async Task Create_NullException()
@@ -87,7 +89,7 @@ namespace StorageTests.RepositoryUnitTests
         /// Finally, the test verifies that the repository added a new protocol and called SaveChangesAsync on the context.
         /// </summary>
         [TestMethod]
-        public async Task Create_SavesUserInContext()
+        public async Task Create_SavesProtocolInContext()
         {
             // Arrange 
             var mockSet = new Mock<DbSet<StoredProtocol>>();
@@ -140,33 +142,7 @@ namespace StorageTests.RepositoryUnitTests
             // Assert 
             Assert.AreEqual(protocol.Id, id); // True for EF but not for interface 
         }
-
-        [TestMethod]
-        public async Task Update_SaveChangesAsync_IsCalled()
-        {
-            // Arrange
-            var protocol = new StoredProtocol { Id = 1 };
-
-            // Act
-            await _repository.UpdateIfExists(protocol);
-
-            // Assert
-            _context.Verify(r => r.SaveChangesAsync(), Times.Once);
-        }
-
-        [TestMethod]
-        public async Task Update_SetModified_IsCalled()
-        {
-            // Arrange 
-            var protocol = new StoredProtocol{ Id = 1, Description = "New Description" };
-
-            // Act 
-            await _repository.UpdateIfExists(protocol);
-
-            // Assert
-            _context.Verify(c => c.SetModified(protocol), Times.Once);
-        }
-
+        
         [TestMethod]
         public async Task Update_SetAttachProtocol_IsCalled()
         {
@@ -213,6 +189,251 @@ namespace StorageTests.RepositoryUnitTests
             var secondProtocol = await _repository.Read(1);
             Assert.AreEqual("Year Protocol", secondProtocol.Description);
         }
+
+        #endregion
+
+        #region Create Operation 
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))] // Assert 
+        public async Task Create_NullInput_ExceptionThrown()
+        {
+            // Arrange and act 
+            await _repository.Create(null);
+        }
+
+        [TestMethod]
+        public async Task Create_Attatch_IsCalled()
+        {
+            // Arrange
+            var validProtocol = new StoredProtocol { Id = 0 };
+
+            // Act 
+            await _repository.Create(validProtocol);
+
+            // Assert
+            _context.Verify(c => c.Attach(validProtocol), Times.Once);
+
+        }
+
+        [TestMethod]
+        public async Task Create_Add_IsCalled()
+        {
+            // Arrange
+            var validProtocol = new StoredProtocol { Id = 0 };
+
+            // Act 
+            await _repository.Create(validProtocol);
+
+            // Assert
+            _context.Verify(c => c.Add(validProtocol), Times.Once);
+
+        }
+
+        [TestMethod]
+        public async Task Create_SaveChangesAsync_IsCalled()
+        {
+            // Arrange
+            var validProtocol = new StoredProtocol();
+            // Act 
+            await _repository.Create(validProtocol);
+
+            // Assert
+            _context.Verify(c => c.SaveChangesAsync(), Times.Once);
+
+        }
+
+        #endregion 
+
+        #region Read Operation 
+
+        [TestMethod]
+        public async Task Read_ValidId_ReturnsProtocol()
+        {
+            // Arrange 
+            var expectedProtocol = _data[0];
+
+            // Act 
+            var protocol = await _repository.Read(1);
+
+            // Assert 
+            Assert.AreEqual(expectedProtocol, protocol);
+        }
+
+        [TestMethod]
+        public async Task Read_InvalidId_ReturnsNull() // Handle null in application logic 
+        {
+            // Arrange and act 
+            var protocol = await _repository.Read(0);
+
+            // Assert 
+            Assert.AreEqual(null, protocol);
+        }
+
+        [TestMethod]
+        public async Task Read_FindAsync_IsCalled()
+        {
+            // Arrange and act 
+            var protocol = await _repository.Read(0);
+
+            // Assert 
+            _context.Verify(c => c.Protocols.FindAsync(), Times.Once);
+        }
+
+        [TestMethod]
+        public void ReadAll_IQueryable_IsCalled() // Not async, IQueryable is not executed by db until used by .ToList() 
+        {
+            // Arrange and act 
+            var protocols = _repository.Read();
+
+            // Assert 
+            _context.Verify(c => c.Protocols.AsQueryable<StoredProtocol>(), Times.Once);
+        }
+
+        #endregion
+
+        #region Update Operation
+
+        // TODO handle null in fasade/adapter in layer above 
+        //[TestMethod, ExpectedException(typeof (ArgumentNullException))]
+        //public async Task Update_NullInput_ExceptionThrown()
+        //{
+        //    await _repository.UpdateIfExists(null);
+        //}
+
+        [TestMethod]
+        public async Task Update_FindAsync_IsCalled()
+        {
+            // Arrange 
+            var firstProtocolUpdated = new StoredProtocol { Id = 1, Description = "New Protocol" };
+
+            // Act 
+            await _repository.UpdateIfExists(firstProtocolUpdated);
+
+            _mockSet.Setup(t => t.FindAsync(It.IsAny<StoredProtocol>().Id)).Returns(Task.FromResult(It.IsAny<StoredProtocol>()));
+
+            // Assert
+            _context.Verify(c => c.Users.FindAsync(firstProtocolUpdated.Id), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task Update_Attach_IsCalled()
+        {
+            // Arrange 
+            var firstStudyUpdated = new StoredProtocol { Id = 1, Description = "New Protocol" };
+
+            // Act 
+            await _repository.UpdateIfExists(firstStudyUpdated);
+
+            // Assert
+            _context.Verify(c => c.Attach(firstStudyUpdated), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task Update_SetModified_IsCalled()
+        {
+            // Arrange 
+            var firstProtocolUpdated = new StoredProtocol { Id = 1, Description = "New Protocol" };
+
+            // Act 
+            await _repository.UpdateIfExists(firstProtocolUpdated);
+
+            // Assert
+            _context.Verify(c => c.SetModified(firstProtocolUpdated), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task Update_SaveChangesAsync_IsCalled()
+        {
+            // Arrange 
+            var firstProtocolUpdated = new StoredProtocol { Id = 1, Description = "New Protocol" };
+
+            // Act 
+            await _repository.UpdateIfExists(firstProtocolUpdated);
+
+            // Assert
+            _context.Verify(c => c.SaveChangesAsync(), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task Update_ValidProtocol_ReturnsTrue()
+        {
+            // Arrange 
+            var firstProtocolUpdated = new StoredProtocol { Id = 1, Description = "New Protocol" };
+
+            // Act 
+            var isUpdated = await _repository.UpdateIfExists(firstProtocolUpdated);
+
+            // Assert
+            Assert.IsTrue(isUpdated);
+        }
+
+        [TestMethod]
+        public async Task Update_InvalidUser_ReturnsFalse()
+        {
+            //Arrange
+            var newProtocol = new StoredProtocol();
+
+            // Act
+            var isUpdated = await _repository.UpdateIfExists(newProtocol);
+
+            // Assert
+            Assert.IsFalse(isUpdated);
+        }
+
+        #endregion
+
+        #region Delete Operation
+
+        [TestMethod]
+        public async Task Delete_ValidId_ReturnsTrue()
+        {
+            // Arrange and act 
+            var isDeleted = await _repository.DeleteIfExists(1);
+
+            // Assert 
+            Assert.IsTrue(isDeleted);
+        }
+
+        [TestMethod]
+        public async Task Delete_InvalidId_ReturnsFalse()
+        {
+            // Arrange and act 
+            var isDeleted = await _repository.DeleteIfExists(0);
+
+            // Assert 
+            Assert.IsFalse(isDeleted);
+        }
+
+        // TODO May be replaced by user validation in application logic 
+        //[TestMethod, ExpectedException(typeof(ArgumentNullException))] // Assert 
+        //public async Task Delete_InvalidStudy_ExceptionThrown()
+        //{
+        //    var study = new StoredStudy { } ;
+        //    // Arrange and act 
+        //    await _repository.DeleteIfExists(study.Id);
+        //}
+
+        [TestMethod]
+        public async Task Delete_Remove_IsCalled()
+        {
+            // Arrange and act 
+            await _repository.DeleteIfExists(1);
+
+            // Assert
+            _context.Verify(c => c.Remove(_data[0]), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task Delete_SaveChangesAsync_IsCalled()
+        {
+            // Arrange and act 
+            await _repository.DeleteIfExists(1);
+
+            // Assert
+            _context.Verify(c => c.SaveChangesAsync(), Times.Once);
+        }
+
+        #endregion
 
     }
 

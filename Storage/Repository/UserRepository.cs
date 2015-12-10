@@ -63,11 +63,9 @@ namespace Storage.Repository
         /// <returns>
         /// All users. 
         /// </returns>
-        public IQueryable<StoredUser> Read()
+        public virtual IQueryable<StoredUser> Read()
         {
-
             return _dbContext.Set<StoredUser>().AsQueryable();
-
         }
 
         /// <summary>
@@ -82,7 +80,7 @@ namespace Storage.Repository
         /// </returns>
         public async Task<bool> UpdateIfExists(StoredUser user)
         {
-            if (user == null) throw new ArgumentNullException(nameof(user));
+            // if (user == null) throw new ArgumentNullException(nameof(user)); // TODO handle in above fasade/adapter layer 
 
             var userToUpdate = await _dbContext.Set<StoredUser>().FindAsync(user.Id);
 
@@ -114,7 +112,8 @@ namespace Storage.Repository
 
             if (userToDelete != null)
             {
-                _dbContext.Set<StoredUser>().Remove(userToDelete);
+                _dbContext.Remove(userToDelete); // Used for mocking 
+                //_dbContext.Set<StoredUser>().Remove(userToDelete);
                 await _dbContext.SaveChangesAsync();
                 return true;
             }

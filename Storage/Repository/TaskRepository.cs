@@ -84,7 +84,7 @@ namespace Storage.Repository
         /// </returns>
         public virtual async Task<bool> UpdateIfExists(StoredTaskRequest user)
         {
-            if (user == null) throw new ArgumentNullException(nameof(user));
+            // if (user == null) throw new ArgumentNullException(nameof(user)); // Todo handle in application logic 
 
             var taskToUpdate = await _dbContext.Set<StoredTaskRequest>().FindAsync(user.Id);
 

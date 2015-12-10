@@ -84,7 +84,7 @@ namespace Storage.Repository
         /// </returns>
         public virtual async Task<bool> UpdateIfExists(StoredStudy user)
         {
-            if (user == null) throw new ArgumentNullException(nameof(user));
+            // if (user == null) throw new ArgumentNullException(nameof(user)); // Todo handle in application logic 
 
             var studyToUpdate = await _dbContext.Set<StoredStudy>().FindAsync(user.Id);
 

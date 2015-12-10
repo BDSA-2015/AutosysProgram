@@ -80,13 +80,13 @@ namespace StorageTests.Utility
             mockSet.As<IQueryable<T>>()
                 .Setup(m => m.Provider)
                 .Returns(new TestDbAsyncQueryProvider<T>(data.Provider));
-
+            
             mockSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(data.Expression);
             mockSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
             mockSet.Setup(m => m.FindAsync(It.IsAny<object[]>())) // <Task<object[]>>
-                .Returns<object[]>(ids => Task.FromResult(items.FirstOrDefault(d => key(d) == (int)ids[0])));
+                .Returns<object[]>(ids => Task.FromResult(items.FirstOrDefault(d => key(d) == (int)ids[0]))); // Set first id to first item 
 
             mockSet.Setup(m => m.Add(It.IsAny<T>())).Callback<T>(a => items.Add(a));
             mockSet.Setup(m => m.Remove(It.IsAny<T>())).Callback<T>(a => items.Remove(a));
