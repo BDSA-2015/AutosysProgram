@@ -19,6 +19,10 @@ namespace ApplicationLogics.StudyManagement
     /// </summary>
     public class Phase 
     {
+        /// <summary>
+        /// The phase's name
+        /// </summary>
+        public string Name { get; set; }
      
         public Study Study { get; set; }
 
@@ -37,17 +41,12 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         /// Used to give similar tasks to multiple users, e.g. a review task. 
         /// </summary>
-        public Dictionary<TaskRequest, List<User>> AssignedTask { get; set; }
+        public Dictionary<TaskRequest, List<User>> Tasks { get; set; }
         
         /// <summary>
         /// A dictionary over Roles. Each role holds a list of Users with the assigned Role. 
         /// </summary>
-        public Dictionary<Role, List<User>> AssignedRole { get; set; } 
-
-        /// <summary>
-        /// Task which has not yet been assigned.
-        /// </summary>
-        public List<TaskRequest> UnassignedTasks { get; set; }
+        public Dictionary<Role, List<User>> AssignedRole { get; set; }
 
         /// <summary>
         /// Returns a booleans value which determines if this dependentPhase has reached its end.

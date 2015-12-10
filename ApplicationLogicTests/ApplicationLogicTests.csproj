@@ -160,7 +160,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="StorageFasade\PaperFacadeTests.cs" />
+    <Compile Include="Resources\StorageFasade\PaperFacadeTests.cs" />
     <Compile Include="StudyManagement\CriteriaFactoryTest.cs" />
   </ItemGroup>
   <ItemGroup>

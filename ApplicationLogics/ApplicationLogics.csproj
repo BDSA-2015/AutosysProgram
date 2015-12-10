@@ -142,6 +142,7 @@
     <Compile Include="StorageFasade\TaskRequestFacade.cs" />
     <Compile Include="StorageFasade\TeamFacade.cs" />
     <Compile Include="StorageFasade\UserFacade.cs" />
+    <Compile Include="StudyManagement\ConflictingData.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\CriteriaFactory.cs" />
     <Compile Include="StudyManagement\CriteriaLimitation.cs" />
