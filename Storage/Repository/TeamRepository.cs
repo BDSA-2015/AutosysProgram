@@ -11,7 +11,7 @@ namespace Storage.Repository
     ///     database. <see cref="StoredTeam" />
     ///     These are used specifically on a Team DbSet in the AutoSysDbModel.
     /// </summary>
-    public class TeamRepository : IAsyncRepository<StoredTeam>
+    public class TeamRepository : IRepository<StoredTeam>
     {
         private readonly IAutoSysContext _dbContext;
 

@@ -11,7 +11,7 @@ namespace Storage.Repository
     ///     the database. <see cref="StoredStudy" />
     ///     These are used specifically on a Stored Study DbSet in the AutoSysDbModel.
     /// </summary>
-    public class StudyRepository : IAsyncRepository<StoredStudy>
+    public class StudyRepository : IRepository<StoredStudy>
     {
         private readonly IAutoSysContext _dbContext;
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Storage.Repository.Interface;
 
 namespace ApplicationLogicTests.UserManagement.Stub
@@ -28,6 +29,26 @@ namespace ApplicationLogicTests.UserManagement.Stub
             return item.Id;
         }
 
+        Task<T> IRepository<T>.Read(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        IQueryable<T> IRepository<T>.Read()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        Task<bool> IRepository<T>.UpdateIfExists(T user)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> DeleteIfExists(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void DeleteIfExists(T item)
         {
             _database.Remove(item.Id);
@@ -36,6 +57,11 @@ namespace ApplicationLogicTests.UserManagement.Stub
         public IEnumerable<T> Read()
         {
             return _database.ToList() as IEnumerable<T>;
+        }
+
+        Task<int> IRepository<T>.Create(T user)
+        {
+            throw new System.NotImplementedException();
         }
 
         public T Read(int id)
@@ -47,6 +73,11 @@ namespace ApplicationLogicTests.UserManagement.Stub
         {
             _database.Remove(item.Id);
             _database.Add(item.Id, item);
+        }
+
+        public void Dispose()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ApplicationLogics.PaperManagement;
 using ApplicationLogics.StorageAdapter;
 using AutoMapper;
@@ -34,7 +35,7 @@ namespace ApplicationLogicTests.StorageFasade
         {
             //Arrange
             var storedPaper = new StoredPaper {Id = 0, Type = "article"};
-            mockRepo.Setup(r => r.Create(storedPaper)).Returns(storedPaper.Id);
+            mockRepo.Setup(r => r.Create(storedPaper)).Returns(Task.FromResult(storedPaper.Id));
             var fieldTypes = new List<string>();
             fieldTypes.Add("author");
             fieldTypes.Add("title");
@@ -50,7 +51,7 @@ namespace ApplicationLogicTests.StorageFasade
             var paperId = _adapter.Create(paper);
 
             //Assert
-            Assert.IsTrue(paperId == 0);
+            Assert.IsTrue(paperId.Result == 0);
         }
 
         [TestMethod]
@@ -59,7 +60,7 @@ namespace ApplicationLogicTests.StorageFasade
         {
             //Arrange
             var storedPaper = new StoredPaper {Id = 0, Type = "article"};
-            mockRepo.Setup(r => r.Create(storedPaper)).Returns(storedPaper.Id);
+            mockRepo.Setup(r => r.Create(storedPaper)).Returns(Task.FromResult(storedPaper.Id));
 
             //Act
             var paperId = _adapter.Create(null);
@@ -80,7 +81,7 @@ namespace ApplicationLogicTests.StorageFasade
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             StoredPaper callBackPaper = null;
-            mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
+            mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>().Id)).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
             _adapter.DeleteIfExists(paper);
@@ -104,7 +105,7 @@ namespace ApplicationLogicTests.StorageFasade
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             StoredPaper callBackPaper = null;
-            mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
+            mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>().Id)).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
             _adapter.DeleteIfExists(paper);
@@ -160,7 +161,7 @@ namespace ApplicationLogicTests.StorageFasade
             paperCollection.Add(Mapper.Map<StoredPaper>(paper4));
             paperCollection.Add(Mapper.Map<StoredPaper>(paper5));
 
-            mockRepo.Setup(r => r.Read()).Returns(paperCollection);
+            mockRepo.Setup(r => r.Read()).Returns(paperCollection.AsQueryable());
 
             //Act
             var papers = _adapter.Read();

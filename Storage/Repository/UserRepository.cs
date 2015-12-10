@@ -11,7 +11,7 @@ namespace Storage.Repository
     ///     database. <see cref="StoredUser" />
     ///     These are used specifically on a User DbSet in the AutoSysDbModel.
     /// </summary>
-    public class UserRepository : IAsyncRepository<StoredUser>
+    public class UserRepository : IRepository<StoredUser>
     {
         private readonly IAutoSysContext _dbContext;
 

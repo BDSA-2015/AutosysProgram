@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ApplicationLogics.PaperManagement;
 using ApplicationLogics.StorageAdapter;
 using AutoMapper;
@@ -50,7 +51,7 @@ namespace ApplicationLogicTests.PaperManagement
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             var mapperPaper = Mapper.Map<StoredPaper>(paper);
-            _mockRepo.Setup(r => r.Create(mapperPaper)).Returns(mapperPaper.Id);
+            _mockRepo.Setup(r => r.Create(mapperPaper)).Returns(Task.FromResult(mapperPaper.Id));
 
             var file = "@book{839269," +
                        "author = {Will Newman}," +
@@ -61,7 +62,7 @@ namespace ApplicationLogicTests.PaperManagement
             var paperIds = _paperHandler.ImportBibtex(file);
 
             //Assert
-            Assert.IsTrue(paperIds.Count() == 1 && paperIds.First() == 0);
+            Assert.IsTrue(paperIds.Count() == 1 && paperIds.First().Result == 0);
         }
 
         /// <summary>
@@ -103,15 +104,15 @@ namespace ApplicationLogicTests.PaperManagement
 
             //paper1 mock setup
             var mapperPaper1 = Mapper.Map<StoredPaper>(paper1);
-            _mockRepo.Setup(r => r.Create(mapperPaper1)).Returns(mapperPaper1.Id);
+            _mockRepo.Setup(r => r.Create(mapperPaper1)).Returns(Task.FromResult(mapperPaper1.Id));
 
             //paper2 mock setup
             var mapperPaper2 = Mapper.Map<StoredPaper>(paper2);
-            _mockRepo.Setup(r => r.Create(mapperPaper2)).Returns(mapperPaper2.Id);
+            _mockRepo.Setup(r => r.Create(mapperPaper2)).Returns(Task.FromResult(mapperPaper2.Id));
 
             //paper3 mock setup
             var mapperPaper3 = Mapper.Map<StoredPaper>(paper3);
-            _mockRepo.Setup(r => r.Create(mapperPaper3)).Returns(mapperPaper3.Id);
+            _mockRepo.Setup(r => r.Create(mapperPaper3)).Returns(Task.FromResult(mapperPaper3.Id));
 
             var file = "@Article{py03," +
                        "author = {Xavier D ecoret}," +

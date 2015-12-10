@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.WebPages;
 using ApplicationLogics.StorageAdapter;
 
@@ -26,11 +27,11 @@ namespace ApplicationLogics.PaperManagement
         /// </summary>
         /// <param name="file">The bibtex file which is parsed to the program</param>
         /// <returns>A List of Papers which was valid for parsing</returns>
-        public IEnumerable<int> ImportBibtex(string file)
+        public IEnumerable<Task<int>> ImportBibtex(string file)
         {
             if (file.IsEmpty() || file == null)
             {
-                throw new ArgumentNullException("The given bibtex file cannot be null nor empty");
+                throw new ArgumentNullException(nameof(file));
             }
 
             return _parser.Parse(file).Select(paper => _paperAdapter.Create(paper));

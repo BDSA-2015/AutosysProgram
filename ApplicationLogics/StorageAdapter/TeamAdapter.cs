@@ -28,7 +28,7 @@ namespace ApplicationLogics.StorageAdapter
         /// </summary>
         /// <param name="team"> Team object</param>
         /// <returns>Id of team</returns>
-        public int Create(Team team)
+        public Task<int> Create(Team team)
         {
             return _teamRepository.Create(Mapper.Map<StoredTeam>(team));
         }
@@ -66,7 +66,7 @@ namespace ApplicationLogics.StorageAdapter
                 team.UserIDs.Equals(toDelete.UserIDs))
             {
                 var storedteamToDelete = Mapper.Map<StoredTeam>(toDelete);
-                _teamRepository.DeleteIfExists(storedteamToDelete);
+                _teamRepository.DeleteIfExists(storedteamToDelete.Id);
             }
             else throw new ArgumentException("Team has been updated");
         }

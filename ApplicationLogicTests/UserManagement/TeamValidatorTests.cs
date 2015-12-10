@@ -2,6 +2,7 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Utils;
@@ -110,7 +111,7 @@ namespace ApplicationLogicTests.UserManagement
             var id = 0;
             var repositoryMock = new Mock<IRepository<StoredTeam>>();
             var storedTeam = new StoredTeam {Id = 0, Name = "name", MetaData = "metaData", UserIds = new[] {1, 2, 3}};
-            repositoryMock.Setup(r => r.Read(id)).Returns(storedTeam);
+            repositoryMock.Setup(r => r.Read(id)).Returns(Task.FromResult(storedTeam));
 
             var teamFacade = new TeamAdapter(repositoryMock.Object);
 

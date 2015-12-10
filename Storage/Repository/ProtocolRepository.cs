@@ -11,7 +11,7 @@ namespace Storage.Repository
     ///     the database. <see cref="StoredProtocol" />
     ///     These are used specifically on a Stored Protocol DbSet in the AutoSysDbModel.
     /// </summary>
-    public class ProtocolRepository : IAsyncRepository<StoredProtocol>
+    public class ProtocolRepository : IRepository<StoredProtocol>
     {
         private readonly IAutoSysContext _dbContext;
 

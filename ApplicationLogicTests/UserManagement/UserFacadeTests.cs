@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ApplicationLogics.AutosysServer.Mapping;
 using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.UserManagement.Entities;
@@ -43,7 +44,7 @@ namespace ApplicationLogicTests.UserManagement
         {
             //Arrange 
             const int expectedReturnId = 0;
-            _repositoryMock.Setup(r => r.Create(_storedUser)).Returns(expectedReturnId);
+            _repositoryMock.Setup(r => r.Create(_storedUser)).Returns(Task.FromResult(expectedReturnId));
             var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
@@ -51,7 +52,7 @@ namespace ApplicationLogicTests.UserManagement
 
 
             //Assert
-            Assert.IsTrue(expectedReturnId == actualId);
+            Assert.IsTrue(expectedReturnId == actualId.Result);
         }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace ApplicationLogicTests.UserManagement
         {
             //Arrange
             var idToRead = 0;
-            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedUser);
+            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(Task.FromResult(_storedUser));
             var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
@@ -80,7 +81,7 @@ namespace ApplicationLogicTests.UserManagement
         {
             //Arrange
             var idToRead = 0;
-            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedUser);
+            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(Task.FromResult(_storedUser));
             var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
@@ -99,7 +100,7 @@ namespace ApplicationLogicTests.UserManagement
         {
             //Arrange
             var idToRead = 0;
-            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedUser);
+            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(Task.FromResult(_storedUser));
             var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
@@ -140,7 +141,7 @@ namespace ApplicationLogicTests.UserManagement
             var user2 = new StoredUser {Name = "name2", MetaData = "metaData2"};
             var user3 = new StoredUser {Name = "name3", MetaData = "metaData3"};
             IEnumerable<StoredUser> list = new List<StoredUser> {user1, user2, user3};
-            _repositoryMock.Setup(r => r.Read()).Returns(list);
+            _repositoryMock.Setup(r => r.Read()).Returns(list.AsQueryable());
             var userFacade = new UserAdapter(_repositoryMock.Object);
             var expectedCount = 3;
 
@@ -162,7 +163,7 @@ namespace ApplicationLogicTests.UserManagement
             var user2 = new StoredUser {Name = "name2", MetaData = "metaData2"};
             var user3 = new StoredUser {Name = "name3", MetaData = "metaData3"};
             IEnumerable<StoredUser> list = new List<StoredUser> {user1, user2, user3};
-            _repositoryMock.Setup(r => r.Read()).Returns(list);
+            _repositoryMock.Setup(r => r.Read()).Returns(list.AsQueryable());
             var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
@@ -237,7 +238,7 @@ namespace ApplicationLogicTests.UserManagement
             var user = new User {Id = 0, Name = "Changed name", MetaData = "Changed metaData"};
 
             var repositoryMock = new Mock<IRepository<StoredUser>>();
-            repositoryMock.Setup(r => r.Read(user.Id)).Returns(storedUser);
+            repositoryMock.Setup(r => r.Read(user.Id)).Returns(Task.FromResult(storedUser));
 
             var userFacade = new UserAdapter(repositoryMock.Object);
 

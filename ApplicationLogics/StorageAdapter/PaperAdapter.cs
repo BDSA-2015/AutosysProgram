@@ -20,7 +20,7 @@ namespace ApplicationLogics.StorageAdapter
             _papers = papers;
         }
 
-        public int Create(Paper item)
+        public Task<int> Create(Paper item)
         {
             if (item == null)
             {
@@ -57,7 +57,7 @@ namespace ApplicationLogics.StorageAdapter
                 throw new ArgumentNullException("The given Paper cannot be null");
             }
             var storedPaper = Mapper.Map<StoredPaper>(item);
-            _papers.DeleteIfExists(storedPaper);
+            _papers.DeleteIfExists(storedPaper.Id);
         }
 
         public Paper Map(Paper item)

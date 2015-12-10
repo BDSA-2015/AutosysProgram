@@ -28,7 +28,7 @@ namespace ApplicationLogics.StorageAdapter
         /// </summary>
         /// <param name="user">User</param>
         /// <returns> int</returns>
-        public int Create(User user)
+        public Task<int> Create(User user)
         {
             return _userRepository.Create(Mapper.Map<StoredUser>(user));
         }
@@ -102,7 +102,7 @@ namespace ApplicationLogics.StorageAdapter
             if (user.Name != toDelete.Name && user.MetaData != toDelete.MetaData)
                 throw new ArgumentException("User has been updated");
             var storedUserToDelete = Mapper.Map<StoredUser>(toDelete);
-            _userRepository.DeleteIfExists(storedUserToDelete);
+            _userRepository.DeleteIfExists(storedUserToDelete.Id);
         }
 
         public User Map(User item)

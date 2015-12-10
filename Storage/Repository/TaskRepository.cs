@@ -11,7 +11,7 @@ namespace Storage.Repository
     ///     requests in the database. <see cref="StoredTaskRequest" />
     ///     These are used specifically on a Task DbSet in the AutoSysDbModel.
     /// </summary>
-    public class TaskRepository : IAsyncRepository<StoredTaskRequest>
+    public class TaskRepository : IRepository<StoredTaskRequest>
     {
         private readonly IAutoSysContext _dbContext;
 

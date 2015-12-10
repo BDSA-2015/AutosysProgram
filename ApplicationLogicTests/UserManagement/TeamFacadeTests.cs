@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ApplicationLogics.AutosysServer.Mapping;
 using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.UserManagement;
@@ -44,14 +45,14 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange 
 
             const int expectedReturnId = 0;
-            _repositoryMock.Setup(r => r.Create(_storedTeam)).Returns(expectedReturnId);
+            _repositoryMock.Setup(r => r.Create(_storedTeam)).Returns(Task.FromResult(expectedReturnId));
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
             var actualId = teamFacade.Create(_team); //BUG AUTOMAPPER EXCEPTION IS THROWN HERE...
 
             //Assert
-            Assert.IsTrue(expectedReturnId == actualId);
+            Assert.IsTrue(expectedReturnId == actualId.Result);
         }
 
 
@@ -63,7 +64,7 @@ namespace ApplicationLogicTests.UserManagement
         {
             //Arrange
             var idToRead = 0;
-            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedTeam);
+            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(Task.FromResult(_storedTeam));
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
@@ -81,7 +82,7 @@ namespace ApplicationLogicTests.UserManagement
         {
             //Arrange
             var idToRead = 0;
-            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedTeam);
+            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(Task.FromResult(_storedTeam));
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
@@ -100,7 +101,7 @@ namespace ApplicationLogicTests.UserManagement
         {
             //Arrange
             var idToRead = 0;
-            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedTeam);
+            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(Task.FromResult(_storedTeam));
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
@@ -142,7 +143,7 @@ namespace ApplicationLogicTests.UserManagement
             var team2 = new StoredTeam {Name = "name2", MetaData = "metaData2"};
             var team3 = new StoredTeam {Name = "name3", MetaData = "metaData3"};
             IEnumerable<StoredTeam> list = new List<StoredTeam> {team1, team2, team3};
-            _repositoryMock.Setup(r => r.Read()).Returns(list);
+            _repositoryMock.Setup(r => r.Read()).Returns(list.AsQueryable());
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
             var expectedCount = 3;
 
@@ -164,7 +165,7 @@ namespace ApplicationLogicTests.UserManagement
             var team2 = new StoredTeam {Name = "name2", MetaData = "metaData2", UserIds = new[] {2}};
             var team3 = new StoredTeam {Name = "name3", MetaData = "metaData3", UserIds = new[] {3}};
             IEnumerable<StoredTeam> list = new List<StoredTeam> {team1, team2, team3};
-            _repositoryMock.Setup(r => r.Read()).Returns(list);
+            _repositoryMock.Setup(r => r.Read()).Returns(list.AsQueryable());
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
@@ -241,7 +242,7 @@ namespace ApplicationLogicTests.UserManagement
                 UserIds = new[] {1, 8}
             };
 
-            _repositoryMock.Setup(r => r.Read(_team.Id)).Returns(editedTeam);
+            _repositoryMock.Setup(r => r.Read(_team.Id)).Returns(Task.FromResult(editedTeam));
 
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
 

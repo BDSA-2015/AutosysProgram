@@ -11,7 +11,7 @@ namespace Storage.Repository
     ///     These are used specifically on a given DbSet in the AutoSysDbModel.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class DbRepository<T> : IAsyncRepository<T> where T : class, IEntity
+    public class DbRepository<T> : IRepository<T> where T : class, IEntity
     {
         private readonly IAutoSysContext _dbContext;
 
