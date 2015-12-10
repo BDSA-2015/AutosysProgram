@@ -40,6 +40,9 @@
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="BibtexLibrary">
+      <HintPath>..\packages\BibtexLibrary.1.2.0\lib\net45\BibtexLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -112,16 +115,9 @@
     <Compile Include="AutosysServer\Mapping\Profiles\StudyManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\PaperManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\UserManagementStorageProfile.cs" />
-    <Compile Include="PaperManagement\Bibtex\BibtexParser.cs" />
-    <Compile Include="PaperManagement\Bibtex\CustomFieldChecker.cs" />
-    <Compile Include="PaperManagement\Bibtex\PaperChecker.cs" />
-    <Compile Include="PaperManagement\Bibtex\DefaultFieldChecker.cs" />
-    <Compile Include="PaperManagement\Bibtex\FieldValidator.cs" />
-    <Compile Include="PaperManagement\Bibtex\Paper.cs" />
-    <Compile Include="PaperManagement\Bibtex\PaperValidator.cs" />
-    <Compile Include="PaperManagement\Interfaces\IPaperChecker.cs" />
-    <Compile Include="PaperManagement\Interfaces\IParser.cs" />
-    <Compile Include="PaperManagement\Interfaces\IFieldChecker.cs" />
+    <Compile Include="PaperManagement\BibtexParser.cs" />
+    <Compile Include="PaperManagement\IParser.cs" />
+    <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="PaperManagement\PaperHandler.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
     <Compile Include="ProtocolManagement\ProtocolHandler.cs" />
