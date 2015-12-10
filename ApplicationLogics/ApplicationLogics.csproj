@@ -120,7 +120,7 @@
     <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\StudyManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\PaperManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\UserManagementStorageProfile.cs" />
-    <Compile Include="ExportManagement\CsvConverter\CsvConverter.cs" />
+    <Compile Include="ExportManagement\Converter\CsvConverter.cs" />
     <Compile Include="PaperManagement\BibtexParser.cs" />
     <Compile Include="PaperManagement\IParser.cs" />
     <Compile Include="PaperManagement\Paper.cs" />

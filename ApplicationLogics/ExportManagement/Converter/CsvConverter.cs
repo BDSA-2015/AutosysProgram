@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using ApplicationLogics.ExportManagement.Interfaces;
@@ -12,10 +11,8 @@ using ApplicationLogics.PaperManagement;
 using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement.Entities;
-using CsvHelper;
-using CsvHelper.TypeConversion;
 
-namespace ApplicationLogics.ExportManagement.CsvConverter
+namespace ApplicationLogics.ExportManagement.Converter
 {
     /// <summary>
     /// Class for converting export files to the CSV format according to the European standard using ; as a separator
@@ -48,8 +45,8 @@ namespace ApplicationLogics.ExportManagement.CsvConverter
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
         private void CreateColumns(StringBuilder builder)
         {
-                builder.Append("Study;Study Description;Phase;Exclusion Criteria;Inclusion Criteria;" +
-                               "Assigned Tasks;Assigned Roles;Unassigned Tasks;Resources;");
+            builder.Append("Study;Study Description;Phase;Exclusion Criteria;Inclusion Criteria;" +
+                           "Assigned Tasks;Assigned Roles;Resources;");
         }
 
         /// <summary>
@@ -67,7 +64,6 @@ namespace ApplicationLogics.ExportManagement.CsvConverter
                 AppendCriteria(phase.InclusionCriteria, builder);
                 AppendAssignedTasks(phase.AssignedTask, builder);
                 AppendRoles(phase.AssignedRole, builder);
-                AppendUnassignedTasks(phase.UnassignedTasks, builder);
                 AppendResources(phase.Reports, builder);
             }
         }
@@ -113,28 +109,13 @@ namespace ApplicationLogics.ExportManagement.CsvConverter
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
         private void AppendRoles(Dictionary<Role, List<User>> roleMap, StringBuilder builder)
         {
-            if(!roleMap.Any()) return;
+            if (!roleMap.Any()) return;
             foreach (var role in roleMap.Keys)
             {
                 foreach (var user in roleMap[role])
                 {
-                    builder.Append($"{user.Name} given role {role},");
+                    builder.Append($"{user.Name} given role {role.RoleType},");
                 }
-            }
-            builder.Append(";");
-        }
-
-        /// <summary>
-        /// Appends the Unassigned Tasks of a specific Phase in accordance to the CSV standard.
-        /// </summary>
-        /// <param name="tasks">The given collection of unassigned Tasks in a specific Phase</param>
-        /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
-        private void AppendUnassignedTasks(IEnumerable<TaskRequest> tasks, StringBuilder builder)
-        {
-            if (!tasks.Any()) return;
-            foreach (var task in tasks)
-            {
-                builder.Append($"{task.Description};");
             }
             builder.Append(";");
         }
@@ -153,30 +134,5 @@ namespace ApplicationLogics.ExportManagement.CsvConverter
             }
             builder.Append(";");
         }
-
-        ///// <summary>
-        ///// Converts data from inclusion criteria in a Protocol into a CSV format.  
-        ///// </summary>
-        ///// <param name="protocol">
-        ///// The Protocol to be converted
-        ///// </param>
-        ///// <returns>
-        ///// The Protocol's Inclusion Criteria as a CSV string
-        ///// </returns>
-        //private string ConvertListData(List<Criteria> criteria)
-        //{
-        //    return string.Join(";", criteria.Select(x =>
-        //    {
-        //        if (x == null)
-        //        {
-        //            throw new ArgumentNullException(null, "The Inclusion Criteria cannot be null"); 
-        //        }
-        //        if (string.IsNullOrEmpty(x.Name))
-        //        {
-        //            throw new ArgumentException("Cannot convert null or empty criteria name");
-        //        }
-        //        return x.Name;
-        //    }));
-        //}
     }
 }

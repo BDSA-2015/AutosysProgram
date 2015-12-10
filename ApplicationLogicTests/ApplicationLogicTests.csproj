@@ -116,6 +116,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ExportManagement\Mock\ProtocolMock.cs" />
     <Compile Include="PaperManagement\BibtexParserTests.cs" />
     <Compile Include="PaperManagement\PaperHandlerTests.cs" />
     <Compile Include="ExportManagement\CSVConverterTests.cs" />
