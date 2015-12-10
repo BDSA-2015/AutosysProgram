@@ -4,7 +4,7 @@
 
 using System;
 using System.Collections.Generic;
-using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Utils;
 
 namespace ApplicationLogics.UserManagement
@@ -14,9 +14,9 @@ namespace ApplicationLogics.UserManagement
     /// </summary>
     public class TeamHandler
     {
-        private readonly IFacade<Team> _storage;
+        private readonly IAdapter<Team> _storage;
 
-        public TeamHandler(IFacade<Team> storage)
+        public TeamHandler(IAdapter<Team> storage)
         {
             _storage = storage;
         }

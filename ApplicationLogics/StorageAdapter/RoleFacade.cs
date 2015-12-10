@@ -1,36 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.StudyManagement;
 
-namespace ApplicationLogics.StorageFasade
+namespace ApplicationLogics.StorageAdapter
 {
-    public class StudyFacade : IFacade<Study>
+    public class RoleAdapter : IAdapter<Role>
     {
-        public int Create(Study item)
+        public int Create(Role item)
         {
             throw new NotImplementedException();
         }
 
-        public Study Read(int id)
+        public Role Read(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Study> Read()
+        public IEnumerable<Role> Read()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Study item)
+        public void Update(Role item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Study item)
+        public void Delete(Role item)
         {
             throw new NotImplementedException();
         }

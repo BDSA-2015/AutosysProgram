@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.StudyManagement;
 
-namespace ApplicationLogics.StorageFasade
+namespace ApplicationLogics.StorageAdapter
 {
-    public class CriteriaFacade : IFacade<Criteria>
+    public class CriteriaAdapter : IAdapter<Criteria>
     {
         public int Create(Criteria item)
         {

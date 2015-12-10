@@ -4,7 +4,7 @@
 
 using System;
 using System.Collections.Generic;
-using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Entities;
 using ApplicationLogics.UserManagement.Utils;
 
@@ -15,9 +15,9 @@ namespace ApplicationLogics.UserManagement
     /// </summary>
     public class UserHandler
     {
-        private readonly IFacade<User> _storage;
+        private readonly IAdapter<User> _storage;
 
-        public UserHandler(IFacade<User> storage)
+        public UserHandler(IAdapter<User> storage)
         {
             _storage = storage;
         }

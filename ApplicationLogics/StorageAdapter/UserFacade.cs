@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Entities;
 using AutoMapper;
 using Storage.Models;
-using Storage.Repository;
 using Storage.Repository.Interface;
 
-namespace ApplicationLogics.StorageFasade
+namespace ApplicationLogics.StorageAdapter
 {
-    public class UserFacade : IFacade<User>
+    public class UserAdapter : IAdapter<User>
     {
         private readonly IRepository<StoredUser> _userRepository;
 
@@ -18,7 +17,7 @@ namespace ApplicationLogics.StorageFasade
         /// This class is responsible for the communication between application logic layer and storage layer.
         /// This class will handle Users and convert them the the propriate object that are to be propagated
         /// </summary>
-        public UserFacade(IRepository<StoredUser> userRepository)
+        public UserAdapter(IRepository<StoredUser> userRepository)
         {
             _userRepository = userRepository;
         }

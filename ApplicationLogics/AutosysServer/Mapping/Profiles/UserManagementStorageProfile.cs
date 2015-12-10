@@ -5,10 +5,9 @@
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
 using AutoMapper;
-using Storage.Entities;
 using Storage.Models;
 
-namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfiles
+namespace ApplicationLogics.AutosysServer.Mapping.Profiles
 {
     /// <summary>
     /// This profile sets the mapping between

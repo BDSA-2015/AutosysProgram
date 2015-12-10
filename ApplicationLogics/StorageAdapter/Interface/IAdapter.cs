@@ -4,13 +4,13 @@
 
 using System.Collections.Generic;
 
-namespace ApplicationLogics.StorageFasade.Interface
+namespace ApplicationLogics.StorageAdapter.Interface
 {
     /// <summary>
     /// This interface outlines the CRUD methods that the storage repository class will be able to perform.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IFacade<T> 
+    public interface IAdapter<T> 
     {
         int Create(T item);
         T Read(int id);
@@ -18,6 +18,8 @@ namespace ApplicationLogics.StorageFasade.Interface
         void Update(T item);
         void Delete(T item);
 
-        // Free to add functionality specific 
+        // Free to add functionality specific
+
+        // T Map(T item);
     }
 }

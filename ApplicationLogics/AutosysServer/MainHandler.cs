@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.PaperManagement;
 using ApplicationLogics.ProtocolManagement;
-using ApplicationLogics.StorageFasade;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
 using System.Threading.Tasks;

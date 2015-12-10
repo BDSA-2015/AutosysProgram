@@ -2,9 +2,7 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-using ApplicationLogics.StorageFasade;
-using Storage.Models;
-using Storage.Repository;
+using ApplicationLogics.StorageAdapter;
 
 namespace ApplicationLogics.AutosysServer
 {
@@ -20,10 +18,10 @@ namespace ApplicationLogics.AutosysServer
         /// It creates a userFacade with specified repository
         /// </summary>
         /// <returns></returns>
-        public UserFacade GetUserFasade()
+        public UserAdapter GetUserFasade()
         {
             //var repository = new UserRepository<StoredUser>();
-            //return new UserFacade(repository);
+            //return new UserAdapter(repository);
             return null;
         }
 

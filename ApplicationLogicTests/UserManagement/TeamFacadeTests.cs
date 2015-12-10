@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ApplicationLogics.AutosysServer.Mapping;
-using ApplicationLogics.StorageFasade;
+using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.UserManagement;
 using ApplicationLogicTests.UserManagement.Stub;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -47,7 +47,7 @@ namespace ApplicationLogicTests.UserManagement
 
             const int expectedReturnId = 0;
             _repositoryMock.Setup(r => r.Create(_storedTeam)).Returns(expectedReturnId);
-            var teamFacade = new TeamFacade(_repositoryMock.Object);
+            var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
             var actualId = teamFacade.Create(_team); //BUG AUTOMAPPER EXCEPTION IS THROWN HERE...
@@ -66,7 +66,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var idToRead = 0;
             _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedTeam);
-            var teamFacade = new TeamFacade(_repositoryMock.Object);
+            var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
             var returnedTeam = teamFacade.Read(idToRead);
@@ -84,7 +84,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var idToRead = 0;
             _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedTeam);
-            var teamFacade = new TeamFacade(_repositoryMock.Object);
+            var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
             var returnedTeam = teamFacade.Read(idToRead);
@@ -103,7 +103,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var idToRead = 0;
             _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedTeam);
-            var teamFacade = new TeamFacade(_repositoryMock.Object);
+            var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
             var returnedTeam = teamFacade.Read(idToRead);
@@ -124,7 +124,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var idToRead = 0;
             _repositoryMock.Setup(r => r.Read(idToRead));
-            var teamFacade = new TeamFacade(_repositoryMock.Object);
+            var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
             var returnedTeam = teamFacade.Read(idToRead);
@@ -145,7 +145,7 @@ namespace ApplicationLogicTests.UserManagement
             var team3 = new StoredTeam {Name = "name3", MetaData = "metaData3"};
             IEnumerable<StoredTeam> list = new List<StoredTeam> {team1, team2, team3};
             _repositoryMock.Setup(r => r.Read()).Returns(list);
-            var teamFacade = new TeamFacade(_repositoryMock.Object);
+            var teamFacade = new TeamAdapter(_repositoryMock.Object);
             var expectedCount = 3;
 
             //Act
@@ -167,7 +167,7 @@ namespace ApplicationLogicTests.UserManagement
             var team3 = new StoredTeam {Name = "name3", MetaData = "metaData3", UserIds = new[] { 3 } };
             IEnumerable<StoredTeam> list = new List<StoredTeam> {team1, team2, team3};
             _repositoryMock.Setup(r => r.Read()).Returns(list);
-            var teamFacade = new TeamFacade(_repositoryMock.Object);
+            var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
             var actualTeams = teamFacade.Read().ToArray();
@@ -194,7 +194,7 @@ namespace ApplicationLogicTests.UserManagement
         public void DeleteTeam_Success_Test()
         {
             //Arrange 
-            var teamFacade = new TeamFacade(new RepositoryStub<StoredTeam>());
+            var teamFacade = new TeamAdapter(new RepositoryStub<StoredTeam>());
             var team = new Team() {Name = "name",MetaData = "data", UserIDs = new []{1,2}};
             var toDeleteId = 0;
             //Act
@@ -219,7 +219,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var toDeleteId = 0;
             _repositoryMock.Setup(r => r.Read(toDeleteId));
-            var teamFacade = new TeamFacade(_repositoryMock.Object);
+            var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
             teamFacade.Delete(_team);
@@ -240,7 +240,7 @@ namespace ApplicationLogicTests.UserManagement
 
             _repositoryMock.Setup(r => r.Read(_team.Id)).Returns(editedTeam);
 
-            var teamFacade = new TeamFacade(_repositoryMock.Object);
+            var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
             teamFacade.Delete(_team);

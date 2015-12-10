@@ -2,7 +2,7 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-using ApplicationLogics.StorageFasade;
+using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -113,7 +113,7 @@ namespace ApplicationLogicTests.UserManagement
             var storedTeam = new StoredTeam {Id = 0, Name = "name", MetaData = "metaData", UserIds = new[] {1, 2, 3}};
             repositoryMock.Setup(r => r.Read(id)).Returns(storedTeam);
 
-            var teamFacade = new TeamFacade(repositoryMock.Object);
+            var teamFacade = new TeamAdapter(repositoryMock.Object);
 
             //Act
             var result = TeamValidator.ValidateExistence(0, teamFacade);
@@ -134,7 +134,7 @@ namespace ApplicationLogicTests.UserManagement
             var storedTeam = new StoredTeam {Id = 0, Name = "name", MetaData = "metaData", UserIds = new[] {1, 2, 3}};
             repositoryMock.Setup(r => r.Read(id));
 
-            var teamFacade = new TeamFacade(repositoryMock.Object);
+            var teamFacade = new TeamAdapter(repositoryMock.Object);
 
             //Act
             var result = TeamValidator.ValidateExistence(0, teamFacade);

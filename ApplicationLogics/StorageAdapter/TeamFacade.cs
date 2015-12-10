@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement;
 using AutoMapper;
 using Storage.Models;
-using Storage.Repository;
 using Storage.Repository.Interface;
 
-namespace ApplicationLogics.StorageFasade
+namespace ApplicationLogics.StorageAdapter
 {
     /// <summary>
     /// This class is responsible for the communication between application logic layer and storage layer.
     /// This class will handle Teams and convert them the the propriate object that are to be propagated
     /// </summary>
-    public class TeamFacade : IFacade<Team>
+    public class TeamAdapter : IAdapter<Team>
     {
         private readonly IRepository<StoredTeam> _teamRepository;
 
-        public TeamFacade(IRepository<StoredTeam> repository)
+        public TeamAdapter(IRepository<StoredTeam> repository)
         {
             _teamRepository = repository;
         }

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.WebPages;
-using ApplicationLogics.StorageFasade;
-using NUnit.Framework.Constraints;
+using ApplicationLogics.StorageAdapter;
 
 namespace ApplicationLogics.PaperManagement
 {
@@ -16,12 +13,12 @@ namespace ApplicationLogics.PaperManagement
     {
         //Used to generate Bibtex files, which later is stored as Papers in the database
         private IParser _parser;
-        private PaperFacade _paperFacade; 
+        private PaperAdapter _paperAdapter; 
 
-        public PaperHandler(IParser parser, PaperFacade paperFacade)
+        public PaperHandler(IParser parser, PaperAdapter paperAdapter)
         {
             _parser = parser;
-            _paperFacade = paperFacade;
+            _paperAdapter = paperAdapter;
         }
 
         /// <summary>
@@ -36,7 +33,7 @@ namespace ApplicationLogics.PaperManagement
                 throw new ArgumentNullException("The given bibtex file cannot be null nor empty");
             }
 
-            return _parser.Parse(file).Select(paper => _paperFacade.Create(paper));
+            return _parser.Parse(file).Select(paper => _paperAdapter.Create(paper));
         }
     }
 }

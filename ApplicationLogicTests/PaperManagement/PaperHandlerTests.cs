@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ApplicationLogics.PaperManagement;
-using ApplicationLogics.StorageFasade;
+using ApplicationLogics.StorageAdapter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json;
@@ -26,7 +26,7 @@ namespace ApplicationLogicTests.PaperManagement
         {
             _mockRepo = new Mock<IRepository<StoredPaper>>();
             AutoMapper.Mapper.CreateMap<Paper, StoredPaper>();
-            _paperHandler = new PaperHandler(new BibtexParser(), new PaperFacade(_mockRepo.Object));
+            _paperHandler = new PaperHandler(new BibtexParser(), new PaperAdapter(_mockRepo.Object));
         }
 
         /// <summary>

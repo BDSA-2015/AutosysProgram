@@ -2,7 +2,7 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.StorageAdapter.Interface;
 
 namespace ApplicationLogics.UserManagement.Utils
 {
@@ -17,7 +17,7 @@ namespace ApplicationLogics.UserManagement.Utils
         /// <param name="teamId">team to find</param>
         /// <param name="teamFasade">Storage location</param>
         /// <returns>Existence of team</returns>
-        public static bool ValidateExistence(int teamId, IFacade<Team> teamFasade)
+        public static bool ValidateExistence(int teamId, IAdapter<Team> teamFasade)
         {
             if (teamId < 0) return false;
             var team = teamFasade.Read(teamId);

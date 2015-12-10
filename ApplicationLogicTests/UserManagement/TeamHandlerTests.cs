@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using ApplicationLogics.AutosysServer.Mapping;
-using ApplicationLogics.StorageFasade;
-using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.StorageAdapter;
+using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement;
 using ApplicationLogicTests.UserManagement.Stub;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,14 +16,14 @@ namespace ApplicationLogicTests.UserManagement
     public class TeamHandlerTests
     {
 
-        private Mock<IFacade<Team>> _facadeMock;
+        private Mock<IAdapter<Team>> _facadeMock;
         private Team _team;
 
         [TestInitialize]
         public void Initialize()
         {
             AutoMapperConfigurator.Configure();
-            _facadeMock = new Mock<IFacade<Team>>();
+            _facadeMock = new Mock<IAdapter<Team>>();
             _team = new Team() {Id = 0, MetaData = "Meta", Name = "name", UserIDs = new[] {1, 2}};
         }
 
@@ -118,7 +118,7 @@ namespace ApplicationLogicTests.UserManagement
         public void DeleteTeam_Valid_Test()
         {
             //Arrange
-            var facade = new TeamFacade(new RepositoryStub<StoredTeam>());
+            var facade = new TeamAdapter(new RepositoryStub<StoredTeam>());
             var teamHandler = new TeamHandler(facade);
             var team = new Team() {Name = "Name", MetaData = "data", UserIDs = new[] {1, 3}};
             const int idToDelete = 0;

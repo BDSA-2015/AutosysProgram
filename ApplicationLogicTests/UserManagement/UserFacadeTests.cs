@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ApplicationLogics.AutosysServer.Mapping;
-using ApplicationLogics.StorageFasade;
+using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.UserManagement.Entities;
 using ApplicationLogicTests.UserManagement.Stub;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -45,7 +45,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange 
             const int expectedReturnId = 0;
             _repositoryMock.Setup(r => r.Create(_storedUser)).Returns(expectedReturnId);
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
             var actualId = userFacade.Create(_user);
@@ -64,7 +64,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var idToRead = 0;
             _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedUser);
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
             var returnedUser = userFacade.Read(idToRead);
@@ -82,7 +82,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var idToRead = 0;
             _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedUser);
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
             var returnedUser = userFacade.Read(idToRead);
@@ -101,7 +101,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var idToRead = 0;
             _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedUser);
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
             var returnedUser = userFacade.Read(idToRead);
@@ -121,7 +121,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var idToRead = 0;
             _repositoryMock.Setup(r => r.Read(idToRead));
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
             var returnedUser = userFacade.Read(idToRead);
@@ -142,7 +142,7 @@ namespace ApplicationLogicTests.UserManagement
             var user3 = new StoredUser {Name = "name3", MetaData = "metaData3"};
             IEnumerable<StoredUser> list = new List<StoredUser> {user1, user2, user3};
             _repositoryMock.Setup(r => r.Read()).Returns(list);
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            var userFacade = new UserAdapter(_repositoryMock.Object);
             var expectedCount = 3;
 
             //Act
@@ -164,7 +164,7 @@ namespace ApplicationLogicTests.UserManagement
             var user3 = new StoredUser {Name = "name3", MetaData = "metaData3"};
             IEnumerable<StoredUser> list = new List<StoredUser> {user1, user2, user3};
             _repositoryMock.Setup(r => r.Read()).Returns(list);
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
             var actualUsers = userFacade.Read().ToArray();
@@ -191,7 +191,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var toDeleteId = 0;
             var user = new User {Id = toDeleteId, Name = "name", MetaData = "metaData"};
-            var userFacade = new UserFacade(new RepositoryStub<StoredUser>());
+            var userFacade = new UserAdapter(new RepositoryStub<StoredUser>());
 
             //Act
             userFacade.Create(user);
@@ -215,7 +215,7 @@ namespace ApplicationLogicTests.UserManagement
             var repositoryMock = new Mock<IRepository<StoredUser>>();
             var toDeleteId = 0;
             repositoryMock.Setup(r => r.Read(toDeleteId));
-            var userFacade = new UserFacade(repositoryMock.Object);
+            var userFacade = new UserAdapter(repositoryMock.Object);
             var user = new User {Id = toDeleteId, Name = "name", MetaData = "metaData"};
 
 
@@ -240,7 +240,7 @@ namespace ApplicationLogicTests.UserManagement
             var repositoryMock = new Mock<IRepository<StoredUser>>();
             repositoryMock.Setup(r => r.Read(user.Id)).Returns(storedUser);
 
-            var userFacade = new UserFacade(repositoryMock.Object);
+            var userFacade = new UserAdapter(repositoryMock.Object);
 
             //Act
             userFacade.Delete(user);

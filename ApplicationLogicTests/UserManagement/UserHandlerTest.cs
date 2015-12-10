@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using ApplicationLogics.AutosysServer.Mapping;
-using ApplicationLogics.StorageFasade;
-using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.StorageAdapter;
+using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
 using ApplicationLogicTests.UserManagement.Stub;
@@ -17,14 +17,14 @@ namespace ApplicationLogicTests.UserManagement
     [TestClass]
     public class UserHandlerTest
     {
-        private Mock<IFacade<User>> _facadeMock;
+        private Mock<IAdapter<User>> _facadeMock;
         private User _user;
             
         [TestInitialize]
         public void Initialize()
         {
             AutoMapperConfigurator.Configure();
-            _facadeMock = new Mock<IFacade<User>>();
+            _facadeMock = new Mock<IAdapter<User>>();
             _user = new User() {Id=0, MetaData = "Meta", Name = "name"};
         }
 
@@ -130,7 +130,7 @@ namespace ApplicationLogicTests.UserManagement
         public void DeleteUser_Valid_Test()
         {
             //Arrange
-            var facade = new UserFacade(new RepositoryStub<StoredUser>());
+            var facade = new UserAdapter(new RepositoryStub<StoredUser>());
             var userHandler = new UserHandler(facade);
             var user = new User() {Name = "Name1", MetaData = "data"};
             const int idToDelete = 0;

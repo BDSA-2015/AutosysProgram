@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ApplicationLogics.StudyManagement;
 using AutoMapper;
-using Storage.Models;
-using ApplicationLogics.UserManagement;
-using ApplicationLogics.StudyManagement;
 using Storage.Entities;
+using Storage.Models;
 
-namespace ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfiles
+namespace ApplicationLogics.AutosysServer.Mapping.Profiles
 {
     class StudyManagementStorageProfile : Profile
     {

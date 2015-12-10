@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Web.Http;
 using SystematicStudyService.Models;
 using ApplicationLogics.AutosysServer;
-using ApplicationLogics.StorageFasade;
 using WebApi.Models;
 
 namespace WebApi.Controllers

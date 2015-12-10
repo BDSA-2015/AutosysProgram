@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ApplicationLogics.ProtocolManagement;
-using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.StorageAdapter.Interface;
 
-namespace ApplicationLogics.StorageFasade
+namespace ApplicationLogics.StorageAdapter
 {
-    public class ProtocolFacade : IFacade<Protocol>
+    public class ProtocolAdapter : IAdapter<Protocol>
     {
         public int Create(Protocol item)
         {

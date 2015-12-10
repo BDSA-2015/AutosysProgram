@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ApplicationLogics.PaperManagement;
-using ApplicationLogics.StorageFasade.Interface;
+using ApplicationLogics.StorageAdapter.Interface;
 using Storage.Models;
-using Storage.Repository;
 using Storage.Repository.Interface;
 
-namespace ApplicationLogics.StorageFasade
+namespace ApplicationLogics.StorageAdapter
 {
-    public class PaperFacade : IFacade<Paper>
+    public class PaperAdapter : IAdapter<Paper>
     {
         //TODO Write purpose of class
         private IRepository<StoredPaper> _papers;
 
-        public PaperFacade(IRepository<StoredPaper> papers)
+        public PaperAdapter(IRepository<StoredPaper> papers)
         {
             _papers = papers;
         }
