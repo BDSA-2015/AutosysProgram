@@ -8,8 +8,16 @@ using ApplicationLogics.UserManagement.Entities;
 
 namespace ApplicationLogicTests.ExportManagement.Mock
 {
+    /// <summary>
+    /// Class for creating mock Protocols used for testing purposes
+    /// </summary>
     public class ProtocolMock
     {
+        /// <summary>
+        /// Creates a valid Protocol with all necessary information for 
+        /// creating a file to be exported e.g. CSV files
+        /// </summary>
+        /// <returns></returns>
         public static Protocol CreateProtocolMock()
         {
             return new Protocol()
@@ -20,7 +28,7 @@ namespace ApplicationLogicTests.ExportManagement.Mock
             };
         }
 
-        private static List<Phase> CreatePhases()
+       private static List<Phase> CreatePhases()
         {
             return new List<Phase>()
             {
