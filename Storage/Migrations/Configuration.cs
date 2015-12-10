@@ -1,14 +1,12 @@
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+
 namespace Storage.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
     /// <summary>
-    /// This class is used to update the database schema upon changes. 
+    ///     This class is used to update the database schema upon changes.
     /// </summary>
-    internal sealed class Configuration : DbMigrationsConfiguration<Storage.AutoSysDbModel>
+    internal sealed class Configuration : DbMigrationsConfiguration<AutoSysDbModel>
     {
         public Configuration()
         {
@@ -16,10 +14,10 @@ namespace Storage.Migrations
         }
 
         /// <summary>
-        /// Called after migrating to the latest version or updating the database. 
+        ///     Called after migrating to the latest version or updating the database.
         /// </summary>
         /// <param name="context"></param>
-        protected override void Seed(Storage.AutoSysDbModel context)
+        protected override void Seed(AutoSysDbModel context)
         {
             Database.SetInitializer(new CreateDatabaseIfNotExists<AutoSysDbModel>());
             context.Database.CreateIfNotExists();

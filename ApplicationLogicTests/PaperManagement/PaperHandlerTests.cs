@@ -3,36 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using ApplicationLogics.PaperManagement;
 using ApplicationLogics.StorageAdapter;
+using AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json;
 using Storage.Models;
-using Storage.Repository;
 using Storage.Repository.Interface;
 
 namespace ApplicationLogicTests.PaperManagement
 {
     /// <summary>
-    /// Class for testing the PaperHandler which handles import of papers
+    ///     Class for testing the PaperHandler which handles import of papers
     /// </summary>
-    [TestClass()]
+    [TestClass]
     public class PaperHandlerTests
     {
         private Mock<IRepository<StoredPaper>> _mockRepo;
         private PaperHandler _paperHandler;
 
-        [TestInitialize()]
+        [TestInitialize]
         public void Initialize()
         {
             _mockRepo = new Mock<IRepository<StoredPaper>>();
-            AutoMapper.Mapper.CreateMap<Paper, StoredPaper>();
+            Mapper.CreateMap<Paper, StoredPaper>();
             _paperHandler = new PaperHandler(new BibtexParser(), new PaperAdapter(_mockRepo.Object));
         }
 
         /// <summary>
-        /// Tests the import of a single bibtex file as a Paper
+        ///     Tests the import of a single bibtex file as a Paper
         /// </summary>
-        [TestMethod()]
+        [TestMethod]
         public void ImportSinglePaperTest()
         {
             //Arrange
@@ -49,7 +49,7 @@ namespace ApplicationLogicTests.PaperManagement
 
             var paper = new Paper("article", fieldTypes, fieldValues);
 
-            var mapperPaper = AutoMapper.Mapper.Map<StoredPaper>(paper);
+            var mapperPaper = Mapper.Map<StoredPaper>(paper);
             _mockRepo.Setup(r => r.Create(mapperPaper)).Returns(mapperPaper.Id);
 
             var file = "@book{839269," +
@@ -62,13 +62,12 @@ namespace ApplicationLogicTests.PaperManagement
 
             //Assert
             Assert.IsTrue(paperIds.Count() == 1 && paperIds.First() == 0);
-
         }
 
         /// <summary>
-        /// Tests the import of multiple papers
+        ///     Tests the import of multiple papers
         /// </summary>
-        [TestMethod()]
+        [TestMethod]
         public void ImportMultiplePapers()
         {
             //Arrange
@@ -96,34 +95,32 @@ namespace ApplicationLogicTests.PaperManagement
             fieldValues3.Add("Simon the saint Templar");
             fieldValues3.Add("Something nice");
             fieldValues3.Add("700");
-            
+
             //Testing papers
             var paper1 = new Paper("article", fieldTypes1, fieldValues1);
             var paper2 = new Paper("article", fieldTypes2, fieldValues2);
             var paper3 = new Paper("article", fieldTypes3, fieldValues3);
 
             //paper1 mock setup
-            var mapperPaper1 = AutoMapper.Mapper.Map<StoredPaper>(paper1);
+            var mapperPaper1 = Mapper.Map<StoredPaper>(paper1);
             _mockRepo.Setup(r => r.Create(mapperPaper1)).Returns(mapperPaper1.Id);
 
             //paper2 mock setup
-            var mapperPaper2 = AutoMapper.Mapper.Map<StoredPaper>(paper2);
+            var mapperPaper2 = Mapper.Map<StoredPaper>(paper2);
             _mockRepo.Setup(r => r.Create(mapperPaper2)).Returns(mapperPaper2.Id);
 
             //paper3 mock setup
-            var mapperPaper3 = AutoMapper.Mapper.Map<StoredPaper>(paper3);
+            var mapperPaper3 = Mapper.Map<StoredPaper>(paper3);
             _mockRepo.Setup(r => r.Create(mapperPaper3)).Returns(mapperPaper3.Id);
 
             var file = "@Article{py03," +
                        "author = {Xavier D ecoret}," +
                        "title = {PyBiTex}," +
-                       "year = {2003}}"+
-
+                       "year = {2003}}" +
                        "@Article{key03," +
                        "author = {Xavier D ecoret}," +
                        "title = {A {bunch {of} braces {in}} title}," +
-                       "year = {2003}}"+
-
+                       "year = {2003}}" +
                        "@Article{key01," +
                        "author = {Simon the saint Templar}," +
                        "title = {Something nice}," +
@@ -138,10 +135,10 @@ namespace ApplicationLogicTests.PaperManagement
         }
 
         /// <summary>
-        /// Tests the import of a bibtex file which is null
+        ///     Tests the import of a bibtex file which is null
         /// </summary>
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void ImportNullBibtex()
         {
             //Act
@@ -149,10 +146,10 @@ namespace ApplicationLogicTests.PaperManagement
         }
 
         /// <summary>
-        /// Tests the import of a bibtex file which is empty
+        ///     Tests the import of a bibtex file which is empty
         /// </summary>
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void ImportEmptyBibtex()
         {
             //Act

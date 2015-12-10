@@ -4,13 +4,13 @@ namespace ApplicationLogics.StudyManagement
 {
     public class CriteriaLimitation
     {
-        private int intLimitation;
+        private readonly bool DateIsCurrentReturnValue;
         private DateTime dateLimitation;
-        private string wordLimitation;
 
-        private bool intIsCurrentReturnValue = false;
-        private bool DateIsCurrentReturnValue = false;
-        private bool WordIsCurrentReturnValue = false;
+        private readonly bool intIsCurrentReturnValue;
+        private readonly int intLimitation;
+        private bool WordIsCurrentReturnValue;
+        private readonly string wordLimitation;
 
         public CriteriaLimitation(int limitation)
         {
@@ -31,31 +31,29 @@ namespace ApplicationLogics.StudyManagement
         }
 
         /// <summary>
-        /// Return the the wrapped object. You can use GetVariableType to determin the objects class type.
+        ///     Return the the wrapped object. You can use GetVariableType to determin the objects class type.
         /// </summary>
         /// <returns></returns>
-        public Object GetLimitation()
+        public object GetLimitation()
         {
             if (intIsCurrentReturnValue)
                 return intLimitation;
-            else if (DateIsCurrentReturnValue)
+            if (DateIsCurrentReturnValue)
                 return dateLimitation;
-            else
-                return wordLimitation;
+            return wordLimitation;
         }
 
         /// <summary>
-        /// Returns the wrappedd objects type
+        ///     Returns the wrappedd objects type
         /// </summary>
         /// <returns></returns>
         public Type GetVariableType()
         {
             if (intIsCurrentReturnValue)
                 return intLimitation.GetType();
-            else if (DateIsCurrentReturnValue)
+            if (DateIsCurrentReturnValue)
                 return dateLimitation.GetType();
-            else
-                return wordLimitation.GetType();
+            return wordLimitation.GetType();
         }
     }
 }

@@ -32,5 +32,4 @@ namespace ApplicationLogics.StorageAdapter
             throw new NotImplementedException();
         }
     }
-
 }

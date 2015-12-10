@@ -8,17 +8,16 @@ using ApplicationLogics.StudyManagement;
 namespace ApplicationLogics.ProtocolManagement
 {
     /// <summary>
-    /// This class represents the Research Protocol used to configure a given study.
+    ///     This class represents the Research Protocol used to configure a given study.
     /// </summary>
-    public class Protocol 
+    public class Protocol
     {
         public string StudyName { get; set; }
         public List<Phase> Phases { get; set; }
-        public string Description { get; set; } 
+        public string Description { get; set; }
 
         public List<Criteria> InclusionCriteria { get; set; } // Update Csv tests and remove this  
 
         public List<Criteria> ExclusionCriteria { get; set; } // Update Csv tests and remove this  
     }
-
 }

@@ -7,15 +7,15 @@ using ApplicationLogics.StorageAdapter;
 namespace ApplicationLogics.AutosysServer
 {
     /// <summary>
-    /// This class is a dependency injection container that returns various facades that are
-    /// to be used.
+    ///     This class is a dependency injection container that returns various facades that are
+    ///     to be used.
     /// </summary>
     internal class FacadeInjectionContainer
     {
         // TODO insert new async repository and make facade take this instead
         /// <summary>
-        /// Returns a UserFacde that are used by userHandlers
-        /// It creates a userFacade with specified repository
+        ///     Returns a UserFacde that are used by userHandlers
+        ///     It creates a userFacade with specified repository
         /// </summary>
         /// <returns></returns>
         public UserAdapter GetUserFasade()

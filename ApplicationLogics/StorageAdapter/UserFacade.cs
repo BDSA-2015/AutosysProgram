@@ -14,8 +14,8 @@ namespace ApplicationLogics.StorageAdapter
         private readonly IRepository<StoredUser> _userRepository;
 
         /// <summary>
-        /// This class is responsible for the communication between application logic layer and storage layer.
-        /// This class will handle Users and convert them the the propriate object that are to be propagated
+        ///     This class is responsible for the communication between application logic layer and storage layer.
+        ///     This class will handle Users and convert them the the propriate object that are to be propagated
         /// </summary>
         public UserAdapter(IRepository<StoredUser> userRepository)
         {
@@ -23,7 +23,7 @@ namespace ApplicationLogics.StorageAdapter
         }
 
         /// <summary>
-        /// Creates a new storedUser from user details and send it to repository
+        ///     Creates a new storedUser from user details and send it to repository
         /// </summary>
         /// <param name="user">User</param>
         /// <returns> int</returns>
@@ -33,7 +33,7 @@ namespace ApplicationLogics.StorageAdapter
         }
 
         /// <summary>
-        /// Reads storedUser and returns a user to the caller.
+        ///     Reads storedUser and returns a user to the caller.
         /// </summary>
         /// <param name="id"> Id in database</param>
         /// <returns>User</returns>
@@ -44,7 +44,7 @@ namespace ApplicationLogics.StorageAdapter
         }
 
         /// <summary>
-        /// Returns an Enumerable set of users
+        ///     Returns an Enumerable set of users
         /// </summary>
         /// <returns>Enumerable set of users</returns>
         public IEnumerable<User> Read()
@@ -52,12 +52,12 @@ namespace ApplicationLogics.StorageAdapter
             var storedUsers = _userRepository.Read();
 
             var userList = Enumerable.ToList(storedUsers.Select(Mapper.Map<User>));
-                //Converts storedUsers to user and return as a list
+            //Converts storedUsers to user and return as a list
             return userList;
         }
 
         /// <summary>
-        /// Converts user to storage entity and update it.
+        ///     Converts user to storage entity and update it.
         /// </summary>
         /// <param name="user">User object</param>
         public void Update(User user)
@@ -66,7 +66,7 @@ namespace ApplicationLogics.StorageAdapter
         }
 
         /// <summary>
-        /// DeleteIfExists given user from database.
+        ///     DeleteIfExists given user from database.
         /// </summary>
         /// <param name="user">User Object</param>
         public void Delete(User user)
@@ -78,7 +78,5 @@ namespace ApplicationLogics.StorageAdapter
             var storedUserToDelete = Mapper.Map<StoredUser>(toDelete);
             _userRepository.DeleteIfExists(storedUserToDelete);
         }
-
     }
-
 }

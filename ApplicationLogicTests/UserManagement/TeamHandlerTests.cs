@@ -15,7 +15,6 @@ namespace ApplicationLogicTests.UserManagement
     [TestClass]
     public class TeamHandlerTests
     {
-
         private Mock<IAdapter<Team>> _facadeMock;
         private Team _team;
 
@@ -24,12 +23,12 @@ namespace ApplicationLogicTests.UserManagement
         {
             AutoMapperConfigurator.Configure();
             _facadeMock = new Mock<IAdapter<Team>>();
-            _team = new Team() {Id = 0, MetaData = "Meta", Name = "name", UserIDs = new[] {1, 2}};
+            _team = new Team {Id = 0, MetaData = "Meta", Name = "name", UserIDs = new[] {1, 2}};
         }
 
 
         /// <summary>
-        /// Test of valid team creation
+        ///     Test of valid team creation
         /// </summary>
         [TestMethod]
         public void CreateTeam_Valid_Test()
@@ -47,7 +46,7 @@ namespace ApplicationLogicTests.UserManagement
 
 
         /// <summary>
-        /// Whitespaces in team are not allowed. Testing if exception is being thrown
+        ///     Whitespaces in team are not allowed. Testing if exception is being thrown
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
@@ -68,7 +67,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Whitespaces in teams are not allowed. Testing if exception is being thrown
+        ///     Whitespaces in teams are not allowed. Testing if exception is being thrown
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
@@ -89,7 +88,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Teams with no members are not allowed. Testing if exception is being thrown
+        ///     Teams with no members are not allowed. Testing if exception is being thrown
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
@@ -109,18 +108,17 @@ namespace ApplicationLogicTests.UserManagement
         }
 
 
-
         /// <summary>
-        /// Test if an existing team is being deleted
+        ///     Test if an existing team is being deleted
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(KeyNotFoundException))]
+        [ExpectedException(typeof (KeyNotFoundException))]
         public void DeleteTeam_Valid_Test()
         {
             //Arrange
             var facade = new TeamAdapter(new RepositoryStub<StoredTeam>());
             var teamHandler = new TeamHandler(facade);
-            var team = new Team() {Name = "Name", MetaData = "data", UserIDs = new[] {1, 3}};
+            var team = new Team {Name = "Name", MetaData = "data", UserIDs = new[] {1, 3}};
             const int idToDelete = 0;
 
             //Act
@@ -130,13 +128,12 @@ namespace ApplicationLogicTests.UserManagement
 
             //Assert
             teamHandler.Read(idToDelete);
-                //Exception must be thrown to indicate that the team does not exist (ONLY FOR TESTING REPOSITORY STUB)
-
+            //Exception must be thrown to indicate that the team does not exist (ONLY FOR TESTING REPOSITORY STUB)
         }
 
         /// <summary>
-        /// Test if non existing team is being deleted
-        /// Exception must be thrown here.
+        ///     Test if non existing team is being deleted
+        ///     Exception must be thrown here.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
@@ -155,7 +152,7 @@ namespace ApplicationLogicTests.UserManagement
 
 
         /// <summary>
-        /// Test if existing team containts correct information
+        ///     Test if existing team containts correct information
         /// </summary>
         [TestMethod]
         public void ReadTeam_Valid_CorrectInformation_Test()
@@ -175,26 +172,25 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test if get all teams returns the correct number of teams.
+        ///     Test if get all teams returns the correct number of teams.
         /// </summary>
         [TestMethod]
         public void ReadAllTeams_Valid_CorrectNumberOfTeams_Test()
         {
             //Arrange
-            var team1 = new Team() {Id = 0, Name = "Team1", MetaData = "Meta1", UserIDs = new []{1}};
-            var team2 = new Team() { Id = 1, Name = "Team2", MetaData = "Meta2", UserIDs = new[] {2} };
-            var teamList = new List<Team>() {team1,team2};
+            var team1 = new Team {Id = 0, Name = "Team1", MetaData = "Meta1", UserIDs = new[] {1}};
+            var team2 = new Team {Id = 1, Name = "Team2", MetaData = "Meta2", UserIDs = new[] {2}};
+            var teamList = new List<Team> {team1, team2};
             _facadeMock.Setup(r => r.Read()).Returns(teamList);
             var teamHandler = new TeamHandler(_facadeMock.Object);
 
             //Act
-            var actualTeams= teamHandler.GetAll();
+            var actualTeams = teamHandler.GetAll();
             var counter = actualTeams.Count();
 
 
             //Assert
             Assert.IsTrue(counter == teamList.Count);
         }
-
     }
 }

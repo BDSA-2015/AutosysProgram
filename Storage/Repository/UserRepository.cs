@@ -6,10 +6,10 @@ using Storage.Repository.Interface;
 
 namespace Storage.Repository
 {
-
     /// <summary>
-    /// This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on users in the database. <see cref="StoredUser"/>
-    /// These are used specifically on a User DbSet in the AutoSysDbModel.
+    ///     This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on users in the
+    ///     database. <see cref="StoredUser" />
+    ///     These are used specifically on a User DbSet in the AutoSysDbModel.
     /// </summary>
     public class UserRepository : IAsyncRepository<StoredUser>
     {
@@ -22,13 +22,13 @@ namespace Storage.Repository
         }
 
         /// <summary>
-        /// Creates a new user and returns its id. Throws an ArgumentNullException if the user to create is null. 
+        ///     Creates a new user and returns its id. Throws an ArgumentNullException if the user to create is null.
         /// </summary>
         /// <param name="user">
-        /// User to create. 
+        ///     User to create.
         /// </param>
         /// <returns>
-        /// True if user was created. 
+        ///     True if user was created.
         /// </returns>
         public async Task<int> Create(StoredUser user)
         {
@@ -40,17 +40,16 @@ namespace Storage.Repository
             //_dbContext.Set<T>().Add(user);
             await _dbContext.SaveChangesAsync();
             return user.Id;
-
         }
 
         /// <summary>
-        /// Returns a user based on its id.
+        ///     Returns a user based on its id.
         /// </summary>
         /// <param name="id">
-        /// Id of user to find. 
+        ///     Id of user to find.
         /// </param>
         /// <returns>
-        /// User from id. 
+        ///     User from id.
         /// </returns>
         public async Task<StoredUser> Read(int id)
         {
@@ -58,10 +57,10 @@ namespace Storage.Repository
         }
 
         /// <summary>
-        /// Returns all users. 
+        ///     Returns all users.
         /// </summary>
         /// <returns>
-        /// All users. 
+        ///     All users.
         /// </returns>
         public virtual IQueryable<StoredUser> Read()
         {
@@ -69,14 +68,15 @@ namespace Storage.Repository
         }
 
         /// <summary>
-        /// Updates a user in the database if it already exists. If not, false is returned to indicate that no UpdateIfExists occurred.
-        /// If the user to update is null, an ArgumentNullException is thrown. 
+        ///     Updates a user in the database if it already exists. If not, false is returned to indicate that no UpdateIfExists
+        ///     occurred.
+        ///     If the user to update is null, an ArgumentNullException is thrown.
         /// </summary>
         /// <param name="user">
-        /// User to update.
+        ///     User to update.
         /// </param>
         /// <returns>
-        /// True if user was updated, vice versa. 
+        ///     True if user was updated, vice versa.
         /// </returns>
         public async Task<bool> UpdateIfExists(StoredUser user)
         {
@@ -93,18 +93,17 @@ namespace Storage.Repository
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
-            else return false;
-
+            return false;
         }
 
         /// <summary>
-        /// Deletes a user based on its id. 
+        ///     Deletes a user based on its id.
         /// </summary>
         /// <param name="id">
-        /// Id of user. 
+        ///     Id of user.
         /// </param>
         /// <returns>
-        /// True if user was deleted, false if user does not exist. 
+        ///     True if user was deleted, false if user does not exist.
         /// </returns>
         public async Task<bool> DeleteIfExists(int id)
         {
@@ -117,17 +116,15 @@ namespace Storage.Repository
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
-            else return false;
+            return false;
         }
 
         /// <summary>
-        /// This method is used to dispose the context.
+        ///     This method is used to dispose the context.
         /// </summary>
         public void Dispose()
         {
             _dbContext.Dispose();
         }
-
     }
-
 }

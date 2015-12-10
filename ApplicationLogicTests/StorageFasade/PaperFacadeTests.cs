@@ -1,42 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections;
 using System.Linq;
 using ApplicationLogics.PaperManagement;
 using ApplicationLogics.StorageAdapter;
+using AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using NUnit.Framework;
 using Storage.Models;
-using Storage.Repository;
 using Storage.Repository.Interface;
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace ApplicationLogicTests.StorageFasade
 {
-    [TestClass()]
+    [TestClass]
     public class PaperFacadeTests
     {
-        private Mock<IRepository<StoredPaper>> mockRepo;
         private PaperAdapter _adapter;
+        private Mock<IRepository<StoredPaper>> mockRepo;
 
-        [TestInitialize()]
+        [TestInitialize]
         public void Initialize()
         {
-            AutoMapper.Mapper.CreateMap<Paper, StoredPaper>();
-            AutoMapper.Mapper.CreateMap<StoredPaper, Paper>();
+            Mapper.CreateMap<Paper, StoredPaper>();
+            Mapper.CreateMap<StoredPaper, Paper>();
             mockRepo = new Mock<IRepository<StoredPaper>>();
             _adapter = new PaperAdapter(mockRepo.Object);
         }
 
         /// <summary>
-        /// Test the creation of a single paper, by checking the paperId 
+        ///     Test the creation of a single paper, by checking the paperId
         /// </summary>
-        [TestMethod()]
+        [TestMethod]
         public void CreatePaperTest()
         {
             //Arrange
-            var storedPaper = new StoredPaper() {Id = 0, Type = "article"};
+            var storedPaper = new StoredPaper {Id = 0, Type = "article"};
             mockRepo.Setup(r => r.Create(storedPaper)).Returns(storedPaper.Id);
             var fieldTypes = new List<string>();
             fieldTypes.Add("author");
@@ -46,7 +43,7 @@ namespace ApplicationLogicTests.StorageFasade
             fieldValues.Add("Will BeGood");
             fieldValues.Add("Life's Questions");
             fieldValues.Add("1905");
-           
+
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             //Act
@@ -56,19 +53,19 @@ namespace ApplicationLogicTests.StorageFasade
             Assert.IsTrue(paperId == 0);
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void CreatePaperNullTest()
         {
             //Arrange
-            var storedPaper = new StoredPaper() { Id = 0, Type = "article" };
+            var storedPaper = new StoredPaper {Id = 0, Type = "article"};
             mockRepo.Setup(r => r.Create(storedPaper)).Returns(storedPaper.Id);
 
             //Act
             var paperId = _adapter.Create(null);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void DeleteObjectNotNullTest()
         {
             //Arrange
@@ -92,7 +89,7 @@ namespace ApplicationLogicTests.StorageFasade
             Assert.IsNotNull(callBackPaper);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void DeleteObjectCorrectStateTest()
         {
             //Arrange
@@ -126,21 +123,19 @@ namespace ApplicationLogicTests.StorageFasade
             Assert.IsTrue(callBackPaper.FieldValues.ElementAt(2) == "1905");
         }
 
-       [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void DeleteNullTest()
         {
             //Arrange
-            
+
             //Act
             _adapter.Delete(null);
 
             //Assert
-            
-
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void ReadAllObjectsTypeTest()
         {
             //Arrange
@@ -159,11 +154,11 @@ namespace ApplicationLogicTests.StorageFasade
             var paper5 = new Paper("ebook", fieldTypes, fieldValues);
 
             var paperCollection = new List<StoredPaper>();
-            paperCollection.Add(AutoMapper.Mapper.Map<StoredPaper>(paper1));
-            paperCollection.Add(AutoMapper.Mapper.Map<StoredPaper>(paper2));
-            paperCollection.Add(AutoMapper.Mapper.Map<StoredPaper>(paper3));
-            paperCollection.Add(AutoMapper.Mapper.Map<StoredPaper>(paper4));
-            paperCollection.Add(AutoMapper.Mapper.Map<StoredPaper>(paper5));
+            paperCollection.Add(Mapper.Map<StoredPaper>(paper1));
+            paperCollection.Add(Mapper.Map<StoredPaper>(paper2));
+            paperCollection.Add(Mapper.Map<StoredPaper>(paper3));
+            paperCollection.Add(Mapper.Map<StoredPaper>(paper4));
+            paperCollection.Add(Mapper.Map<StoredPaper>(paper5));
 
             mockRepo.Setup(r => r.Read()).Returns(paperCollection);
 
@@ -171,17 +166,17 @@ namespace ApplicationLogicTests.StorageFasade
             var papers = _adapter.Read();
 
             //Assert
-            for (int i = 0; i < papers.Count(); i++)
+            for (var i = 0; i < papers.Count(); i++)
             {
                 Assert.IsTrue(papers.ElementAt(i).Type == paperCollection.ElementAt(i).Type);
             }
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void ReadObjectTest()
         {
             //Arrange
-            int callBackPaperId = -1;
+            var callBackPaperId = -1;
             mockRepo.Setup(r => r.Read(It.IsAny<int>())).Callback<int>(o => callBackPaperId = o);
 
             //Act
@@ -192,8 +187,8 @@ namespace ApplicationLogicTests.StorageFasade
             Assert.IsTrue(callBackPaperId == 5);
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentOutOfRangeException))]
         public void ReadObjectNegativeIdTest()
         {
             //Arrange
@@ -204,7 +199,7 @@ namespace ApplicationLogicTests.StorageFasade
             //Assert
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UpdateObjectNotNullTest()
         {
             //Arrange
@@ -228,7 +223,7 @@ namespace ApplicationLogicTests.StorageFasade
             Assert.IsNotNull(callBackPaper);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UpdateObjectCorrectStateTest()
         {
             //Arrange
@@ -262,8 +257,8 @@ namespace ApplicationLogicTests.StorageFasade
             Assert.IsTrue(callBackPaper.FieldValues.ElementAt(2) == "1905");
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void UpdateNullTest()
         {
             //Arrange
@@ -272,8 +267,6 @@ namespace ApplicationLogicTests.StorageFasade
             _adapter.Update(null);
 
             //Assert
-
-
         }
     }
 }

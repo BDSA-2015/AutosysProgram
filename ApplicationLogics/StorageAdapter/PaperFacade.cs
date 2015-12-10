@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ApplicationLogics.PaperManagement;
 using ApplicationLogics.StorageAdapter.Interface;
+using AutoMapper;
 using Storage.Models;
 using Storage.Repository.Interface;
 
@@ -10,7 +11,7 @@ namespace ApplicationLogics.StorageAdapter
     public class PaperAdapter : IAdapter<Paper>
     {
         //TODO Write purpose of class
-        private IRepository<StoredPaper> _papers;
+        private readonly IRepository<StoredPaper> _papers;
 
         public PaperAdapter(IRepository<StoredPaper> papers)
         {
@@ -23,7 +24,7 @@ namespace ApplicationLogics.StorageAdapter
             {
                 throw new ArgumentNullException("The given Paper cannot be null");
             }
-            var storedPaper = AutoMapper.Mapper.Map<StoredPaper>(item);
+            var storedPaper = Mapper.Map<StoredPaper>(item);
             return _papers.Create(storedPaper);
         }
 
@@ -33,7 +34,7 @@ namespace ApplicationLogics.StorageAdapter
             {
                 throw new ArgumentNullException("The given Paper cannot be null");
             }
-            var storedPaper = AutoMapper.Mapper.Map<StoredPaper>(item);
+            var storedPaper = Mapper.Map<StoredPaper>(item);
             _papers.DeleteIfExists(storedPaper);
         }
 
@@ -41,7 +42,7 @@ namespace ApplicationLogics.StorageAdapter
         {
             foreach (var storedPaper in _papers.Read())
             {
-                yield return AutoMapper.Mapper.Map<Paper>(storedPaper);
+                yield return Mapper.Map<Paper>(storedPaper);
             }
         }
 
@@ -52,7 +53,7 @@ namespace ApplicationLogics.StorageAdapter
                 throw new ArgumentOutOfRangeException("The given id must be 0 or greater");
             }
 
-            return AutoMapper.Mapper.Map<Paper>(_papers.Read(id));
+            return Mapper.Map<Paper>(_papers.Read(id));
         }
 
         public void Update(Paper item)
@@ -62,8 +63,7 @@ namespace ApplicationLogics.StorageAdapter
                 throw new ArgumentNullException("The given Paper cannot be null");
             }
 
-            _papers.UpdateIfExists(AutoMapper.Mapper.Map<StoredPaper>(item));
+            _papers.UpdateIfExists(Mapper.Map<StoredPaper>(item));
         }
     }
-
 }

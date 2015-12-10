@@ -12,13 +12,12 @@ using ApplicationLogicTests.UserManagement.Stub;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Storage.Models;
-using Storage.Repository;
 using Storage.Repository.Interface;
 
 namespace ApplicationLogicTests.UserManagement
 {
     /// <summary>
-    /// Test for the userHandler class
+    ///     Test for the userHandler class
     /// </summary>
     [TestClass]
     public class UserFacadeTests
@@ -37,7 +36,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test when a user can be created
+        ///     Test when a user can be created
         /// </summary>
         [TestMethod]
         public void CreateUser_Success_Test()
@@ -56,7 +55,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test if read does not return null when given a valid user id
+        ///     Test if read does not return null when given a valid user id
         /// </summary>
         [TestMethod]
         public void GetUser_Valid_NotNull_Test()
@@ -74,7 +73,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test if read returns a user object when given a valid user id
+        ///     Test if read returns a user object when given a valid user id
         /// </summary>
         [TestMethod]
         public void GetUser_Valid_IsUser_Test()
@@ -93,7 +92,7 @@ namespace ApplicationLogicTests.UserManagement
 
 
         /// <summary>
-        /// Test if read returns a user object with correct information
+        ///     Test if read returns a user object with correct information
         /// </summary>
         [TestMethod]
         public void GetUser_Valid_CorrectUserInfo_Test()
@@ -113,7 +112,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test that returned user is null if user does not exist.
+        ///     Test that returned user is null if user does not exist.
         /// </summary>
         [TestMethod]
         public void GetUser_Invalid_NoExistingUser_Test()
@@ -131,7 +130,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test if read with parameters returns correct numbers of users
+        ///     Test if read with parameters returns correct numbers of users
         /// </summary>
         [TestMethod]
         public void GetAllUsers_Valid_ReturnsCorrectNumberOfUsers_Test()
@@ -153,7 +152,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test if read with parameters returns users with correct information
+        ///     Test if read with parameters returns users with correct information
         /// </summary>
         [TestMethod]
         public void GetAllUsers_Valid_ReturnsCorrectUsers_Test()
@@ -183,7 +182,7 @@ namespace ApplicationLogicTests.UserManagement
 
 
         /// <summary>
-        /// Test if a user can be deleted.
+        ///     Test if a user can be deleted.
         /// </summary>
         [TestMethod]
         public void DeleteUser_Success_Test()
@@ -204,8 +203,8 @@ namespace ApplicationLogicTests.UserManagement
 
 
         /// <summary>
-        /// Test when trying to delete a non-existing user.
-        /// Exception must be thrown to pass test.
+        ///     Test when trying to delete a non-existing user.
+        ///     Exception must be thrown to pass test.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (NullReferenceException))]
@@ -227,7 +226,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test deleting a user that has been updated
+        ///     Test deleting a user that has been updated
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
@@ -246,7 +245,7 @@ namespace ApplicationLogicTests.UserManagement
             userFacade.Delete(user);
 
             //Assert
-                //Exception must be thrown
+            //Exception must be thrown
         }
     }
 }

@@ -7,13 +7,13 @@ using ApplicationLogics.StorageAdapter;
 namespace ApplicationLogics.PaperManagement
 {
     /// <summary>
-    /// Class for handling all functionality associated with creating and importing Papers into the program
+    ///     Class for handling all functionality associated with creating and importing Papers into the program
     /// </summary>
     public class PaperHandler
     {
+        private readonly PaperAdapter _paperAdapter;
         //Used to generate Bibtex files, which later is stored as Papers in the database
-        private IParser _parser;
-        private PaperAdapter _paperAdapter; 
+        private readonly IParser _parser;
 
         public PaperHandler(IParser parser, PaperAdapter paperAdapter)
         {
@@ -22,7 +22,7 @@ namespace ApplicationLogics.PaperManagement
         }
 
         /// <summary>
-        /// Creates a List of Paper based on an imported BibTex file which is parsed to the program.
+        ///     Creates a List of Paper based on an imported BibTex file which is parsed to the program.
         /// </summary>
         /// <param name="file">The bibtex file which is parsed to the program</param>
         /// <returns>A List of Papers which was valid for parsing</returns>

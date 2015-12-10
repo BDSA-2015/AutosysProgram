@@ -11,7 +11,7 @@ using ApplicationLogics.UserManagement.Utils;
 namespace ApplicationLogics.UserManagement
 {
     /// <summary>
-    /// This class is responsible for user operations
+    ///     This class is responsible for user operations
     /// </summary>
     public class UserHandler
     {
@@ -24,7 +24,7 @@ namespace ApplicationLogics.UserManagement
 
 
         /// <summary>
-        /// Validates if a user exists in database.
+        ///     Validates if a user exists in database.
         /// </summary>
         /// <param name="id">user Id</param>
         /// <returns>bool of user existence</returns>
@@ -34,7 +34,7 @@ namespace ApplicationLogics.UserManagement
         }
 
         /// <summary>
-        /// Creates a user with information from a userDTo
+        ///     Creates a user with information from a userDTo
         /// </summary>
         /// <param name="user">User object</param>
         public int Create(User user)
@@ -48,7 +48,7 @@ namespace ApplicationLogics.UserManagement
         }
 
         /// <summary>
-        /// Edit and update an existing user
+        ///     Edit and update an existing user
         /// </summary>
         /// <param name="oldId">id of user to update</param>
         /// <param name="user">User object</param>
@@ -65,7 +65,7 @@ namespace ApplicationLogics.UserManagement
         }
 
         /// <summary>
-        /// DeleteIfExists an existing user
+        ///     DeleteIfExists an existing user
         /// </summary>
         /// <param name="id">id of user to delete.</param>
         public void Delete(int id)
@@ -78,7 +78,7 @@ namespace ApplicationLogics.UserManagement
         }
 
         /// <summary>
-        /// Get a user from the database
+        ///     Get a user from the database
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -91,7 +91,7 @@ namespace ApplicationLogics.UserManagement
         }
 
         /// <summary>
-        /// Get every user from the database.
+        ///     Get every user from the database.
         /// </summary>
         /// <returns>All users</returns>
         public IEnumerable<User> GetAll()

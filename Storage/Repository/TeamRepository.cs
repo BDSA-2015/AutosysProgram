@@ -6,10 +6,10 @@ using Storage.Repository.Interface;
 
 namespace Storage.Repository
 {
-
     /// <summary>
-    /// This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on teams in the database. <see cref="StoredTeam"/>
-    /// These are used specifically on a Team DbSet in the AutoSysDbModel.
+    ///     This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on teams in the
+    ///     database. <see cref="StoredTeam" />
+    ///     These are used specifically on a Team DbSet in the AutoSysDbModel.
     /// </summary>
     public class TeamRepository : IAsyncRepository<StoredTeam>
     {
@@ -22,13 +22,13 @@ namespace Storage.Repository
         }
 
         /// <summary>
-        /// Creates a new team and returns its id. Throws an ArgumentNullException if the team to create is null. 
+        ///     Creates a new team and returns its id. Throws an ArgumentNullException if the team to create is null.
         /// </summary>
         /// <param name="user">
-        /// Team to create. 
+        ///     Team to create.
         /// </param>
         /// <returns>
-        /// True if team was created. 
+        ///     True if team was created.
         /// </returns>
         public virtual async Task<int> Create(StoredTeam user)
         {
@@ -40,47 +40,42 @@ namespace Storage.Repository
             //_dbContext.Set<T>().Add(team);
             await _dbContext.SaveChangesAsync();
             return user.Id;
-
         }
 
         /// <summary>
-        /// Returns a team based on its id.
+        ///     Returns a team based on its id.
         /// </summary>
         /// <param name="id">
-        /// Id of team to find. 
+        ///     Id of team to find.
         /// </param>
         /// <returns>
-        /// Team from id. 
+        ///     Team from id.
         /// </returns>
         public virtual async Task<StoredTeam> Read(int id)
         {
-
             return await _dbContext.Set<StoredTeam>().FindAsync(id);
-
         }
 
         /// <summary>
-        /// Returns all teams. 
+        ///     Returns all teams.
         /// </summary>
         /// <returns>
-        /// All teams. 
+        ///     All teams.
         /// </returns>
         public virtual IQueryable<StoredTeam> Read()
         {
-
             return _dbContext.Set<StoredTeam>().AsQueryable();
-
         }
 
         /// <summary>
-        /// Updates a team in the database if it already exists. If not, false is returned to indicate that no Update occurred.
-        /// If the team to update is null, an ArgumentNullException is thrown. 
+        ///     Updates a team in the database if it already exists. If not, false is returned to indicate that no Update occurred.
+        ///     If the team to update is null, an ArgumentNullException is thrown.
         /// </summary>
         /// <param name="user">
-        /// Team to update.
+        ///     Team to update.
         /// </param>
         /// <returns>
-        /// True if team was updated, vice versa. 
+        ///     True if team was updated, vice versa.
         /// </returns>
         public virtual async Task<bool> UpdateIfExists(StoredTeam user)
         {
@@ -97,18 +92,17 @@ namespace Storage.Repository
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
-            else return false;
-
+            return false;
         }
 
         /// <summary>
-        /// Deletes a team based on its id. 
+        ///     Deletes a team based on its id.
         /// </summary>
         /// <param name="id">
-        /// Id of entity. 
+        ///     Id of entity.
         /// </param>
         /// <returns>
-        /// True if team was deleted, false if team does not exist. 
+        ///     True if team was deleted, false if team does not exist.
         /// </returns>
         public virtual async Task<bool> DeleteIfExists(int id)
         {
@@ -120,18 +114,15 @@ namespace Storage.Repository
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
-            else return false;
-
+            return false;
         }
 
         /// <summary>
-        /// This method is used to dispose the context.
+        ///     This method is used to dispose the context.
         /// </summary>
         public void Dispose()
         {
             _dbContext.Dispose();
         }
-
     }
-
 }

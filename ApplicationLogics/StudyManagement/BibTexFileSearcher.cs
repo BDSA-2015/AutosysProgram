@@ -2,16 +2,5 @@
 {
     public class BibTexFileSearcher
     {
-
-
-        
-
-        public BibTexFileSearcher()
-        {
-            
-        }
-
-
-        
     }
 }

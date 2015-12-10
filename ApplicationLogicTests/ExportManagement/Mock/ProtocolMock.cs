@@ -1,5 +1,4 @@
-﻿using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ApplicationLogics.PaperManagement;
 using ApplicationLogics.ProtocolManagement;
@@ -12,7 +11,7 @@ namespace ApplicationLogicTests.ExportManagement.Mock
     {
         public static Protocol CreateProtocolMock()
         {
-            return new Protocol()
+            return new Protocol
             {
                 StudyName = "Software Study",
                 Description = "For fun",
@@ -22,9 +21,9 @@ namespace ApplicationLogicTests.ExportManagement.Mock
 
         private static List<Phase> CreatePhases()
         {
-            return new List<Phase>()
+            return new List<Phase>
             {
-                new Phase()
+                new Phase
                 {
                     ExclusionCriteria = CreateExclusionCriteria(),
                     InclusionCriteria = CreateInclusionCriteria(),
@@ -32,7 +31,7 @@ namespace ApplicationLogicTests.ExportManagement.Mock
                     AssignedTask = CreateAssignedTasks(),
                     Reports = CreateReports()
                 },
-                new Phase()
+                new Phase
                 {
                     ExclusionCriteria = CreateExclusionCriteria(),
                     InclusionCriteria = CreateInclusionCriteria(),
@@ -40,7 +39,7 @@ namespace ApplicationLogicTests.ExportManagement.Mock
                     AssignedTask = CreateAssignedTasks(),
                     Reports = CreateReports()
                 },
-                new Phase()
+                new Phase
                 {
                     ExclusionCriteria = CreateExclusionCriteria(),
                     InclusionCriteria = CreateInclusionCriteria(),
@@ -53,32 +52,32 @@ namespace ApplicationLogicTests.ExportManagement.Mock
 
         private static List<Criteria> CreateExclusionCriteria()
         {
-            return new List<Criteria>()
+            return new List<Criteria>
             {
-                new Criteria() {Name = "Fruit Products", Description = "Not eatable"},
-                new Criteria() {Name = "Pricy Hardware", Description = "Unaffordable"},
-                new Criteria() {Name = "Bad stuff", Description = "Bad"}
+                new Criteria {Name = "Fruit Products", Description = "Not eatable"},
+                new Criteria {Name = "Pricy Hardware", Description = "Unaffordable"},
+                new Criteria {Name = "Bad stuff", Description = "Bad"}
             };
         }
 
         private static List<Criteria> CreateInclusionCriteria()
         {
-            return new List<Criteria>()
+            return new List<Criteria>
             {
-                new Criteria() {Name = "Windows", Description = "See the light"},
-                new Criteria() {Name = "Quality Hardware", Description = "Powerful"}
+                new Criteria {Name = "Windows", Description = "See the light"},
+                new Criteria {Name = "Quality Hardware", Description = "Powerful"}
             };
         }
 
         private static Dictionary<Role, List<User>> CreateAssignedRoles()
         {
-            return new Dictionary<Role, List<User>>()
+            return new Dictionary<Role, List<User>>
             {
                 {
-                    new Role() {RoleType = Role.Type.Reviewer},
-                    new List<User>()
+                    new Role {RoleType = Role.Type.Reviewer},
+                    new List<User>
                     {
-                        new User() {Name = "Member1"}
+                        new User {Name = "Member1"}
                     }
                 }
             };
@@ -86,13 +85,13 @@ namespace ApplicationLogicTests.ExportManagement.Mock
 
         private static Dictionary<TaskRequest, List<User>> CreateAssignedTasks()
         {
-            return new Dictionary<TaskRequest, List<User>>()
+            return new Dictionary<TaskRequest, List<User>>
             {
                 {
-                    new TaskRequest() {Description = "Review papers 1-200"},
-                    new List<User>()
+                    new TaskRequest {Description = "Review papers 1-200"},
+                    new List<User>
                     {
-                        new User() {Name = "Member1"}
+                        new User {Name = "Member1"}
                     }
                 }
             };
@@ -100,13 +99,13 @@ namespace ApplicationLogicTests.ExportManagement.Mock
 
         private static List<Paper> CreateReports()
         {
-            var fieldTypes = new ReadOnlyCollection<string>(new List<string>()
+            var fieldTypes = new ReadOnlyCollection<string>(new List<string>
             {
                 "author",
                 "title",
                 "year"
             });
-            var fieldValues = new ReadOnlyCollection<string>(new List<string>()
+            var fieldValues = new ReadOnlyCollection<string>(new List<string>
             {
                 "Sam",
                 "Sam Learns to Program",
@@ -114,10 +113,10 @@ namespace ApplicationLogicTests.ExportManagement.Mock
             });
 
             var paper1 = new Paper("book", fieldTypes, fieldValues) {ResourceRef = "1"};
-            var paper2 = new Paper("book", fieldTypes, fieldValues) { ResourceRef = "2" };
-            var paper3 = new Paper("book", fieldTypes, fieldValues) { ResourceRef = "3" };
+            var paper2 = new Paper("book", fieldTypes, fieldValues) {ResourceRef = "2"};
+            var paper3 = new Paper("book", fieldTypes, fieldValues) {ResourceRef = "3"};
 
-            return new List<Paper>() {paper1, paper2, paper3};
+            return new List<Paper> {paper1, paper2, paper3};
         }
 
         public static string OutPut()

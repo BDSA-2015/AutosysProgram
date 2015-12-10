@@ -2,7 +2,6 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-using System;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Entities;
 
@@ -11,7 +10,7 @@ namespace ApplicationLogics.UserManagement.Utils
     public class UserValidator
     {
         /// <summary>
-        /// Check if a specific user exists
+        ///     Check if a specific user exists
         /// </summary>
         /// <param name="userId">user to find</param>
         /// <param name="userFasade">StorageLocation</param>
@@ -22,7 +21,7 @@ namespace ApplicationLogics.UserManagement.Utils
         }
 
         /// <summary>
-        /// Validate user information
+        ///     Validate user information
         /// </summary>
         /// <param name="user">User</param>
         /// <returns>validation of user information</returns>

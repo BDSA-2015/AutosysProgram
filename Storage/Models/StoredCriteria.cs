@@ -4,16 +4,14 @@ using Storage.Repository.Interface;
 
 namespace Storage.Models
 {
-    
     /// <summary>
-    /// This class represents a Criteria entity used to synthesize data in a given study. 
+    ///     This class represents a Criteria entity used to synthesize data in a given study.
     /// </summary>
     [Table("Criteria")]
     public class StoredCriteria : IEntity
     {
-
         /// <summary>
-        /// Defines which operation to use for comparison. 
+        ///     Defines which operation to use for comparison.
         /// </summary>
         public enum Operation
         {
@@ -25,16 +23,13 @@ namespace Storage.Models
         }
 
         /// <summary>
-        /// Used to determine whether the criteria should include or exclude data.
+        ///     Used to determine whether the criteria should include or exclude data.
         /// </summary>
         public enum Type
         {
             Inclusion,
             Exclusion
         }
-
-        [Key]
-        public int Id { get; set; }
 
         [NotMapped]
         public Type FilterType { get; set; }
@@ -43,7 +38,7 @@ namespace Storage.Models
         public Operation ComparisonType { get; set; }
 
         /// <summary>
-        /// Used to map the enum FilterType as a string. 
+        ///     Used to map the enum FilterType as a string.
         /// </summary>
         [Required]
         [Column("FilterType")]
@@ -54,7 +49,7 @@ namespace Storage.Models
         }
 
         /// <summary>
-        /// Used to map the enum FilterType as a string. 
+        ///     Used to map the enum FilterType as a string.
         /// </summary>
         [Required]
         [Column("ComparisonType")]
@@ -65,7 +60,7 @@ namespace Storage.Models
         }
 
         /// <summary>
-        /// The actual value used to retrieve relevant papers for a given study upon comparison. 
+        ///     The actual value used to retrieve relevant papers for a given study upon comparison.
         /// </summary>
         public string Value { get; set; }
 
@@ -89,7 +84,7 @@ namespace Storage.Models
         [Required]
         public virtual StoredDataField DataField { get; set; }
 
-
+        [Key]
+        public int Id { get; set; }
     }
-
 }

@@ -9,7 +9,7 @@ using ApplicationLogics.ProtocolManagement;
 namespace ApplicationLogics.ExportManagement
 {
     /// <summary>
-    /// Class for exporting research protocols to the clients in different formats.
+    ///     Class for exporting research protocols to the clients in different formats.
     /// </summary>
     public class ExportHandler
     {

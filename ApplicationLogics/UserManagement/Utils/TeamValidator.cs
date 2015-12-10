@@ -7,12 +7,12 @@ using ApplicationLogics.StorageAdapter.Interface;
 namespace ApplicationLogics.UserManagement.Utils
 {
     /// <summary>
-    /// Responsible for validating teams
+    ///     Responsible for validating teams
     /// </summary>
     public class TeamValidator
     {
         /// <summary>
-        /// Validate existience of team
+        ///     Validate existience of team
         /// </summary>
         /// <param name="teamId">team to find</param>
         /// <param name="teamFasade">Storage location</param>
@@ -25,14 +25,14 @@ namespace ApplicationLogics.UserManagement.Utils
         }
 
         /// <summary>
-        /// Validation of team information
+        ///     Validation of team information
         /// </summary>
         /// <param name="team">team to validate</param>
         /// <returns>validated team information</returns>
         public static bool ValidateEnteredTeamData(Team team)
         {
             return
-                team.Id>=0 &&
+                team.Id >= 0 &&
                 !string.IsNullOrWhiteSpace(team.Name) &&
                 !string.IsNullOrWhiteSpace(team.MetaData) &&
                 (team.UserIDs.Length > 0);

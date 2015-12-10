@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Storage.Repository;
 using Storage.Repository.Interface;
 
 namespace ApplicationLogicTests.UserManagement.Stub
 {
     /// <summary>
-    /// This class is a stub of a repository used for testing
+    ///     This class is a stub of a repository used for testing
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class RepositoryStub<T> : IRepository<T> where T : class, IEntity
@@ -41,7 +40,6 @@ namespace ApplicationLogicTests.UserManagement.Stub
 
         public T Read(int id)
         {
-            
             return _database[id];
         }
 

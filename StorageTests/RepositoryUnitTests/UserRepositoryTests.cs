@@ -12,28 +12,27 @@ using StorageTests.Utility;
 
 namespace StorageTests.RepositoryUnitTests
 {
-
     /// <summary>
-    /// This test class is used to test the Entity Framework UserRepository, <see cref="UserRepository"/>.
-    /// The repository is a concrete implementation of the repository interface and is used to write data to a database.
-    /// Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
+    ///     This test class is used to test the Entity Framework UserRepository, <see cref="UserRepository" />.
+    ///     The repository is a concrete implementation of the repository interface and is used to write data to a database.
+    ///     Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
     /// </summary>
     [TestClass]
     public class UserRepositoryTests
     {
+        private Mock<IAutoSysContext> _context; // Use IUserContext instead of concrete AutoSysDbModel
 
         private IList<StoredUser> _data;
-        private Mock<IAutoSysContext> _context; // Use IUserContext instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredUser>> _mockSet;
         private UserRepository _repository;
 
         /// <summary>
-        /// This method sets up data used to mock a collection of users in a DbContext used by the UserRepository, <see cref="UserRepository"/>. 
+        ///     This method sets up data used to mock a collection of users in a DbContext used by the UserRepository,
+        ///     <see cref="UserRepository" />.
         /// </summary>
         [TestInitialize]
         public void Initialize()
         {
-
             _data = new List<StoredUser>
             {
                 new StoredUser {Id = 1, Name = "William Parker", MetaData = "Researcher"},
@@ -62,7 +61,7 @@ namespace StorageTests.RepositoryUnitTests
 
         #region Create Operation 
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))] // Assert 
+        [TestMethod, ExpectedException(typeof (ArgumentNullException))] // Assert 
         public async Task Create_NullInput_ExceptionThrown()
         {
             // Arrange and act 
@@ -80,21 +79,19 @@ namespace StorageTests.RepositoryUnitTests
 
             // Assert
             _context.Verify(c => c.Attach(validUser), Times.Once);
-
         }
 
         [TestMethod]
         public async Task Create_Add_IsCalled()
         {
             // Arrange
-            var validUser = new StoredUser { Id = 0, Name = "Steven", MetaData = "Researcher" };
+            var validUser = new StoredUser {Id = 0, Name = "Steven", MetaData = "Researcher"};
 
             // Act 
             await _repository.Create(validUser);
 
             // Assert
             _context.Verify(c => c.Add(validUser), Times.Once);
-
         }
 
         [TestMethod]
@@ -108,10 +105,9 @@ namespace StorageTests.RepositoryUnitTests
 
             // Assert
             _context.Verify(c => c.SaveChangesAsync(), Times.Once);
-
         }
 
-        #endregion 
+        #endregion
 
         #region Read Operation 
 
@@ -139,7 +135,7 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
-        public async Task Read_FindAsync_IsCalled() 
+        public async Task Read_FindAsync_IsCalled()
         {
             // Arrange and act 
             var user = await _repository.Read(0);
@@ -149,13 +145,14 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
-        public void ReadAll_IQueryable_IsCalled() // Not async, IQueryable is not executed by db until used by .ToList() 
+        public void ReadAll_IQueryable_IsCalled()
+            // Not async, IQueryable is not executed by db until used by .ToList() 
         {
             // Arrange and act 
             var users = _repository.Read();
 
             // Assert 
-            _context.Verify(c => c.Users.AsQueryable<StoredUser>(), Times.Once);
+            _context.Verify(c => c.Users.AsQueryable(), Times.Once);
         }
 
         #endregion
@@ -174,7 +171,7 @@ namespace StorageTests.RepositoryUnitTests
         {
             // Arrange 
             var firstUserUpdated = new StoredUser {Id = 1, Name = "William Parker", MetaData = "Validator"};
-            
+
             // Act 
             await _repository.UpdateIfExists(firstUserUpdated);
 
@@ -188,7 +185,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_Attach_IsCalled()
         {
             // Arrange 
-            var firstUserUpdated = new StoredUser { Id = 1, Name = "William Parker", MetaData = "Validator" };
+            var firstUserUpdated = new StoredUser {Id = 1, Name = "William Parker", MetaData = "Validator"};
 
             // Act 
             await _repository.UpdateIfExists(firstUserUpdated);
@@ -201,7 +198,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SetModified_IsCalled()
         {
             // Arrange 
-            var firstUserUpdated = new StoredUser { Id = 1, Name = "William Parker", MetaData = "Validator" };
+            var firstUserUpdated = new StoredUser {Id = 1, Name = "William Parker", MetaData = "Validator"};
 
             // Act 
             await _repository.UpdateIfExists(firstUserUpdated);
@@ -214,7 +211,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SaveChangesAsync_IsCalled()
         {
             // Arrange 
-            var firstUserUpdated = new StoredUser { Id = 1, Name = "William Parker", MetaData = "Validator" };
+            var firstUserUpdated = new StoredUser {Id = 1, Name = "William Parker", MetaData = "Validator"};
 
             // Act 
             await _repository.UpdateIfExists(firstUserUpdated);
@@ -227,7 +224,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_ValidUser_ReturnsTrue()
         {
             // Arrange 
-            var firstUserUpdated = new StoredUser { Id = 1, Name = "William Parker", MetaData = "Validator" };
+            var firstUserUpdated = new StoredUser {Id = 1, Name = "William Parker", MetaData = "Validator"};
 
             // Act 
             var isUpdated = await _repository.UpdateIfExists(firstUserUpdated);
@@ -303,8 +300,5 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         #endregion
-
-
     }
-
 }

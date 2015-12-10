@@ -6,12 +6,12 @@ using Storage.Repository.Interface;
 
 namespace Storage.Repository
 {
-
     /// <summary>
-    /// This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on protocols in the database. <see cref="StoredProtocol"/>
-    /// These are used specifically on a Stored Protocol DbSet in the AutoSysDbModel.
+    ///     This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on protocols in
+    ///     the database. <see cref="StoredProtocol" />
+    ///     These are used specifically on a Stored Protocol DbSet in the AutoSysDbModel.
     /// </summary>
-    public class ProtocolRepository : IAsyncRepository<StoredProtocol> 
+    public class ProtocolRepository : IAsyncRepository<StoredProtocol>
     {
         private readonly IAutoSysContext _dbContext;
 
@@ -22,13 +22,13 @@ namespace Storage.Repository
         }
 
         /// <summary>
-        /// Creates a new protocol and returns its id. Throws an ArgumentNullException if the protocol to create is null. 
+        ///     Creates a new protocol and returns its id. Throws an ArgumentNullException if the protocol to create is null.
         /// </summary>
         /// <param name="user">
-        /// Protocol to create. 
+        ///     Protocol to create.
         /// </param>
         /// <returns>
-        /// True if protocol was created. 
+        ///     True if protocol was created.
         /// </returns>
         public virtual async Task<int> Create(StoredProtocol user)
         {
@@ -40,47 +40,43 @@ namespace Storage.Repository
             //_dbContext.Set<T>().Add(protocol);
             await _dbContext.SaveChangesAsync();
             return user.Id;
-
         }
 
         /// <summary>
-        /// Returns an protocol based on its id.
+        ///     Returns an protocol based on its id.
         /// </summary>
         /// <param name="id">
-        /// Id of protocol to find. 
+        ///     Id of protocol to find.
         /// </param>
         /// <returns>
-        /// Protocol from id. 
+        ///     Protocol from id.
         /// </returns>
         public virtual async Task<StoredProtocol> Read(int id)
         {
-
             return await _dbContext.Set<StoredProtocol>().FindAsync(id);
-
         }
 
         /// <summary>
-        /// Returns all protocols. 
+        ///     Returns all protocols.
         /// </summary>
         /// <returns>
-        /// All protocols. 
+        ///     All protocols.
         /// </returns>
         public virtual IQueryable<StoredProtocol> Read()
         {
-
             return _dbContext.Set<StoredProtocol>().AsQueryable();
-
         }
 
         /// <summary>
-        /// Updates an protocol in the database if it already exists. If not false is returned to indicate that no UpdateIfExists occurred.
-        /// If the protocol to update is null an ArgumentNullException is thrown. 
+        ///     Updates an protocol in the database if it already exists. If not false is returned to indicate that no
+        ///     UpdateIfExists occurred.
+        ///     If the protocol to update is null an ArgumentNullException is thrown.
         /// </summary>
         /// <param name="user">
-        /// Protocol to update.
+        ///     Protocol to update.
         /// </param>
         /// <returns>
-        /// True if protocol was updated, vice versa. 
+        ///     True if protocol was updated, vice versa.
         /// </returns>
         public virtual async Task<bool> UpdateIfExists(StoredProtocol user)
         {
@@ -97,18 +93,17 @@ namespace Storage.Repository
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
-            else return false;
-
+            return false;
         }
 
         /// <summary>
-        /// Deletes an protocol based on its id. 
+        ///     Deletes an protocol based on its id.
         /// </summary>
         /// <param name="id">
-        /// Id of entity. 
+        ///     Id of entity.
         /// </param>
         /// <returns>
-        /// True if protocol was deleted, false if protocol does not exist. 
+        ///     True if protocol was deleted, false if protocol does not exist.
         /// </returns>
         public virtual async Task<bool> DeleteIfExists(int id)
         {
@@ -120,18 +115,15 @@ namespace Storage.Repository
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
-            else return false;
-
+            return false;
         }
 
         /// <summary>
-        /// This method is used to dispose the context.
+        ///     This method is used to dispose the context.
         /// </summary>
         public void Dispose()
         {
             _dbContext.Dispose();
         }
-
     }
-
 }

@@ -15,13 +15,13 @@ using ApplicationLogics.UserManagement.Entities;
 namespace ApplicationLogics.ExportManagement.Converter
 {
     /// <summary>
-    /// Class for converting export files to the CSV format according to the European standard using ; as a separator
-    /// by following the standards described at https://en.wikipedia.org/wiki/Comma-separated_values
+    ///     Class for converting export files to the CSV format according to the European standard using ; as a separator
+    ///     by following the standards described at https://en.wikipedia.org/wiki/Comma-separated_values
     /// </summary>
     public class CsvConverter : IConverter
     {
         /// <summary>
-        /// Converts the given Protocol to a string using the CSV format which can be exported by an ExportHandler
+        ///     Converts the given Protocol to a string using the CSV format which can be exported by an ExportHandler
         /// </summary>
         /// <param name="protocol">The Protocol which is to be exported</param>
         /// <returns></returns>
@@ -40,7 +40,7 @@ namespace ApplicationLogics.ExportManagement.Converter
         }
 
         /// <summary>
-        /// Creates the columns of the CSV file. The columns are based on the fields in a Study and its Phases
+        ///     Creates the columns of the CSV file. The columns are based on the fields in a Study and its Phases
         /// </summary>
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
         private void CreateColumns(StringBuilder builder)
@@ -50,7 +50,7 @@ namespace ApplicationLogics.ExportManagement.Converter
         }
 
         /// <summary>
-        /// Creates the rows of the CSV file. The Rows are based on the data kept in the fields of a Study and its Phases
+        ///     Creates the rows of the CSV file. The Rows are based on the data kept in the fields of a Study and its Phases
         /// </summary>
         /// <param name="protocol">The given protocol to be exported</param>
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
@@ -69,7 +69,7 @@ namespace ApplicationLogics.ExportManagement.Converter
         }
 
         /// <summary>
-        /// Appends the Criteria of a specific Phase in accordance to the CSV standard.
+        ///     Appends the Criteria of a specific Phase in accordance to the CSV standard.
         /// </summary>
         /// <param name="criteriaList">The given List of criteria from a specific Study Phase </param>
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
@@ -84,7 +84,7 @@ namespace ApplicationLogics.ExportManagement.Converter
         }
 
         /// <summary>
-        /// Appends the Tasks and the associated Users of a specific Phase in accordance to the CSV standard.
+        ///     Appends the Tasks and the associated Users of a specific Phase in accordance to the CSV standard.
         /// </summary>
         /// <param name="taskMap">The given Dictionary of Tasks and their associated Users in a specific phase</param>
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
@@ -103,7 +103,7 @@ namespace ApplicationLogics.ExportManagement.Converter
         }
 
         /// <summary>
-        /// Appends the Roles and the associated Users of a specific Phase in accordance to the CSV standard.
+        ///     Appends the Roles and the associated Users of a specific Phase in accordance to the CSV standard.
         /// </summary>
         /// <param name="roleMap">The given Dictionary of Roles and their associated Users in a specific Phase</param>
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
@@ -121,7 +121,7 @@ namespace ApplicationLogics.ExportManagement.Converter
         }
 
         /// <summary>
-        /// Appends the Resource Ids associated with Resources of a specific Phase in accordance to the CSV standard.
+        ///     Appends the Resource Ids associated with Resources of a specific Phase in accordance to the CSV standard.
         /// </summary>
         /// <param name="papers">The given resource collection of Papers in a specific Phase</param>
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>

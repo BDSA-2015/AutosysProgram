@@ -8,19 +8,18 @@ using ApplicationLogics.UserManagement.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Storage.Models;
-using Storage.Repository;
 using Storage.Repository.Interface;
 
 namespace ApplicationLogicTests.UserManagement
 {
     /// <summary>
-    /// This class tests if the team validator is working correctly
+    ///     This class tests if the team validator is working correctly
     /// </summary>
     [TestClass]
     public class TeamValidatorTests
     {
         /// <summary>
-        /// Test team with valid data
+        ///     Test team with valid data
         /// </summary>
         [TestMethod]
         public void ValidateEnteredDate_ValidData_Success_Test()
@@ -36,7 +35,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test team with invalid id
+        ///     Test team with invalid id
         /// </summary>
         [TestMethod]
         public void InvalidDataInTeamTest_invalidID_ReturnFalse_Test()
@@ -52,8 +51,8 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test team with empty string in data. Must return false
-        /// to pass the test.
+        ///     Test team with empty string in data. Must return false
+        ///     to pass the test.
         /// </summary>
         [TestMethod]
         public void InvalidDataInTeamTest_EmptyString_ReturnFalse_Test()
@@ -69,8 +68,8 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test team with white space in data. Must return false
-        /// to pass the test.
+        ///     Test team with white space in data. Must return false
+        ///     to pass the test.
         /// </summary>
         [TestMethod]
         public void InvalidDataInTeamTest_WhiteSpace_ReturnFalse_Test()
@@ -86,7 +85,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test team with no user. Must return false to pass.
+        ///     Test team with no user. Must return false to pass.
         /// </summary>
         [TestMethod]
         public void InvalidDataInTeamTest_NoUserIDs_ReturnFalse_Test()
@@ -102,8 +101,8 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test validation of existing team. Test must return true
-        /// to indicate a team exist.
+        ///     Test validation of existing team. Test must return true
+        ///     to indicate a team exist.
         /// </summary>
         public void CheckExistingTeam_Exists_True_Test()
         {
@@ -123,8 +122,8 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test validation of non-existing team. Test must return false
-        /// to indicate a team does not exist.
+        ///     Test validation of non-existing team. Test must return false
+        ///     to indicate a team does not exist.
         /// </summary>
         public void CheckExistingTeam_NonExisting_False_Test()
         {

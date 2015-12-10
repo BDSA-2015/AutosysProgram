@@ -6,10 +6,10 @@ using Storage.Repository.Interface;
 
 namespace Storage.Repository
 {
-
     /// <summary>
-    /// This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on studies in the database. <see cref="StoredStudy"/>
-    /// These are used specifically on a Stored Study DbSet in the AutoSysDbModel.
+    ///     This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on studies in
+    ///     the database. <see cref="StoredStudy" />
+    ///     These are used specifically on a Stored Study DbSet in the AutoSysDbModel.
     /// </summary>
     public class StudyRepository : IAsyncRepository<StoredStudy>
     {
@@ -22,13 +22,13 @@ namespace Storage.Repository
         }
 
         /// <summary>
-        /// Creates a new study and returns its id. Throws an ArgumentNullException if the study to create is null. 
+        ///     Creates a new study and returns its id. Throws an ArgumentNullException if the study to create is null.
         /// </summary>
         /// <param name="user">
-        /// Study to create. 
+        ///     Study to create.
         /// </param>
         /// <returns>
-        /// True if study was created. 
+        ///     True if study was created.
         /// </returns>
         public virtual async Task<int> Create(StoredStudy user)
         {
@@ -40,47 +40,43 @@ namespace Storage.Repository
             //_dbContext.Set<T>().Add(study);
             await _dbContext.SaveChangesAsync();
             return user.Id;
-
         }
 
         /// <summary>
-        /// Returns a study based on its id.
+        ///     Returns a study based on its id.
         /// </summary>
         /// <param name="id">
-        /// Id of study to find. 
+        ///     Id of study to find.
         /// </param>
         /// <returns>
-        /// Study from id. 
+        ///     Study from id.
         /// </returns>
         public virtual async Task<StoredStudy> Read(int id)
         {
-
             return await _dbContext.Set<StoredStudy>().FindAsync(id);
-
         }
 
         /// <summary>
-        /// Returns all studies. 
+        ///     Returns all studies.
         /// </summary>
         /// <returns>
-        /// All studies. 
+        ///     All studies.
         /// </returns>
         public virtual IQueryable<StoredStudy> Read()
         {
-
             return _dbContext.Set<StoredStudy>().AsQueryable();
-
         }
 
         /// <summary>
-        /// Updates an study in the database if it already exists. If not false is returned to indicate that no UpdateIfExists occurred.
-        /// If the study to update is null an ArgumentNullException is thrown. 
+        ///     Updates an study in the database if it already exists. If not false is returned to indicate that no UpdateIfExists
+        ///     occurred.
+        ///     If the study to update is null an ArgumentNullException is thrown.
         /// </summary>
         /// <param name="user">
-        /// Study to update.
+        ///     Study to update.
         /// </param>
         /// <returns>
-        /// True if study was updated, vice versa. 
+        ///     True if study was updated, vice versa.
         /// </returns>
         public virtual async Task<bool> UpdateIfExists(StoredStudy user)
         {
@@ -97,18 +93,17 @@ namespace Storage.Repository
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
-            else return false;
-
+            return false;
         }
 
         /// <summary>
-        /// Deletes an study based on its id. 
+        ///     Deletes an study based on its id.
         /// </summary>
         /// <param name="id">
-        /// Id of entity. 
+        ///     Id of entity.
         /// </param>
         /// <returns>
-        /// True if study was deleted, false if study does not exist. 
+        ///     True if study was deleted, false if study does not exist.
         /// </returns>
         public virtual async Task<bool> DeleteIfExists(int id)
         {
@@ -120,18 +115,15 @@ namespace Storage.Repository
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
-            else return false;
-
+            return false;
         }
 
         /// <summary>
-        /// This method is used to dispose the context.
+        ///     This method is used to dispose the context.
         /// </summary>
         public void Dispose()
         {
             _dbContext.Dispose();
         }
-
     }
-
 }
