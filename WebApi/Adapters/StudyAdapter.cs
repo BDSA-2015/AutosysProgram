@@ -63,7 +63,7 @@ namespace WebApi.Adapters
                             }
                         }
 
-
+                    
                     else if (AssignedTasks.Key.TaskState == ApplicationLogics.StudyManagement.TaskRequest.State.Done)
                         foreach (ApplicationLogics.UserManagement.User user in AssignedTasks.Value)
                         {
@@ -107,12 +107,13 @@ namespace WebApi.Adapters
         /// <param name="count">The amount of tasks to retrieve.</param>
         /// <param name="filter">Defines whether to get remaining tasks, delivered (but still editable) tasks, or completed tasks.</param>
         /// <param name="type">The type of tasks to retrieve.</param>
-        public IEnumerable<TaskRequest> GetTasks(int id, int userId, int count = 1, TaskRequest.Filter filter = TaskRequest.Filter.Remaining, TaskRequest.Type type = TaskRequest.Type.Both)
+        public IEnumerable<SystematicStudyService.Models.TaskRequest> GetTasks(int id, int userId, int count = 1, SystematicStudyService.Models.TaskRequest.Filter filter = SystematicStudyService.Models.TaskRequest.Filter.Remaining, SystematicStudyService.Models.TaskRequest.Type type = SystematicStudyService.Models.TaskRequest.Type.Both)
         {
-            var database = new MainHandler();
 
-            if
-            database.GetTasks()
+            type = SystematicStudyService.Models.TaskRequest.Type.
+
+            var database = new MainHandler();
+            database.GetTasks(id,userId,count,
             throw new NotImplementedException();
         }
 
