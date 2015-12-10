@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using SystematicStudyService.Models;
+using ApplicationLogics.AutosysServer;
+using ApplicationLogics.StorageFasade;
+using WebApi.Models;
 
-namespace SystematicStudyService.Controllers
+namespace WebApi.Controllers
 {
     /// <summary>
     /// Controller to access information about a study.
@@ -11,6 +14,24 @@ namespace SystematicStudyService.Controllers
     [RoutePrefix("api/Study")]
     public class StudyController : ApiController
     {
+
+        /*
+        private IDisposable _facade;
+         
+        public UserController(IDisposable facade)
+        {
+            _facade = facade;
+        }
+        */
+
+        private readonly MainHandler _facade;
+
+        // Injecting a facade with IDisposable 
+        public StudyController(MainHandler facade)
+        {
+            _facade = facade;
+        }
+
         /// <summary>
         /// Retrieve an overview of the specified study.
         /// </summary>
@@ -94,5 +115,16 @@ namespace SystematicStudyService.Controllers
             // GET: api/Study/4/Resource/5
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Clean up, allows to release resources per request when using underlying logic to access database. 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected override void Dispose(bool disposing)
+        {
+            // _facade.Dispose(); TODO make all interfaces down to db implement IDisposable 
+            base.Dispose(disposing);
+        }
     }
+
 }

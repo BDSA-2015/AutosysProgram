@@ -37,8 +37,22 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+    <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="BibtexLibrary">
+      <HintPath>..\packages\BibtexLibrary.1.2.0\lib\net45\BibtexLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.2.13.5.0\lib\net40-client\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -49,7 +63,12 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="nunit.framework, Version=3.0.5813.39031, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -95,39 +114,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutosysServer\FacadeInjectionContainer.cs" />
     <Compile Include="AutosysServer\Mapping\AutoMapperConfigurator.cs" />
-    <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\PaperManagementStorageProfile.cs" />
-    <Compile Include="AutosysServer\Mapping\Profiles\ApplicationLogicProfiles\UserManagementStorageProfile.cs" />
-    <Compile Include="ExportManagement\CsvFile.cs" />
-    <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
-    <Compile Include="ExportManagement\Interfaces\IExportFile.cs" />
-    <Compile Include="ExportManagement\PdfFile.cs" />
-    <Compile Include="PaperManagement\BibTexFile.cs" />
+    <Compile Include="AutosysServer\Mapping\Profiles\StudyManagementStorageProfile.cs" />
+    <Compile Include="AutosysServer\Mapping\Profiles\PaperManagementStorageProfile.cs" />
+    <Compile Include="AutosysServer\Mapping\Profiles\UserManagementStorageProfile.cs" />
     <Compile Include="PaperManagement\BibtexParser.cs" />
-    <Compile Include="PaperManagement\FieldTag.cs" />
-    <Compile Include="PaperManagement\Interfaces\IChecker.cs" />
-    <Compile Include="PaperManagement\Interfaces\IFile.cs" />
-    <Compile Include="PaperManagement\Interfaces\ITag.cs" />
-    <Compile Include="PaperManagement\Interfaces\IValidator.cs" />
+    <Compile Include="PaperManagement\IParser.cs" />
+    <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="PaperManagement\PaperHandler.cs" />
-    <Compile Include="PaperManagement\ItemTag.cs" />
-    <Compile Include="PaperManagement\TagChecker.cs" />
-    <Compile Include="PaperManagement\Interfaces\IParser.cs" />
-    <Compile Include="PaperManagement\TagValidator.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
     <Compile Include="ProtocolManagement\ProtocolHandler.cs" />
-    <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ExportManagement\CSVConverter.cs" />
     <Compile Include="ExportManagement\ExportHandler.cs" />
-    <Compile Include="ExportManagement\ExportType.cs" />
-    <Compile Include="ExportManagement\PDFConverter.cs" />
+    <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
+    <Compile Include="ExportManagement\Converter\CsvConverter.cs" />
     <Compile Include="StudyManagement\BibTexFileSearcher.cs" />
     <Compile Include="StorageFasade\CriteriaFacade.cs" />
     <Compile Include="StorageFasade\DatafieldFacade.cs" />
     <Compile Include="StorageFasade\Interface\IFacade.cs" />
-    <Compile Include="AutosysServer\Mapping\Profiles\WebApiProfile\UserManagementDTOProfile.cs" />
     <Compile Include="StorageFasade\PaperFacade.cs" />
     <Compile Include="StorageFasade\PhaseFacade.cs" />
     <Compile Include="StorageFasade\ProtocolFacade.cs" />
@@ -136,6 +142,7 @@
     <Compile Include="StorageFasade\TaskRequestFacade.cs" />
     <Compile Include="StorageFasade\TeamFacade.cs" />
     <Compile Include="StorageFasade\UserFacade.cs" />
+    <Compile Include="StudyManagement\ConflictingData.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\CriteriaFactory.cs" />
     <Compile Include="StudyManagement\CriteriaLimitation.cs" />
@@ -146,16 +153,14 @@
     <Compile Include="StudyManagement\Study.cs" />
     <Compile Include="StudyManagement\StudyHandler.cs" />
     <Compile Include="StudyManagement\StudyManager.cs" />
-    <Compile Include="UserManagement\Manager.cs" />
-    <Compile Include="UserManagement\Researcher.cs" />
-    <Compile Include="UserManagement\Team.cs" />
-    <Compile Include="UserManagement\User.cs" />
+    <Compile Include="UserManagement\Entities\Team.cs" />
+    <Compile Include="UserManagement\Entities\User.cs" />
+    <Compile Include="UserManagement\TeamHandler.cs" />
     <Compile Include="UserManagement\UserHandler.cs" />
-    <Compile Include="UserManagement\UserValidator.cs" />
+    <Compile Include="UserManagement\Utils\TeamValidator.cs" />
+    <Compile Include="UserManagement\Utils\UserValidator.cs" />
     <Compile Include="AutosysServer\Adapter.cs" />
     <Compile Include="AutosysServer\MainHandler.cs" />
-    <Compile Include="AutosysServer\Request.cs" />
-    <Compile Include="AutosysServer\RequestHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

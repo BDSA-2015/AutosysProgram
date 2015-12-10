@@ -1,26 +1,31 @@
-﻿// BibtexParser.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
-// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
-// Jacob Mullit Møiniche.
-
-using System;
-using ApplicationLogics.PaperManagement.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using BibtexLibrary;
+using BibtexLibrary.Parser;
 
 namespace ApplicationLogics.PaperManagement
 {
+    /// <summary>
+    /// Class for passing Bibtex files to Papers based to be saved in the database
+    /// For parsing the imported bibtex files the BibtexLibrary package is used,
+    /// which can be found at: https://github.com/MaikelH/BibtexLibrary
+    /// </summary>
     public class BibtexParser : IParser
     {
-        /// <summary>
-        /// Generates a BibTex file based on the input file (given as a string).
-        /// This file will contain a mapping of common tag properties of a file (Auther, Year written, etc..) with their respective values. 
-        /// </summary>
-        /// <returns>
-        /// Returns a bibtex file.
-        /// </returns>
-        public IFile Parse(string file)
+        public IEnumerable<Paper> Parse(string file)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var bibFile = BibtexImporter.FromString(@file);
+                return bibFile.Entries.Select(bib => new Paper(bib.Type.Trim(), bib.Tags.Keys, bib.Tags.Values) { ResourceRef = bib.Key });
+            }
+            catch (ParseException e)
+            {
+                throw new InvalidDataException($"The parsed file was not recognized as a bibtex file", e);
+            }
+                 
         }
-
     }
-
 }

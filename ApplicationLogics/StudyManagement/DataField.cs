@@ -68,5 +68,11 @@ namespace ApplicationLogics.StudyManagement
         }
 
         public bool IsModifiable { get; }
+
+
+        /// <summary>
+        /// For <see cref="DataType.Enumeration"/> and <see cref="DataType.Flags"/> data types, a collection of the predefined values.
+        /// </summary>
+        public string[] TypeInfo { get; set; }
     }
 }

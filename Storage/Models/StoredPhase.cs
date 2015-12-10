@@ -16,27 +16,24 @@ namespace Storage.Entities
     {
         [Key]
         public int Id { get; set; }
+        [Required]
+        public virtual string Name { get; set; }
 
         public virtual StoredStudy Study { get; set; }
 
         public virtual ICollection<StoredPaper> Reports { get; set; }
 
-        public ICollection<StoredCriteria> ExclusionCriteria { get; set; }
+        public virtual ICollection<StoredCriteria> ExclusionCriteria { get; set; }
 
-        /// <summary>
-        /// This list contains Criteria, which each report must contain.
-        /// </summary>
-        public ICollection<StoredCriteria> InclusionCriteria { get; set; }
+        public virtual ICollection<StoredCriteria> InclusionCriteria { get; set; }
 
         public string IsFinished { get; set; } 
 
         public virtual ICollection<StoredCriteria> Criteria { get; set; }
 
-        public virtual IDictionary<StoredTaskRequest, List<StoredUser>> AssignedTask { get; set; }
+        public virtual IDictionary<StoredTaskRequest, List<StoredUser>> Tasks { get; set; }
 
         public virtual IDictionary<StoredUser, StoredRole> AssignedRole { get; set; }
-
-        public virtual ICollection<StoredTaskRequest> UnassignedTasks { get; set; }
 
         public virtual ICollection<StoredPhase> DependentPhases { get; set; }
 

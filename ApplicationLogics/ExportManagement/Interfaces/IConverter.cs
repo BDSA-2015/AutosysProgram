@@ -2,7 +2,9 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using System.Collections.Generic;
 using ApplicationLogics.ProtocolManagement;
+
 
 namespace ApplicationLogics.ExportManagement.Interfaces
 {
@@ -11,6 +13,6 @@ namespace ApplicationLogics.ExportManagement.Interfaces
     /// </summary>
     public interface IConverter
     {
-        IExportFile Convert(Protocol protocol);
+        string Convert(Protocol protocol);
     }
 }

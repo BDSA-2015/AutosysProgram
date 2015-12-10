@@ -1,51 +1,43 @@
-﻿// Paper.cs is a part of Autosys project in BDSA-2015. Created: 17, 11, 2015.
-// Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
-// Jacob Mullit Møiniche.
-
-using System;
-using System.Collections.Generic;
-using ApplicationLogics.PaperManagement.Interfaces;
+﻿using System.Collections.Generic;
 
 namespace ApplicationLogics.PaperManagement
 {
-    public class Paper 
+    /// <summary>
+    /// Class for holding bibtex file information to be stored in the database
+    /// </summary>
+    public class Paper
     {
         /// <summary>
-        /// Creates an empty paper with no values.
+        /// The Entry type of the bibliographic item (e.g. Article, Book, Phdthesis...)
         /// </summary>
-        public Paper()
-        {
-            throw new NotImplementedException();
-        }
+        public string Type;
 
         /// <summary>
-        /// Creates a Paper based on existing information.
+        /// A collection of the bibtex field types (e.g. Author, Year...)
+        /// The collection only holds information associated with the default bibtex field types
         /// </summary>
-        /// <param name="paperInformation"></param>
-        public Paper(Dictionary<ITag, List<string>> paperInformation)
-        {
-            throw new NotImplementedException();
-        }
+        public readonly IReadOnlyCollection<string> FieldTypes;
 
-        public Dictionary<ITag, List<string>> PaperInformation { get; protected set; }
+        public readonly IReadOnlyCollection<string> FieldValues; 
 
         /// <summary>
-        /// Update information on paper or add addtional information on the Paper.
+        /// A reference to the resource associated with this Paper (e.g. A PDF, or CSV file...)
         /// </summary>
-        /// <param name="itemTag"></param>
-        /// <param name="information"></param>
-        public void AddInformation(ITag itemTag, string information)
-        {
-            throw new NotImplementedException();
-        }
+        public string ResourceRef { get; set; }
 
         /// <summary>
-        /// Remove information about a paper. This will remove all information about the specified Tag
-        /// (even if multiple information was stored under this Tag).
+        /// Constructor for creating a Paper based on a bibtex file entry type and fields
         /// </summary>
-        public void RemoveInformation()
+        /// <param name="type">The type of Paper which is associated with the entry type of the bibtex file it is created from</param>
+        /// <param name="fieldTypes">Collection of bibtex fieldtypes from an imported bibtex file
+        /// which fields are contained in the associated bibtex file</param>
+        /// <param name="fieldValues">Collection of bibtex field values associated with a field type from an imported bibtex file</param>
+        public Paper(string type, IReadOnlyCollection<string> fieldTypes, IReadOnlyCollection<string> fieldValues)
         {
-            throw new NotImplementedException();
+            Type = type;
+            FieldTypes = fieldTypes;
+            FieldValues = fieldValues;
         }
     }
+
 }

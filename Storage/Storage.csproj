@@ -33,16 +33,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -58,16 +58,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repository\Interface\IAutoSysContext.cs" />
+    <Compile Include="Repository\AsyncDbRepository.cs" />
     <Compile Include="AutoSysDbModel.cs" />
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\StoredEntry.cs" />
-    <Compile Include="Models\StoredTag.cs" />
-    <Compile Include="Repository\DbRepository.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Repository\OldDbRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Interface\IAsyncRepository.cs" />
     <Compile Include="Repository\Interface\IEntity.cs" />
-    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\Interface\IRepository.cs" />
     <Compile Include="Models\StoredCriteria.cs" />
     <Compile Include="Models\StoredDataField.cs" />
     <Compile Include="Models\StoredPaper.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Models\StoredTaskRequest.cs" />
     <Compile Include="Models\StoredTeam.cs" />
     <Compile Include="Models\StoredUser.cs" />
+    <Compile Include="Repository\ProtocolRepository.cs" />
     <Compile Include="Repository\StudyRepository.cs" />
     <Compile Include="Repository\TaskRepository.cs" />
     <Compile Include="Repository\TeamRepository.cs" />
