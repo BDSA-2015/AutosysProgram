@@ -14,8 +14,13 @@ namespace ApplicationLogics.StudyManagement
     ///     Each dependentPhase is dependent on each other sequentially and is completed in a ﬁxed order.
     ///     The class details how task requests are handled and handed out.
     /// </summary>
-    public class Phase
+    public class Phase 
     {
+        /// <summary>
+        /// The phase's name
+        /// </summary>
+        public string Name { get; set; }
+     
         public Study Study { get; set; }
 
         public List<Paper> Reports { get; set; }
@@ -29,16 +34,16 @@ namespace ApplicationLogics.StudyManagement
         ///     This list contains Criteria, which each report must contain.
         /// </summary>
         public List<Criteria> InclusionCriteria { get; set; }
-
+        
         /// <summary>
         ///     Used to give similar tasks to multiple users, e.g. a review task.
         /// </summary>
-        public Dictionary<TaskRequest, List<User>> AssignedTask { get; set; }
-
+        public Dictionary<TaskRequest, List<User>> Tasks { get; set; }
+        
         /// <summary>
         ///     A dictionary over Roles. Each role holds a list of Users with the assigned Role.
         /// </summary>
-        public Dictionary<Role, List<User>> AssignedRole { get; set; }
+        public Dictionary<Role, List<User>> AssignedRole { get; set; } 
 
         /// <summary>
         ///     Task which has not yet been assigned.
@@ -54,7 +59,7 @@ namespace ApplicationLogics.StudyManagement
         ///     A dependentPhase cannot begin prior to the completion of these Phases.
         /// </summary>
         public List<Phase> DependentPhases { get; set; }
-
+    
         /// <summary>
         ///     Used to dertermine if a criteria has been assigned in a dependentPhase.
         ///     Either occurs in the InclusionList or ExclusionList
@@ -76,7 +81,7 @@ namespace ApplicationLogics.StudyManagement
         /// <param name="criteria"></param>
         public void AddCriteria(Criteria criteria, Criteria.Type type)
         {
-            if (type == Criteria.Type.Exclusion)
+            if (type == Criteria.Type.Exclusion) 
                 throw new NotImplementedException(); // Create exclusion criteria
 
             if (type == Criteria.Type.Inclusion)

@@ -14,10 +14,10 @@ namespace Storage.Models
         public enum Type
         {
             String,
-            Boolean,
-            Enumeration,
-            Flags,
-            Resource
+            Boolean, // True or false 
+            Enumeration, // Select one item from list. Comma separated
+            Flags, // Select multiple items or none from list. Comma separated
+            Resource // type such as PDF, JPEG etc.
         }
 
         [Required]
@@ -43,6 +43,12 @@ namespace Storage.Models
         }
 
         public string IsModifiable { get; set; }
+
+        /// <summary>
+        ///     For <see cref="DataType.Enumeration" /> and <see cref="DataType.Flags" /> data types, a collection of the
+        ///     predefined values.
+        /// </summary>
+        public string[] TypeInfo { get; set; }
 
         [Key]
         public int Id { get; set; }

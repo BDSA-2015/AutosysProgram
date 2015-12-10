@@ -2,7 +2,9 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using System.Collections.Generic;
 using ApplicationLogics.ProtocolManagement;
+
 
 namespace ApplicationLogics.ExportManagement.Interfaces
 {

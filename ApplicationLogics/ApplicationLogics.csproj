@@ -167,7 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Storage\Storage.csproj">
-      <Project>{390d70e5-5e15-4344-915a-d570f5bca74d}</Project>
+      <Project>{390D70E5-5E15-4344-915A-D570F5BCA74D}</Project>
       <Name>Storage</Name>
     </ProjectReference>
   </ItemGroup>

@@ -12,7 +12,7 @@ namespace ApplicationLogics.StudyManagement
     ///     A study consists of diﬀerent phases where data is continuously synthesized and approved by users with different
     ///     roles.
     /// </summary>
-    public class Study
+    public class Study 
     {
         public string Name { get; set; }
 
@@ -22,7 +22,11 @@ namespace ApplicationLogics.StudyManagement
         public string Classification { get; set; }
 
         /// <summary>
-        ///     A quick summary of the study
+        /// A list of all the users who are working or have been working on the study
+        /// </summary>
+        public List<int> UserId { get; set; } 
+        /// <summary>
+        /// A quick summary of the study
         /// </summary>
         public string Description { get; set; }
 

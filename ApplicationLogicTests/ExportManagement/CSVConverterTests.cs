@@ -15,15 +15,6 @@ namespace ApplicationLogicTests.ExportManagement
     [TestClass]
     public class CsvConverterTests
     {
-        private CsvConverter _converter;
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            _converter = new CsvConverter();
-        }
-
-
         /// <summary>
         ///     Tests the conversion to a CSV formatted string of a Protocol
         /// </summary>
@@ -34,7 +25,7 @@ namespace ApplicationLogicTests.ExportManagement
             var protocol = ProtocolMock.CreateProtocolMock();
 
             //Act
-            var csvFile = _converter.Convert(protocol);
+            var csvFile = CsvConverter.Convert(protocol);
 
             //Assert
             Assert.IsTrue(csvFile == ProtocolMock.OutPut());

@@ -3,8 +3,13 @@
 // Jacob Mullit Møiniche.
 
 using System;
+using System.IO;
+using System.Web.Http;
+using ApplicationLogics.ExportManagement.Converter;
 using ApplicationLogics.ExportManagement.Interfaces;
 using ApplicationLogics.ProtocolManagement;
+
+using Newtonsoft.Json;
 
 namespace ApplicationLogics.ExportManagement
 {
@@ -13,16 +18,19 @@ namespace ApplicationLogics.ExportManagement
     /// </summary>
     public class ExportHandler
     {
-        private IConverter _converter;
-
+        /// <summary>
+        /// Method for converting a Protocol to CSV and exporting it as JSON
+        /// </summary>
+        /// <param name="protocol">The Protocol to be converted and exported</param>
+        /// <returns></returns>
         public string ExportCsvFile(Protocol protocol)
         {
-            throw new NotImplementedException();
+            if (protocol == null)
+            {
+                throw new ArgumentNullException(nameof(protocol));
         }
 
-        public string ExportPdfFile(Protocol protocol)
-        {
-            throw new NotImplementedException();
+            return JsonConvert.SerializeObject(CsvConverter.Convert(protocol));
         }
     }
 }

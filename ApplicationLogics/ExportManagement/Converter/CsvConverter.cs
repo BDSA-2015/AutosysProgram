@@ -18,14 +18,14 @@ namespace ApplicationLogics.ExportManagement.Converter
     ///     Class for converting export files to the CSV format according to the European standard using ; as a separator
     ///     by following the standards described at https://en.wikipedia.org/wiki/Comma-separated_values
     /// </summary>
-    public class CsvConverter : IConverter
+    public static class CsvConverter
     {
         /// <summary>
         ///     Converts the given Protocol to a string using the CSV format which can be exported by an ExportHandler
         /// </summary>
         /// <param name="protocol">The Protocol which is to be exported</param>
         /// <returns></returns>
-        public string Convert(Protocol protocol)
+        public static string Convert(Protocol protocol)
         {
             if (protocol == null)
             {
@@ -43,7 +43,7 @@ namespace ApplicationLogics.ExportManagement.Converter
         ///     Creates the columns of the CSV file. The columns are based on the fields in a Study and its Phases
         /// </summary>
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
-        private void CreateColumns(StringBuilder builder)
+        private static void CreateColumns(StringBuilder builder)
         {
             builder.Append("Study;Study Description;Phase;Exclusion Criteria;Inclusion Criteria;" +
                            "Assigned Tasks;Assigned Roles;Resources;");
@@ -54,7 +54,7 @@ namespace ApplicationLogics.ExportManagement.Converter
         /// </summary>
         /// <param name="protocol">The given protocol to be exported</param>
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
-        private void CreateRows(Protocol protocol, StringBuilder builder)
+        private static void CreateRows(Protocol protocol, StringBuilder builder)
         {
             var i = 1;
             foreach (var phase in protocol.Phases)
@@ -62,7 +62,7 @@ namespace ApplicationLogics.ExportManagement.Converter
                 builder.Append($"{protocol.StudyName};{protocol.Description};Phase{i++};");
                 AppendCriteria(phase.ExclusionCriteria, builder);
                 AppendCriteria(phase.InclusionCriteria, builder);
-                AppendAssignedTasks(phase.AssignedTask, builder);
+                AppendAssignedTasks(phase.Tasks, builder);
                 AppendRoles(phase.AssignedRole, builder);
                 AppendResources(phase.Reports, builder);
             }
@@ -73,7 +73,7 @@ namespace ApplicationLogics.ExportManagement.Converter
         /// </summary>
         /// <param name="criteriaList">The given List of criteria from a specific Study Phase </param>
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
-        private void AppendCriteria(IEnumerable<Criteria> criteriaList, StringBuilder builder)
+        private static void AppendCriteria(IEnumerable<Criteria> criteriaList, StringBuilder builder)
         {
             if (!criteriaList.Any()) return;
             foreach (var criteria in criteriaList)
@@ -88,7 +88,7 @@ namespace ApplicationLogics.ExportManagement.Converter
         /// </summary>
         /// <param name="taskMap">The given Dictionary of Tasks and their associated Users in a specific phase</param>
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
-        private void AppendAssignedTasks(Dictionary<TaskRequest, List<User>> taskMap, StringBuilder builder)
+        private static void AppendAssignedTasks(Dictionary<TaskRequest, List<User>> taskMap, StringBuilder builder)
         {
             if (!taskMap.Any()) return;
             foreach (var task in taskMap.Keys)
@@ -107,7 +107,7 @@ namespace ApplicationLogics.ExportManagement.Converter
         /// </summary>
         /// <param name="roleMap">The given Dictionary of Roles and their associated Users in a specific Phase</param>
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
-        private void AppendRoles(Dictionary<Role, List<User>> roleMap, StringBuilder builder)
+        private static void AppendRoles(Dictionary<Role, List<User>> roleMap, StringBuilder builder)
         {
             if (!roleMap.Any()) return;
             foreach (var role in roleMap.Keys)
@@ -125,7 +125,7 @@ namespace ApplicationLogics.ExportManagement.Converter
         /// </summary>
         /// <param name="papers">The given resource collection of Papers in a specific Phase</param>
         /// <param name="builder">The given StringBuilder which appends the string to be exported</param>
-        private void AppendResources(IEnumerable<Paper> papers, StringBuilder builder)
+        private static void AppendResources(IEnumerable<Paper> papers, StringBuilder builder)
         {
             if (!papers.Any()) return;
             foreach (var paper in papers)
