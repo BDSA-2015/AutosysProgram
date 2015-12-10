@@ -12,32 +12,31 @@ using StorageTests.Utility;
 
 namespace StorageTests.RepositoryUnitTests
 {
-
     /// <summary>
-    /// This test class is used to test the Entity Framework TeamRepository, <see cref="TeamRepository"/>.
-    /// The repository is a concrete implementation of the repository interface and is used to write data to a database.
-    /// Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
+    ///     This test class is used to test the Entity Framework TeamRepository, <see cref="TeamRepository" />.
+    ///     The repository is a concrete implementation of the repository interface and is used to write data to a database.
+    ///     Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
     /// </summary>
     [TestClass]
     public class TeamRepositoryTests
     {
+        private Mock<IAutoSysContext> _context; // Use IAutoSysContext instead of concrete AutoSysDbModel
 
         private IList<StoredTeam> _data;
-        private Mock<IAutoSysContext> _context; // Use IAutoSysContext instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredTeam>> _mockSet;
         private TeamRepository _repository;
 
         /// <summary>
-        /// This method sets up data used to mock a collection of studies in a DbContext used by the TeamRepository, <see cref="TeamRepository"/>. 
+        ///     This method sets up data used to mock a collection of studies in a DbContext used by the TeamRepository,
+        ///     <see cref="TeamRepository" />.
         /// </summary>
         [TestInitialize]
         public void Initialize()
         {
-
             _data = new List<StoredTeam>
             {
-                new StoredTeam { Id = 1}, // Todo insert pseudo data 
-                new StoredTeam { Id = 2}
+                new StoredTeam {Id = 1}, // Todo insert pseudo data 
+                new StoredTeam {Id = 2}
             };
 
             _mockSet = MockUtility.CreateAsyncMockDbSet(_data, u => u.Id);
@@ -62,7 +61,7 @@ namespace StorageTests.RepositoryUnitTests
 
         #region Create Operation 
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))] // Assert 
+        [TestMethod, ExpectedException(typeof (ArgumentNullException))] // Assert 
         public async Task Create_NullInput_ExceptionThrown()
         {
             // Arrange and act 
@@ -73,28 +72,26 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Create_Attatch_IsCalled()
         {
             // Arrange
-            var validTeam = new StoredTeam { Id = 0 };
+            var validTeam = new StoredTeam {Id = 0};
 
             // Act 
             await _repository.Create(validTeam);
 
             // Assert
             _context.Verify(c => c.Attach(validTeam), Times.Once);
-
         }
 
         [TestMethod]
         public async Task Create_Add_IsCalled()
         {
             // Arrange
-            var validTeam = new StoredTeam { Id = 0 };
+            var validTeam = new StoredTeam {Id = 0};
 
             // Act 
             await _repository.Create(validTeam);
 
             // Assert
             _context.Verify(c => c.Add(validTeam), Times.Once);
-
         }
 
         [TestMethod]
@@ -107,10 +104,9 @@ namespace StorageTests.RepositoryUnitTests
 
             // Assert
             _context.Verify(c => c.SaveChangesAsync(), Times.Once);
-
         }
 
-        #endregion 
+        #endregion
 
         #region Read Operation 
 
@@ -148,7 +144,8 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
-        public void ReadAll_IQueryable_IsCalled() // Not async, IQueryable is not executed by db until used by .ToList() 
+        public void ReadAll_IQueryable_IsCalled()
+            // Not async, IQueryable is not executed by db until used by .ToList() 
         {
             // Arrange and act 
             var teams = _repository.Read();
@@ -172,7 +169,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_FindAsync_IsCalled()
         {
             // Arrange 
-            var firstTeamUpdated = new StoredTeam { Id = 1, Name = "New Team" };
+            var firstTeamUpdated = new StoredTeam {Id = 1, Name = "New Team"};
 
             // Act 
             await _repository.UpdateIfExists(firstTeamUpdated);
@@ -187,7 +184,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_Attach_IsCalled()
         {
             // Arrange 
-            var firstTeamUpdated = new StoredTeam { Id = 1, Name = "New Team" };
+            var firstTeamUpdated = new StoredTeam {Id = 1, Name = "New Team"};
 
             // Act 
             await _repository.UpdateIfExists(firstTeamUpdated);
@@ -200,7 +197,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SetModified_IsCalled()
         {
             // Arrange 
-            var firstTeamUpdated = new StoredTeam { Id = 1, Name = "New Team" };
+            var firstTeamUpdated = new StoredTeam {Id = 1, Name = "New Team"};
 
             // Act 
             await _repository.UpdateIfExists(firstTeamUpdated);
@@ -213,7 +210,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SaveChangesAsync_IsCalled()
         {
             // Arrange 
-            var firstTeamUpdated = new StoredTeam { Id = 1, Name = "New Team" };
+            var firstTeamUpdated = new StoredTeam {Id = 1, Name = "New Team"};
 
             // Act 
             await _repository.UpdateIfExists(firstTeamUpdated);
@@ -226,7 +223,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_ValidUser_ReturnsTrue()
         {
             // Arrange 
-            var firstTeamUpdated = new StoredTeam { Id = 1, Name = "New Team" };
+            var firstTeamUpdated = new StoredTeam {Id = 1, Name = "New Team"};
 
             // Act 
             var isUpdated = await _repository.UpdateIfExists(firstTeamUpdated);
@@ -302,8 +299,5 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         #endregion
-
-
     }
-
 }

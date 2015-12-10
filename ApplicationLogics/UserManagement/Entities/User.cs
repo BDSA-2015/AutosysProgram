@@ -5,8 +5,8 @@
 namespace ApplicationLogics.UserManagement.Entities
 {
     /// <summary>
-    /// A user can be part of a team working on a given study and if so can be assigned different roles defining task
-    /// possibilities.
+    ///     A user can be part of a team working on a given study and if so can be assigned different roles defining task
+    ///     possibilities.
     /// </summary>
     public class User
     {

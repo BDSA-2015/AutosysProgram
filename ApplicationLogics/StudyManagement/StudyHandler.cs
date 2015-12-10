@@ -3,11 +3,20 @@
 // Jacob Mullit Møiniche.
 
 using System;
+using ApplicationLogics.StorageAdapter.Interface;
 
 namespace ApplicationLogics.StudyManagement
 {
     internal class StudyHandler // TODO Why internal? 
     {
+
+        private IAdapter<Study> _studyAdapter;
+
+        public StudyHandler(IAdapter<Study> adapter)
+        {
+            _studyAdapter = adapter;
+        }
+
         public void Create()
         {
             throw new NotImplementedException();

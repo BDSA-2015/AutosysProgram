@@ -5,16 +5,13 @@ using Storage.Repository.Interface;
 
 namespace Storage.Models
 {
-
     /// <summary>
-    /// This class represents a paper entity used to store information based on tags in a given bibtex file with many papers. 
+    ///     This class represents a paper entity used to store information based on tags in a given bibtex file with many
+    ///     papers.
     /// </summary>
     [Table("Paper")]
     public class StoredPaper : IEntity
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public string Type { get; set; }
 
@@ -24,9 +21,12 @@ namespace Storage.Models
         [Required]
         public virtual ICollection<string> FieldValues { get; set; }
 
+        [Key]
+        public int Id { get; set; }
+
         //[StringLength(400)]
-        //[Required]
         //public string Type { get; set; }
+        //[Required]
 
         //[StringLength(400)]
         //[Required]
@@ -58,7 +58,5 @@ namespace Storage.Models
 
         //[StringLength(50)]
         //public string ISSN { get; set; } 
-
     }
-
 }

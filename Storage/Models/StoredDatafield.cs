@@ -4,10 +4,9 @@ using Storage.Repository.Interface;
 
 namespace Storage.Models
 {
-
     /// <summary>
-    /// This class represents a data field entity.
-    /// The datafield is used as part of a criteria to include and exclude paper content. 
+    ///     This class represents a data field entity.
+    ///     The datafield is used as part of a criteria to include and exclude paper content.
     /// </summary>
     [Table("DataField")]
     public class StoredDataField : IEntity
@@ -19,24 +18,24 @@ namespace Storage.Models
             Enumeration, // Select one item from list. Comma separated
             Flags, // Select multiple items or none from list. Comma separated
             Resource // type such as PDF, JPEG etc.
-        } 
-        
-        [Key]
-        public int Id { get; set; }
+        }
 
-        [Required][StringLength(50)]
+        [Required]
+        [StringLength(50)]
         public string Name { get; set; }
 
-        [Required][StringLength(400)]
+        [Required]
+        [StringLength(400)]
         public string Description { get; set; }
 
         [NotMapped]
         public Type FieldType { get; set; }
 
         /// <summary>
-        /// Used to map the enum Type as a string. 
+        ///     Used to map the enum Type as a string.
         /// </summary>
-        [Required][Column("Type")]
+        [Required]
+        [Column("Type")]
         public string TypeString
         {
             get { return FieldType.ToString(); }
@@ -46,10 +45,12 @@ namespace Storage.Models
         public string IsModifiable { get; set; }
 
         /// <summary>
-        /// For <see cref="DataType.Enumeration"/> and <see cref="DataType.Flags"/> data types, a collection of the predefined values.
+        ///     For <see cref="DataType.Enumeration" /> and <see cref="DataType.Flags" /> data types, a collection of the
+        ///     predefined values.
         /// </summary>
         public string[] TypeInfo { get; set; }
 
+        [Key]
+        public int Id { get; set; }
     }
-
 }

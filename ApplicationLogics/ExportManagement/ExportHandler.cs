@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 namespace ApplicationLogics.ExportManagement
 {
     /// <summary>
-    /// Class for exporting research protocols to the clients in different formats.
+    ///     Class for exporting research protocols to the clients in different formats.
     /// </summary>
     public class ExportHandler
     {
@@ -28,7 +28,7 @@ namespace ApplicationLogics.ExportManagement
             if (protocol == null)
             {
                 throw new ArgumentNullException(nameof(protocol));
-            }
+        }
 
             return JsonConvert.SerializeObject(CsvConverter.Convert(protocol));
         }

@@ -3,15 +3,13 @@ using System.IO;
 using System.Linq;
 using ApplicationLogics.PaperManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace ApplicationLogicTests.PaperManagement
 {
     /// <summary>
-    /// Class for testing the parsing of bibtex files into the program
+    ///     Class for testing the parsing of bibtex files into the program
     /// </summary>
-    [TestClass()]
+    [TestClass]
     public class BibtexParserTests
     {
         private BibtexParser _parser;
@@ -23,10 +21,10 @@ namespace ApplicationLogicTests.PaperManagement
         }
 
         /// <summary>
-        /// Tests the parsing of a bibtex file
-        /// by checking that the Paper is referring to the correct resource
+        ///     Tests the parsing of a bibtex file
+        ///     by checking that the Paper is referring to the correct resource
         /// </summary>
-        [TestMethod()]
+        [TestMethod]
         public void ParseValidPaperResourceTest()
         {
             //Arrange
@@ -47,10 +45,10 @@ namespace ApplicationLogicTests.PaperManagement
         }
 
         /// <summary>
-        /// Tests the parsing of a bibtex file
-        /// by checking that entry types are parsed correctly and saved in a Paper
+        ///     Tests the parsing of a bibtex file
+        ///     by checking that entry types are parsed correctly and saved in a Paper
         /// </summary>
-        [TestMethod()]
+        [TestMethod]
         public void ParseValidPaperEntryTest()
         {
             //Arrange
@@ -65,10 +63,10 @@ namespace ApplicationLogicTests.PaperManagement
         }
 
         /// <summary>
-        /// Tests the parsing of a bibtex file
-        /// by checking that fields are parsed correctly and saved in a Paper
+        ///     Tests the parsing of a bibtex file
+        ///     by checking that fields are parsed correctly and saved in a Paper
         /// </summary>
-        [TestMethod()]
+        [TestMethod]
         public void ParseValidPaperFieldTest()
         {
             //Arrange
@@ -80,14 +78,14 @@ namespace ApplicationLogicTests.PaperManagement
 
             //Assert
             Assert.IsTrue(papers.ElementAt(0).FieldTypes.ElementAt(0) == "author" &&
-                            papers.ElementAt(0).FieldValues.ElementAt(0) == "David A. Aaker");
+                          papers.ElementAt(0).FieldValues.ElementAt(0) == "David A. Aaker");
         }
 
         /// <summary>
-        /// Tests the parsing of a bibtex file where the entry e.g. (article, book, ...) is missing
+        ///     Tests the parsing of a bibtex file where the entry e.g. (article, book, ...) is missing
         /// </summary>
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidDataException))]
+        [TestMethod]
+        [ExpectedException(typeof (InvalidDataException))]
         public void ParseMissingEntryTest()
         {
             //Arrange
@@ -105,27 +103,27 @@ namespace ApplicationLogicTests.PaperManagement
         }
 
         /// <summary>
-        /// Tests the parsing of a bibtex file where the enclosing start and end brackets are missing
+        ///     Tests the parsing of a bibtex file where the enclosing start and end brackets are missing
         /// </summary>
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidDataException))]
+        [TestMethod]
+        [ExpectedException(typeof (InvalidDataException))]
         public void ParseMissingStartAndEndBracketsTest()
         {
             //Arrange
             var file = "@book 839269," +
-                      "author = {David A. Aaker}," +
-                      "title = {Multivariate Analysis in Marketing}," +
-                      "year = {1981;}";
+                       "author = {David A. Aaker}," +
+                       "title = {Multivariate Analysis in Marketing}," +
+                       "year = {1981;}";
 
             //Act
             var papers = _parser.Parse(file);
         }
 
         /// <summary>
-        /// Tests that the parsing of an empty input i handled correctly
+        ///     Tests that the parsing of an empty input i handled correctly
         /// </summary>
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void ParseEmptyInputTest()
         {
             //Act

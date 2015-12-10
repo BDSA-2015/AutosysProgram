@@ -4,13 +4,11 @@
 
 namespace ApplicationLogics.StudyManagement
 {
-
     /// <summary>
-    /// A role is assigned to a user in a given phase and determines what tasks are to be received. 
+    ///     A role is assigned to a user in a given phase and determines what tasks are to be received.
     /// </summary>
-    public class Role 
+    public class Role
     {
-
         public enum Type
         {
             Validator,
@@ -18,7 +16,5 @@ namespace ApplicationLogics.StudyManagement
         }
 
         public Type RoleType { get; set; }
-
     }
-
 }

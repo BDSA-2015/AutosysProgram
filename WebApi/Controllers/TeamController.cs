@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using SystematicStudyService.Models;
 using ApplicationLogics.AutosysServer;
-using ApplicationLogics.UserManagement;
-using Team = SystematicStudyService.Models.Team;
 
 namespace WebApi.Controllers
 {
     /// <summary>
-    /// Controller to access and modify teams.
+    ///     Controller to access and modify teams.
     /// </summary>
     public class TeamController : ApiController
     {
-
         /*
         private IDisposable _facade;
          
@@ -31,7 +29,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// Get all teams.
+        ///     Get all teams.
         /// </summary>
         /// <param name="name">Search for teams which match the specified name.</param>
         public IEnumerable<Team> Get(string name = "")
@@ -42,7 +40,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// Get the team with the specific ID.
+        ///     Get the team with the specific ID.
         /// </summary>
         /// <param name="id">The ID of the team to retrieve.</param>
         public Team Get(int id)
@@ -52,30 +50,30 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// Create a new Team.
+        ///     Create a new Team.
         /// </summary>
         /// <param name="team">The new team to create.</param>
-        public IHttpActionResult Post([FromBody]Team team)
+        public IHttpActionResult Post([FromBody] Team team)
         {
             // POST: api/Team
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Update the team with the specified ID.
-        /// The list of users part of the team can not be modified once it has been created.
+        ///     Update the team with the specified ID.
+        ///     The list of users part of the team can not be modified once it has been created.
         /// </summary>
         /// <param name="id">The ID of the team to update.</param>
         /// <param name="user">The new team data.</param>
-        public IHttpActionResult Put(int id, [FromBody]Team user)
+        public IHttpActionResult Put(int id, [FromBody] Team user)
         {
             // PUT: api/Team/5
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Delete the team with the specified ID.
-        /// A team can not be deleted when it is participating in a study.
+        ///     Delete the team with the specified ID.
+        ///     A team can not be deleted when it is participating in a study.
         /// </summary>
         /// <param name="id">The ID of the team to delete.</param>
         public IHttpActionResult Delete(int id)
@@ -85,7 +83,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// Clean up, allows to release resources per request when using underlying logic to access database. 
+        ///     Clean up, allows to release resources per request when using underlying logic to access database.
         /// </summary>
         protected override void Dispose(bool disposing)
         {
