@@ -20,7 +20,7 @@ namespace Storage.Repository
         /// <param name="item">
         /// Entity to create.
         /// </param>
-        public virtual int CreateOrUpdate(T item)
+        public virtual int Create(T item)
         {
             using (var context = new AutoSysDbModel())
             {
@@ -32,14 +32,7 @@ namespace Storage.Repository
                     context.SaveChanges();
                     return item.Id;
                 }
-
-                else
-                {
-                    context.Set<T>().Attach(item);
-                    context.Entry<T>(item).State = EntityState.Modified;
-                    context.SaveChanges();
-                    return item.Id;
-                }
+                else return 0;
 
             }
 
@@ -65,7 +58,7 @@ namespace Storage.Repository
         public virtual IEnumerable<T> Read()
         {
             using (var context = new AutoSysDbModel())
-            { 
+            {
                 return context.Set<T>();
             }
         }
@@ -83,7 +76,7 @@ namespace Storage.Repository
                 var entity = context.Set<T>().Find(item.Id);
 
                 if (entity != null)
-                { 
+                {
                     context.Set<T>().Attach(item);
                     context.Entry<T>(item).State = EntityState.Modified;
                     context.SaveChanges();
@@ -104,9 +97,9 @@ namespace Storage.Repository
                 var entity = context.Set<T>().Find(item.Id);
 
                 if (entity != null)
-                { 
-                context.Set<T>().Remove(item);
-                context.SaveChanges();
+                {
+                    context.Set<T>().Remove(item);
+                    context.SaveChanges();
                 }
             }
         }

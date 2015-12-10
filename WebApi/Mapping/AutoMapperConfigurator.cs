@@ -1,8 +1,9 @@
 ﻿using ApplicationLogics.AutosysServer.Mapping.Profiles;
 using ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfiles;
 using AutoMapper;
+using WebApi.Mapping.Profiles;
 
-namespace ApplicationLogics.AutosysServer.Mapping
+namespace WebApi.Mapping
 {
     /// <summary>
     /// This class will take mapping profiles which enables AutoMapper to
@@ -17,7 +18,7 @@ namespace ApplicationLogics.AutosysServer.Mapping
     {
 
         /// <summary>
-        /// This method will initialize mapping profiles between the logical layer <see cref="ApplicationLogics"/> and the storage layer <see cref="Storage"/>
+        /// This method will initialize mapping profiles between the WebApi layer <see cref="WebApi"/> and the logical layer <see cref="ApplicationLogics"/>
         /// for Automapper.
         /// To add more profiles just add the following line below an existing profile
         /// 
@@ -28,14 +29,8 @@ namespace ApplicationLogics.AutosysServer.Mapping
         {
             Mapper.Initialize(cfg =>
             {
-                // UserManagement profiles 
-                cfg.AddProfile(new UserManagementStorageProfile());
-
-                // StudyManagement Profiles 
-                cfg.AddProfile(new StudyManagementStorageProfile());
-                
-                //PaperManagement Profiles
-                cfg.AddProfile(new PaperManagementStorageProfile());
+                //WebApi Profiles
+                cfg.AddProfile(new UserAndTeamDtoProfile());
 
             });
             Mapper.AssertConfigurationIsValid();

@@ -30,7 +30,7 @@ namespace ApplicationLogics.StorageFasade
         /// <returns>Id of team</returns>
         public int Create(Team team)
         {
-            return _teamRepository.CreateOrUpdate(Mapper.Map<StoredTeam>(team));
+            return _teamRepository.Create(Mapper.Map<StoredTeam>(team));
         }
 
         /// <summary>

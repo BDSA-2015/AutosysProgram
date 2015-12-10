@@ -28,7 +28,7 @@ namespace ApplicationLogics.StorageFasade
                 throw new ArgumentNullException("The given Paper cannot be null");
             }
             var storedPaper = AutoMapper.Mapper.Map<StoredPaper>(item);
-            return _papers.CreateOrUpdate(storedPaper);
+            return _papers.Create(storedPaper);
         }
 
         public void Delete(Paper item)

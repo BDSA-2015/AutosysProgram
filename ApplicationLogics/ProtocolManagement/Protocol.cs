@@ -12,10 +12,15 @@ namespace ApplicationLogics.ProtocolManagement
     /// </summary>
     public class Protocol 
     {
-        public List<Criteria> InclusionCriteria { get; set; }
+        public string StudyName { get; set; }
 
-        public List<Criteria> ExclusionCriteria { get; set; }
+        public List<Phase> Phases { get; set; }
 
         public string Description { get; set; } 
+
+        public List<Criteria> InclusionCriteria { get; set; } // Update Csv tests and remove this  
+
+        public List<Criteria> ExclusionCriteria { get; set; } // Update Csv tests and remove this  
     }
+
 }
