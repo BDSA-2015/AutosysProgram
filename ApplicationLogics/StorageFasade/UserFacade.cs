@@ -30,7 +30,7 @@ namespace ApplicationLogics.StorageFasade
         /// <returns> int</returns>
         public int Create(User user)
         {
-            return _userRepository.CreateOrUpdate(Mapper.Map<StoredUser>(user));
+            return _userRepository.Create(Mapper.Map<StoredUser>(user));
         }
 
         /// <summary>
@@ -79,5 +79,7 @@ namespace ApplicationLogics.StorageFasade
             var storedUserToDelete = Mapper.Map<StoredUser>(toDelete);
             _userRepository.DeleteIfExists(storedUserToDelete);
         }
+
     }
+
 }

@@ -1,6 +1,5 @@
 ﻿using ApplicationLogics.AutosysServer.Mapping.Profiles;
 using ApplicationLogics.AutosysServer.Mapping.Profiles.ApplicationLogicProfiles;
-using ApplicationLogics.AutosysServer.Mapping.Profiles.WebApiProfile;
 using AutoMapper;
 
 namespace ApplicationLogics.AutosysServer.Mapping
@@ -18,7 +17,7 @@ namespace ApplicationLogics.AutosysServer.Mapping
     {
 
         /// <summary>
-        /// This method will initialize mapping profiles 
+        /// This method will initialize mapping profiles between the logical layer <see cref="ApplicationLogics"/> and the storage layer <see cref="Storage"/>
         /// for Automapper.
         /// To add more profiles just add the following line below an existing profile
         /// 
@@ -29,14 +28,10 @@ namespace ApplicationLogics.AutosysServer.Mapping
         {
             Mapper.Initialize(cfg =>
             {
-                //ApplicationLogic Profiles
+                // UserManagement profiles 
                 cfg.AddProfile(new UserManagementStorageProfile());
 
-                //WebApi Profiles
-                cfg.AddProfile(new UserAndTeamDTOProfile());
-
-
-                //WebApi Profiles
+                // StudyManagement Profiles 
                 cfg.AddProfile(new StudyManagementStorageProfile());
                 
                 //PaperManagement Profiles

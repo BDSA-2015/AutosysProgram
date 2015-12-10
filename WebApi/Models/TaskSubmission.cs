@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SystematicStudyService.Models
+namespace WebApi.Models
 {
     /// <summary>
     /// A submission by a user for a requested task.

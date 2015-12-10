@@ -44,7 +44,7 @@ namespace StorageTests.Utility
             set.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
             set.Setup(m => m.Find(It.IsAny<object[]>()))
-                .Returns<object[]>(ids => items.FirstOrDefault(d => key(d) == (int) ids[0]));
+                .Returns<object[]>(ids => items.FirstOrDefault(d => key(d) == (int) ids[0])); // Find first id on first spot 
 
             set.Setup(m => m.Add(It.IsAny<T>())).Callback<T>(a => items.Add(a));
             set.Setup(m => m.Remove(It.IsAny<T>())).Callback<T>(a => items.Remove(a));
@@ -52,50 +52,47 @@ namespace StorageTests.Utility
             return set;
         }
 
-        ///// <summary>
-        ///// This helper method is used to create a mocked DbSet from a stored entity.
-        ///// This is used in all repository tests to setup a mock for a given entity DbSet passed in a repository.
-        ///// </summary>
-        ///// <typeparam name="T">
-        ///// The entity collection to mock, e.g. users.  
-        ///// </typeparam>
-        ///// <param name="items">
-        ///// Items to add to the collection, e.g. a list of users. 
-        ///// </param>
-        ///// <param name="key">
-        ///// Id of the entity, e.g. 
-        ///// </param>
-        ///// <returns>
-        ///// A Mock DbSet used to test async repositories. 
-        ///// </returns>
-        //public static Mock<DbSet<T>> CreateAsyncMockDbSet<T>(ICollection<T> items, Func<T, int> key) where T : class
-        //{
-        //    var data = items.AsQueryable();
-        //    var mockSet = new Mock<DbSet<T>>();
+        /// <summary>
+        /// This helper method is used to create a mocked DbSet from a stored entity.
+        /// This is used in all repository tests to setup a mock for a given entity DbSet passed in a repository.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The entity collection to mock, e.g. users.  
+        /// </typeparam>
+        /// <param name="items">
+        /// Items to add to the collection, e.g. a list of users. 
+        /// </param>
+        /// <param name="key">
+        /// Id of the entity, e.g. 
+        /// </param>
+        /// <returns>
+        /// A Mock DbSet used to test async repositories. 
+        /// </returns>
+        public static Mock<DbSet<T>> CreateAsyncMockDbSet<T>(ICollection<T> items, Func<T, int> key) where T : class
+        {
+            var data = items.AsQueryable();
+            var mockSet = new Mock<DbSet<T>>();
 
-        //    mockSet.As<IDbAsyncEnumerable<T>>()
-        //        .Setup(m => m.GetAsyncEnumerator())
-        //        .Returns(new TestDbAsyncEnumerator<T>(data.GetEnumerator()));
+            mockSet.As<IDbAsyncEnumerable<T>>()
+                .Setup(m => m.GetAsyncEnumerator())
+                .Returns(new TestDbAsyncEnumerator<T>(data.GetEnumerator()));
 
-        //    mockSet.As<IQueryable<T>>()
-        //        .Setup(m => m.Provider)
-        //        .Returns(new TestDbAsyncQueryProvider<T>(data.Provider));
+            mockSet.As<IQueryable<T>>()
+                .Setup(m => m.Provider)
+                .Returns(new TestDbAsyncQueryProvider<T>(data.Provider));
+            
+            mockSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
-        //    mockSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(data.Expression);
-        //    mockSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
-        //    mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mockSet.Setup(m => m.FindAsync(It.IsAny<object[]>())) // <Task<object[]>>
+                .Returns<object[]>(ids => Task.FromResult(items.FirstOrDefault(d => key(d) == (int)ids[0]))); // Set first id to first item 
 
-        //    mockSet.Setup(m => m.Find(It.IsAny<object[]>()))
-        //        .Returns<object[]>(ids => items.FirstOrDefault(d => key(d) == (int) ids[0]));
+            mockSet.Setup(m => m.Add(It.IsAny<T>())).Callback<T>(a => items.Add(a));
+            mockSet.Setup(m => m.Remove(It.IsAny<T>())).Callback<T>(a => items.Remove(a));
 
-        //    // mockSet.Setup(m => m.FindAsync(It.IsAny<Task<object[]>>()))
-        //    //    .ReturnsAsync(ids => items.Single);
-
-        //    mockSet.Setup(m => m.Add(It.IsAny<T>())).Callback<T>(a => items.Add(a));
-        //    mockSet.Setup(m => m.Remove(It.IsAny<T>())).Callback<T>(a => items.Remove(a));
-
-        //    return mockSet;
-        //}
+            return mockSet;
+        }
 
     }
 }

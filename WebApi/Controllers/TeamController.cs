@@ -1,15 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
-using SystematicStudyService.Models;
+using ApplicationLogics.AutosysServer;
+using ApplicationLogics.UserManagement;
+using Team = SystematicStudyService.Models.Team;
 
-namespace SystematicStudyService.Controllers
+namespace WebApi.Controllers
 {
     /// <summary>
     /// Controller to access and modify teams.
     /// </summary>
     public class TeamController : ApiController
     {
+
+        /*
+        private IDisposable _facade;
+         
+        public UserController(IDisposable facade)
+        {
+            _facade = facade;
+        }
+        */
+
+        private readonly MainHandler _facade;
+
+        // Injecting a facade with IDisposable 
+        public TeamController(MainHandler facade)
+        {
+            _facade = facade;
+        }
+
         /// <summary>
         /// Get all teams.
         /// </summary>
@@ -62,6 +82,15 @@ namespace SystematicStudyService.Controllers
         {
             // DELETE: api/Team/5
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Clean up, allows to release resources per request when using underlying logic to access database. 
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            // _facade.Dispose(); TODO make all interfaces down to db implement IDisposable 
+            base.Dispose(disposing);
         }
     }
 }

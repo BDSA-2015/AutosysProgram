@@ -37,7 +37,7 @@ namespace ApplicationLogicTests.StorageFasade
         {
             //Arrange
             var storedPaper = new StoredPaper() {Id = 0, Type = "article"};
-            mockRepo.Setup(r => r.CreateOrUpdate(storedPaper)).Returns(storedPaper.Id);
+            mockRepo.Setup(r => r.Create(storedPaper)).Returns(storedPaper.Id);
             var fieldTypes = new List<string>();
             fieldTypes.Add("author");
             fieldTypes.Add("title");
@@ -62,7 +62,7 @@ namespace ApplicationLogicTests.StorageFasade
         {
             //Arrange
             var storedPaper = new StoredPaper() { Id = 0, Type = "article" };
-            mockRepo.Setup(r => r.CreateOrUpdate(storedPaper)).Returns(storedPaper.Id);
+            mockRepo.Setup(r => r.Create(storedPaper)).Returns(storedPaper.Id);
 
             //Act
             var paperId = _facade.Create(null);

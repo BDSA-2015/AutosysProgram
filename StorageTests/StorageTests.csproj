@@ -95,14 +95,14 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DbContextTests.cs" />
-    <Compile Include="RepositoryTests\DbRepositoryTests.cs" />
+    <Compile Include="RepositoryIntegrationTests\RepositoryIntegrationTest.cs" />
+    <Compile Include="RepositoryUnitTests\AsyncUserRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryTests\StudyRepositoryTests.cs" />
-    <Compile Include="RepositoryTests\TeamRepositoryTests.cs" />
-    <Compile Include="RepositoryTests\TaskRepositoryTests.cs" />
-    <Compile Include="RepositoryTests\ProtocolRepositoryTests.cs" />
-    <Compile Include="RepositoryTests\UserRepositoryTests.cs" />
-    <Compile Include="Utility\DbRepositoryStub.cs" />
+    <Compile Include="RepositoryUnitTests\StudyRepositoryTests.cs" />
+    <Compile Include="RepositoryUnitTests\TeamRepositoryTests.cs" />
+    <Compile Include="RepositoryUnitTests\TaskRepositoryTests.cs" />
+    <Compile Include="RepositoryUnitTests\ProtocolRepositoryTests.cs" />
+    <Compile Include="RepositoryUnitTests\UserRepositoryTests.cs" />
     <Compile Include="Utility\IDbContext.cs" />
     <Compile Include="Utility\IUserContext.cs" />
     <Compile Include="Utility\MockUtility.cs" />
