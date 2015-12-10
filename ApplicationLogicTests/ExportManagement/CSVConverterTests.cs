@@ -1,16 +1,23 @@
-﻿// CSVConverterTests.cs is a part of Autosys project in BDSA-2015. Created: 24, 11, 2015.
-// Creaters: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
-// Jacob Mullit Møiniche.
+﻿//// CSVConverterTests.cs is a part of Autosys project in BDSA-2015. Created: 24, 11, 2015.
+//// Creaters: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
+//// Jacob Mullit Møiniche.
 
 using System;
 using System.Collections.Generic;
 using ApplicationLogics.ExportManagement;
+using ApplicationLogics.ExportManagement.CsvConverter;
+using ApplicationLogics.PaperManagement;
 using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
+using ApplicationLogics.UserManagement.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApplicationLogicTests.ExportManagement
 {
+    /// <summary>
+    /// Class for testing the conversion of Protocol Objects to strings following the European CSV format
+    /// using a ; as separator as described at https://en.wikipedia.org/wiki/Comma-separated_values
+    /// </summary>
     [TestClass]
     public class CsvConverterTests
     {
@@ -22,122 +29,105 @@ namespace ApplicationLogicTests.ExportManagement
             _converter = new CsvConverter();
         }
 
+        /// <summary>
+        /// Tests the conversion to a CSV formatted string of a Protocol with only one exclusion and inclusion criteria
+        /// </summary>
         [TestMethod]
-        public void ConvertEmptyAcceptedInputTest()
+        public void ConvertSingleExAndInCriteriaProtocolTest()
         {
             //Arrange
-            var protocol = new Protocol();
-            protocol.ExclusionCriteria = new List<Criteria>();
-            protocol.InclusionCriteria = new List<Criteria>();
-
-            //Act
-            CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
-
-            //Assert
-            Assert.AreEqual("", csvFile.ExclusionCriteria);
-            Assert.AreEqual("", csvFile.InclusionCriteria);
-        }
-
-        [TestMethod]
-        public void ConvertSingleAcceptedInputTest()
-        {
-            //Arrange
-            var protocol = new Protocol();
-            protocol.ExclusionCriteria = new List<Criteria>();
-            protocol.InclusionCriteria = new List<Criteria>();
-
-            //Act
-            protocol.ExclusionCriteria.Add(new Criteria {Name = $"criteria{0}"});
-            protocol.InclusionCriteria.Add(new Criteria {Name = $"criteria{0}"});
-
-            CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
-
-            //Assert
-            Assert.AreEqual("criteria0", csvFile.ExclusionCriteria);
-            Assert.AreEqual("criteria0", csvFile.InclusionCriteria);
-        }
-
-        [TestMethod]
-        public void ConvertManyAcceptedInputTest()
-        {
-            //Arrange
-            var protocol = new Protocol();
-            protocol.ExclusionCriteria = new List<Criteria>();
-            protocol.InclusionCriteria = new List<Criteria>();
-
-            //Act
-            for (int i = 0; i < 3; i++)
+            var protocol = new Protocol()
             {
-                protocol.ExclusionCriteria.Add(new Criteria {Name = $"criteria{i}"});
-                protocol.InclusionCriteria.Add(new Criteria {Name = $"criteria{i}"});
-            }
+                StudyName = "Software Study", Description = "For fun",
+                Phases = new List<Phase>()
+                {
+                    new Phase()
+                    {
+                        ExclusionCriteria = new List<Criteria>()
+                        {
+                            new Criteria() {Name = "Fruit Products", Description = "Not eatable"}
+                        },
+                        InclusionCriteria = new List<Criteria>()
+                        {
+                            new Criteria() {Name = "Windows", Description = "See the light"}
+                        },
+                        AssignedRole = new Dictionary<Role, List<User>>()
+                        {
+                            
+                        },
+                        AssignedTask = new Dictionary<TaskRequest, List<User>>()
+                        {
+                            
+                        },
+                        Reports = new List<Paper>()
+                        {
+                            
+                        },
+                        UnassignedTasks = new List<TaskRequest>()
+                    }
+                }
+            };   
 
-            CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
+            //Act
+            var csvFile = _converter.Convert(protocol);
 
             //Assert
-            Assert.AreEqual("criteria0,criteria1,criteria2", csvFile.ExclusionCriteria);
-            Assert.AreEqual("criteria0,criteria1,criteria2", csvFile.InclusionCriteria);
+            Assert.IsTrue(csvFile.Contains("Study;Study Description;Phase;Exclusion Criteria;Inclusion Criteria;" +
+                               "Assigned Tasks;Assigned Roles;Unassigned Tasks;Resources;" +
+                                           "Software Study;For fun;Phase1;Fruit Products,;Windows,"));
         }
 
+        /// <summary>
+        /// Tests the conversion to a CSV formatted string of a Protocol with multiple exclusion and inclusion criteria
+        /// </summary>
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public void ConvertNullCriteriaInputTest()
+        public void ConvertMultipleExAndInCriteriaProtocolTest()
         {
             //Arrange
-            var protocol = new Protocol();
-            protocol.ExclusionCriteria = new List<Criteria>();
-            protocol.InclusionCriteria = new List<Criteria>();
+            var protocol = new Protocol()
+            {
+                StudyName = "Software Study",
+                Description = "For fun",
+                Phases = new List<Phase>()
+                {
+                    new Phase()
+                    {
+                        ExclusionCriteria = new List<Criteria>()
+                        {
+                            new Criteria() {Name = "Fruit Products", Description = "Not eatable"},
+                            new Criteria() {Name = "Pricy Hardware", Description = "Unaffordable"},
+                            new Criteria() {Name = "Bad stuff", Description = "Bad"}
+                        },
+                        InclusionCriteria = new List<Criteria>()
+                        {
+                            new Criteria() {Name = "Windows", Description = "See the light"},
+                            new Criteria() {Name = "Quality Hardware", Description = "Powerful"}
+                        },
+                        AssignedRole = new Dictionary<Role, List<User>>()
+                        {
+
+                        },
+                        AssignedTask = new Dictionary<TaskRequest, List<User>>()
+                        {
+
+                        },
+                        Reports = new List<Paper>()
+                        {
+
+                        },
+                        UnassignedTasks = new List<TaskRequest>()
+                    }
+                }
+            };
 
             //Act
-            protocol.ExclusionCriteria.Add(null);
+            var csvFile = _converter.Convert(protocol);
 
-            var csvFile = _converter.Convert(protocol) as CsvFile;
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public void ConvertCriteriaNameNullInputTest()
-        {
-            //Arrange
-            var protocol = new Protocol();
-            protocol.ExclusionCriteria = new List<Criteria>();
-            protocol.InclusionCriteria = new List<Criteria>();
-
-            //Act
-            protocol.ExclusionCriteria.Add(new Criteria {Name = null});
-
-            CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public void ConvertCriteriaNameEmptyInputTest()
-        {
-            //Arrange
-            var protocol = new Protocol();
-            protocol.ExclusionCriteria = new List<Criteria>();
-            protocol.InclusionCriteria = new List<Criteria>();
-
-            //Act
-            protocol.ExclusionCriteria.Add(new Criteria {Name = ""});
-
-            CsvFile csvFile = _converter.Convert(protocol) as CsvFile;
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public void ConvertNullCriteriaListInputTest()
-        {
-            //Act
-            CsvFile csvFile = _converter.Convert(null) as CsvFile;
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public void ConvertNullProtocolInputTest()
-        {
-            //Act
-            CsvFile csvFile = _converter.Convert(null) as CsvFile;
+            //Assert
+            Assert.IsTrue(csvFile.Contains("Study;Study Description;Phase;Exclusion Criteria;Inclusion Criteria;" +
+                               "Assigned Tasks;Assigned Roles;Unassigned Tasks;Resources;" +
+                                           "Software Study;For fun;Phase1;Fruit Products,Pricy Hardware,Bad stuff,;" +
+                                           "Windows,Quality Hardware,"));
         }
     }
 }
