@@ -12,7 +12,7 @@ namespace WebApi.Controllers
     /// Controller to access information about a study.
     /// </summary>
     [RoutePrefix("api/Study")]
-    public class StudyController : ApiController
+    public class StudyController : ApiController, IStudyControllerAdapter
     {
 
         /*

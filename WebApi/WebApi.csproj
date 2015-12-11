@@ -147,6 +147,7 @@
   <ItemGroup>
     <Compile Include="Adapter\IAdapter.cs" />
     <Compile Include="Adapter\MainAdapter.cs" />
+    <Compile Include="Adapter\StudyControllerAdaptorcs.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Adapter\IStudyControllerAdapter.cs" />
     <Compile Include="Controllers\StudyController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\UserController.cs" />
