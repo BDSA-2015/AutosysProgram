@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.WebPages;
 using ApplicationLogics.StorageFasade;
+using ApplicationLogics.StorageFasade.Interface;
 using NUnit.Framework.Constraints;
 
 namespace ApplicationLogics.PaperManagement
@@ -16,9 +17,9 @@ namespace ApplicationLogics.PaperManagement
     {
         //Used to generate Bibtex files, which later is stored as Papers in the database
         private IParser _parser;
-        private PaperFacade _paperFacade; 
+        private IFacade<Paper> _paperFacade; 
 
-        public PaperHandler(IParser parser, PaperFacade paperFacade)
+        public PaperHandler(IParser parser, IFacade<Paper> paperFacade)
         {
             _parser = parser;
             _paperFacade = paperFacade;
@@ -29,14 +30,17 @@ namespace ApplicationLogics.PaperManagement
         /// </summary>
         /// <param name="file">The bibtex file which is parsed to the program</param>
         /// <returns>A List of Papers which was valid for parsing</returns>
-        public IEnumerable<int> ImportBibtex(string file)
+        public void ImportBibtex(string file)
         {
             if (file.IsEmpty() || file == null)
             {
                 throw new ArgumentNullException("The given bibtex file cannot be null nor empty");
             }
 
-            return _parser.Parse(file).Select(paper => _paperFacade.Create(paper));
+            foreach (var paper in _parser.Parse(file))
+            {
+                _paperFacade.Create(paper);
+            }
         }
     }
 }

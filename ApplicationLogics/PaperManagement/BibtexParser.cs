@@ -19,7 +19,10 @@ namespace ApplicationLogics.PaperManagement
             try
             {
                 var bibFile = BibtexImporter.FromString(@file);
-                return bibFile.Entries.Select(bib => new Paper(bib.Type.Trim(), bib.Tags.Keys, bib.Tags.Values) { ResourceRef = bib.Key });
+                IEnumerable<Paper> papers;
+                papers = bibFile.Entries.Select(bib => new Paper(bib.Type.Trim(), bib.Tags.Keys, bib.Tags.Values) { ResourceRef = bib.Key });
+
+                return papers;
             }
             catch (ParseException e)
             {
