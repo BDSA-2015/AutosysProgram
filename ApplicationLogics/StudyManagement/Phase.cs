@@ -21,7 +21,7 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
         public string Name { get; set; }
      
-        public string Name { get; set; }
+        
         public Study Study { get; set; }
 
         public List<Paper> Reports { get; set; }
