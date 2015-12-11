@@ -9,15 +9,14 @@ using Storage.Models;
 namespace ApplicationLogics.AutosysServer.Mapping.Profiles
 {
     /// <summary>
-    /// This class will create mappings on application logic entities in 
-    /// PaperManagement subsystem and StoredPaper entities.
+    ///     This class will create mappings on application logic entities in
+    ///     PaperManagement subsystem and StoredPaper entities.
     /// </summary>
     public class PaperManagementStorageProfile : Profile
     {
-
         protected override void Configure()
         {
-           CreatePaperMappings();
+            CreatePaperMappings();
         }
 
 
@@ -29,6 +28,5 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles
             //StoredPaper to Paper
             Mapper.CreateMap<StoredPaper, Paper>();
         }
-         
     }
 }

@@ -131,18 +131,17 @@
     <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
     <Compile Include="ExportManagement\Converter\CsvConverter.cs" />
     <Compile Include="StudyManagement\BibTexFileSearcher.cs" />
-    <Compile Include="StorageFasade\CriteriaFacade.cs" />
-    <Compile Include="StorageFasade\DatafieldFacade.cs" />
-    <Compile Include="StorageFasade\Interface\IFacade.cs" />
-    <Compile Include="StorageFasade\PaperFacade.cs" />
-    <Compile Include="StorageFasade\PhaseFacade.cs" />
-    <Compile Include="StorageFasade\ProtocolFacade.cs" />
-    <Compile Include="StorageFasade\RoleFacade.cs" />
-    <Compile Include="StorageFasade\StudyFacade.cs" />
-    <Compile Include="StorageFasade\TaskRequestFacade.cs" />
-    <Compile Include="StorageFasade\TeamFacade.cs" />
-    <Compile Include="StorageFasade\UserFacade.cs" />
-    <Compile Include="StudyManagement\ConflictingData.cs" />
+    <Compile Include="StorageAdapter\CriteriaAdapter.cs" />
+    <Compile Include="StorageAdapter\DatafieldAdapter.cs" />
+    <Compile Include="StorageAdapter\Interface\IAdapter.cs" />
+    <Compile Include="StorageAdapter\PaperAdapter.cs" />
+    <Compile Include="StorageAdapter\PhaseAdapter.cs" />
+    <Compile Include="StorageAdapter\ProtocolAdapter.cs" />
+    <Compile Include="StorageAdapter\RoleAdapter.cs" />
+    <Compile Include="StorageAdapter\StudyAdapter.cs" />
+    <Compile Include="StorageAdapter\TaskRequestAdapter.cs" />
+    <Compile Include="StorageAdapter\TeamAdapter.cs" />
+    <Compile Include="StorageAdapter\UserAdapter.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\CriteriaFactory.cs" />
     <Compile Include="StudyManagement\CriteriaLimitation.cs" />
@@ -168,7 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Storage\Storage.csproj">
-      <Project>{390d70e5-5e15-4344-915a-d570f5bca74d}</Project>
+      <Project>{390D70E5-5E15-4344-915A-D570F5BCA74D}</Project>
       <Name>Storage</Name>
     </ProjectReference>
   </ItemGroup>

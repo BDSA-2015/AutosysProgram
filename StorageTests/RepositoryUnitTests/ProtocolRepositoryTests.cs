@@ -12,32 +12,30 @@ using StorageTests.Utility;
 
 namespace StorageTests.RepositoryUnitTests
 {
-
     /// <summary>
-    /// This test class is used to test the Entity Framework ProtocolRepositorys.
-    /// The repository is a concrete implementation of the repository interface and is used to write data to a database.
-    /// Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
+    ///     This test class is used to test the Entity Framework ProtocolRepositorys.
+    ///     The repository is a concrete implementation of the repository interface and is used to write data to a database.
+    ///     Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
     /// </summary>
     [TestClass]
     public class ProtocolRepositoryTests
     {
+        private Mock<IAutoSysContext> _context; // Use IAutoSys instead of concrete AutoSysDbModel
 
         private IList<StoredProtocol> _data;
-        private Mock<IAutoSysContext> _context; // Use IAutoSys instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredProtocol>> _mockSet;
         private ProtocolRepository _repository;
 
         /// <summary>
-        /// This method sets up data used to mock a collection of protocols in a DbContext used by the ProtocolRepository. 
+        ///     This method sets up data used to mock a collection of protocols in a DbContext used by the ProtocolRepository.
         /// </summary>
         [TestInitialize]
         public void Initialize()
         {
-
             _data = new List<StoredProtocol>
             {
-                new StoredProtocol { Id = 1, Description = "Year Protocol" }, // TODO add phases
-                new StoredProtocol { Id = 2, Description = "Year Protocol" }
+                new StoredProtocol {Id = 1, Description = "Year Protocol"}, // TODO add phases
+                new StoredProtocol {Id = 2, Description = "Year Protocol"}
             };
 
             _mockSet = MockUtility.CreateAsyncMockDbSet(_data, u => u.Id);
@@ -62,7 +60,7 @@ namespace StorageTests.RepositoryUnitTests
 
         #region Old Tests 
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof (ArgumentNullException))]
         public async Task Create_NullException()
         {
             await _repository.Create(null);
@@ -76,17 +74,17 @@ namespace StorageTests.RepositoryUnitTests
 
             // Act 
             var id = await _repository.Create(protocol);
-        
+
             // Assert
             _context.Verify(c => c.SaveChangesAsync(), Times.Once);
-
         }
 
         /// <summary>
-        /// This test uses Moq to create a context and then creates a DbSet of <see cref="StoredProtocol"/>.
-        /// This is returned from the context's <see cref="StoredProtocol"/> property. The context is used to create a new <see cref="ProtocolRepository"/>, 
-        /// which is then used to create a new <see cref="StoredProtocol"/>, using the Create method. 
-        /// Finally, the test verifies that the repository added a new protocol and called SaveChangesAsync on the context.
+        ///     This test uses Moq to create a context and then creates a DbSet of <see cref="StoredProtocol" />.
+        ///     This is returned from the context's <see cref="StoredProtocol" /> property. The context is used to create a new
+        ///     <see cref="ProtocolRepository" />,
+        ///     which is then used to create a new <see cref="StoredProtocol" />, using the Create method.
+        ///     Finally, the test verifies that the repository added a new protocol and called SaveChangesAsync on the context.
         /// </summary>
         [TestMethod]
         public async Task Create_SavesProtocolInContext()
@@ -103,7 +101,6 @@ namespace StorageTests.RepositoryUnitTests
             // Assert 
             // mockSet.Verify(m => m.Add(It.IsAny<StoredProtocol>()), Times.Once());
             mockContext.Verify(m => m.SaveChangesAsync(), Times.Once());
-
         }
 
         [TestMethod]
@@ -120,8 +117,8 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         /// <summary>
-        /// Test is true for EF but not for mocked interface that requires setup.
-        /// This test is useless because it does not check logic but tests if EF correctly increments id and Mock works.
+        ///     Test is true for EF but not for mocked interface that requires setup.
+        ///     This test is useless because it does not check logic but tests if EF correctly increments id and Mock works.
         /// </summary>
         /// <returns></returns>
         [TestMethod]
@@ -133,7 +130,7 @@ namespace StorageTests.RepositoryUnitTests
             var mockContext = new Mock<IAutoSysContext>();
 
             mockContext.Setup(m => m.Protocols).Returns(mockSet.Object);
-            var protocol = new StoredProtocol { };
+            var protocol = new StoredProtocol();
 
             // Act 
             var service = new ProtocolRepository(mockContext.Object);
@@ -142,12 +139,12 @@ namespace StorageTests.RepositoryUnitTests
             // Assert 
             Assert.AreEqual(protocol.Id, id); // True for EF but not for interface 
         }
-        
+
         [TestMethod]
         public async Task Update_SetAttachProtocol_IsCalled()
         {
             // Arrange 
-            var protocol = new StoredProtocol { Id = 1, Description = "New Description" };
+            var protocol = new StoredProtocol {Id = 1, Description = "New Description"};
 
             // Act 
             await _repository.UpdateIfExists(protocol);
@@ -194,7 +191,7 @@ namespace StorageTests.RepositoryUnitTests
 
         #region Create Operation 
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))] // Assert 
+        [TestMethod, ExpectedException(typeof (ArgumentNullException))] // Assert 
         public async Task Create_NullInput_ExceptionThrown()
         {
             // Arrange and act 
@@ -205,28 +202,26 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Create_Attatch_IsCalled()
         {
             // Arrange
-            var validProtocol = new StoredProtocol { Id = 0 };
+            var validProtocol = new StoredProtocol {Id = 0};
 
             // Act 
             await _repository.Create(validProtocol);
 
             // Assert
             _context.Verify(c => c.Attach(validProtocol), Times.Once);
-
         }
 
         [TestMethod]
         public async Task Create_Add_IsCalled()
         {
             // Arrange
-            var validProtocol = new StoredProtocol { Id = 0 };
+            var validProtocol = new StoredProtocol {Id = 0};
 
             // Act 
             await _repository.Create(validProtocol);
 
             // Assert
             _context.Verify(c => c.Add(validProtocol), Times.Once);
-
         }
 
         [TestMethod]
@@ -239,10 +234,9 @@ namespace StorageTests.RepositoryUnitTests
 
             // Assert
             _context.Verify(c => c.SaveChangesAsync(), Times.Once);
-
         }
 
-        #endregion 
+        #endregion
 
         #region Read Operation 
 
@@ -280,13 +274,14 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
-        public void ReadAll_IQueryable_IsCalled() // Not async, IQueryable is not executed by db until used by .ToList() 
+        public void ReadAll_IQueryable_IsCalled()
+            // Not async, IQueryable is not executed by db until used by .ToList() 
         {
             // Arrange and act 
             var protocols = _repository.Read();
 
             // Assert 
-            _context.Verify(c => c.Protocols.AsQueryable<StoredProtocol>(), Times.Once);
+            _context.Verify(c => c.Protocols.AsQueryable(), Times.Once);
         }
 
         #endregion
@@ -304,12 +299,13 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_FindAsync_IsCalled()
         {
             // Arrange 
-            var firstProtocolUpdated = new StoredProtocol { Id = 1, Description = "New Protocol" };
+            var firstProtocolUpdated = new StoredProtocol {Id = 1, Description = "New Protocol"};
 
             // Act 
             await _repository.UpdateIfExists(firstProtocolUpdated);
 
-            _mockSet.Setup(t => t.FindAsync(It.IsAny<StoredProtocol>().Id)).Returns(Task.FromResult(It.IsAny<StoredProtocol>()));
+            _mockSet.Setup(t => t.FindAsync(It.IsAny<StoredProtocol>().Id))
+                .Returns(Task.FromResult(It.IsAny<StoredProtocol>()));
 
             // Assert
             _context.Verify(c => c.Users.FindAsync(firstProtocolUpdated.Id), Times.Once);
@@ -319,7 +315,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_Attach_IsCalled()
         {
             // Arrange 
-            var firstStudyUpdated = new StoredProtocol { Id = 1, Description = "New Protocol" };
+            var firstStudyUpdated = new StoredProtocol {Id = 1, Description = "New Protocol"};
 
             // Act 
             await _repository.UpdateIfExists(firstStudyUpdated);
@@ -332,7 +328,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SetModified_IsCalled()
         {
             // Arrange 
-            var firstProtocolUpdated = new StoredProtocol { Id = 1, Description = "New Protocol" };
+            var firstProtocolUpdated = new StoredProtocol {Id = 1, Description = "New Protocol"};
 
             // Act 
             await _repository.UpdateIfExists(firstProtocolUpdated);
@@ -345,7 +341,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SaveChangesAsync_IsCalled()
         {
             // Arrange 
-            var firstProtocolUpdated = new StoredProtocol { Id = 1, Description = "New Protocol" };
+            var firstProtocolUpdated = new StoredProtocol {Id = 1, Description = "New Protocol"};
 
             // Act 
             await _repository.UpdateIfExists(firstProtocolUpdated);
@@ -358,7 +354,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_ValidProtocol_ReturnsTrue()
         {
             // Arrange 
-            var firstProtocolUpdated = new StoredProtocol { Id = 1, Description = "New Protocol" };
+            var firstProtocolUpdated = new StoredProtocol {Id = 1, Description = "New Protocol"};
 
             // Act 
             var isUpdated = await _repository.UpdateIfExists(firstProtocolUpdated);
@@ -434,7 +430,5 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         #endregion
-
     }
-
 }

@@ -4,25 +4,26 @@
 
 using System;
 using System.Collections.Generic;
-using ApplicationLogics.StorageFasade.Interface;
+using System.Threading.Tasks;
+using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Utils;
 
 namespace ApplicationLogics.UserManagement
 {
     /// <summary>
-    /// Responsible for Team operations
+    ///     Responsible for Team operations
     /// </summary>
     public class TeamHandler
     {
-        private readonly IFacade<Team> _storage;
+        private readonly IAdapter<Team> _storage;
 
-        public TeamHandler(IFacade<Team> storage)
+        public TeamHandler(IAdapter<Team> storage)
         {
             _storage = storage;
         }
 
         /// <summary>
-        /// Validates if a team exists in database.
+        ///     Validates if a team exists in database.
         /// </summary>
         /// <param name="id">team Id</param>
         /// <returns>bool of team existence</returns>
@@ -32,19 +33,19 @@ namespace ApplicationLogics.UserManagement
         }
 
         /// <summary>
-        /// Creates a new team
+        ///     Creates a new team
         /// </summary>
         /// <param name="team"> Team Object</param>
-        public int Create(Team team)
+        public Task<int> Create(Team team)
         {
             if (!TeamValidator.ValidateEnteredTeamData(team))
                 throw new ArgumentException("Team data is invalid");
 
-           return _storage.Create(team);
+            return _storage.Create(team);
         }
 
         /// <summary>
-        /// DeleteIfExists a team from database
+        ///     DeleteIfExists a team from database
         /// </summary>
         /// <param name="id">id of team</param>
         public void Delete(int id)
@@ -53,7 +54,7 @@ namespace ApplicationLogics.UserManagement
                 throw new ArgumentException("Team does not exist");
 
             var team = _storage.Read(id);
-            _storage.Delete(team);
+            _storage.DeleteIfExists(team.Id);
         }
 
         /// <summary>
@@ -65,11 +66,11 @@ namespace ApplicationLogics.UserManagement
         {
             if (!TeamValidator.ValidateEnteredTeamData(team)) throw new ArgumentException("Team data is invalid");
             if (!TeamValidator.ValidateExistence(oldId, _storage)) throw new ArgumentException("Team does not exist");
-            _storage.Update(team);
+            _storage.UpdateIfExists(team);
         }
 
         /// <summary>
-        /// Returns every teams stored in database
+        ///     Returns every teams stored in database
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Team> GetAll()
@@ -78,12 +79,12 @@ namespace ApplicationLogics.UserManagement
         }
 
         /// <summary>
-        /// Returns every teams stored in database
+        ///     Returns every teams stored in database
         /// </summary>
         /// <returns></returns>
-        public Team Read(int id)
+        public Task<Team> Read(int id)
         {
-            if(!TeamValidator.ValidateId(id))
+            if (!TeamValidator.ValidateId(id))
                 throw new ArgumentException("Id is not valid");
             return _storage.Read(id);
         }

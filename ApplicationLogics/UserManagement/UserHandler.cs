@@ -4,27 +4,28 @@
 
 using System;
 using System.Collections.Generic;
-using ApplicationLogics.StorageFasade.Interface;
+using System.Threading.Tasks;
+using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Entities;
 using ApplicationLogics.UserManagement.Utils;
 
 namespace ApplicationLogics.UserManagement
 {
     /// <summary>
-    /// This class is responsible for user operations
+    ///     This class is responsible for user operations
     /// </summary>
     public class UserHandler
     {
-        private readonly IFacade<User> _storage;
+        private readonly IAdapter<User> _storage;
 
-        public UserHandler(IFacade<User> storage)
+        public UserHandler(IAdapter<User> storage)
         {
             _storage = storage;
         }
 
 
         /// <summary>
-        /// Validates if a user exists in database.
+        ///     Validates if a user exists in database.
         /// </summary>
         /// <param name="id">user Id</param>
         /// <returns>bool of user existence</returns>
@@ -34,10 +35,10 @@ namespace ApplicationLogics.UserManagement
         }
 
         /// <summary>
-        /// Creates a user with information from a userDTo
+        ///     Creates a user with information from a userDTo
         /// </summary>
         /// <param name="user">User object</param>
-        public int Create(User user)
+        public Task<int> Create(User user)
         {
             if (user == null)
                 throw new ArgumentException("User is null");
@@ -48,7 +49,7 @@ namespace ApplicationLogics.UserManagement
         }
 
         /// <summary>
-        /// Edit and update an existing user
+        ///     Edit and update an existing user
         /// </summary>
         /// <param name="oldId">id of user to update</param>
         /// <param name="user">User object</param>
@@ -61,11 +62,11 @@ namespace ApplicationLogics.UserManagement
             if (!UserValidator.ValidateExistence(oldId, _storage))
                 throw new ArgumentException("User does not exist");
 
-            _storage.Update(user);
+            _storage.UpdateIfExists(user);
         }
 
         /// <summary>
-        /// DeleteIfExists an existing user
+        ///     DeleteIfExists an existing user
         /// </summary>
         /// <param name="id">id of user to delete.</param>
         public void Delete(int id)
@@ -74,15 +75,15 @@ namespace ApplicationLogics.UserManagement
                 throw new ArgumentException("User does not exist");
 
             var userToDelete = _storage.Read(id);
-            _storage.Delete(userToDelete);
+            _storage.DeleteIfExists(userToDelete.Id);
         }
 
         /// <summary>
-        /// Get a user from the database
+        ///     Get a user from the database
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public User Read(int id)
+        public Task<User> Read(int id)
         {
             if (!UserValidator.ValidateId(id))
                 throw new ArgumentException("Id is not valid");
@@ -91,7 +92,7 @@ namespace ApplicationLogics.UserManagement
         }
 
         /// <summary>
-        /// Get every user from the database.
+        ///     Get every user from the database.
         /// </summary>
         /// <returns>All users</returns>
         public IEnumerable<User> GetAll()

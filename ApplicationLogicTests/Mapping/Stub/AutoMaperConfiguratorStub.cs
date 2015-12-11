@@ -7,17 +7,14 @@ using AutoMapper;
 namespace ApplicationLogicTests.Mapping.Stub
 {
     /// <summary>
-    /// This stub is used to configure the mapping profile for auto
-    /// mapper. 
+    ///     This stub is used to configure the mapping profile for auto
+    ///     mapper.
     /// </summary>
     public class AutoMaperConfiguratorStub
     {
         public static void Configure()
         {
-            Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile(new MappingProfileStub());
-            });
+            Mapper.Initialize(cfg => { cfg.AddProfile(new MappingProfileStub()); });
         }
     }
 }

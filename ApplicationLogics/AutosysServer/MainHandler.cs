@@ -4,13 +4,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.PaperManagement;
 using ApplicationLogics.ProtocolManagement;
-using ApplicationLogics.StorageFasade;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
-using System.Threading.Tasks;
 
 namespace ApplicationLogics.AutosysServer
 {
@@ -30,13 +29,12 @@ namespace ApplicationLogics.AutosysServer
         }
 
         /// <summary>
-        /// Initialize Facades buy utilzing a dependency injection container
+        ///     Initialize Facades buy utilzing a dependency injection container
         /// </summary>
         /// <param name="injector"></param>
         private void InitializeHandlers(FacadeInjectionContainer injector)
         {
             _userHandler = new UserHandler(injector.GetUserFasade());
-
         }
 
         /// <summary>
@@ -95,13 +93,13 @@ namespace ApplicationLogics.AutosysServer
         public void GetTasks(int studyId, int userId, int count, TaskRequest.Type type)
         {
             throw new NotImplementedException();
-        } 
+        }
 
         /// <summary>
-        /// Reports the different stages in a study and shows completed tasks per stage for each user.  
+        ///     Reports the different stages in a study and shows completed tasks per stage for each user.
         /// </summary>
-        /// <param name="userId"> 
-        /// If of user related to a given study.
+        /// <param name="userId">
+        ///     If of user related to a given study.
         /// </param>
         public List<TaskRequest> GetStudyOverview(int userId)
         {
@@ -110,24 +108,25 @@ namespace ApplicationLogics.AutosysServer
 
 
         /// <summary>
-        /// Deliver a finished task including a result with modified fields.
-        /// This should return whether or not the task was delivered (e.g., can still be delivered) successfully).
-        /// Can be called several times for the same task in which case the latest value is used (if the task is still editable, which is decided by the server).
+        ///     Deliver a finished task including a result with modified fields.
+        ///     This should return whether or not the task was delivered (e.g., can still be delivered) successfully).
+        ///     Can be called several times for the same task in which case the latest value is used (if the task is still
+        ///     editable, which is decided by the server).
         /// </summary>
         /// <param name="studyId">
-        /// Study holding task.
+        ///     Study holding task.
         /// </param>
         /// <param name="userId">
-        /// User assigned to task.
+        ///     User assigned to task.
         /// </param>
         /// <param name="taskId">
-        /// Id of the task. 
+        ///     Id of the task.
         /// </param>
         /// <param name="modifiedField">
-        /// Datafields that have been changed in the task.
+        ///     Datafields that have been changed in the task.
         /// </param>
         /// <returns>
-        /// A task request with results. 
+        ///     A task request with results.
         /// </returns>
         public TaskRequest DeliverTask(int studyId, int userId, int taskId, string modifiedField)
         {
@@ -136,10 +135,9 @@ namespace ApplicationLogics.AutosysServer
 
 
         /// <summary>
-        /// Retrieves all ids of task requests which have already been delivered and can still be edited.
+        ///     Retrieves all ids of task requests which have already been delivered and can still be edited.
         /// </summary>
         /// <param name="userId">
-        /// 
         /// </param>
         /// <param name="studyId"></param>
         /// <returns></returns>
@@ -155,5 +153,4 @@ namespace ApplicationLogics.AutosysServer
 
         #endregion
     }
-
 }

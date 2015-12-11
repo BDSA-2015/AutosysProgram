@@ -3,7 +3,6 @@
 // Jacob Mullit Møiniche.
 
 using System.Collections.Generic;
-using SystematicStudyService.Models;
 
 namespace ApplicationLogics.StudyManagement
 {
@@ -20,7 +19,7 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         /// Filters task requests.
         /// </summary>
-        public enum Progress
+        public enum Filter
         {
             /// <summary>
             /// Only list remaining tasks.
@@ -35,7 +34,7 @@ namespace ApplicationLogics.StudyManagement
             /// </summary>
             Done
         }
-
+        
         public Filter TaskType { get; set; }
 
         public int Id { get; set; }

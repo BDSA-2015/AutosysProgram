@@ -6,12 +6,12 @@ using Storage.Repository.Interface;
 
 namespace Storage.Repository
 {
-
     /// <summary>
-    /// This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on studies in the database. <see cref="StoredStudy"/>
-    /// These are used specifically on a Stored Study DbSet in the AutoSysDbModel.
+    ///     This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on studies in
+    ///     the database. <see cref="StoredStudy" />
+    ///     These are used specifically on a Stored Study DbSet in the AutoSysDbModel.
     /// </summary>
-    public class StudyRepository : IAsyncRepository<StoredStudy>
+    public class StudyRepository : IRepository<StoredStudy>
     {
         private readonly IAutoSysContext _dbContext;
 
@@ -22,116 +22,106 @@ namespace Storage.Repository
         }
 
         /// <summary>
-        /// Creates a new study and returns its id. Throws an ArgumentNullException if the study to create is null. 
+        ///     Creates a new study and returns its id. Throws an ArgumentNullException if the study to create is null.
         /// </summary>
-        /// <param name="user">
-        /// Study to create. 
+        /// <param name="study">
+        ///     Study to create.
         /// </param>
         /// <returns>
-        /// True if study was created. 
+        ///     True if study was created.
         /// </returns>
-        public virtual async Task<int> Create(StoredStudy user)
+        public virtual async Task<int> Create(StoredStudy study)
         {
-            if (user == null) throw new ArgumentNullException(nameof(user));
+            if (study == null) throw new ArgumentNullException(nameof(study));
 
-            _dbContext.Attach(user); // Used for mocking
+            _dbContext.Attach(study); // Used for mocking
             // _dbContext.Set<T>().Attach(study);
-            _dbContext.Add(user); // Used for mocking 
+            _dbContext.Add(study); // Used for mocking 
             //_dbContext.Set<T>().Add(study);
             await _dbContext.SaveChangesAsync();
-            return user.Id;
-
+            return study.Id;
         }
 
         /// <summary>
-        /// Returns a study based on its id.
+        ///     Returns a study based on its id.
         /// </summary>
         /// <param name="id">
-        /// Id of study to find. 
+        ///     Id of study to find.
         /// </param>
         /// <returns>
-        /// Study from id. 
+        ///     Study from id.
         /// </returns>
         public virtual async Task<StoredStudy> Read(int id)
         {
-
             return await _dbContext.Set<StoredStudy>().FindAsync(id);
-
         }
 
         /// <summary>
-        /// Returns all studies. 
+        ///     Returns all studies.
         /// </summary>
         /// <returns>
-        /// All studies. 
+        ///     All studies.
         /// </returns>
         public virtual IQueryable<StoredStudy> Read()
         {
-
             return _dbContext.Set<StoredStudy>().AsQueryable();
-
         }
 
         /// <summary>
-        /// Updates an study in the database if it already exists. If not false is returned to indicate that no UpdateIfExists occurred.
-        /// If the study to update is null an ArgumentNullException is thrown. 
+        ///     Updates an study in the database if it already exists. If not false is returned to indicate that no UpdateIfExists
+        ///     occurred.
+        ///     If the study to update is null an ArgumentNullException is thrown.
         /// </summary>
-        /// <param name="user">
-        /// Study to update.
+        /// <param name="study">
+        ///     Study to update.
         /// </param>
         /// <returns>
-        /// True if study was updated, vice versa. 
+        ///     True if study was updated, vice versa.
         /// </returns>
-        public virtual async Task<bool> UpdateIfExists(StoredStudy user)
+        public virtual async Task<bool> UpdateIfExists(StoredStudy study)
         {
             // if (user == null) throw new ArgumentNullException(nameof(user)); // Todo handle in application logic 
 
-            var studyToUpdate = await _dbContext.Set<StoredStudy>().FindAsync(user.Id);
+            var studyToUpdate = await _dbContext.Set<StoredStudy>().FindAsync(study.Id);
 
-            if (studyToUpdate != null)
-            {
-                _dbContext.Attach(user); // Used for mocking 
-                //_dbContext.Set<T>().Attach(study);
-                _dbContext.SetModified(user); // Used for mocking 
-                //dbContext.Entry<T>(study).State = EntityState.Modified; 
-                await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            else return false;
+            if (studyToUpdate == null) return false;
 
+            _dbContext.Attach(study); // Used for mocking 
+            //_dbContext.Set<T>().Attach(study);
+            _dbContext.SetModified(study); // Used for mocking 
+            //dbContext.Entry<T>(study).State = EntityState.Modified; 
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
         /// <summary>
-        /// Deletes an study based on its id. 
+        ///     Deletes an study based on its id.
         /// </summary>
         /// <param name="id">
-        /// Id of entity. 
+        ///     Id of entity.
         /// </param>
         /// <returns>
-        /// True if study was deleted, false if study does not exist. 
+        ///     True if study was deleted, false if study does not exist.
         /// </returns>
         public virtual async Task<bool> DeleteIfExists(int id)
         {
             var studyToDelete = await _dbContext.Set<StoredStudy>().FindAsync(id);
 
-            if (studyToDelete != null)
-            {
-                _dbContext.Set<StoredStudy>().Remove(studyToDelete);
-                await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            else return false;
+            if (studyToDelete == null) return false;
 
+            _dbContext.Set<StoredStudy>().Remove(studyToDelete);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
         /// <summary>
-        /// This method is used to dispose the context.
+        ///     This method is used to dispose the context.
         /// </summary>
         public void Dispose()
         {
             _dbContext.Dispose();
         }
-
     }
-
 }

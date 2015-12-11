@@ -5,20 +5,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ApplicationLogics.AutosysServer.Mapping;
-using ApplicationLogics.StorageFasade;
+using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.UserManagement.Entities;
 using ApplicationLogicTests.UserManagement.Stub;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Storage.Models;
-using Storage.Repository;
 using Storage.Repository.Interface;
 
 namespace ApplicationLogicTests.UserManagement
 {
     /// <summary>
-    /// Test for the userHandler class
+    ///     Test for the userHandler class
     /// </summary>
     [TestClass]
     public class UserFacadeTests
@@ -37,34 +37,34 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test when a user can be created
+        ///     Test when a user can be created
         /// </summary>
         [TestMethod]
         public void CreateUser_Success_Test()
         {
             //Arrange 
             const int expectedReturnId = 0;
-            _repositoryMock.Setup(r => r.Create(_storedUser)).Returns(expectedReturnId);
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            _repositoryMock.Setup(r => r.Create(_storedUser)).Returns(Task.FromResult(expectedReturnId));
+            var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
             var actualId = userFacade.Create(_user);
 
 
             //Assert
-            Assert.IsTrue(expectedReturnId == actualId);
+            Assert.IsTrue(expectedReturnId == actualId.Result);
         }
 
         /// <summary>
-        /// Test if read does not return null when given a valid user id
+        ///     Test if read does not return null when given a valid user id
         /// </summary>
         [TestMethod]
         public void GetUser_Valid_NotNull_Test()
         {
             //Arrange
             var idToRead = 0;
-            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedUser);
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(Task.FromResult(_storedUser));
+            var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
             var returnedUser = userFacade.Read(idToRead);
@@ -74,15 +74,15 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test if read returns a user object when given a valid user id
+        ///     Test if read returns a user object when given a valid user id
         /// </summary>
         [TestMethod]
         public void GetUser_Valid_IsUser_Test()
         {
             //Arrange
             var idToRead = 0;
-            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedUser);
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(Task.FromResult(_storedUser));
+            var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
             var returnedUser = userFacade.Read(idToRead);
@@ -93,15 +93,15 @@ namespace ApplicationLogicTests.UserManagement
 
 
         /// <summary>
-        /// Test if read returns a user object with correct information
+        ///     Test if read returns a user object with correct information
         /// </summary>
         [TestMethod]
         public void GetUser_Valid_CorrectUserInfo_Test()
         {
             //Arrange
             var idToRead = 0;
-            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(_storedUser);
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            _repositoryMock.Setup(r => r.Read(idToRead)).Returns(Task.FromResult(_storedUser));
+            var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
             var returnedUser = userFacade.Read(idToRead);
@@ -113,7 +113,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test that returned user is null if user does not exist.
+        ///     Test that returned user is null if user does not exist.
         /// </summary>
         [TestMethod]
         public void GetUser_Invalid_NoExistingUser_Test()
@@ -121,7 +121,7 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var idToRead = 0;
             _repositoryMock.Setup(r => r.Read(idToRead));
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
             var returnedUser = userFacade.Read(idToRead);
@@ -131,7 +131,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test if read with parameters returns correct numbers of users
+        ///     Test if read with parameters returns correct numbers of users
         /// </summary>
         [TestMethod]
         public void GetAllUsers_Valid_ReturnsCorrectNumberOfUsers_Test()
@@ -141,8 +141,8 @@ namespace ApplicationLogicTests.UserManagement
             var user2 = new StoredUser {Name = "name2", MetaData = "metaData2"};
             var user3 = new StoredUser {Name = "name3", MetaData = "metaData3"};
             IEnumerable<StoredUser> list = new List<StoredUser> {user1, user2, user3};
-            _repositoryMock.Setup(r => r.Read()).Returns(list);
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            _repositoryMock.Setup(r => r.Read()).Returns(list.AsQueryable());
+            var userFacade = new UserAdapter(_repositoryMock.Object);
             var expectedCount = 3;
 
             //Act
@@ -153,7 +153,7 @@ namespace ApplicationLogicTests.UserManagement
         }
 
         /// <summary>
-        /// Test if read with parameters returns users with correct information
+        ///     Test if read with parameters returns users with correct information
         /// </summary>
         [TestMethod]
         public void GetAllUsers_Valid_ReturnsCorrectUsers_Test()
@@ -163,8 +163,8 @@ namespace ApplicationLogicTests.UserManagement
             var user2 = new StoredUser {Name = "name2", MetaData = "metaData2"};
             var user3 = new StoredUser {Name = "name3", MetaData = "metaData3"};
             IEnumerable<StoredUser> list = new List<StoredUser> {user1, user2, user3};
-            _repositoryMock.Setup(r => r.Read()).Returns(list);
-            var userFacade = new UserFacade(_repositoryMock.Object);
+            _repositoryMock.Setup(r => r.Read()).Returns(list.AsQueryable());
+            var userFacade = new UserAdapter(_repositoryMock.Object);
 
             //Act
             var actualUsers = userFacade.Read().ToArray();
@@ -183,7 +183,7 @@ namespace ApplicationLogicTests.UserManagement
 
 
         /// <summary>
-        /// Test if a user can be deleted.
+        ///     Test if a user can be deleted.
         /// </summary>
         [TestMethod]
         public void DeleteUser_Success_Test()
@@ -191,12 +191,12 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var toDeleteId = 0;
             var user = new User {Id = toDeleteId, Name = "name", MetaData = "metaData"};
-            var userFacade = new UserFacade(new RepositoryStub<StoredUser>());
+            var userFacade = new UserAdapter(new RepositoryStub<StoredUser>());
 
             //Act
             userFacade.Create(user);
             Assert.IsNotNull(userFacade.Read(toDeleteId));
-            userFacade.Delete(user);
+            userFacade.DeleteIfExists(user);
 
             //Assert
             Assert.IsNull(userFacade.Read(toDeleteId));
@@ -204,8 +204,8 @@ namespace ApplicationLogicTests.UserManagement
 
 
         /// <summary>
-        /// Test when trying to delete a non-existing user.
-        /// Exception must be thrown to pass test.
+        ///     Test when trying to delete a non-existing user.
+        ///     Exception must be thrown to pass test.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (NullReferenceException))]
@@ -215,19 +215,19 @@ namespace ApplicationLogicTests.UserManagement
             var repositoryMock = new Mock<IRepository<StoredUser>>();
             var toDeleteId = 0;
             repositoryMock.Setup(r => r.Read(toDeleteId));
-            var userFacade = new UserFacade(repositoryMock.Object);
+            var userFacade = new UserAdapter(repositoryMock.Object);
             var user = new User {Id = toDeleteId, Name = "name", MetaData = "metaData"};
 
 
             //Act
-            userFacade.Delete(user);
+            userFacade.DeleteIfExists(user);
 
             //Assert
             //Exception must be thrown
         }
 
         /// <summary>
-        /// Test deleting a user that has been updated
+        ///     Test deleting a user that has been updated
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
@@ -238,15 +238,15 @@ namespace ApplicationLogicTests.UserManagement
             var user = new User {Id = 0, Name = "Changed name", MetaData = "Changed metaData"};
 
             var repositoryMock = new Mock<IRepository<StoredUser>>();
-            repositoryMock.Setup(r => r.Read(user.Id)).Returns(storedUser);
+            repositoryMock.Setup(r => r.Read(user.Id)).Returns(Task.FromResult(storedUser));
 
-            var userFacade = new UserFacade(repositoryMock.Object);
+            var userFacade = new UserAdapter(repositoryMock.Object);
 
             //Act
-            userFacade.Delete(user);
+            userFacade.DeleteIfExists(user);
 
             //Assert
-                //Exception must be thrown
+            //Exception must be thrown
         }
     }
 }

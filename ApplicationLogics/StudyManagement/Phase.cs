@@ -5,17 +5,14 @@
 using System;
 using System.Collections.Generic;
 using ApplicationLogics.PaperManagement;
-using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
-
 
 namespace ApplicationLogics.StudyManagement
 {
-
     /// <summary>
-    /// A dependentPhase is a given set of review tasks. 
-    /// Each dependentPhase is dependent on each other sequentially and is completed in a ﬁxed order.
-    /// The class details how task requests are handled and handed out. 
+    ///     A dependentPhase is a given set of review tasks.
+    ///     Each dependentPhase is dependent on each other sequentially and is completed in a ﬁxed order.
+    ///     The class details how task requests are handled and handed out.
     /// </summary>
     public class Phase 
     {
@@ -27,54 +24,60 @@ namespace ApplicationLogics.StudyManagement
         public string Name { get; set; }
         public Study Study { get; set; }
 
-        public List<Paper> Reports { get;  set; }
+        public List<Paper> Reports { get; set; }
 
         /// <summary>
-        /// This list contains Criteria, which each report cannot contain.
+        ///     This list contains Criteria, which each report cannot contain.
         /// </summary>
         public List<Criteria> ExclusionCriteria { get; set; }
 
         /// <summary>
-        /// This list contains Criteria, which each report must contain.
+        ///     This list contains Criteria, which each report must contain.
         /// </summary>
         public List<Criteria> InclusionCriteria { get; set; }
         
         /// <summary>
-        /// Used to give similar tasks to multiple users, e.g. a review task. 
+        ///     Used to give similar tasks to multiple users, e.g. a review task.
         /// </summary>
         public Dictionary<TaskRequest, List<User>> Tasks { get; set; }
         
         /// <summary>
-        /// A dictionary over Roles. Each role holds a list of Users with the assigned Role. 
+        ///     A dictionary over Roles. Each role holds a list of Users with the assigned Role.
         /// </summary>
-        public Dictionary<Role, List<User>> AssignedRole { get; set; }
+        public Dictionary<Role, List<User>> AssignedRole { get; set; } 
 
         /// <summary>
-        /// Returns a booleans value which determines if this dependentPhase has reached its end.
+        ///     Task which has not yet been assigned.
+        /// </summary>
+        public List<TaskRequest> UnassignedTasks { get; set; }
+
+        /// <summary>
+        ///     Returns a booleans value which determines if this dependentPhase has reached its end.
         /// </summary>
         public bool IsFinished { get; set; }
 
         /// <summary>
-        /// A dependentPhase cannot begin prior to the completion of these Phases.
+        ///     A dependentPhase cannot begin prior to the completion of these Phases.
         /// </summary>
         public List<Phase> DependentPhases { get; set; }
     
         /// <summary>
-        /// Used to dertermine if a criteria has been assigned in a dependentPhase.
-        /// Either occurs in the InclusionList or ExclusionList
+        ///     Used to dertermine if a criteria has been assigned in a dependentPhase.
+        ///     Either occurs in the InclusionList or ExclusionList
         /// </summary>
         /// <param name="criteria">
-        /// The criteria looked for in a given dependentPhase.
+        ///     The criteria looked for in a given dependentPhase.
         /// </param>
         /// <returns>
-        /// Returns true if the criteria is used in a given dependentPhase.
+        ///     Returns true if the criteria is used in a given dependentPhase.
         /// </returns>
         public bool HasCriteria(Criteria criteria)
         {
             throw new NotImplementedException();
         }
+
         /// <summary>
-        /// Add an exclusion criteria to the dependentPhase.
+        ///     Add an exclusion criteria to the dependentPhase.
         /// </summary>
         /// <param name="criteria"></param>
         public void AddCriteria(Criteria criteria, Criteria.Type type)
@@ -82,16 +85,17 @@ namespace ApplicationLogics.StudyManagement
             if (type == Criteria.Type.Exclusion) 
                 throw new NotImplementedException(); // Create exclusion criteria
 
-            else if (type == Criteria.Type.Inclusion)
+            if (type == Criteria.Type.Inclusion)
                 throw new NotImplementedException(); // Create inclusion criteria 
 
             throw new NotImplementedException();
         }
+
         /// <summary>
-        /// Remove a criteria from this dependentPhase. 
+        ///     Remove a criteria from this dependentPhase.
         /// </summary>
         /// <param name="criteriaName">
-        /// Name of the criteria to delete. 
+        ///     Name of the criteria to delete.
         /// </param>
         public void RemoveCriteria(string criteriaName)
         {
@@ -107,11 +111,12 @@ namespace ApplicationLogics.StudyManagement
         {
             throw new NotImplementedException();
         }
+
         /// <summary>
-        /// Add another task to unassigned tasks.  
+        ///     Add another task to unassigned tasks.
         /// </summary>
         /// <param name="task">
-        /// Task to add to list of unassigned tasks.
+        ///     Task to add to list of unassigned tasks.
         /// </param>
         public void AddTask(TaskRequest task)
         {
@@ -122,29 +127,32 @@ namespace ApplicationLogics.StudyManagement
         {
             throw new NotImplementedException();
         }
+
         /// <summary>
-        /// Updates a task to an unassigned task or a task in progress.
+        ///     Updates a task to an unassigned task or a task in progress.
         /// </summary>
         /// <param name="task"></param>
         public void UpdateTaskStatus(TaskRequest task)
         {
             throw new NotImplementedException();
         }
+
         /// <summary>
-        /// Return a list of tasks, which has not been finished yet or started at all.
+        ///     Return a list of tasks, which has not been finished yet or started at all.
         /// </summary>
         /// <returns>
-        /// List of unfinished tasks. 
+        ///     List of unfinished tasks.
         /// </returns>
         public IEnumerable<TaskRequest> GetUnfinishedTasks()
         {
             throw new NotImplementedException();
         }
+
         /// <summary>
-        /// Add a dependentPhase that needs to be completed prior to a given dependentPhase has begun or finished. 
+        ///     Add a dependentPhase that needs to be completed prior to a given dependentPhase has begun or finished.
         /// </summary>
         /// <param name="dependentPhase">
-        /// Phase to be completed prior to this phase. 
+        ///     Phase to be completed prior to this phase.
         /// </param>
         public void AddDependingPhase(Phase dependentPhase)
         {
@@ -152,10 +160,10 @@ namespace ApplicationLogics.StudyManagement
         }
 
         /// <summary>
-        /// Remove a phase that this phase depends on itself. 
+        ///     Remove a phase that this phase depends on itself.
         /// </summary>
         /// <param name="dependentPhase">
-        /// Phase to be completed prior to this phase. 
+        ///     Phase to be completed prior to this phase.
         /// </param>
         public void RemoveDependentPhase(Phase dependentPhase)
         {

@@ -12,32 +12,31 @@ using StorageTests.Utility;
 
 namespace StorageTests.RepositoryUnitTests
 {
-
     /// <summary>
-    /// This test class is used to test the Entity Framework StudyRepository, <see cref="StudyRepository"/>.
-    /// The repository is a concrete implementation of the repository interface and is used to write data to a database.
-    /// Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
+    ///     This test class is used to test the Entity Framework StudyRepository, <see cref="StudyRepository" />.
+    ///     The repository is a concrete implementation of the repository interface and is used to write data to a database.
+    ///     Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
     /// </summary>
     [TestClass]
     public class StudyRepositoryTests
     {
+        private Mock<IAutoSysContext> _context; // Use IAutoSysContext instead of concrete AutoSysDbModel
 
         private IList<StoredStudy> _data;
-        private Mock<IAutoSysContext> _context; // Use IAutoSysContext instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredStudy>> _mockSet;
         private StudyRepository _repository;
 
         /// <summary>
-        /// This method sets up data used to mock a collection of studies in a DbContext used by the StudyRepository, <see cref="StudyRepository"/>. 
+        ///     This method sets up data used to mock a collection of studies in a DbContext used by the StudyRepository,
+        ///     <see cref="StudyRepository" />.
         /// </summary>
         [TestInitialize]
         public void Initialize()
         {
-
             _data = new List<StoredStudy>
             {
-                new StoredStudy { Id = 1}, // Todo insert pseudo data 
-                new StoredStudy { Id = 2}
+                new StoredStudy {Id = 1}, // Todo insert pseudo data 
+                new StoredStudy {Id = 2}
             };
 
             _mockSet = MockUtility.CreateAsyncMockDbSet(_data, u => u.Id);
@@ -62,7 +61,7 @@ namespace StorageTests.RepositoryUnitTests
 
         #region Create Operation 
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))] // Assert 
+        [TestMethod, ExpectedException(typeof (ArgumentNullException))] // Assert 
         public async Task Create_NullInput_ExceptionThrown()
         {
             // Arrange and act 
@@ -73,28 +72,26 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Create_Attatch_IsCalled()
         {
             // Arrange
-            var validStudy = new StoredStudy { Id = 0 };
+            var validStudy = new StoredStudy {Id = 0};
 
             // Act 
             await _repository.Create(validStudy);
 
             // Assert
             _context.Verify(c => c.Attach(validStudy), Times.Once);
-
         }
 
         [TestMethod]
         public async Task Create_Add_IsCalled()
         {
             // Arrange
-            var validStudy = new StoredStudy { Id = 0 };
+            var validStudy = new StoredStudy {Id = 0};
 
             // Act 
             await _repository.Create(validStudy);
 
             // Assert
             _context.Verify(c => c.Add(validStudy), Times.Once);
-
         }
 
         [TestMethod]
@@ -107,10 +104,9 @@ namespace StorageTests.RepositoryUnitTests
 
             // Assert
             _context.Verify(c => c.SaveChangesAsync(), Times.Once);
-
         }
 
-        #endregion 
+        #endregion
 
         #region Read Operation 
 
@@ -148,13 +144,14 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
-        public void ReadAll_IQueryable_IsCalled() // Not async, IQueryable is not executed by db until used by .ToList() 
+        public void ReadAll_IQueryable_IsCalled()
+            // Not async, IQueryable is not executed by db until used by .ToList() 
         {
             // Arrange and act 
             var studies = _repository.Read();
 
             // Assert 
-            _context.Verify(c => c.Studies.AsQueryable<StoredStudy>(), Times.Once);
+            _context.Verify(c => c.Studies.AsQueryable(), Times.Once);
         }
 
         #endregion
@@ -172,12 +169,13 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_FindAsync_IsCalled()
         {
             // Arrange 
-            var firstStudyUpdated = new StoredStudy { Id = 1, Description = "New Study" };
+            var firstStudyUpdated = new StoredStudy {Id = 1, Description = "New Study"};
 
             // Act 
             await _repository.UpdateIfExists(firstStudyUpdated);
 
-            _mockSet.Setup(t => t.FindAsync(It.IsAny<StoredUser>().Id)).Returns(Task.FromResult(It.IsAny<StoredStudy>()));
+            _mockSet.Setup(t => t.FindAsync(It.IsAny<StoredUser>().Id))
+                .Returns(Task.FromResult(It.IsAny<StoredStudy>()));
 
             // Assert
             _context.Verify(c => c.Users.FindAsync(firstStudyUpdated.Id), Times.Once);
@@ -187,7 +185,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_Attach_IsCalled()
         {
             // Arrange 
-            var firstStudyUpdated = new StoredStudy { Id = 1, Description = "New Study" };
+            var firstStudyUpdated = new StoredStudy {Id = 1, Description = "New Study"};
 
             // Act 
             await _repository.UpdateIfExists(firstStudyUpdated);
@@ -200,7 +198,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SetModified_IsCalled()
         {
             // Arrange 
-            var firstStudyUpdated = new StoredStudy { Id = 1, Description = "New Study" };
+            var firstStudyUpdated = new StoredStudy {Id = 1, Description = "New Study"};
 
             // Act 
             await _repository.UpdateIfExists(firstStudyUpdated);
@@ -213,8 +211,8 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SaveChangesAsync_IsCalled()
         {
             // Arrange 
-            var firstStudyUpdated = new StoredStudy { Id = 1, Description = "New Study" };
-            
+            var firstStudyUpdated = new StoredStudy {Id = 1, Description = "New Study"};
+
             // Act 
             await _repository.UpdateIfExists(firstStudyUpdated);
 
@@ -226,7 +224,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_ValidUser_ReturnsTrue()
         {
             // Arrange 
-            var firstStudyUpdated = new StoredStudy { Id = 1, Description = "New Study" };
+            var firstStudyUpdated = new StoredStudy {Id = 1, Description = "New Study"};
 
             // Act 
             var isUpdated = await _repository.UpdateIfExists(firstStudyUpdated);
@@ -302,8 +300,5 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         #endregion
-
-
     }
-
 }
