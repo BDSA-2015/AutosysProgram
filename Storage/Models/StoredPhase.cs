@@ -30,7 +30,7 @@ namespace Storage.Entities
 
         public virtual ICollection<StoredCriteria> Criteria { get; set; }
 
-        public virtual IDictionary<StoredTaskRequest, List<StoredUser>> Tasks { get; set; }
+        public virtual IDictionary<StoredUser, List<StoredTaskRequest>> Tasks { get; set; }
 
         public virtual IDictionary<StoredUser, StoredRole> AssignedRole { get; set; }
 

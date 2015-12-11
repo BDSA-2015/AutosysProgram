@@ -39,7 +39,7 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         ///     Used to give similar tasks to multiple users, e.g. a review task.
         /// </summary>
-        public Dictionary<TaskRequest, List<User>> Tasks { get; set; }
+        public Dictionary<User, List<TaskRequest>> Tasks { get; set; }
         
         /// <summary>
         ///     A dictionary over Roles. Each role holds a list of Users with the assigned Role.
