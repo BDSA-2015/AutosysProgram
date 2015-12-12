@@ -6,13 +6,11 @@ using Storage.Models;
 
 namespace Storage.Repository.Interface
 {
-
     /// <summary>
-    /// This interface is used to mock the DbContext, <see cref="AutoSysDbModel"/>
+    ///     This interface is used to mock the DbContext, <see cref="AutoSysDbModel" />
     /// </summary>
     public interface IAutoSysContext : IDisposable
     {
-
         // Study entities 
         DbSet<StoredCriteria> Criterias { get; set; }
         DbSet<StoredPhase> Phases { get; set; }
@@ -36,8 +34,8 @@ namespace Storage.Repository.Interface
         Task<int> SaveChangesAsync();
 
         // Used to allow mocking of dbContext.Entry<T>(item).State = EntityState.Modified; in UpdateIfExists method 
-        void SetModified<TEntity>(TEntity entity) where TEntity : class, IEntity; 
-        
+        void SetModified<TEntity>(TEntity entity) where TEntity : class, IEntity;
+
         // Used to allow mocking of Set method in DbContext  
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
@@ -52,13 +50,12 @@ namespace Storage.Repository.Interface
     }
 
     /// <summary>
-    /// This is used to "instantiate" the interface when mocking, <see cref="IAutoSysContext"/>.
+    ///     This is used to "instantiate" the interface when mocking, <see cref="IAutoSysContext" />.
     /// </summary>
     public class AutoSysContext : DbContext, IAutoSysContext
     {
         public AutoSysContext() : base("name=AutoSysDbModel")
         {
-            
         }
 
         public DbSet<StoredCriteria> Criterias { get; set; }
@@ -73,7 +70,7 @@ namespace Storage.Repository.Interface
         public DbSet<StoredPaper> Papers { get; set; }
 
         /// <summary>
-        /// This allows mocking the UpdateIfExists functionality that is now hidden behind an interface. 
+        ///     This allows mocking the UpdateIfExists functionality that is now hidden behind an interface.
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
@@ -83,7 +80,8 @@ namespace Storage.Repository.Interface
         }
 
         /// <summary>
-        /// This allows mocking the "_dbContext.Set<T>().Attach(item);" in the UpdateIfExists functionality that is now hidden behind an interface. 
+        ///     This allows mocking the "_dbContext.Set
+        ///     <T>().Attach(item);" in the UpdateIfExists functionality that is now hidden behind an interface.
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
@@ -93,7 +91,8 @@ namespace Storage.Repository.Interface
         }
 
         /// <summary>
-        /// This allows mocking the "_dbContext.Set<T>().Add(item);" in the UpdateIfExists functionality that is now hidden behind an interface. 
+        ///     This allows mocking the "_dbContext.Set
+        ///     <T>().Add(item);" in the UpdateIfExists functionality that is now hidden behind an interface.
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
@@ -103,7 +102,8 @@ namespace Storage.Repository.Interface
         }
 
         /// <summary>
-        /// This allows mocking the "_dbContext.Set<T>().Remove(item);" in the DeleteIfExists functionality that is now hidden behind an interface. 
+        ///     This allows mocking the "_dbContext.Set
+        ///     <T>().Remove(item);" in the DeleteIfExists functionality that is now hidden behind an interface.
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>

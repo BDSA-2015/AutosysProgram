@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace StorageTests.Utility
 {
-
     /// <summary>
-    /// This class is used to create an in-memory DbAsyncQueryProvider used to process async queries.
-    /// It is possible to setup a query using Moq but easier to create this test double implementation in code.
-    /// The class is used to allow using asynchronous queries in our mocking tests. 
-    /// Link: https://msdn.microsoft.com/en-us/data/dn314429.aspx 
+    ///     This class is used to create an in-memory DbAsyncQueryProvider used to process async queries.
+    ///     It is possible to setup a query using Moq but easier to create this test double implementation in code.
+    ///     The class is used to allow using asynchronous queries in our mocking tests.
+    ///     Link: https://msdn.microsoft.com/en-us/data/dn314429.aspx
     /// </summary>
     /// <typeparam name="TEntity">
-    /// The entity that we wish to make async queries for. 
+    ///     The entity that we wish to make async queries for.
     /// </typeparam>
     internal class TestDbAsyncQueryProvider<TEntity> : IDbAsyncQueryProvider
     {
@@ -61,11 +60,13 @@ namespace StorageTests.Utility
     {
         public TestDbAsyncEnumerable(IEnumerable<T> enumerable)
             : base(enumerable)
-        { }
+        {
+        }
 
         public TestDbAsyncEnumerable(Expression expression)
             : base(expression)
-        { }
+        {
+        }
 
         public IDbAsyncEnumerator<T> GetAsyncEnumerator()
         {

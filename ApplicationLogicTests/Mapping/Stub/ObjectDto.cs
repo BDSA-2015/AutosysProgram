@@ -1,8 +1,8 @@
 ﻿namespace ApplicationLogicTests.Mapping.Stub
 {
     /// <summary>
-    /// This object represents a DTOobject that is used as the baseobject 
-    /// which automapper is using for property transfers.
+    ///     This object represents a DTOobject that is used as the baseobject
+    ///     which automapper is using for property transfers.
     /// </summary>
     public class ObjectDto
     {

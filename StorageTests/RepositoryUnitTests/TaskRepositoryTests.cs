@@ -12,32 +12,31 @@ using StorageTests.Utility;
 
 namespace StorageTests.RepositoryUnitTests
 {
-
     /// <summary>
-    /// This test class is used to test the Entity Framework TaskRepository, <see cref="TaskRepository"/>.
-    /// The repository is a concrete implementation of the repository interface and is used to write data to a database.
-    /// Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
+    ///     This test class is used to test the Entity Framework TaskRepository, <see cref="TaskRepository" />.
+    ///     The repository is a concrete implementation of the repository interface and is used to write data to a database.
+    ///     Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
     /// </summary>
     [TestClass]
     public class TaskRepositoryTests
     {
+        private Mock<IAutoSysContext> _context; // Use IAutoSysContext instead of concrete AutoSysDbModel
 
         private IList<StoredTaskRequest> _data;
-        private Mock<IAutoSysContext> _context; // Use IAutoSysContext instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredTaskRequest>> _mockSet;
         private TaskRepository _repository;
 
         /// <summary>
-        /// This method sets up data used to mock a collection of studies in a DbContext used by the TaskRepository, <see cref="TaskRepository"/>. 
+        ///     This method sets up data used to mock a collection of studies in a DbContext used by the TaskRepository,
+        ///     <see cref="TaskRepository" />.
         /// </summary>
         [TestInitialize]
         public void Initialize()
         {
-
             _data = new List<StoredTaskRequest>
             {
-                new StoredTaskRequest() { Id = 1}, // Todo insert pseudo data 
-                new StoredTaskRequest() { Id = 2}
+                new StoredTaskRequest {Id = 1}, // Todo insert pseudo data 
+                new StoredTaskRequest {Id = 2}
             };
 
             _mockSet = MockUtility.CreateAsyncMockDbSet(_data, u => u.Id);
@@ -62,7 +61,7 @@ namespace StorageTests.RepositoryUnitTests
 
         #region Create Operation 
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))] // Assert 
+        [TestMethod, ExpectedException(typeof (ArgumentNullException))] // Assert 
         public async Task Create_NullInput_ExceptionThrown()
         {
             // Arrange and act 
@@ -73,28 +72,26 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Create_Attatch_IsCalled()
         {
             // Arrange
-            var validTask = new StoredTaskRequest { Id = 0 };
+            var validTask = new StoredTaskRequest {Id = 0};
 
             // Act 
             await _repository.Create(validTask);
 
             // Assert
             _context.Verify(c => c.Attach(validTask), Times.Once);
-
         }
 
         [TestMethod]
         public async Task Create_Add_IsCalled()
         {
             // Arrange
-            var validTask = new StoredTaskRequest { Id = 0 };
+            var validTask = new StoredTaskRequest {Id = 0};
 
             // Act 
             await _repository.Create(validTask);
 
             // Assert
             _context.Verify(c => c.Add(validTask), Times.Once);
-
         }
 
         [TestMethod]
@@ -107,10 +104,9 @@ namespace StorageTests.RepositoryUnitTests
 
             // Assert
             _context.Verify(c => c.SaveChangesAsync(), Times.Once);
-
         }
 
-        #endregion 
+        #endregion
 
         #region Read Operation 
 
@@ -148,13 +144,14 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
-        public void ReadAll_IQueryable_IsCalled() // Not async, IQueryable is not executed by db until used by .ToList() 
+        public void ReadAll_IQueryable_IsCalled()
+            // Not async, IQueryable is not executed by db until used by .ToList() 
         {
             // Arrange and act 
             var tasks = _repository.Read();
 
             // Assert 
-            _context.Verify(c => c.Tasks.AsQueryable<StoredTaskRequest>(), Times.Once);
+            _context.Verify(c => c.Tasks.AsQueryable(), Times.Once);
         }
 
         #endregion
@@ -172,12 +169,13 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_FindAsync_IsCalled()
         {
             // Arrange 
-            var firstTaskUpdated = new StoredTaskRequest { Id = 1, Description = "New Task" };
+            var firstTaskUpdated = new StoredTaskRequest {Id = 1, Description = "New Task"};
 
             // Act 
             await _repository.UpdateIfExists(firstTaskUpdated);
 
-            _mockSet.Setup(t => t.FindAsync(It.IsAny<StoredTaskRequest>().Id)).Returns(Task.FromResult(It.IsAny<StoredTaskRequest>())); // TODO Move to MockUtility
+            _mockSet.Setup(t => t.FindAsync(It.IsAny<StoredTaskRequest>().Id))
+                .Returns(Task.FromResult(It.IsAny<StoredTaskRequest>())); // TODO Move to MockUtility
 
             // Assert
             _context.Verify(c => c.Tasks.FindAsync(firstTaskUpdated.Id), Times.Once);
@@ -187,7 +185,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_Attach_IsCalled()
         {
             // Arrange 
-            var firstTaskUpdated = new StoredTaskRequest { Id = 1, Description = "New Task" };
+            var firstTaskUpdated = new StoredTaskRequest {Id = 1, Description = "New Task"};
 
             // Act 
             await _repository.UpdateIfExists(firstTaskUpdated);
@@ -200,7 +198,8 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SetModified_IsCalled()
         {
             // Arrange 
-            var firstTaskUpdated = new StoredTaskRequest { Id = 1, Description = "New Task" }; // Todo move to test initialize 
+            var firstTaskUpdated = new StoredTaskRequest {Id = 1, Description = "New Task"};
+                // Todo move to test initialize 
 
             // Act 
             await _repository.UpdateIfExists(firstTaskUpdated); // 
@@ -213,7 +212,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SaveChangesAsync_IsCalled()
         {
             // Arrange 
-            var firstTaskUpdated = new StoredTaskRequest { Id = 1, Description = "New Task" };
+            var firstTaskUpdated = new StoredTaskRequest {Id = 1, Description = "New Task"};
 
             // Act 
             await _repository.UpdateIfExists(firstTaskUpdated);
@@ -226,7 +225,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_ValidUser_ReturnsTrue()
         {
             // Arrange 
-            var firstTaskUpdated = new StoredTaskRequest { Id = 1, Description = "New Task" };
+            var firstTaskUpdated = new StoredTaskRequest {Id = 1, Description = "New Task"};
 
             // Act 
             var isUpdated = await _repository.UpdateIfExists(firstTaskUpdated);
@@ -302,8 +301,5 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         #endregion
-
-
     }
-
 }

@@ -12,28 +12,27 @@ using StorageTests.Utility;
 
 namespace StorageTests.RepositoryUnitTests
 {
-
     /// <summary>
-    /// This test class is used to test the Entity Framework Async DbRepository used by all repositories.
-    /// The repository is a concrete implementation of the async IRepository interface and is used to write data to a database.
-    /// Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
+    ///     This test class is used to test the Entity Framework Async DbRepository used by all repositories.
+    ///     The repository is a concrete implementation of the async IRepository interface and is used to write data to a
+    ///     database.
+    ///     Consequently, Moq is used to allow the tests to verify that the repository writes correctly to the database.
     /// </summary>
     [TestClass]
     public class AsyncUserRepositoryTests
     {
+        private Mock<IAutoSysContext> _context; // Use IUserContext instead of concrete AutoSysDbModel
 
         private IList<StoredUser> _data;
-        private Mock<IAutoSysContext> _context; // Use IUserContext instead of concrete AutoSysDbModel
         private Mock<DbSet<StoredUser>> _mockSet;
-        private AsyncDbRepository<StoredUser> _repository;
+        private DbRepository<StoredUser> _repository;
 
         /// <summary>
-        /// This method sets up data used to mock a collection of users in a DbContext used by the UserRepository. 
+        ///     This method sets up data used to mock a collection of users in a DbContext used by the UserRepository.
         /// </summary>
         [TestInitialize]
         public void Initialize()
         {
-
             _data = new List<StoredUser>
             {
                 new StoredUser {Id = 1, Name = "William Parker", MetaData = "Researcher"},
@@ -57,12 +56,12 @@ namespace StorageTests.RepositoryUnitTests
             }));
 
             _context = mockContext;
-            _repository = new AsyncDbRepository<StoredUser>(_context.Object);
+            _repository = new DbRepository<StoredUser>(_context.Object);
         }
 
         #region Old Tests 
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof (ArgumentNullException))]
         public async Task Create_NullException()
         {
             await _repository.Create(null);
@@ -79,14 +78,13 @@ namespace StorageTests.RepositoryUnitTests
 
             // Assert
             _context.Verify(c => c.SaveChangesAsync(), Times.Once);
-
         }
 
         /// <summary>
-        /// This test uses Moq to create a context and then creates a DbSet<StoredUser> </StoredUser>.
-        /// This is returned from the context's StoredUsers property. The context is used to create a new UserRepository, 
-        /// which is then used to create a new Stored User, using the Create method. 
-        /// Finally, the test verifies that the repository added a new user and called SaveChanges on the context.
+        ///     This test uses Moq to create a context and then creates a DbSet<StoredUser> </StoredUser>.
+        ///     This is returned from the context's StoredUsers property. The context is used to create a new UserRepository,
+        ///     which is then used to create a new Stored User, using the Create method.
+        ///     Finally, the test verifies that the repository added a new user and called SaveChanges on the context.
         /// </summary>
         /// <returns></returns>
         [TestMethod]
@@ -98,13 +96,12 @@ namespace StorageTests.RepositoryUnitTests
             mockContext.Setup(m => m.Users).Returns(mockSet.Object);
 
             // Act 
-            var service = new AsyncDbRepository<StoredUser>(mockContext.Object);
+            var service = new DbRepository<StoredUser>(mockContext.Object);
             var id = await service.Create(new StoredUser());
 
             // Assert 
             // mockSet.Verify(m => m.Add(It.IsAny<StoredUser>()), Times.Once());
             mockContext.Verify(m => m.SaveChangesAsync(), Times.Once());
-
         }
 
         [TestMethod]
@@ -116,8 +113,8 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         /// <summary>
-        /// Test is true for EF but not for mocked interface that requires setup.
-        /// This test is useless because it does not check logic but tests if EF correctly increments id and Mock works.
+        ///     Test is true for EF but not for mocked interface that requires setup.
+        ///     This test is useless because it does not check logic but tests if EF correctly increments id and Mock works.
         /// </summary>
         /// <returns></returns>
         [TestMethod]
@@ -129,10 +126,10 @@ namespace StorageTests.RepositoryUnitTests
             var mockContext = new Mock<IAutoSysContext>();
 
             mockContext.Setup(m => m.Users).Returns(mockSet.Object);
-            var user = new StoredUser { Name = "Steven", MetaData = "Validator" };
+            var user = new StoredUser {Name = "Steven", MetaData = "Validator"};
 
             // Act 
-            var service = new AsyncDbRepository<StoredUser>(mockContext.Object);
+            var service = new DbRepository<StoredUser>(mockContext.Object);
             var id = await service.Create(user);
 
             // Assert 
@@ -143,7 +140,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SetAttachUser_IsCalled()
         {
             // Arrange 
-            var user = new StoredUser { Id = 1, Name = "User", MetaData = "Validator" };
+            var user = new StoredUser {Id = 1, Name = "User", MetaData = "Validator"};
 
             // Act 
             await _repository.UpdateIfExists(user);
@@ -190,7 +187,7 @@ namespace StorageTests.RepositoryUnitTests
 
         #region Create Operation 
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))] // Assert 
+        [TestMethod, ExpectedException(typeof (ArgumentNullException))] // Assert 
         public async Task Create_NullInput_ExceptionThrown()
         {
             // Arrange and act 
@@ -201,28 +198,26 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Create_Attatch_IsCalled()
         {
             // Arrange
-            var validUser = new StoredUser { Id = 0, Name = "Steven", MetaData = "Researcher" };
+            var validUser = new StoredUser {Id = 0, Name = "Steven", MetaData = "Researcher"};
 
             // Act 
             await _repository.Create(validUser);
 
             // Assert
             _context.Verify(c => c.Attach(validUser), Times.Once);
-
         }
 
         [TestMethod]
         public async Task Create_Add_IsCalled()
         {
             // Arrange
-            var validUser = new StoredUser { Id = 0, Name = "Steven", MetaData = "Researcher" };
+            var validUser = new StoredUser {Id = 0, Name = "Steven", MetaData = "Researcher"};
 
             // Act 
             await _repository.Create(validUser);
 
             // Assert
             _context.Verify(c => c.Add(validUser), Times.Once);
-
         }
 
         [TestMethod]
@@ -236,10 +231,9 @@ namespace StorageTests.RepositoryUnitTests
 
             // Assert
             _context.Verify(c => c.SaveChangesAsync(), Times.Once);
-
         }
 
-        #endregion 
+        #endregion
 
         #region Read Operation 
 
@@ -277,13 +271,14 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
-        public void ReadAll_IQueryable_IsCalled() // Not async, IQueryable is not executed by db until used by .ToList() 
+        public void ReadAll_IQueryable_IsCalled()
+            // Not async, IQueryable is not executed by db until used by .ToList() 
         {
             // Arrange and act 
             var users = _repository.Read();
 
             // Assert 
-            _context.Verify(c => c.Users.AsQueryable<StoredUser>(), Times.Once);
+            _context.Verify(c => c.Users.AsQueryable(), Times.Once);
         }
 
         #endregion
@@ -301,7 +296,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_FindAsync_IsCalled()
         {
             // Arrange 
-            var firstUserUpdated = new StoredUser { Id = 1, Name = "William Parker", MetaData = "Validator" };
+            var firstUserUpdated = new StoredUser {Id = 1, Name = "William Parker", MetaData = "Validator"};
 
             // Act 
             await _repository.UpdateIfExists(firstUserUpdated);
@@ -316,7 +311,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_Attach_IsCalled()
         {
             // Arrange 
-            var firstUserUpdated = new StoredUser { Id = 1, Name = "William Parker", MetaData = "Validator" };
+            var firstUserUpdated = new StoredUser {Id = 1, Name = "William Parker", MetaData = "Validator"};
 
             // Act 
             await _repository.UpdateIfExists(firstUserUpdated);
@@ -329,7 +324,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SetModified_IsCalled()
         {
             // Arrange 
-            var firstUserUpdated = new StoredUser { Id = 1, Name = "William Parker", MetaData = "Validator" };
+            var firstUserUpdated = new StoredUser {Id = 1, Name = "William Parker", MetaData = "Validator"};
 
             // Act 
             await _repository.UpdateIfExists(firstUserUpdated);
@@ -342,7 +337,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SaveChangesAsync_IsCalled()
         {
             // Arrange 
-            var firstUserUpdated = new StoredUser { Id = 1, Name = "William Parker", MetaData = "Validator" };
+            var firstUserUpdated = new StoredUser {Id = 1, Name = "William Parker", MetaData = "Validator"};
 
             // Act 
             await _repository.UpdateIfExists(firstUserUpdated);
@@ -355,7 +350,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_ValidUser_ReturnsTrue()
         {
             // Arrange 
-            var firstUserUpdated = new StoredUser { Id = 1, Name = "William Parker", MetaData = "Validator" };
+            var firstUserUpdated = new StoredUser {Id = 1, Name = "William Parker", MetaData = "Validator"};
 
             // Act 
             var isUpdated = await _repository.UpdateIfExists(firstUserUpdated);
@@ -431,7 +426,5 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         #endregion
-
     }
-
 }
