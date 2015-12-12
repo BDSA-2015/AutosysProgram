@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.AutosysServer.Mapping;
-using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Storage.Models;
 
 namespace ApplicationLogicTests.UserManagement
 {
@@ -38,7 +36,7 @@ namespace ApplicationLogicTests.UserManagement
             var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
-            var returnedId =  await userHandler.Create(_user);
+            var returnedId = await userHandler.Create(_user);
 
             //Assert
             Assert.IsTrue(returnedId == _user.Id);
@@ -163,7 +161,7 @@ namespace ApplicationLogicTests.UserManagement
         ///     Exception must be thrown here.
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof (ArgumentException))]
         public async void DeleteUser_Invalid_InvalidId_Test()
         {
             //Arrange
@@ -198,14 +196,14 @@ namespace ApplicationLogicTests.UserManagement
         ///     Test if existing user is an instance of user when retrieved
         /// </summary>
         [TestMethod]
-        public void ReadUser_Valid_TypeOfUser_Test()
+        public async void ReadUser_Valid_TypeOfUser_Test()
         {
             //Arrange
             _adapterMock.Setup(r => r.Read(_user.Id)).Returns(Task.FromResult(_user));
             var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
-            var user = userHandler.Read(_user.Id);
+            var user = await userHandler.Read(_user.Id);
 
             //Assert
             Assert.IsInstanceOfType(user, typeof (User));
@@ -216,19 +214,19 @@ namespace ApplicationLogicTests.UserManagement
         ///     Test if existing user containts correct information
         /// </summary>
         [TestMethod]
-        public void ReadUser_Valid_CorrectInformation_Test()
+        public async void ReadUser_Valid_CorrectInformation_Test()
         {
             //Arrange
             _adapterMock.Setup(r => r.Read(_user.Id)).Returns(Task.FromResult(_user));
             var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
-            var actualUser = userHandler.Read(_user.Id);
+            var actualUser = await userHandler.Read(_user.Id);
 
             //Assert
             Assert.IsTrue(actualUser.Id == _user.Id);
-            Assert.IsTrue(actualUser.Result.Name == _user.Name);
-            Assert.IsTrue(actualUser.Result.MetaData == _user.MetaData);
+            Assert.IsTrue(actualUser.Name == _user.Name);
+            Assert.IsTrue(actualUser.MetaData == _user.MetaData);
         }
 
         /// <summary>

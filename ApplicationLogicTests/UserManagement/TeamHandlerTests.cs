@@ -91,7 +91,7 @@ namespace ApplicationLogicTests.UserManagement
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
-        public void CreateTeam_Invalid_NoTeamMember_Test()
+        public async void CreateTeam_Invalid_NoTeamMember_Test()
         {
             //Arrange
             _team.UserIDs = new int[0];
@@ -100,7 +100,7 @@ namespace ApplicationLogicTests.UserManagement
             var teamHandler = new TeamHandler(_adapterMock.Object);
 
             //Act
-            var result = teamHandler.Create(_team);
+            var result = await teamHandler.Create(_team);
 
             //Assert
             //Exception must be thrown
@@ -169,20 +169,20 @@ namespace ApplicationLogicTests.UserManagement
         ///     Test if existing team containts correct information
         /// </summary>
         [TestMethod]
-        public void ReadTeam_Valid_CorrectInformation_Test()
+        public async void ReadTeam_Valid_CorrectInformation_Test()
         {
             //Arrange
             _adapterMock.Setup(r => r.Read(_team.Id)).Returns(Task.FromResult(_team));
             var teamHandler = new TeamHandler(_adapterMock.Object);
 
             //Act
-            var actualTeam = teamHandler.Read(_team.Id);
+            var actualTeam = await teamHandler.Read(_team.Id);
 
             //Assert
             Assert.IsTrue(actualTeam.Id == _team.Id);
-            Assert.IsTrue(actualTeam.Result.Name == _team.Name);
-            Assert.IsTrue(actualTeam.Result.MetaData == _team.MetaData);
-            Assert.IsTrue(actualTeam.Result.UserIDs.Length == _team.UserIDs.Length);
+            Assert.IsTrue(actualTeam.Name == _team.Name);
+            Assert.IsTrue(actualTeam.MetaData == _team.MetaData);
+            Assert.IsTrue(actualTeam.UserIDs.Length == _team.UserIDs.Length);
         }
 
         /// <summary>

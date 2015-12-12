@@ -78,7 +78,7 @@ namespace ApplicationLogicTests.UserManagement
         ///     Test if read returns a team object when given a valid team id
         /// </summary>
         [TestMethod]
-        public void GetTeam_Valid_IsTeam_Test()
+        public async void GetTeam_Valid_IsTeam_Test()
         {
             //Arrange
             var idToRead = 0;
@@ -86,7 +86,7 @@ namespace ApplicationLogicTests.UserManagement
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
-            var returnedTeam = teamFacade.Read(idToRead);
+            var returnedTeam = await teamFacade.Read(idToRead);
 
             //Assert
             Assert.IsInstanceOfType(returnedTeam, typeof (Team));
@@ -118,7 +118,7 @@ namespace ApplicationLogicTests.UserManagement
         ///     Test that a returned team is null if Team does not exist.
         /// </summary>
         [TestMethod]
-        public void GetTeam_Invalid_NoExistingTeamMustReturnNull_Test()
+        public async void GetTeam_Invalid_NoExistingTeamMustReturnNull_Test()
         {
             //Arrange
             var idToRead = 0;
@@ -126,7 +126,7 @@ namespace ApplicationLogicTests.UserManagement
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
-            var returnedTeam = teamFacade.Read(idToRead);
+            var returnedTeam = await teamFacade.Read(idToRead);
 
             //Assert
             Assert.IsNull(returnedTeam);

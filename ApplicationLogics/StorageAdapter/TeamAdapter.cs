@@ -31,7 +31,6 @@ namespace ApplicationLogics.StorageAdapter
         public async Task<Team> Read(int id)
         {
             return Mapper.Map<Team>(await _teamRepository.Read(id));
-            ;
         }
 
         /// <summary>
