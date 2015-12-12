@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\StoredBibtexTag.cs" />
+    <Compile Include="Repository\BibtexTagRepository.cs" />
     <Compile Include="Repository\Interface\IAutoSysContext.cs" />
     <Compile Include="Repository\DbRepository.cs" />
     <Compile Include="AutoSysDbModel.cs" />
