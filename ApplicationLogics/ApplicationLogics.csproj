@@ -120,6 +120,7 @@
     <Compile Include="AutosysServer\Mapping\Profiles\PaperManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\UserManagementStorageProfile.cs" />
     <Compile Include="PaperManagement\BibtexParser.cs" />
+    <Compile Include="PaperManagement\BibtexTag.cs" />
     <Compile Include="PaperManagement\IParser.cs" />
     <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="PaperManagement\PaperHandler.cs" />
