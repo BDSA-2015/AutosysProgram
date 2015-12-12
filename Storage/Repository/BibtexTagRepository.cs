@@ -24,7 +24,7 @@ namespace Storage.Repository
         }
 
         /// <summary>
-        ///     Creates a new BibtexTag and returns its id. Throws an ArgumentNullException if the bibtextag to create is null.
+        ///     Creates a new BibtexTag and returns its id. Throws an ArgumentNullException if the BibtexTag to create is null.
         /// </summary>
         /// <param name="tag">
         /// BibtexTag to create
@@ -32,9 +32,14 @@ namespace Storage.Repository
         /// <returns>
         /// True if the BibtexTag was created
         /// </returns>
-        public Task<int> Create(StoredBibtexTag tag)
+        public virtual async Task<int> Create(StoredBibtexTag tag)
         {
-            throw new NotImplementedException();
+            if (tag == null) throw new ArgumentNullException(nameof(tag));
+
+            _dbContext.Attach(tag); // Used for mocking
+            _dbContext.Add(tag); // Used for mocking 
+            await _dbContext.SaveChangesAsync();
+            return tag.Id;
         }
 
         /// <summary>
@@ -46,9 +51,9 @@ namespace Storage.Repository
         /// <returns>
         ///     BibtexTag from id.
         /// </returns>
-        public Task<StoredBibtexTag> Read(int id)
+        public virtual async Task<StoredBibtexTag> Read(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<StoredBibtexTag>().FindAsync(id);
         }
 
         /// <summary>
@@ -57,9 +62,9 @@ namespace Storage.Repository
         /// <returns>
         ///     All BibtexTags.
         /// </returns>
-        public IQueryable<StoredBibtexTag> Read()
+        public virtual IQueryable<StoredBibtexTag> Read()
         {
-            throw new NotImplementedException();
+            return _dbContext.Set<StoredBibtexTag>().AsQueryable();
         }
 
         /// <summary>
@@ -73,9 +78,17 @@ namespace Storage.Repository
         /// <returns>
         ///     True if BibtexTag was updated, vice versa.
         /// </returns>
-        public Task<bool> UpdateIfExists(StoredBibtexTag tag)
+        public virtual async Task<bool> UpdateIfExists(StoredBibtexTag tag)
         {
-            throw new NotImplementedException();
+            var tagToUpdate = await _dbContext.Set<StoredBibtexTag>().FindAsync(tag.Id);
+
+            if (tagToUpdate == null) return false;
+
+            _dbContext.Attach(tag); // Used for mocking 
+            _dbContext.SetModified(tag); // Used for mocking 
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
         /// <summary>
@@ -87,9 +100,15 @@ namespace Storage.Repository
         /// <returns>
         ///     True if BibtexTag was deleted, false if BibtexTag does not exist.
         /// </returns>
-        public Task<bool> DeleteIfExists(int id)
+        public virtual async Task<bool> DeleteIfExists(int id)
         {
-            throw new NotImplementedException();
+            var bibtexTagToDelete = await _dbContext.Set<StoredBibtexTag>().FindAsync(id);
+
+            if (bibtexTagToDelete == null) return false;
+
+            _dbContext.Set<StoredBibtexTag>().Remove(bibtexTagToDelete);
+            await _dbContext.SaveChangesAsync();
+            return true;
         }
 
         /// <summary>
@@ -97,7 +116,7 @@ namespace Storage.Repository
         /// </summary>
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _dbContext.Dispose();
         }
     }
 }
