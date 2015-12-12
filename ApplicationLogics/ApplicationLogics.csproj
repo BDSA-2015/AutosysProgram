@@ -124,6 +124,8 @@
     <Compile Include="PaperManagement\IParser.cs" />
     <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="PaperManagement\PaperHandler.cs" />
+    <Compile Include="PaperManagement\Savers\BibtexTagSaver.cs" />
+    <Compile Include="PaperManagement\Savers\ISaver.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
     <Compile Include="ProtocolManagement\ProtocolHandler.cs" />
     <Compile Include="Program.cs" />
