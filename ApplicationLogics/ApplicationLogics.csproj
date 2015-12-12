@@ -131,6 +131,7 @@
     <Compile Include="ExportManagement\ExportHandler.cs" />
     <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
     <Compile Include="ExportManagement\Converter\CsvConverter.cs" />
+    <Compile Include="StorageAdapter\BibtexTagAdapter.cs" />
     <Compile Include="StudyManagement\BibTexFileSearcher.cs" />
     <Compile Include="StorageAdapter\CriteriaAdapter.cs" />
     <Compile Include="StorageAdapter\DatafieldAdapter.cs" />
