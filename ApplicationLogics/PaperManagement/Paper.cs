@@ -40,5 +40,7 @@ namespace ApplicationLogics.PaperManagement
         ///     A reference to the resource associated with this Paper (e.g. A PDF, or CSV file...)
         /// </summary>
         public string ResourceRef { get; set; }
+
+        public int Id { get; set; }
     }
 }

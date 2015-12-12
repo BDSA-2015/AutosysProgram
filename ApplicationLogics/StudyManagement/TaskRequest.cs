@@ -16,6 +16,8 @@ namespace ApplicationLogics.StudyManagement
     /// </summary>
     public class TaskRequest
     {
+        public int Id { get; set; }
+
         /// <summary>
         ///     Determines task states; initialized, in progress or completed
         /// </summary>

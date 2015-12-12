@@ -47,7 +47,7 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles
 
             //Team to StoredTeam
             Mapper.CreateMap<Team, StoredTeam>()
-                .ForMember(user => user.UserIds,
+                .ForMember(user => user.InternalUserIds,
                     opt => opt.MapFrom(storedUser => storedUser.UserIDs));
         }
     }

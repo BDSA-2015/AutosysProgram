@@ -21,6 +21,13 @@ namespace Storage.Models
         [Required]
         public virtual ICollection<string> FieldValues { get; set; }
 
+        /// <summary>
+        ///     A reference to the resource associated with this Paper (e.g. A PDF, or CSV file...)
+        /// </summary>
+        [StringLength(100)]
+        [Required]
+        public string ResourceRef { get; set; }
+
         [Key]
         public int Id { get; set; }
 
