@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement;
+using ApplicationLogics.UserManagement.Entities;
 using AutoMapper;
 using Storage.Models;
 using Storage.Repository.Interface;
@@ -24,99 +24,65 @@ namespace ApplicationLogics.StorageAdapter
         }
 
         /// <summary>
-        ///     Creates a new team in database
+        ///     Reads storedteam and returns a team to the caller.
         /// </summary>
-        /// <param name="team"> Team object</param>
-        /// <returns>Id of team</returns>
-        public Task<int> Create(Team team)
+        /// <param name="id"> Id in database</param>
+        /// <returns>Team</returns>
+        public async Task<Team> Read(int id)
         {
-            return _teamRepository.Create(Mapper.Map<StoredTeam>(team));
-        }
-
-        Task<Team> IAdapter<Team>.Read(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        IQueryable<Team> IAdapter<Team>.Read()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<bool> IAdapter<Team>.UpdateIfExists(Team user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteIfExists(int id)
-        {
-            throw new NotImplementedException();
+            return Mapper.Map<Team>(await _teamRepository.Read(id));
+            ;
         }
 
         /// <summary>
-        ///     Deletes a team from database
+        ///     Returns an IQueryable set of teams
         /// </summary>
-        /// <param name="team">team object</param>
-        public void DeleteIfExists(Team team)
+        /// <returns>IQueryable set of teams</returns>
+        public IQueryable<Team> Read()
         {
-            var toDelete = Read(team.Id);
-            if (toDelete == null) throw new NullReferenceException("Team does not exist");
-
-            if ((team.Id == toDelete.Id) && (team.MetaData == toDelete.MetaData) && (team.Name == toDelete.Name) &&
-                team.UserIDs.Equals(toDelete.UserIDs))
-            {
-                var storedteamToDelete = Mapper.Map<StoredTeam>(toDelete);
-                _teamRepository.DeleteIfExists(storedteamToDelete.Id);
-            }
-            else throw new ArgumentException("Team has been updated");
+            var storedTeam =  _teamRepository.Read();
+            return storedTeam.Select(Mapper.Map<Team>).AsQueryable();
         }
+
+        /// <summary>
+        ///     Converts team to storage entity and update it.
+        /// </summary>
+        /// <param name="team">Team object</param>
+        public async Task<bool> UpdateIfExists(Team team)
+        {
+            return await _teamRepository.UpdateIfExists(Mapper.Map<StoredTeam>(team));
+        }
+
+        /// <summary>
+        ///     DeleteIfExists given team from database.
+        /// </summary>
+        /// <param name="id">id of team</param>
+        public async Task<bool> DeleteIfExists(int id)
+        {
+            var result = await _teamRepository.DeleteIfExists(id);
+            if (!result) throw new NullReferenceException(nameof(id));
+            return true;
+        }
+
+        /// <summary>
+        ///     Creates a new storedTeam from team details and send it to repository
+        /// </summary>
+        /// <param name="team">team</param>
+        /// <returns> int</returns>
+        public async Task<int> Create(Team team)
+        {
+            return await _teamRepository.Create(Mapper.Map<StoredTeam>(team));
+        }
+
 
         public Team Map(Team item)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        ///     Read all teams in database
-        /// </summary>
-        /// <returns>Enumerable collection of all teams</returns>
-        public IEnumerable<Team> Read()
-        {
-            var storedTeam = _teamRepository.Read();
-
-            var teams = Enumerable.ToList(storedTeam.Select(Mapper.Map<Team>));
-            //Converts storedUsers to user and return as a list
-            return teams;
-        }
-
-        Task<int> IAdapter<Team>.Create(Team user)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        ///     Reads a given team from a specific id
-        /// </summary>
-        /// <param name="id">id of team</param>
-        /// <returns>team object</returns>
-        public Team Read(int id)
-        {
-            var storedTeam = _teamRepository.Read(id);
-            return Mapper.Map<Team>(storedTeam);
-        }
-
-        /// <summary>
-        ///     Updates an existing team in database
-        /// </summary>
-        /// <param name="team">team object</param>
-        public void UpdateIfExists(Team team)
-        {
-            _teamRepository.UpdateIfExists(Mapper.Map<StoredTeam>(team));
-        }
-
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _teamRepository.Dispose();
         }
     }
 }

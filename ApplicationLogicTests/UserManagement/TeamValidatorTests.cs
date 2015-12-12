@@ -5,6 +5,7 @@
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.UserManagement;
+using ApplicationLogics.UserManagement.Entities;
 using ApplicationLogics.UserManagement.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

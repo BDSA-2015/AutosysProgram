@@ -10,6 +10,7 @@ using ApplicationLogics.PaperManagement;
 using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
+using ApplicationLogics.UserManagement.Entities;
 
 namespace ApplicationLogics.AutosysServer
 {

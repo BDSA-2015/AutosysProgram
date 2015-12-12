@@ -7,7 +7,6 @@ using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
-using ApplicationLogicTests.UserManagement.Stub;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Storage.Models;
@@ -17,14 +16,14 @@ namespace ApplicationLogicTests.UserManagement
     [TestClass]
     public class UserHandlerTest
     {
-        private Mock<IAdapter<User>> _facadeMock;
+        private Mock<IAdapter<User>> _adapterMock;
         private User _user;
 
         [TestInitialize]
         public void Initialize()
         {
             AutoMapperConfigurator.Configure();
-            _facadeMock = new Mock<IAdapter<User>>();
+            _adapterMock = new Mock<IAdapter<User>>();
             _user = new User {Id = 0, MetaData = "Meta", Name = "name"};
         }
 
@@ -32,17 +31,17 @@ namespace ApplicationLogicTests.UserManagement
         ///     Test of valid user creation
         /// </summary>
         [TestMethod]
-        public void CreateUser_Valid_Test()
+        public async void CreateUser_Valid_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Create(_user)).Returns(Task.FromResult(_user.Id));
-            var userHandler = new UserHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Create(_user)).Returns(Task.FromResult(_user.Id));
+            var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
-            var user = userHandler.Create(_user);
+            var returnedId =  await userHandler.Create(_user);
 
             //Assert
-            Assert.IsTrue(user.Result == _user.Id);
+            Assert.IsTrue(returnedId == _user.Id);
         }
 
         /// <summary>
@@ -50,15 +49,15 @@ namespace ApplicationLogicTests.UserManagement
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
-        public void CreateUser_Invalid_userInformationWhiteSpace_Test()
+        public async void CreateUser_Invalid_userInformationWhiteSpace_Test()
         {
             //Arrange
             var user = new User {Name = " ", MetaData = " "};
-            _facadeMock.Setup(r => r.Create(user));
-            var userHandler = new UserHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Create(user));
+            var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
-            var result = userHandler.Create(user);
+            var result = await userHandler.Create(user);
 
             //Assert
             //Exception must be thrown
@@ -69,15 +68,15 @@ namespace ApplicationLogicTests.UserManagement
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
-        public void CreateUser_Invalid_userInformationEmptyString_Test()
+        public async void CreateUser_Invalid_userInformationEmptyString_Test()
         {
             //Arrange
             var user = new User {Name = "", MetaData = ""};
-            _facadeMock.Setup(r => r.Create(user));
-            var userHandler = new UserHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Create(user));
+            var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
-            var result = userHandler.Create(user);
+            var result = await userHandler.Create(user);
 
             //Assert
             //Exception must be thrown
@@ -88,15 +87,15 @@ namespace ApplicationLogicTests.UserManagement
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
-        public void CreateUser_Invalid_userInformationNull_Test()
+        public async void CreateUser_Invalid_userInformationNull_Test()
         {
             //Arrange
             var user = new User {Name = null, MetaData = null};
-            _facadeMock.Setup(r => r.Create(user));
-            var userHandler = new UserHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Create(user));
+            var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
-            var result = userHandler.Create(user);
+            var result = await userHandler.Create(user);
 
             //Assert
             //Exception must be thrown
@@ -108,14 +107,14 @@ namespace ApplicationLogicTests.UserManagement
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
-        public void CreateUser_Invalid_userIsNull_Test()
+        public async void CreateUser_Invalid_userIsNull_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Create(null));
-            var userHandler = new UserHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Create(null));
+            var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
-            var result = userHandler.Create(null);
+            var result = await userHandler.Create(null);
 
             //Assert
             //Exception must be thrown
@@ -126,23 +125,18 @@ namespace ApplicationLogicTests.UserManagement
         ///     Test if an existing user is being deleted
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof (KeyNotFoundException))]
-        public void DeleteUser_Valid_Test()
+        public async void DeleteUser_Valid_Test()
         {
             //Arrange
-            var facade = new UserAdapter(new RepositoryStub<StoredUser>());
-            var userHandler = new UserHandler(facade);
-            var user = new User {Name = "Name1", MetaData = "data"};
             const int idToDelete = 0;
+            _adapterMock.Setup(a => a.DeleteIfExists(idToDelete)).Returns(Task.FromResult(true));
+            var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
-            userHandler.Create(user);
-            Assert.IsNotNull(userHandler.Read(idToDelete));
-            userHandler.Delete(idToDelete);
+            var result = await userHandler.Delete(idToDelete);
 
             //Assert
-            userHandler.Read(idToDelete);
-            //Exception must be thrown to indicate that the user does not exist (ONLY FOR TESTING REPOSITORY STUB)
+            Assert.IsTrue(result);
         }
 
         /// <summary>
@@ -150,15 +144,34 @@ namespace ApplicationLogicTests.UserManagement
         ///     Exception must be thrown here.
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof (ArgumentException))]
-        public void DeleteUser_Invalid_NoExistingUser_Test()
+        [ExpectedException(typeof (NullReferenceException))]
+        public async void DeleteUser_Invalid_NoExistingUser_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Read(_user.Id));
-            var userHandler = new UserHandler(_facadeMock.Object);
+            _adapterMock.Setup(a => a.DeleteIfExists(_user.Id)).Throws(new NullReferenceException());
+            var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
-            userHandler.Delete(_user.Id);
+            var result = await userHandler.Delete(_user.Id);
+
+            //Assert
+            //Exception must be thrown
+        }
+
+        /// <summary>
+        ///     Test deletion with invalid id
+        ///     Exception must be thrown here.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public async void DeleteUser_Invalid_InvalidId_Test()
+        {
+            //Arrange
+            var userHandler = new UserHandler(_adapterMock.Object);
+            var invalidId = -1;
+
+            //Act
+            var result = await userHandler.Delete(invalidId);
 
             //Assert
             //Exception must be thrown
@@ -171,8 +184,8 @@ namespace ApplicationLogicTests.UserManagement
         public void ReadUser_Valid_IsNotNull_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Read(_user.Id)).Returns(Task.FromResult(_user));
-            var userHandler = new UserHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Read(_user.Id)).Returns(Task.FromResult(_user));
+            var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
             var user = userHandler.Read(_user.Id);
@@ -188,8 +201,8 @@ namespace ApplicationLogicTests.UserManagement
         public void ReadUser_Valid_TypeOfUser_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Read(_user.Id)).Returns(Task.FromResult(_user));
-            var userHandler = new UserHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Read(_user.Id)).Returns(Task.FromResult(_user));
+            var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
             var user = userHandler.Read(_user.Id);
@@ -206,8 +219,8 @@ namespace ApplicationLogicTests.UserManagement
         public void ReadUser_Valid_CorrectInformation_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Read(_user.Id)).Returns(Task.FromResult(_user));
-            var userHandler = new UserHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Read(_user.Id)).Returns(Task.FromResult(_user));
+            var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
             var actualUser = userHandler.Read(_user.Id);
@@ -228,8 +241,8 @@ namespace ApplicationLogicTests.UserManagement
             var team1 = new User {Id = 0, Name = "User1", MetaData = "Meta1"};
             var team2 = new User {Id = 1, Name = "User2", MetaData = "Meta2"};
             var users = new List<User> {team1, team2};
-            _facadeMock.Setup(r => r.Read()).Returns(users.AsQueryable());
-            var userHandler = new UserHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Read()).Returns(users.AsQueryable());
+            var userHandler = new UserHandler(_adapterMock.Object);
 
             //Act
             var actualUsers = userHandler.GetAll();

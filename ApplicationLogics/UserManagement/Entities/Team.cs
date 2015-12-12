@@ -2,7 +2,7 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-namespace ApplicationLogics.UserManagement
+namespace ApplicationLogics.UserManagement.Entities
 {
     /// <summary>
     ///     This class represents a team of users created prior to a given study.

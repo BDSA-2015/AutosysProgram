@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using ApplicationLogics.AutosysServer.Mapping;
 using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.UserManagement;
-using ApplicationLogicTests.UserManagement.Stub;
+using ApplicationLogics.UserManagement.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Storage.Models;
@@ -21,7 +21,7 @@ namespace ApplicationLogicTests.UserManagement
     ///     Test for the TeamHandler Class
     /// </summary>
     [TestClass]
-    public class TeamFacadeTests
+    public class TeamAdapterTests
     {
         private Mock<IRepository<StoredTeam>> _repositoryMock;
         private StoredTeam _storedTeam;
@@ -49,7 +49,7 @@ namespace ApplicationLogicTests.UserManagement
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
-            var actualId = teamFacade.Create(_team); //BUG AUTOMAPPER EXCEPTION IS THROWN HERE...
+            var actualId = teamFacade.Create(_team);
 
             //Assert
             Assert.IsTrue(expectedReturnId == actualId.Result);
@@ -105,7 +105,7 @@ namespace ApplicationLogicTests.UserManagement
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
 
             //Act
-            var returnedTeam = teamFacade.Read(idToRead);
+            var returnedTeam = teamFacade.Read(idToRead).Result;
 
             //Assert
             Assert.IsTrue(_team.Name == returnedTeam.Name);
@@ -190,20 +190,21 @@ namespace ApplicationLogicTests.UserManagement
         /// </summary>
         [ExpectedException(typeof (KeyNotFoundException))]
         [TestMethod]
-        public void DeleteTeam_Success_Test()
+        public async void DeleteTeam_Success_Test()
         {
             //Arrange 
-            var teamFacade = new TeamAdapter(new RepositoryStub<StoredTeam>());
-            var team = new Team {Name = "name", MetaData = "data", UserIDs = new[] {1, 2}};
-            var toDeleteId = 0;
+            var repositoryMock = new Mock<IRepository<StoredTeam>>();
+            const int toDeleteId = 0;
+            repositoryMock.Setup(r => r.DeleteIfExists(toDeleteId)).Returns(Task.FromResult(true));
+            var adapter = new TeamAdapter(repositoryMock.Object);
+
+
             //Act
-            teamFacade.Create(team);
-            Assert.IsNotNull(teamFacade.Read(toDeleteId));
-            teamFacade.DeleteIfExists(team);
+
+            var result = await adapter.DeleteIfExists(toDeleteId);
 
             //Assert
-            teamFacade.Read(toDeleteId);
-            //Exception must be thrown to indicate that the team does not exist (ONLY FOR TESTING REPOSITORY STUB)
+            Assert.IsTrue(result);
         }
 
         /// <summary>
@@ -212,42 +213,15 @@ namespace ApplicationLogicTests.UserManagement
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (NullReferenceException))]
-        public void DeleteTeam_Fail_TeamDoesNotExist_Test()
+        public async void DeleteTeam_Fail_TeamDoesNotExist_Test()
         {
             //Arrange
             var toDeleteId = 0;
-            _repositoryMock.Setup(r => r.Read(toDeleteId));
-            var teamFacade = new TeamAdapter(_repositoryMock.Object);
+            _repositoryMock.Setup(r => r.DeleteIfExists(toDeleteId)).Returns(Task.FromResult(false));
+            var adapter = new TeamAdapter(_repositoryMock.Object);
 
             //Act
-            teamFacade.DeleteIfExists(_team);
-
-            //Assert
-            //Exception must be thrown
-        }
-
-        /// <summary>
-        ///     Test deleting a team that has been updated
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentException))]
-        public void DeleteTeam_Fail_TeamToDeleteHasBeenUpdated_Test()
-        {
-            //Arrange
-            var editedTeam = new StoredTeam
-            {
-                Id = _team.Id,
-                Name = "changed",
-                MetaData = "changed",
-                UserIds = new[] {1, 8}
-            };
-
-            _repositoryMock.Setup(r => r.Read(_team.Id)).Returns(Task.FromResult(editedTeam));
-
-            var teamFacade = new TeamAdapter(_repositoryMock.Object);
-
-            //Act
-            teamFacade.DeleteIfExists(_team);
+            var result = await adapter.DeleteIfExists(toDeleteId);
 
             //Assert
             //Exception must be thrown
