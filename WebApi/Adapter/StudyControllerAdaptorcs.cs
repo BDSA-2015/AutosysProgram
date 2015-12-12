@@ -6,6 +6,7 @@ using System.Web.Http;
 using SystematicStudyService.Models;
 using WebApi.Controllers;
 using WebApi.Models;
+using TaskRequest = WebApi.Models.TaskRequest;
 using ApplicationLogics.AutosysServer;
 
 using ApplicationLogics.StudyManagement;
@@ -39,7 +40,7 @@ namespace WebApi.Adapter
 
             foreach (Phase phase in study.Phases)//For each phase
             {
-                foreach(KeyValuePair<DatabaseUser,List<DatabaseTask>> usersTasks in phase.Tasks) //Foreach user in the phase
+                foreach(KeyValuePair<DatabaseUser,List<DatabaseTask>> usersTasks in phase.Tasks) //Foreach user in the phase // In the future, the foreach could be replaced with just examing the latest phase
                 {
                     
                     foreach(DatabaseTask task in usersTasks.Value)//Account for the users completed and incomplete tasks
@@ -67,7 +68,7 @@ namespace WebApi.Adapter
 
         public IHttpActionResult GetResource(int id, int resourceId)
         {
-           _facade
+            throw new NotImplementedException();
         }
 
         public Models.TaskRequest GetTask(int id, int taskId)
@@ -80,14 +81,73 @@ namespace WebApi.Adapter
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Models.TaskRequest> GetTasks(int id, int userId, int count = 1, Models.TaskRequest.Filter filter = Models.TaskRequest.Filter.Remaining, Models.TaskRequest.Type type = Models.TaskRequest.Type.Both)
+        public IEnumerable<Models.TaskRequest> GetTasks(int id, int userId, int count = 1, Models.TaskRequest.Filter filter = TaskRequest.Filter.Remaining, TaskRequest.Type type = TaskRequest.Type.Both)
         {
             throw new NotImplementedException();
+            
+
+            var taskRequestFilter = TaskRequestFilterTranslator(filter);
+            var taskRequestType = TaskRequestTypeTranslator(type);
+
+            var DatabaseTasks =  _facade.GetTasks(id, userId, count, taskRequestFilter, taskRequestType);
+            var tasks = new List<TaskRequest>();
+            TaskRequest newTask; 
+            foreach (DatabaseTask task in DatabaseTasks)
+            {
+                newTask = new TaskRequest();
+                newTask.ConflictingData = task.ConflictingData;
+                newTask.Id = null;
+                newTask.IsDeliverable = null;
+                newTask.RequestedFields = null;
+                newTask.TaskType = null;
+                newTask.VisibleFields  = null
+                
+            }
+
+
+
         }
 
         public IHttpActionResult PostTask(int id, int taskId, [FromBody] TaskSubmission task)
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// /// Converts APi representation of the enity TaskRequest.Filter to the ApplicationLogics Representation of the entity
+        /// </summary>
+        /// <param name="filterType"></param>
+        /// <returns></returns>
+        private DatabaseTask.Filter TaskRequestFilterTranslator(TaskRequest.Filter filterType)
+        {
+
+            if (filterType == TaskRequest.Filter.Done)
+                return DatabaseTask.Filter.Done;
+            else if (filterType == TaskRequest.Filter.Editable)
+                return DatabaseTask.Filter.Editable;
+            else if (filterType == TaskRequest.Filter.Remaining)
+                return DatabaseTask.Filter.Remaining;
+            else throw new NotImplementedException();//This code does not reflect all of the possible Filters. Extend this method if this statement is reached
+        }
+
+        /// <summary>
+        /// Converts APi representation of the enity TaskRequest.Type to the ApplicationLogics Representation of the entity
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private DatabaseTask.Type TaskRequestTypeTranslator(TaskRequest.Type type)
+        {
+            throw new NotImplementedException();
+
+            if (type == TaskRequest.Type.Both)
+                return DatabaseTask.Type.Both;
+            else if (type == TaskRequest.Type.Conflict)
+                return DatabaseTask.Type.HandleConflictingDatafields;
+            else if (type == TaskRequest.Type.Review)
+                return DatabaseTask.Type.FillOutDataFields;
+            else throw new NotImplementedException(); //This code does not reflect all of the possible Types. Extend this method if this statement is reached
+        }
+
+        private TaskRequest TaskRequest
     }
 }

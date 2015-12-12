@@ -142,6 +142,7 @@
     <Compile Include="StorageAdapter\TaskRequestAdapter.cs" />
     <Compile Include="StorageAdapter\TeamAdapter.cs" />
     <Compile Include="StorageAdapter\UserAdapter.cs" />
+    <Compile Include="StudyManagement\ConflictingData.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />
     <Compile Include="StudyManagement\CriteriaFactory.cs" />
     <Compile Include="StudyManagement\CriteriaLimitation.cs" />
