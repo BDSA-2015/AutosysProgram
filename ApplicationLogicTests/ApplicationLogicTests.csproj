@@ -129,6 +129,7 @@
     <Compile Include="Mapping\Stub\ObjectManyProperties.cs" />
     <Compile Include="Mapping\Stub\ObjectSameOneProperty.cs" />
     <Compile Include="Mapping\AutoMapperConfiguratorTest.cs" />
+    <Compile Include="PaperManagement\Savers\BibtexTagSaverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserManagement\Stub\RepositoryStub.cs" />
     <Compile Include="UserManagement\TeamFacadeTests.cs" />
