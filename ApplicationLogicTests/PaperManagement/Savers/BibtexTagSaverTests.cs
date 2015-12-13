@@ -59,7 +59,11 @@ namespace ApplicationLogicTests.PaperManagement.Savers
             _mockAdapter.Verify(r => r.Create(It.IsAny<BibtexTag>()), Times.Exactly(4));
         }
 
-        [TestMethod(), ExpectedException(typeof(ArgumentNullException))]
+        /// <summary>
+        ///     Test method for testing that a BibtexFile with no entries is handled probably
+        ///     No attempt to save tags to the database should be done, if the file contains no entries
+        /// </summary>
+        [TestMethod()]
         public void Save_EmptyFile_CreateIsNotCalled()
         {
             //Arrange
@@ -71,6 +75,16 @@ namespace ApplicationLogicTests.PaperManagement.Savers
 
             //Assert
             _mockAdapter.Verify(r => r.Create(It.IsAny<BibtexTag>()), Times.Never);
+        }
+
+        /// <summary>
+        ///     Test method to check if a null input for the saver is handled probably
+        /// </summary>
+        [TestMethod(), ExpectedException(typeof (ArgumentNullException))]
+        public void Save_NullInput_ExceptionIsThrown()
+        {
+            //Act
+            _saver.Save(null);
         }
     }
 }

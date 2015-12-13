@@ -23,7 +23,7 @@ namespace ApplicationLogics.PaperManagement.Savers
         /// <param name="entryType">The given bibtex file entry type</param>
         public void Save(BibtexFile entryType)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
