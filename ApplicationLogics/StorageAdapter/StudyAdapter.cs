@@ -13,7 +13,7 @@ namespace ApplicationLogics.StorageAdapter
 
     /// <summary>
     ///     This class is responsible for the communication between application logic layer and storage layer.
-    ///     This class will handle Users and convert them the the appropriate object that are to be propagated.
+    ///     This class will handle studies and convert them the the appropriate object that are to be propagated.
     /// </summary>
     public class StudyAdapter : IAdapter<Study>
     {

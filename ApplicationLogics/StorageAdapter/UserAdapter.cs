@@ -9,6 +9,7 @@ using Storage.Repository.Interface;
 
 namespace ApplicationLogics.StorageAdapter
 {
+
     /// <summary>
     ///     This class is responsible for converting users in the logical layer to stored user entities in the storage layer and call appropriate database operations.
     /// </summary>
@@ -16,10 +17,6 @@ namespace ApplicationLogics.StorageAdapter
     {
         private readonly IRepository<StoredUser> _userRepository;
 
-        /// <summary>
-        ///     This class is responsible for the communication between application logic layer and storage layer.
-        ///     This class will handle Users and convert them the the propriate object that are to be propagated
-        /// </summary>
         public UserAdapter(IRepository<StoredUser> userRepository)
         {
             _userRepository = userRepository;
