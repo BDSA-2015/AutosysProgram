@@ -280,14 +280,13 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
-        public void ReadAll_IQueryable_IsCalled()
-            // Not async, IQueryable is not executed by db until used by .ToList() 
+        public void ReadAll_IQueryable_IsCalled() // Not async, IQueryable is not executed by db until used by .ToList() 
         {
             // Arrange and act 
             var protocols = _repository.Read();
 
             // Assert 
-            _context.Verify(c => c.Protocols.AsQueryable(), Times.Once);
+            _context.Verify(c => c.Read<StoredProtocol>(), Times.Once);
         }
 
         #endregion

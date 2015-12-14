@@ -155,7 +155,7 @@ namespace StorageTests.RepositoryUnitTests
             var tags = _repository.Read();
 
             // Assert 
-            _context.Verify(c => c.BibtexTags.AsQueryable(), Times.Once);
+            _context.Verify(c => c.Read<StoredBibtexTag>(), Times.Once);
         }
 
         #endregion

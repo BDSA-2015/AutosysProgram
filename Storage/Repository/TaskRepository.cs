@@ -69,7 +69,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual IQueryable<StoredTaskRequest> Read()
         {
-            return _dbContext.Set<StoredTaskRequest>().AsQueryable();
+            return _dbContext.Read<StoredTaskRequest>(); // Used for mocking 
+            //return _dbContext.Set<StoredTaskRequest>().AsQueryable();
         }
 
         /// <summary>

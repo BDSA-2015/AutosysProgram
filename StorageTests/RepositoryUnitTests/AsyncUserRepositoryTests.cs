@@ -285,7 +285,7 @@ namespace StorageTests.RepositoryUnitTests
             var users = _repository.Read();
 
             // Assert 
-            _context.Verify(c => c.Users.AsQueryable(), Times.Once);
+            _context.Verify(c => c.Read<StoredUser>(), Times.Once);
         }
 
         #endregion
@@ -413,7 +413,7 @@ namespace StorageTests.RepositoryUnitTests
 
         [TestMethod]
         public async Task Delete_Remove_IsCalled()
-        {
+        { 
             // Arrange and act 
             await _repository.DeleteIfExists(0);
 

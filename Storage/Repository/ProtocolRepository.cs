@@ -69,7 +69,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual IQueryable<StoredProtocol> Read()
         {
-            return _dbContext.Set<StoredProtocol>().AsQueryable();
+            return _dbContext.Read<StoredProtocol>();
+            // return _dbContext.Set<StoredProtocol>().AsQueryable();
         }
 
         /// <summary>

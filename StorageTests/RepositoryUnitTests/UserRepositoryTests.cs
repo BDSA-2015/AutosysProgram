@@ -157,7 +157,7 @@ namespace StorageTests.RepositoryUnitTests
             var users = _repository.Read();
 
             // Assert 
-            _context.Verify(c => c.Users.AsQueryable(), Times.Once);
+            _context.Verify(c => c.Read<StoredUser>(), Times.Once);
         }
 
         #endregion

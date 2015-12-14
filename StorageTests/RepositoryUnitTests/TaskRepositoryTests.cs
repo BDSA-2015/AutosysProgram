@@ -156,7 +156,7 @@ namespace StorageTests.RepositoryUnitTests
             var tasks = _repository.Read();
 
             // Assert 
-            _context.Verify(c => c.Tasks.AsQueryable(), Times.Once);
+            _context.Verify(c => c.Read<StoredTaskRequest>(), Times.Once);
         }
 
         #endregion
