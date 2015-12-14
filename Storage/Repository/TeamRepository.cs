@@ -7,7 +7,7 @@ using Storage.Repository.Interface;
 namespace Storage.Repository
 {
     /// <summary>
-    ///     This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on teams in the
+    ///     This class implements the IRepository interface outlining the async CRUD operations to be used on teams in the
     ///     database. <see cref="StoredTeam" />
     ///     These are used specifically on a Team DbSet in the AutoSysDbModel.
     /// </summary>
