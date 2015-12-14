@@ -12,7 +12,7 @@ namespace ApplicationLogics.PaperManagement.Savers
     /// </summary>
     public class BibtexTagSaver : ISaver<BibtexFile>
     {
-        private IAdapter<BibtexTag> _bibtexAdapter;
+        private readonly IAdapter<BibtexTag> _bibtexAdapter;
         private ICollection<BibtexEntry> _dataEntries;
         private List<BibtexTag> _bibtexTags;
         private List<BibtexTag> _bibtexNewTags;   
