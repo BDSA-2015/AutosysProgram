@@ -45,7 +45,7 @@ namespace WebApi.Adapter
                     
                     foreach(DatabaseTask task in usersTasks.Value)//Account for the users completed and incomplete tasks
                     {
-                        if (DatabaseTask.Filter.Done == task.TaskType)
+                        if (DatabaseTask.Filter.Done == task.Progress)
                             completedTasks.AddOrUpdate(usersTasks.Key.Id, 1, (userId, finishedWork) => finishedWork + 1);
                         else
                             incompleteTasksTasks.AddOrUpdate(usersTasks.Key.Id, 1, (userId, unfinishedWork) => unfinishedWork + 1);

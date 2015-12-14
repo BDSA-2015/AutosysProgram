@@ -50,6 +50,10 @@ namespace WebApi.Models
         /// </summary>
         [Required]
         public Type TaskType { get; set; }
+        /// <summary>
+        /// ///     The <see cref="Filter" /> of the task. Descripes the the taks progress
+        /// </summary>
+        public Filter TaskFilter { get; set; }
 
         /// <summary>
         ///     Defines whether the task is still deliverable or not.

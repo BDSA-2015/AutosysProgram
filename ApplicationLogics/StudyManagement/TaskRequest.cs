@@ -35,7 +35,7 @@ namespace ApplicationLogics.StudyManagement
             Done
         }
         
-        public Filter TaskType { get; set; }
+        public Filter Progress { get; set; }
 
         public int Id { get; set; }
 
@@ -47,6 +47,11 @@ namespace ApplicationLogics.StudyManagement
             HandleConflictingDatafields,
             
         }
+
+        /// <summary>
+        ///     Defines whether the task is still deliverable or not.
+        /// </summary>
+        public bool IsDeliverable { get; set; }
 
 
         public string Description { get; set; }
