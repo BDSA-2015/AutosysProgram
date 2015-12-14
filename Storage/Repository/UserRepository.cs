@@ -57,7 +57,8 @@ namespace Storage.Repository
         /// </returns>
         public async Task<StoredUser> Read(int id)
         {
-            return await _dbContext.Set<StoredUser>().FindAsync(id);
+            return await _dbContext.Read<StoredUser>(id); // Used for mocking 
+            //return await _dbContext.Set<StoredUser>().FindAsync(id);
         }
 
         /// <summary>
@@ -68,7 +69,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual IQueryable<StoredUser> Read()
         {
-            return _dbContext.Set<StoredUser>().AsQueryable();
+            return _dbContext.Read<StoredUser>(); // Used for mocking 
+            //return _dbContext.Set<StoredUser>().AsQueryable();
         }
 
         /// <summary>

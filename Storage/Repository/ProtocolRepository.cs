@@ -57,7 +57,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual async Task<StoredProtocol> Read(int id)
         {
-            return await _dbContext.Set<StoredProtocol>().FindAsync(id);
+            return await _dbContext.Read<StoredProtocol>(id); // Used for mocking 
+            //return await _dbContext.Set<StoredProtocol>().FindAsync(id);
         }
 
         /// <summary>
@@ -68,7 +69,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual IQueryable<StoredProtocol> Read()
         {
-            return _dbContext.Set<StoredProtocol>().AsQueryable();
+            return _dbContext.Read<StoredProtocol>();
+            // return _dbContext.Set<StoredProtocol>().AsQueryable();
         }
 
         /// <summary>
@@ -114,7 +116,8 @@ namespace Storage.Repository
 
             if (protocolToDelete == null) return false;
 
-            _dbContext.Set<StoredProtocol>().Remove(protocolToDelete);
+            _dbContext.Remove(protocolToDelete);
+            //_dbContext.Set<StoredProtocol>().Remove(protocolToDelete);
             await _dbContext.SaveChangesAsync();
 
             return true;

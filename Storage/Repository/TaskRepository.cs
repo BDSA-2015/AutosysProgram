@@ -57,7 +57,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual async Task<StoredTaskRequest> Read(int id)
         {
-            return await _dbContext.Set<StoredTaskRequest>().FindAsync(id);
+            return await _dbContext.Read<StoredTaskRequest>(id);
+            //return await _dbContext.Set<StoredTaskRequest>().FindAsync(id);
         }
 
         /// <summary>
@@ -68,7 +69,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual IQueryable<StoredTaskRequest> Read()
         {
-            return _dbContext.Set<StoredTaskRequest>().AsQueryable();
+            return _dbContext.Read<StoredTaskRequest>(); // Used for mocking 
+            //return _dbContext.Set<StoredTaskRequest>().AsQueryable();
         }
 
         /// <summary>
@@ -114,7 +116,8 @@ namespace Storage.Repository
 
             if (userToDelete == null) return false;
 
-            _dbContext.Set<StoredTaskRequest>().Remove(userToDelete);
+            _dbContext.Remove(userToDelete);
+            //_dbContext.Set<StoredTaskRequest>().Remove(userToDelete);
             await _dbContext.SaveChangesAsync();
             return true;
         }
