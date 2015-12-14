@@ -21,6 +21,10 @@ namespace Storage.Repository
             _dbContext = context;
         }
 
+        public DbRepository()
+        {
+        }
+
         /// <summary>
         ///     Creates a new T entity and returns its id. Throws an ArgumentNullException if the item to create is null.
         /// </summary>
@@ -42,7 +46,7 @@ namespace Storage.Repository
         ///     Returns an item based on its id.
         /// </summary>
         /// <param name="id">
-        ///     Id of item to find.
+        ///     Id of item to find.x 
         /// </param>
         /// <returns></returns>
         public virtual async Task<T> Read(int id)

@@ -16,13 +16,13 @@ namespace ApplicationLogics.StorageAdapter.Interface
     /// <typeparam name="T"></typeparam>
     public interface IAdapter<T> : IDisposable
     {
-        Task<int> Create(T user);
+        Task<int> Create(T item);
 
         Task<T> Read(int id);
 
         IQueryable<T> Read();
 
-        Task<bool> UpdateIfExists(T user);
+        Task<bool> UpdateIfExists(T item);
 
         Task<bool> DeleteIfExists(int id);
 

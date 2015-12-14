@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
-using Storage.Entities;
 using Storage.Models;
 
 namespace Storage.Repository.Interface

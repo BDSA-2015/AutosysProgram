@@ -7,7 +7,7 @@ using Storage.Repository.Interface;
 namespace Storage.Repository
 {
     /// <summary>
-    ///     This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on studies in
+    ///     This class implements the IRepository interface outlining the async CRUD operations to be used on studies in
     ///     the database. <see cref="StoredStudy" />
     ///     These are used specifically on a Stored Study DbSet in the AutoSysDbModel.
     /// </summary>
@@ -19,6 +19,10 @@ namespace Storage.Repository
         public StudyRepository(IAutoSysContext context)
         {
             _dbContext = context;
+        }
+
+        public StudyRepository()
+        {
         }
 
         /// <summary>

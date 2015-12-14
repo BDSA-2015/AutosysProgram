@@ -21,6 +21,10 @@ namespace Storage.Repository
             _dbContext = context;
         }
 
+        public ProtocolRepository()
+        {
+        }
+
         /// <summary>
         ///     Creates a new protocol and returns its id. Throws an ArgumentNullException if the protocol to create is null.
         /// </summary>
