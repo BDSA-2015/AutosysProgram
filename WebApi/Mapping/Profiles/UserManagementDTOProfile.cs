@@ -35,10 +35,10 @@ namespace WebApi.Mapping.Profiles
         private void CreateTeamMappings()
         {
             //DTO to User
-            Mapper.CreateMap<Team, ApplicationLogics.UserManagement.Team>();
+            Mapper.CreateMap<Team, ApplicationLogics.UserManagement.Entities.Team>();
 
             //User to DTO
-            Mapper.CreateMap<ApplicationLogics.UserManagement.Team, Team>();
+            Mapper.CreateMap<ApplicationLogics.UserManagement.Entities.Team, Team>();
         }
     }
 }

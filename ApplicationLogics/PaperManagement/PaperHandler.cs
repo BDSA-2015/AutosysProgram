@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web.WebPages;
 using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.StorageAdapter.Interface;
+using BibtexLibrary;
 
 namespace ApplicationLogics.PaperManagement
 {
@@ -15,9 +16,9 @@ namespace ApplicationLogics.PaperManagement
     {
         private readonly IAdapter<Paper> _paperAdapter;
         //Used to generate Bibtex files, which later is stored as Papers in the database
-        private readonly IParser _parser;
+        private readonly IParser<BibtexFile> _parser;
 
-        public PaperHandler(IParser parser, IAdapter<Paper> paperAdapter)
+        public PaperHandler(IParser<BibtexFile> parser, IAdapter<Paper> paperAdapter)
         {
             _parser = parser;
             _paperAdapter = paperAdapter;
@@ -35,7 +36,12 @@ namespace ApplicationLogics.PaperManagement
                 throw new ArgumentNullException(nameof(file));
             }
 
-            return _parser.Parse(file).Select(paper => _paperAdapter.Create(paper));
+            return _parser.ParseToPapers(file).Select(paper => _paperAdapter.Create(paper));
+        }
+
+        public void SaveTags()
+        {
+            throw new NotImplementedException();
         }
     }
 }

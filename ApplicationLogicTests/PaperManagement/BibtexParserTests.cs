@@ -38,7 +38,7 @@ namespace ApplicationLogicTests.PaperManagement
                        "topic = { multivariate - statistics; market - research;}}";
 
             //Act
-            var papers = _parser.Parse(file);
+            var papers = _parser.ParseToPapers(file);
 
             //Assert
             Assert.IsTrue(papers.ElementAt(0).ResourceRef == "839269");
@@ -56,7 +56,7 @@ namespace ApplicationLogicTests.PaperManagement
                        "author = {David A. Aaker}}";
 
             //Act
-            var papers = _parser.Parse(file);
+            var papers = _parser.ParseToPapers(file);
 
             //Assert
             Assert.IsTrue(papers.ElementAt(0).Type == "book");
@@ -74,7 +74,7 @@ namespace ApplicationLogicTests.PaperManagement
                        "author = {David A. Aaker}}";
 
             //Act
-            var papers = _parser.Parse(file);
+            var papers = _parser.ParseToPapers(file);
 
             //Assert
             Assert.IsTrue(papers.ElementAt(0).FieldTypes.ElementAt(0) == "author" &&
@@ -99,7 +99,7 @@ namespace ApplicationLogicTests.PaperManagement
                        "topic = {multivariate - statistics; market - research;}}";
 
             //Act
-            var papers = _parser.Parse(file);
+            var papers = _parser.ParseToPapers(file);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace ApplicationLogicTests.PaperManagement
                        "year = {1981;}";
 
             //Act
-            var papers = _parser.Parse(file);
+            var papers = _parser.ParseToPapers(file);
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace ApplicationLogicTests.PaperManagement
         public void ParseEmptyInputTest()
         {
             //Act
-            var papers = _parser.Parse("");
+            var papers = _parser.ParseToPapers("");
         }
     }
 }

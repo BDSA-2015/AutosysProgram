@@ -1,4 +1,5 @@
-﻿using ApplicationLogics.StudyManagement;
+﻿using System.Reflection;
+using ApplicationLogics.StudyManagement;
 using AutoMapper;
 using Storage.Entities;
 using Storage.Models;
@@ -53,7 +54,9 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles
         /// </summary>
         private void CreateRoleMapping()
         {
-            Mapper.CreateMap<Role, StoredRole>();
+            Mapper.CreateMap<Role, StoredRole>().ForMember(storedRole => storedRole.Id, 
+                                                            opt => opt.Ignore());
+
             Mapper.CreateMap<StoredRole, Role>();
         }
 
@@ -62,8 +65,13 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles
         /// </summary>
         private void CreateStudyMapping()
         {
-            Mapper.CreateMap<Study, StoredStudy>();
-            Mapper.CreateMap<StoredStudy, Study>();
+            Mapper.CreateMap<Study, StoredStudy>()
+                .ForMember(source => source.Id, 
+                            opt => opt.MapFrom(target => target.Id));
+           
+            Mapper.CreateMap<StoredStudy, Study>()
+                .ForMember(source => source.Id,
+                            opt => opt.MapFrom(target => target.Id)); ;
         }
 
         /// <summary>
