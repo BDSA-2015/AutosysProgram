@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using SystematicStudyService.Models;
 using WebApi.Models;
 
 namespace WebApi.Adapter

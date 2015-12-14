@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SystematicStudyService.Models
+namespace WebApi.Models
 {
     /// <summary>
     ///     The overview of a systematic study on which a team works.
