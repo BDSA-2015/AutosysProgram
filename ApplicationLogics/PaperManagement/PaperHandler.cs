@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.WebPages;
-using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.StorageAdapter.Interface;
 using BibtexLibrary;
 
@@ -17,7 +12,7 @@ namespace ApplicationLogics.PaperManagement
         private readonly IAdapter<Paper> _paperAdapter;
         //Used to generate Bibtex files, which later is stored as Papers in the database
         private readonly IParser<BibtexFile> _parser;
-
+        
         public PaperHandler(IParser<BibtexFile> parser, IAdapter<Paper> paperAdapter)
         {
             _parser = parser;
@@ -25,23 +20,23 @@ namespace ApplicationLogics.PaperManagement
         }
 
         /// <summary>
-        ///     Creates a List of Paper based on an imported BibTex file which is parsed to the program.
+        ///      Parses a given string file to Paper objects for import into the database
         /// </summary>
-        /// <param name="file">The bibtex file which is parsed to the program</param>
-        /// <returns>A List of Papers which was valid for parsing</returns>
-        public IEnumerable<Task<int>> ImportBibtex(string file)
+        /// <param name="file">
+        ///      The given file to be parsed to Paper objects for import
+        /// </param>
+        public void ImportBibtex(string file)
         {
-            if (file.IsEmpty() || file == null)
+            if (string.IsNullOrEmpty(file))
             {
                 throw new ArgumentNullException(nameof(file));
             }
+                var papers = _parser.ParseToPapers(file);
 
-            return _parser.ParseToPapers(file).Select(paper => _paperAdapter.Create(paper));
-        }
-
-        public void SaveTags()
-        {
-            throw new NotImplementedException();
+                foreach (var paper in papers)
+                {
+                    _paperAdapter.Create(paper);
+                }
         }
     }
 }

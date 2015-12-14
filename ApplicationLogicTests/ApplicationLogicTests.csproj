@@ -83,6 +83,7 @@
     <Compile Include="ExportManagement\ExportHandlerTests.cs" />
     <Compile Include="ExportManagement\Mock\ProtocolMock.cs" />
     <Compile Include="PaperManagement\BibtexParserTests.cs" />
+    <Compile Include="PaperManagement\FileTagHandlerTests.cs" />
     <Compile Include="PaperManagement\PaperHandlerTests.cs" />
     <Compile Include="ExportManagement\CSVConverterTests.cs" />
     <Compile Include="Mapping\AutoMapperTests.cs" />

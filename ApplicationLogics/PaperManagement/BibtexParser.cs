@@ -48,7 +48,7 @@ namespace ApplicationLogics.PaperManagement
         /// <returns>
         ///     A BibtexFile
         /// </returns>
-        public BibtexFile ParseToFile(string file)
+        public BibtexFile ParseToTags(string file)
         {
             return BibtexImporter.FromString(@file);
         }
