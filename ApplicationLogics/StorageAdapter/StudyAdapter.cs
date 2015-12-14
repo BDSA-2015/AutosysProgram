@@ -4,22 +4,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.StudyManagement;
+using AutoMapper;
+using Storage.Models;
+using Storage.Repository.Interface;
 
 namespace ApplicationLogics.StorageAdapter
 {
+
+    /// <summary>
+    ///     This class is responsible for the communication between application logic layer and storage layer.
+    ///     This class will handle Users and convert them the the appropriate object that are to be propagated.
+    /// </summary>
     public class StudyAdapter : IAdapter<Study>
     {
 
+        private readonly IRepository<StoredStudy> _studyRepository;
 
-
-        public void Dispose()
+        public StudyAdapter(IRepository<StoredStudy> studyRepository)
         {
-            throw new NotImplementedException();
+            _studyRepository = studyRepository;
         }
 
-        public Task<int> Create(Study user)
+        public async Task<int> Create(Study study)
         {
-            throw new NotImplementedException();
+
+            var storedStudy = Mapper.Map<StoredStudy>(study);
+            return await _studyRepository.Create(storedStudy);
         }
 
         public Task<Study> Read(int id)
@@ -46,7 +56,12 @@ namespace ApplicationLogics.StorageAdapter
         {
             throw new NotImplementedException();
         }
-    }
 
+        public void Dispose()
+        {
+            _studyRepository.Dispose();
+        }
+
+    }
 
 }

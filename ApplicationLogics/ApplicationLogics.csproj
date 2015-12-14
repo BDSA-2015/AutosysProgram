@@ -135,13 +135,9 @@
     <Compile Include="ExportManagement\Converter\CsvConverter.cs" />
     <Compile Include="StorageAdapter\BibtexTagAdapter.cs" />
     <Compile Include="StudyManagement\BibTexFileSearcher.cs" />
-    <Compile Include="StorageAdapter\CriteriaAdapter.cs" />
-    <Compile Include="StorageAdapter\DatafieldAdapter.cs" />
     <Compile Include="StorageAdapter\Interface\IAdapter.cs" />
     <Compile Include="StorageAdapter\PaperAdapter.cs" />
-    <Compile Include="StorageAdapter\PhaseAdapter.cs" />
     <Compile Include="StorageAdapter\ProtocolAdapter.cs" />
-    <Compile Include="StorageAdapter\RoleAdapter.cs" />
     <Compile Include="StorageAdapter\StudyAdapter.cs" />
     <Compile Include="StorageAdapter\TaskRequestAdapter.cs" />
     <Compile Include="StorageAdapter\TeamAdapter.cs" />

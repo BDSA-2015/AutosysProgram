@@ -13,21 +13,19 @@ namespace ApplicationLogics.AutosysServer
     /// </summary>
     internal class AdapterInjectionContainer
     {
-        // TODO insert new async repository and make facade take this instead
+
         /// <summary>
-        ///     Returns a UserFacde that are used by userHandlers
-        ///     It creates a userFacade with specified repository
+        ///     Returns an adapter used to convert user entities to the storage layer in the UserHandler.
+        ///     Creates an adapter with its corresponding repository. 
         /// </summary>
         /// <returns></returns>
-        public UserAdapter GetUserFasade()
+        public UserAdapter GetUserAdapter()
         {
             var userRepository = new UserRepository();
             return new UserAdapter(userRepository);
-            //var repository = new UserRepository<StoredUser>();
-            //return new UserAdapter(repository);
         }
 
-        public TeamAdapter GetTeamFasade()
+        public TeamAdapter GetTeamAdapter()
         {
             var teamRepository = new TeamRepository();
             return new TeamAdapter(teamRepository);
@@ -38,6 +36,12 @@ namespace ApplicationLogics.AutosysServer
             var studyRepository = new StudyRepository();
             return new StudyAdapter(studyRepository);
         }
+
+        public PhaseAdapter GetPhaseAdapter()
+        {
+            return new PhaseAdapter(); // Only used in StudyHandler to convert phases that are stored 
+        }
+
     }
 
 }

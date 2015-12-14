@@ -35,7 +35,7 @@ namespace ApplicationLogics.AutosysServer
         /// <param name="injector"></param>
         private void InitializeHandlers(AdapterInjectionContainer injector)
         {
-            _userHandler = new UserHandler(injector.GetUserFasade());
+            _userHandler = new UserHandler(injector.GetUserAdapter());
         }
 
 
