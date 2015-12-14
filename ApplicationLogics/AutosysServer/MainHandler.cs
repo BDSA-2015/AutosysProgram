@@ -10,6 +10,7 @@ using ApplicationLogics.PaperManagement;
 using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
+using ApplicationLogics.UserManagement.Entities;
 
 namespace ApplicationLogics.AutosysServer
 {
@@ -24,7 +25,7 @@ namespace ApplicationLogics.AutosysServer
 
         public MainHandler()
         {
-            var injector = new FacadeInjectionContainer();
+            var injector = new AdapterInjectionContainer();
             InitializeHandlers(injector);
         }
 
@@ -32,9 +33,9 @@ namespace ApplicationLogics.AutosysServer
         ///     Initialize Facades buy utilzing a dependency injection container
         /// </summary>
         /// <param name="injector"></param>
-        private void InitializeHandlers(FacadeInjectionContainer injector)
+        private void InitializeHandlers(AdapterInjectionContainer injector)
         {
-            _userHandler = new UserHandler(injector.GetUserFasade());
+            _userHandler = new UserHandler(injector.GetUserAdapter());
         }
 
 

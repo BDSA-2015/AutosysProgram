@@ -23,6 +23,10 @@ namespace Storage.Repository
             _dbContext = context;
         }
 
+        public BibtexTagRepository()
+        {
+        }
+
         /// <summary>
         ///     Creates a new BibtexTag and returns its id. Throws an ArgumentNullException if the BibtexTag to create is null.
         /// </summary>

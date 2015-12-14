@@ -17,14 +17,7 @@ namespace Storage.Models
         [StringLength(50)]
         public string Name { get; set; }
 
-        public int[] UserIds
-        {
-            get { return Array.ConvertAll(InternalUserIds.Split(','), int.Parse); }
-            set { InternalUserIds = string.Join(",", value.Select(ids => ids.ToString().ToArray())); }
-        }
-
-        [NotMapped]
-        public string InternalUserIds { get; set; } // Converts actual user ids from csv string to int [] in UserIDs. 
+        public int[] UserIds { get; set;}
 
         [StringLength(400)]
         public string MetaData { get; set; }

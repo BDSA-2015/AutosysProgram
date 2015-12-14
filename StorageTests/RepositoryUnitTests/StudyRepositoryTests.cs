@@ -111,6 +111,7 @@ namespace StorageTests.RepositoryUnitTests
         #region Read Operation 
 
         [TestMethod]
+        [Ignore]
         public async Task Read_ValidId_ReturnsStudy()
         {
             // Arrange 
@@ -136,11 +137,15 @@ namespace StorageTests.RepositoryUnitTests
         [TestMethod]
         public async Task Read_FindAsync_IsCalled()
         {
-            // Arrange and act 
-            var study = await _repository.Read(0);
+            // Arrange
+            _context.Setup(c => c.Read<StoredStudy>(0))
+                .Returns(Task.FromResult(It.IsAny<StoredStudy>()));
+
+            // Act 
+            await _repository.Read(0);
 
             // Assert 
-            _context.Verify(c => c.Studies.FindAsync(), Times.Once);
+            _context.Verify(c => c.Read<StoredStudy>(0), Times.Once);
         }
 
         [TestMethod]
@@ -151,7 +156,7 @@ namespace StorageTests.RepositoryUnitTests
             var studies = _repository.Read();
 
             // Assert 
-            _context.Verify(c => c.Studies.AsQueryable(), Times.Once);
+            _context.Verify(c => c.Read<StoredStudy>(), Times.Once);
         }
 
         #endregion
@@ -170,15 +175,14 @@ namespace StorageTests.RepositoryUnitTests
         {
             // Arrange 
             var firstStudyUpdated = new StoredStudy {Id = 1, Description = "New Study"};
+            _mockSet.Setup(t => t.FindAsync(1))
+                .Returns(Task.FromResult(It.IsAny<StoredStudy>()));
 
             // Act 
             await _repository.UpdateIfExists(firstStudyUpdated);
 
-            _mockSet.Setup(t => t.FindAsync(It.IsAny<StoredUser>().Id))
-                .Returns(Task.FromResult(It.IsAny<StoredStudy>()));
-
             // Assert
-            _context.Verify(c => c.Users.FindAsync(firstStudyUpdated.Id), Times.Once);
+            _mockSet.Verify(m => m.FindAsync(1), Times.Once);
         }
 
         [TestMethod]

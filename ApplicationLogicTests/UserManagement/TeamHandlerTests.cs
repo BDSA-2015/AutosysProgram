@@ -3,27 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.AutosysServer.Mapping;
-using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement;
-using ApplicationLogicTests.UserManagement.Stub;
+using ApplicationLogics.UserManagement.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Storage.Models;
 
 namespace ApplicationLogicTests.UserManagement
 {
     [TestClass]
     public class TeamHandlerTests
     {
-        private Mock<IAdapter<Team>> _facadeMock;
+        private Mock<IAdapter<Team>> _adapterMock;
         private Team _team;
 
         [TestInitialize]
         public void Initialize()
         {
             AutoMapperConfigurator.Configure();
-            _facadeMock = new Mock<IAdapter<Team>>();
+            _adapterMock = new Mock<IAdapter<Team>>();
             _team = new Team {Id = 0, MetaData = "Meta", Name = "name", UserIDs = new[] {1, 2}};
         }
 
@@ -32,17 +30,17 @@ namespace ApplicationLogicTests.UserManagement
         ///     Test of valid team creation
         /// </summary>
         [TestMethod]
-        public void CreateTeam_Valid_Test()
+        public async void CreateTeam_Valid_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Create(_team)).Returns(Task.FromResult(_team.Id));
-            var teamHandler = new TeamHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Create(_team)).Returns(Task.FromResult(_team.Id));
+            var teamHandler = new TeamHandler(_adapterMock.Object);
 
             //Act
-            var team = teamHandler.Create(_team);
+            var returnedId = await teamHandler.Create(_team);
 
             //Assert
-            Assert.IsTrue(team.Result == _team.Id);
+            Assert.IsTrue(returnedId == _team.Id);
         }
 
 
@@ -51,17 +49,17 @@ namespace ApplicationLogicTests.UserManagement
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
-        public void CreateTeam_Invalid_TeamInformationWhiteSpace_Test()
+        public async void CreateTeam_Invalid_TeamInformationWhiteSpace_Test()
         {
             //Arrange
             _team.Name = " ";
             _team.MetaData = " ";
 
-            _facadeMock.Setup(r => r.Create(_team));
-            var teamHandler = new TeamHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Create(_team));
+            var teamHandler = new TeamHandler(_adapterMock.Object);
 
             //Act
-            var result = teamHandler.Create(_team);
+            var result = await teamHandler.Create(_team);
 
             //Assert
             //Exception must be thrown
@@ -72,17 +70,17 @@ namespace ApplicationLogicTests.UserManagement
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
-        public void CreateTeam_Invalid_TeamInformationEmptyString_Test()
+        public async void CreateTeam_Invalid_TeamInformationEmptyString_Test()
         {
             //Arrange
             _team.Name = "";
             _team.MetaData = "";
 
-            _facadeMock.Setup(r => r.Create(_team));
-            var teamHandler = new TeamHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Create(_team));
+            var teamHandler = new TeamHandler(_adapterMock.Object);
 
             //Act
-            var result = teamHandler.Create(_team);
+            var result = await teamHandler.Create(_team);
 
             //Assert
             //Exception must be thrown
@@ -93,16 +91,16 @@ namespace ApplicationLogicTests.UserManagement
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
-        public void CreateTeam_Invalid_NoTeamMember_Test()
+        public async void CreateTeam_Invalid_NoTeamMember_Test()
         {
             //Arrange
             _team.UserIDs = new int[0];
 
-            _facadeMock.Setup(r => r.Create(_team));
-            var teamHandler = new TeamHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Create(_team));
+            var teamHandler = new TeamHandler(_adapterMock.Object);
 
             //Act
-            var result = teamHandler.Create(_team);
+            var result = await teamHandler.Create(_team);
 
             //Assert
             //Exception must be thrown
@@ -113,23 +111,19 @@ namespace ApplicationLogicTests.UserManagement
         ///     Test if an existing team is being deleted
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof (KeyNotFoundException))]
-        public void DeleteTeam_Valid_Test()
+        public async void DeleteTeam_Valid_Test()
         {
             //Arrange
-            var facade = new TeamAdapter(new RepositoryStub<StoredTeam>());
-            var teamHandler = new TeamHandler(facade);
-            var team = new Team {Name = "Name", MetaData = "data", UserIDs = new[] {1, 3}};
+            var adapter = new Mock<IAdapter<Team>>();
             const int idToDelete = 0;
+            adapter.Setup(r => r.DeleteIfExists(idToDelete)).Returns(Task.FromResult(true));
+            var teamHandler = new TeamHandler(adapter.Object);
 
             //Act
-            teamHandler.Create(team);
-            Assert.IsNotNull(teamHandler.Read(idToDelete));
-            teamHandler.Delete(idToDelete);
+            var result = await teamHandler.Delete(idToDelete);
 
             //Assert
-            teamHandler.Read(idToDelete);
-            //Exception must be thrown to indicate that the team does not exist (ONLY FOR TESTING REPOSITORY STUB)
+            Assert.IsTrue(result);
         }
 
         /// <summary>
@@ -137,15 +131,34 @@ namespace ApplicationLogicTests.UserManagement
         ///     Exception must be thrown here.
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof (ArgumentException))]
-        public void DeleteUser_Invalid_NoExistingUser_Test()
+        [ExpectedException(typeof (NullReferenceException))]
+        public async void DeleteTeam_Invalid_NoExistingTeam_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Read(_team.Id));
-            var teamHandler = new TeamHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.DeleteIfExists(_team.Id)).Throws(new NullReferenceException());
+            var teamHandler = new TeamHandler(_adapterMock.Object);
 
             //Act
-            teamHandler.Delete(_team.Id);
+            await teamHandler.Delete(_team.Id);
+
+            //Assert
+            //Exception must be thrown
+        }
+
+        /// <summary>
+        ///     Test deletion with invalid id
+        ///     Exception must be thrown here.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public async void DeleteUser_Invalid_InvalidId_Test()
+        {
+            //Arrange
+            var teamHandler = new TeamHandler(_adapterMock.Object);
+            var invalidId = -1;
+
+            //Act
+            var result = await teamHandler.Delete(invalidId);
 
             //Assert
             //Exception must be thrown
@@ -156,20 +169,20 @@ namespace ApplicationLogicTests.UserManagement
         ///     Test if existing team containts correct information
         /// </summary>
         [TestMethod]
-        public void ReadTeam_Valid_CorrectInformation_Test()
+        public async void ReadTeam_Valid_CorrectInformation_Test()
         {
             //Arrange
-            _facadeMock.Setup(r => r.Read(_team.Id)).Returns(Task.FromResult(_team));
-            var teamHandler = new TeamHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Read(_team.Id)).Returns(Task.FromResult(_team));
+            var teamHandler = new TeamHandler(_adapterMock.Object);
 
             //Act
-            var actualTeam = teamHandler.Read(_team.Id);
+            var actualTeam = await teamHandler.Read(_team.Id);
 
             //Assert
             Assert.IsTrue(actualTeam.Id == _team.Id);
-            Assert.IsTrue(actualTeam.Result.Name == _team.Name);
-            Assert.IsTrue(actualTeam.Result.MetaData == _team.MetaData);
-            Assert.IsTrue(actualTeam.Result.UserIDs.Length == _team.UserIDs.Length);
+            Assert.IsTrue(actualTeam.Name == _team.Name);
+            Assert.IsTrue(actualTeam.MetaData == _team.MetaData);
+            Assert.IsTrue(actualTeam.UserIDs.Length == _team.UserIDs.Length);
         }
 
         /// <summary>
@@ -182,13 +195,12 @@ namespace ApplicationLogicTests.UserManagement
             var team1 = new Team {Id = 0, Name = "Team1", MetaData = "Meta1", UserIDs = new[] {1}};
             var team2 = new Team {Id = 1, Name = "Team2", MetaData = "Meta2", UserIDs = new[] {2}};
             var teamList = new List<Team> {team1, team2};
-            _facadeMock.Setup(r => r.Read()).Returns(teamList.AsQueryable());
-            var teamHandler = new TeamHandler(_facadeMock.Object);
+            _adapterMock.Setup(r => r.Read()).Returns(teamList.AsQueryable());
+            var teamHandler = new TeamHandler(_adapterMock.Object);
 
             //Act
             var actualTeams = teamHandler.GetAll();
             var counter = actualTeams.Count();
-
 
             //Assert
             Assert.IsTrue(counter == teamList.Count);
