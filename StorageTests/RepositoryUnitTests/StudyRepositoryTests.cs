@@ -170,15 +170,14 @@ namespace StorageTests.RepositoryUnitTests
         {
             // Arrange 
             var firstStudyUpdated = new StoredStudy {Id = 1, Description = "New Study"};
+            _mockSet.Setup(t => t.FindAsync(1))
+                .Returns(Task.FromResult(It.IsAny<StoredStudy>()));
 
             // Act 
             await _repository.UpdateIfExists(firstStudyUpdated);
 
-            _mockSet.Setup(t => t.FindAsync(It.IsAny<StoredUser>().Id))
-                .Returns(Task.FromResult(It.IsAny<StoredStudy>()));
-
             // Assert
-            _context.Verify(c => c.Users.FindAsync(firstStudyUpdated.Id), Times.Once);
+            _mockSet.Verify(m => m.FindAsync(1), Times.Once);
         }
 
         [TestMethod]

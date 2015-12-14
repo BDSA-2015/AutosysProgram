@@ -263,11 +263,14 @@ namespace StorageTests.RepositoryUnitTests
         [TestMethod]
         public async Task Read_FindAsync_IsCalled()
         {
+            // Arrange 
+            // var firstUser = new StoredUser {Id = 1, Name = "William Parker", MetaData = "Researcher"};
+
             // Arrange and act 
             var user = await _repository.Read(0);
 
             // Assert 
-            _context.Verify(c => c.Users.FindAsync(), Times.Once);
+            _context.Verify(c => c.Users.FindAsync(0), Times.Once);
         }
 
         [TestMethod]
@@ -297,14 +300,13 @@ namespace StorageTests.RepositoryUnitTests
         {
             // Arrange 
             var firstUserUpdated = new StoredUser {Id = 1, Name = "William Parker", MetaData = "Validator"};
+            _mockSet.Setup(t => t.FindAsync(1)).Returns(Task.FromResult(It.IsAny<StoredUser>()));
 
             // Act 
             await _repository.UpdateIfExists(firstUserUpdated);
 
-            _mockSet.Setup(t => t.FindAsync(It.IsAny<StoredUser>().Id)).Returns(Task.FromResult(It.IsAny<StoredUser>()));
-
             // Assert
-            _context.Verify(c => c.Users.FindAsync(firstUserUpdated.Id), Times.Once);
+            _mockSet.Verify(m => m.FindAsync(1), Times.Once);
         }
 
         [TestMethod]

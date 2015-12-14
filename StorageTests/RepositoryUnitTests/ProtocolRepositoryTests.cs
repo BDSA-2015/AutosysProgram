@@ -300,15 +300,15 @@ namespace StorageTests.RepositoryUnitTests
         {
             // Arrange 
             var firstProtocolUpdated = new StoredProtocol {Id = 1, Description = "New Protocol"};
+            _mockSet.Setup(t => t.FindAsync(1))
+                .Returns(Task.FromResult(It.IsAny<StoredProtocol>()));
+
 
             // Act 
             await _repository.UpdateIfExists(firstProtocolUpdated);
 
-            _mockSet.Setup(t => t.FindAsync(It.IsAny<StoredProtocol>().Id))
-                .Returns(Task.FromResult(It.IsAny<StoredProtocol>()));
-
             // Assert
-            _context.Verify(c => c.Users.FindAsync(firstProtocolUpdated.Id), Times.Once);
+            _mockSet.Verify(m => m.FindAsync(1), Times.Once);
         }
 
         [TestMethod]
