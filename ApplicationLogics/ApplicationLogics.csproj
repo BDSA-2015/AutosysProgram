@@ -120,9 +120,12 @@
     <Compile Include="AutosysServer\Mapping\Profiles\PaperManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\UserManagementStorageProfile.cs" />
     <Compile Include="PaperManagement\BibtexParser.cs" />
+    <Compile Include="PaperManagement\BibtexTag.cs" />
     <Compile Include="PaperManagement\IParser.cs" />
     <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="PaperManagement\PaperHandler.cs" />
+    <Compile Include="PaperManagement\Savers\BibtexTagSaver.cs" />
+    <Compile Include="PaperManagement\Savers\ISaver.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
     <Compile Include="ProtocolManagement\ProtocolHandler.cs" />
     <Compile Include="Program.cs" />
@@ -130,6 +133,7 @@
     <Compile Include="ExportManagement\ExportHandler.cs" />
     <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
     <Compile Include="ExportManagement\Converter\CsvConverter.cs" />
+    <Compile Include="StorageAdapter\BibtexTagAdapter.cs" />
     <Compile Include="StudyManagement\BibTexFileSearcher.cs" />
     <Compile Include="StorageAdapter\CriteriaAdapter.cs" />
     <Compile Include="StorageAdapter\DatafieldAdapter.cs" />
