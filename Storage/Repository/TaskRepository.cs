@@ -57,7 +57,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual async Task<StoredTaskRequest> Read(int id)
         {
-            return await _dbContext.Set<StoredTaskRequest>().FindAsync(id);
+            return await _dbContext.Read<StoredTaskRequest>(id);
+            //return await _dbContext.Set<StoredTaskRequest>().FindAsync(id);
         }
 
         /// <summary>

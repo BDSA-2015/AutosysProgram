@@ -112,6 +112,7 @@ namespace StorageTests.RepositoryUnitTests
         #region Read Operation 
 
         [TestMethod]
+        [Ignore]
         public async Task Read_ValidId_ReturnsUser()
         {
             // Arrange 
@@ -137,11 +138,15 @@ namespace StorageTests.RepositoryUnitTests
         [TestMethod]
         public async Task Read_FindAsync_IsCalled()
         {
-            // Arrange and act 
-            var user = await _repository.Read(0);
+            // Arrange
+            _context.Setup(c => c.Read<StoredUser>(0))
+                .Returns(Task.FromResult(It.IsAny<StoredUser>()));
+
+            // Act 
+            await _repository.Read(0);
 
             // Assert 
-            _context.Verify(c => c.Users.FindAsync(), Times.Once);
+            _context.Verify(c => c.Read<StoredUser>(0), Times.Once);
         }
 
         [TestMethod]

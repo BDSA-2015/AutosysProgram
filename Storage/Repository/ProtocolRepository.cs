@@ -57,7 +57,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual async Task<StoredProtocol> Read(int id)
         {
-            return await _dbContext.Set<StoredProtocol>().FindAsync(id);
+            return await _dbContext.Read<StoredProtocol>(id); // Used for mocking 
+            //return await _dbContext.Set<StoredProtocol>().FindAsync(id);
         }
 
         /// <summary>

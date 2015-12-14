@@ -51,7 +51,8 @@ namespace Storage.Repository
         /// <returns></returns>
         public virtual async Task<T> Read(int id)
         {
-            return await _dbContext.Set<T>().FindAsync(id);
+            return await _dbContext.Read<T>(id); // Used for mocking 
+            //return await _dbContext.Set<T>().FindAsync(id);
         }
 
         /// <summary>
@@ -108,7 +109,8 @@ namespace Storage.Repository
 
             if (entity == null) return false;
 
-            _dbContext.Set<T>().Remove(entity);
+            _dbContext.Remove(entity);
+            //_dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
 
             return true;

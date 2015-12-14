@@ -57,7 +57,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual async Task<StoredTeam> Read(int id)
         {
-            return await _dbContext.Set<StoredTeam>().FindAsync(id);
+            return await _dbContext.Read<StoredTeam>(id); // Used for mocking 
+            // return await _dbContext.Set<StoredTeam>().FindAsync(id);
         }
 
         /// <summary>

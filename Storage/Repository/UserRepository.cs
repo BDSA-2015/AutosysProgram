@@ -57,7 +57,8 @@ namespace Storage.Repository
         /// </returns>
         public async Task<StoredUser> Read(int id)
         {
-            return await _dbContext.Set<StoredUser>().FindAsync(id);
+            return await _dbContext.Read<StoredUser>(id); // Used for mocking 
+            //return await _dbContext.Set<StoredUser>().FindAsync(id);
         }
 
         /// <summary>

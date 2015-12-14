@@ -47,6 +47,9 @@ namespace Storage.Repository.Interface
 
         // Used to allow mocking of Remove when calling DeleteIfExists in DbContext 
         void Remove<TEntity>(TEntity entity) where TEntity : class;
+
+        // Used to allow mocking of FindAsync when calling Read(int id) in DbContext
+        Task<TEntity> Read<TEntity>(int id) where TEntity : class;
     }
 
     /// <summary>
@@ -112,5 +115,18 @@ namespace Storage.Repository.Interface
         {
             Set<TEntity>().Remove(entity);
         }
+
+        /// <summary>
+        ///     This allows mocking the "_dbContext.Set
+        ///     <T>().FindAsync(item);" in the Read functionality that is now hidden behind an interface.
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="entity"></param>
+        public async Task<TEntity> Read<TEntity>(int id) where TEntity : class
+        {
+            return await Set<TEntity>().FindAsync(id);
+        }
+
     }
+
 }
