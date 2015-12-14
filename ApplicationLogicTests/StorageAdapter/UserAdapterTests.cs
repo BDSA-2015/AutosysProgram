@@ -208,7 +208,7 @@ namespace ApplicationLogicTests.StorageAdapter
         ///     Exception must be thrown to pass test.
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof (NullReferenceException))]
+        [ExpectedException(typeof (NullReferenceException))] // Assert 
         public async void DeleteUser_Fail_UserDoesNotExist_Test()
         {
             //Arrange
@@ -219,9 +219,8 @@ namespace ApplicationLogicTests.StorageAdapter
 
             //Act
             await adapter.DeleteIfExists(toDeleteId);
-
-            //Assert
-            //Exception must be thrown
         }
+
     }
+
 }
