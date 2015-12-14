@@ -22,7 +22,6 @@ namespace ApplicationLogicTests.PaperManagement
     [TestClass]
     public class PaperHandlerTests
     {
-        private Mock<IRepository<StoredPaper>> _mockRepo;
         private Mock<IAdapter<Paper>> _mockAdapter;
         private Mock<ISaver<BibtexFile>> _mockBibtexTagSaver;
         private PaperHandler _paperHandler;
@@ -30,17 +29,13 @@ namespace ApplicationLogicTests.PaperManagement
         [TestInitialize]
         public void Initialize()
         {
-            _mockRepo = new Mock<IRepository<StoredPaper>>();
-            _mockRepo.Setup(r => r.Create(It.IsAny<StoredPaper>()));
-
             _mockAdapter = new Mock<IAdapter<Paper>>();
             _mockAdapter.Setup(r => r.Create(It.IsAny<Paper>()));
 
             _mockBibtexTagSaver = new Mock<ISaver<BibtexFile>>();
             _mockBibtexTagSaver.Setup(r => r.Save(It.IsAny<BibtexFile>()));
 
-            _paperHandler = new PaperHandler(new BibtexParser(), _mockAdapter.Object,
-                _mockBibtexTagSaver.Object);
+            _paperHandler = new PaperHandler(new BibtexParser(), _mockAdapter.Object);
         }
 
     #region ImportPaper
@@ -112,51 +107,5 @@ namespace ApplicationLogicTests.PaperManagement
                 _paperHandler.ImportBibtex("");
             }
         #endregion
-
-    #region SaveTags
-        /// <summary>
-        ///     Tests that a 
-        /// </summary>
-        [TestMethod()]
-        public void SaveTagsTest()
-        {
-            //Arrange
-            var file = "@Article{py03," +
-                          "author = {Xavier D ecoret}," +
-                          "title = {PyBiTex}," +
-                          "year = {2003}}" +
-                          "@Article{key03," +
-                          "author = {Xavier D ecoret}," +
-                          "title = {A {bunch {of} braces {in}} title}," +
-                          "year = {2003}}" +
-                          "@Article{key01," +
-                          "author = {Simon the saint Templar}," +
-                          "title = {Something nice}," +
-                          "year = {700}}";
-
-            //Act
-            _paperHandler.SaveTags(file);
-
-            //Assert
-            _mockBibtexTagSaver.Verify(r => r.Save(It.IsAny<BibtexFile>()), Times.Once);
-
-        }
-
-        [TestMethod, ExpectedException(typeof (ArgumentNullException))]
-        public void SaveNullInputTest()
-        {
-            //Act
-            _paperHandler.SaveTags(null);
-        }
-
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
-        public void SaveEmptyStringInputTest()
-        {
-            //Act
-            _paperHandler.SaveTags("");
-        }
-
-        #endregion
-
     }
 }

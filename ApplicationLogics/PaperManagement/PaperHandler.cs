@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.WebPages;
-using ApplicationLogics.PaperManagement.Savers;
-using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.StorageAdapter.Interface;
 using BibtexLibrary;
-using NUnit.Framework;
 
 namespace ApplicationLogics.PaperManagement
 {
@@ -20,14 +12,11 @@ namespace ApplicationLogics.PaperManagement
         private readonly IAdapter<Paper> _paperAdapter;
         //Used to generate Bibtex files, which later is stored as Papers in the database
         private readonly IParser<BibtexFile> _parser;
-        private readonly ISaver<BibtexFile> _saver;
-
-        public PaperHandler(IParser<BibtexFile> parser, IAdapter<Paper> paperAdapter,
-            ISaver<BibtexFile> saver)
+        
+        public PaperHandler(IParser<BibtexFile> parser, IAdapter<Paper> paperAdapter)
         {
             _parser = parser;
             _paperAdapter = paperAdapter;
-            _saver = saver;
         }
 
         /// <summary>
@@ -48,21 +37,6 @@ namespace ApplicationLogics.PaperManagement
                 {
                     _paperAdapter.Create(paper);
                 }
-        }
-
-        /// <summary>
-        ///     Method to save new tags from a file.
-        ///     E.g. a bibtex file could be given containing the tags author and book
-        ///     these will be stored if they are not already in the database
-        /// </summary>
-        /// <param name="file"></param>
-        public void SaveTags(string file)
-        {
-            if (string.IsNullOrEmpty(file))
-            {
-                throw new ArgumentNullException(nameof(file));
-            }
-            _saver.Save(_parser.ParseToTags(file));
         }
     }
 }
