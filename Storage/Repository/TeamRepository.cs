@@ -21,6 +21,10 @@ namespace Storage.Repository
             _dbContext = context;
         }
 
+        public TeamRepository()
+        {
+        }
+
         /// <summary>
         ///     Creates a new team and returns its id. Throws an ArgumentNullException if the team to create is null.
         /// </summary>

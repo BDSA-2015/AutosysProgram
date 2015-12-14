@@ -114,7 +114,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutosysServer\FacadeInjectionContainer.cs" />
+    <Compile Include="AutosysServer\AdapterInjectionContainer.cs" />
     <Compile Include="AutosysServer\Mapping\AutoMapperConfigurator.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\StudyManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\PaperManagementStorageProfile.cs" />

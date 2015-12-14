@@ -21,6 +21,10 @@ namespace Storage.Repository
             _dbContext = context;
         }
 
+        public UserRepository()
+        {
+        }
+
         /// <summary>
         ///     Creates a new user and returns its id. Throws an ArgumentNullException if the user to create is null.
         /// </summary>

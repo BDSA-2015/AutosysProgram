@@ -21,6 +21,10 @@ namespace Storage.Repository
             _dbContext = context;
         }
 
+        public StudyRepository()
+        {
+        }
+
         /// <summary>
         ///     Creates a new study and returns its id. Throws an ArgumentNullException if the study to create is null.
         /// </summary>

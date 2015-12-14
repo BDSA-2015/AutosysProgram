@@ -26,7 +26,6 @@ namespace ApplicationLogics.StorageAdapter
             _userRepository = userRepository;
         }
 
-
         /// <summary>
         ///     Reads storedUser and returns a user to the caller.
         /// </summary>

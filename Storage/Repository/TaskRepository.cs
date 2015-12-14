@@ -21,6 +21,10 @@ namespace Storage.Repository
             _dbContext = context;
         }
 
+        public TaskRepository()
+        {
+        }
+
         /// <summary>
         ///     Creates a new task and returns its id. Throws an ArgumentNullException if the task to create is null.
         /// </summary>

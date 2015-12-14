@@ -9,6 +9,9 @@ namespace ApplicationLogics.StorageAdapter
 {
     public class StudyAdapter : IAdapter<Study>
     {
+
+
+
         public void Dispose()
         {
             throw new NotImplementedException();
