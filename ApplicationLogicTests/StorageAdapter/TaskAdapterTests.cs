@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.AutosysServer.Mapping;
-using ApplicationLogics.PaperManagement;
 using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.StudyManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using NUnit.Framework.Constraints;
 using Storage.Models;
 using Storage.Repository.Interface;
 
@@ -19,7 +17,7 @@ namespace ApplicationLogicTests.StorageAdapter
     {
         private Mock<IRepository<StoredTaskRequest>> _repositoryMock;
         private StoredTaskRequest _storedTask;
-        private StoredTaskRequest _task;
+        private TaskRequest _task;
 
         [TestInitialize]
         public void Initialize()
@@ -27,7 +25,7 @@ namespace ApplicationLogicTests.StorageAdapter
             AutoMapperConfigurator.Configure();
             _repositoryMock = new Mock<IRepository<StoredTaskRequest>>();
             _storedTask = new StoredTaskRequest {}; // TODO insert data 
-            _task = new StoredTaskRequest { }; // TODO insert data 
+            _task = new TaskRequest { }; // TODO insert data 
         }
 
         /// <summary>

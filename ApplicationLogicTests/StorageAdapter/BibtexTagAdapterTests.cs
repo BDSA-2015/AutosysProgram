@@ -18,7 +18,7 @@ namespace ApplicationLogicTests.StorageAdapter
     {
             private Mock<IRepository<StoredBibtexTag>> _repositoryMock;
             private StoredBibtexTag _storedTag;
-            private StoredBibtexTag _tag;
+            private BibtexTag _tag;
 
             [TestInitialize]
             public void Initialize()
@@ -26,7 +26,7 @@ namespace ApplicationLogicTests.StorageAdapter
                 AutoMapperConfigurator.Configure();
                 _repositoryMock = new Mock<IRepository<StoredBibtexTag>>();
                 _storedTag = new StoredBibtexTag {Id = 0, Type = "Author" };
-                _tag = new StoredBibtexTag { Id = 0, Type = "Author" };
+                _tag = new BibtexTag { Type = "Author" };
         }
 
             /// <summary>
