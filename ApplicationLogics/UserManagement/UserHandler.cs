@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Entities;
@@ -38,14 +39,14 @@ namespace ApplicationLogics.UserManagement
         ///     Creates a user with information from a userDTo
         /// </summary>
         /// <param name="user">User object</param>
-        public Task<int> Create(User user)
+        public async Task<int> Create(User user)
         {
             if (user == null)
                 throw new ArgumentException("User is null");
             if (!UserValidator.ValidateEnteredUserInformation(user))
                 throw new ArgumentException("Input may not be null, whitespace or empty");
 
-            return _storage.Create(user);
+            return await _storage.Create(user);
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace ApplicationLogics.UserManagement
         /// </summary>
         /// <param name="oldId">id of user to update</param>
         /// <param name="user">User object</param>
-        public void Update(int oldId, User user)
+        public async Task Update(int oldId, User user)
         {
             if (!UserValidator.ValidateId(oldId))
                 throw new ArgumentException("Id is not valid");
@@ -62,20 +63,19 @@ namespace ApplicationLogics.UserManagement
             if (!UserValidator.ValidateExistence(oldId, _storage))
                 throw new ArgumentException("User does not exist");
 
-            _storage.UpdateIfExists(user);
+            await _storage.UpdateIfExists(user);
         }
 
         /// <summary>
         ///     DeleteIfExists an existing user
         /// </summary>
         /// <param name="id">id of user to delete.</param>
-        public void Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            if (!UserValidator.ValidateExistence(id, _storage))
-                throw new ArgumentException("User does not exist");
-
-            var userToDelete = _storage.Read(id);
-            _storage.DeleteIfExists(userToDelete.Id);
+            if (!UserValidator.ValidateId(id))
+                throw new ArgumentException("Id is not valid");
+             
+            return await _storage.DeleteIfExists(id);
         }
 
         /// <summary>
@@ -83,19 +83,19 @@ namespace ApplicationLogics.UserManagement
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<User> Read(int id)
+        public async Task<User> Read(int id)
         {
             if (!UserValidator.ValidateId(id))
                 throw new ArgumentException("Id is not valid");
 
-            return _storage.Read(id);
+            return await _storage.Read(id);
         }
 
         /// <summary>
         ///     Get every user from the database.
         /// </summary>
         /// <returns>All users</returns>
-        public IEnumerable<User> GetAll()
+        public IQueryable<User> GetAll()
         {
             return _storage.Read();
         }

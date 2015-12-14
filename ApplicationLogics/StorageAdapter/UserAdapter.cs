@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
@@ -10,6 +9,10 @@ using Storage.Repository.Interface;
 
 namespace ApplicationLogics.StorageAdapter
 {
+    /// <summary>
+    ///     This class is responsible for converting user to storedusers and call propriate
+    ///     database operations
+    /// </summary>
     public class UserAdapter : IAdapter<User>
     {
         private readonly IRepository<StoredUser> _userRepository;
@@ -23,87 +26,59 @@ namespace ApplicationLogics.StorageAdapter
             _userRepository = userRepository;
         }
 
-        /// <summary>
-        ///     Creates a new storedUser from user details and send it to repository
-        /// </summary>
-        /// <param name="user">User</param>
-        /// <returns> int</returns>
-        public Task<int> Create(User user)
-        {
-            return _userRepository.Create(Mapper.Map<StoredUser>(user));
-        }
-
-        Task<User> IAdapter<User>.Read(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        IQueryable<User> IAdapter<User>.Read()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<bool> IAdapter<User>.UpdateIfExists(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteIfExists(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<int> IAdapter<User>.Create(User user)
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         ///     Reads storedUser and returns a user to the caller.
         /// </summary>
         /// <param name="id"> Id in database</param>
         /// <returns>User</returns>
-        public User Read(int id)
+        public async Task<User> Read(int id)
         {
-            var storedUser = _userRepository.Read(id);
-            return Mapper.Map<User>(storedUser);
+            var user = Mapper.Map<User>(await _userRepository.Read(id));
+            return user;
         }
 
         /// <summary>
-        ///     Returns an Enumerable set of users
+        ///     Returns an IQueryable set of users
         /// </summary>
-        /// <returns>Enumerable set of users</returns>
-        public IEnumerable<User> Read()
+        /// <returns>IQueryable set of users</returns>
+        public IQueryable<User> Read()
         {
             var storedUsers = _userRepository.Read();
-
-            var userList = Enumerable.ToList(storedUsers.Select(Mapper.Map<User>));
-            //Converts storedUsers to user and return as a list
-            return userList;
+            return Queryable.AsQueryable(storedUsers.Select(Mapper.Map<User>));
+            ;
         }
 
         /// <summary>
         ///     Converts user to storage entity and update it.
         /// </summary>
         /// <param name="user">User object</param>
-        public void UpdateIfExists(User user)
+        public async Task<bool> UpdateIfExists(User user)
         {
-            _userRepository.UpdateIfExists(Mapper.Map<StoredUser>(user));
+            return await _userRepository.UpdateIfExists(Mapper.Map<StoredUser>(user));
         }
 
         /// <summary>
         ///     DeleteIfExists given user from database.
         /// </summary>
-        /// <param name="user">User Object</param>
-        public void DeleteIfExists(User user)
+        /// <param name="id">id of user</param>
+        public async Task<bool> DeleteIfExists(int id)
         {
-            var toDelete = Read(user.Id);
-            if (toDelete == null) throw new NullReferenceException("User does not exist");
-            if (user.Name != toDelete.Name && user.MetaData != toDelete.MetaData)
-                throw new ArgumentException("User has been updated");
-            var storedUserToDelete = Mapper.Map<StoredUser>(toDelete);
-            _userRepository.DeleteIfExists(storedUserToDelete.Id);
+            var result = await _userRepository.DeleteIfExists(id);
+            if (!result) throw new NullReferenceException(nameof(id));
+            return true;
         }
+
+        /// <summary>
+        ///     Creates a new storedUser from user details and send it to repository
+        /// </summary>
+        /// <param name="user">User</param>
+        /// <returns> int</returns>
+        public async Task<int> Create(User user)
+        {
+            return await _userRepository.Create(Mapper.Map<StoredUser>(user));
+        }
+
 
         public User Map(User item)
         {
@@ -112,7 +87,7 @@ namespace ApplicationLogics.StorageAdapter
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _userRepository.Dispose();
         }
     }
 }

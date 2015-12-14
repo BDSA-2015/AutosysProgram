@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.StudyManagement;
+using ApplicationLogics.UserManagement;
 
 namespace ApplicationLogics.StorageAdapter
 {

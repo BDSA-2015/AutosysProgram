@@ -130,12 +130,11 @@
     <Compile Include="Mapping\Stub\ObjectSameOneProperty.cs" />
     <Compile Include="Mapping\AutoMapperConfiguratorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserManagement\Stub\RepositoryStub.cs" />
-    <Compile Include="UserManagement\TeamFacadeTests.cs" />
+    <Compile Include="UserManagement\TeamAdapterTests.cs" />
     <Compile Include="UserManagement\TeamValidatorTests.cs" />
     <Compile Include="UserManagement\TeamHandlerTests.cs" />
     <Compile Include="UserManagement\UserHandlerTest.cs" />
-    <Compile Include="UserManagement\UserFacadeTests.cs" />
+    <Compile Include="UserManagement\UserAdapterTests.cs" />
     <Compile Include="UserManagement\UserTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
