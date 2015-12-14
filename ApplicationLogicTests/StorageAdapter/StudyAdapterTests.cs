@@ -6,9 +6,13 @@ namespace ApplicationLogicTests.StorageAdapter
     [TestClass]
     public class StudyAdapterTests
     {
+
         [TestMethod]
         public void TestMethod1()
         {
+
         }
+
     }
+
 }
