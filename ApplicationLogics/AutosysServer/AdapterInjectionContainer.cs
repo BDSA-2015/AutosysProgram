@@ -41,6 +41,7 @@ namespace ApplicationLogics.AutosysServer
         {
             var tagRepository = new BibtexTagRepository();
             return new BibtexTagAdapter(tagRepository);
+            
         }
 
         // TODO should Paper have its own repository, William?
@@ -63,8 +64,6 @@ namespace ApplicationLogics.AutosysServer
             return new TaskAdapter(taskRepository);
         }
 
-
-
     }
 
-}
+} 

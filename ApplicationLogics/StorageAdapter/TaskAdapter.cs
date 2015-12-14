@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.StudyManagement;
+using AutoMapper;
 using Storage.Models;
+using Storage.Repository;
 using Storage.Repository.Interface;
 
 namespace ApplicationLogics.StorageAdapter
@@ -19,14 +21,15 @@ namespace ApplicationLogics.StorageAdapter
             _taskRepository = taskRepository;   
         } 
 
-        public Task<int> Create(TaskRequest user)
+        public async Task<int> Create(TaskRequest user)
         {
-            throw new NotImplementedException();
+            var storedTask = Mapper.Map<StoredTaskRequest>(user);
+            return await _taskRepository.Create(storedTask);
         }
 
         public Task<TaskRequest> Read(int id)
         {
-            throw new NotImplementedException();
+            
         }
 
         public IQueryable<TaskRequest> Read()
