@@ -14,7 +14,7 @@ using Moq;
 using Storage.Models;
 using Storage.Repository.Interface;
 
-namespace ApplicationLogicTests.UserManagement
+namespace ApplicationLogicTests.StorageAdapter
 {
     /// <summary>
     ///     Test for the userHandler class

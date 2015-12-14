@@ -94,7 +94,7 @@ namespace ApplicationLogics.StorageAdapter
         /// </returns>
         public async Task<bool> DeleteIfExists(int id)
         {
-            return await _bibtexTagRepository.UpdateIfExists(id);
+            return await _bibtexTagRepository.DeleteIfExists(id);
         }
 
         //TODO Refactor IAdapter Interface Mapper method(s)

@@ -46,7 +46,7 @@ namespace Storage.Repository
         ///     Returns an item based on its id.
         /// </summary>
         /// <param name="id">
-        ///     Id of item to find.
+        ///     Id of item to find.x 
         /// </param>
         /// <returns></returns>
         public virtual async Task<T> Read(int id)
