@@ -17,25 +17,29 @@ namespace ApplicationLogics.StudyManagement
     public class TaskRequest
     {
         /// <summary>
-        ///     Determines task states; initialized, in progress or completed
+        ///     Defines if a Task is completed or is still in progress
         /// </summary>
-        public enum Progress
-        {
-            NotStarted,
-            Started,
-            Done
-        }
+        public bool IsFinished { get; set; }
 
-        public enum Type
-        {
-            FillOutDataFields,
-            HandleConflictingDatafields
-        }
+        /// <summary>
+        ///     The Id of the specified User associated with this Task
+        /// </summary>
+        public int UserId { get; set; }
 
+        /// <summary>
+        ///     The Task description, which defines the work to be completed in the Task
+        /// </summary>
         public string Description { get; set; }
 
-        private List<DataField> NonModifiableDatafields { get; set; }
+        /// <summary>
+        ///     A collection of non modifiable fields containing to be visualized to a Client.
+        ///     A field can be a tag imported from a file e.g. the entry from a bibtex file or the field type and its value
+        /// </summary>
+        private List<string> VisibleDataFields { get; set; }
 
-        public List<DataField> ModifiableDatafields { get; set; }
+        /// <summary>
+        ///     A collection of modifiable fields which are defined by a Client
+        /// </summary>
+        public List<DataField> RequestedDataFields { get; set; }
     }
 }
