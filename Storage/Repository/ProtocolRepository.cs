@@ -116,7 +116,8 @@ namespace Storage.Repository
 
             if (protocolToDelete == null) return false;
 
-            _dbContext.Set<StoredProtocol>().Remove(protocolToDelete);
+            _dbContext.Remove(protocolToDelete);
+            //_dbContext.Set<StoredProtocol>().Remove(protocolToDelete);
             await _dbContext.SaveChangesAsync();
 
             return true;

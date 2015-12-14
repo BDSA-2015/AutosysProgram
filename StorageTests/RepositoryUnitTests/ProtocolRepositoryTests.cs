@@ -154,6 +154,7 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task Delete_RemoveProtocol_IsRemoved()
         {
             // Arrange 

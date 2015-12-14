@@ -114,7 +114,8 @@ namespace Storage.Repository
 
             if (teamToDelete == null) return false;
 
-            _dbContext.Set<StoredTeam>().Remove(teamToDelete);
+            _dbContext.Remove(teamToDelete); // Used for mocking 
+            //_dbContext.Set<StoredTeam>().Remove(teamToDelete);
             await _dbContext.SaveChangesAsync();
 
             return true;

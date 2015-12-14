@@ -413,9 +413,9 @@ namespace StorageTests.RepositoryUnitTests
 
         [TestMethod]
         public async Task Delete_Remove_IsCalled()
-        { 
+        {
             // Arrange and act 
-            await _repository.DeleteIfExists(0);
+            await _repository.DeleteIfExists(1);
 
             // Assert
             _context.Verify(c => c.Remove(_data[0]), Times.Once);

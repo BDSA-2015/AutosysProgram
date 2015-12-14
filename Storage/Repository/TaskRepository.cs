@@ -116,7 +116,8 @@ namespace Storage.Repository
 
             if (userToDelete == null) return false;
 
-            _dbContext.Set<StoredTaskRequest>().Remove(userToDelete);
+            _dbContext.Remove(userToDelete);
+            //_dbContext.Set<StoredTaskRequest>().Remove(userToDelete);
             await _dbContext.SaveChangesAsync();
             return true;
         }

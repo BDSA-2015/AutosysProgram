@@ -116,7 +116,8 @@ namespace Storage.Repository
 
             if (studyToDelete == null) return false;
 
-            _dbContext.Set<StoredStudy>().Remove(studyToDelete);
+            _dbContext.Remove(studyToDelete);
+            //_dbContext.Set<StoredStudy>().Remove(studyToDelete);
             await _dbContext.SaveChangesAsync();
 
             return true;
