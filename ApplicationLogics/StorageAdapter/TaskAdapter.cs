@@ -29,7 +29,9 @@ namespace ApplicationLogics.StorageAdapter
         /// Creates and converts a task to store it in the storage layer. 
         /// </summary>
         /// <param name="user"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// Id of the created task. 
+        /// </returns>
         public async Task<int> Create(TaskRequest user)
         {
             var storedTask = Mapper.Map<StoredTaskRequest>(user);

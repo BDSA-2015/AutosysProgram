@@ -33,8 +33,7 @@ namespace ApplicationLogics.StorageAdapter
         /// </returns>
         public async Task<User> Read(int id)
         {
-            var user = Mapper.Map<User>(await _userRepository.Read(id));
-            return user;
+            return Mapper.Map<User>(await _userRepository.Read(id));
         }
 
         /// <summary>

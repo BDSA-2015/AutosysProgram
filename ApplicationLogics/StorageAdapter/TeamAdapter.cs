@@ -25,8 +25,12 @@ namespace ApplicationLogics.StorageAdapter
         /// <summary>
         ///     Reads a given team from the Storage layer and returns it as a team to the caller.
         /// </summary>
-        /// <param name="id"> Id in database</param>
-        /// <returns>Team</returns>
+        /// <param name="id"> 
+        /// Id of given team to look up. 
+        /// </param>
+        /// <returns>
+        /// Converted team object. 
+        /// </returns>
         public async Task<Team> Read(int id)
         {
             var storedTeam = await _teamRepository.Read(id);
@@ -36,7 +40,9 @@ namespace ApplicationLogics.StorageAdapter
         /// <summary>
         ///     Returns all teams.
         /// </summary>
-        /// <returns>IQueryable set of teams</returns>
+        /// <returns>
+        ///     Set of teams.
+        /// </returns>
         public IQueryable<Team> Read()
         {
             var storedTeam =  _teamRepository.Read();
@@ -46,7 +52,9 @@ namespace ApplicationLogics.StorageAdapter
         /// <summary>
         ///     Converts a team to storage entity and updates it if it exists.
         /// </summary>
-        /// <param name="team">Team object</param>
+        /// <param name="team">
+        /// Team object.
+        /// </param>
         public async Task<bool> UpdateIfExists(Team team)
         {
             var storedTeam = Mapper.Map<StoredTeam>(team);
@@ -56,7 +64,12 @@ namespace ApplicationLogics.StorageAdapter
         /// <summary>
         ///     Deletes a given team from the database if it exists. 
         /// </summary>
-        /// <param name="id">id of team</param>
+        /// <param name="id">
+        ///     Id of team to delete. 
+        /// </param>
+        /// <returns>
+        /// True if existin team was deleted. 
+        /// </returns>
         public async Task<bool> DeleteIfExists(int id)
         {
             var result = await _teamRepository.DeleteIfExists(id);
@@ -68,7 +81,9 @@ namespace ApplicationLogics.StorageAdapter
         ///     Creates a new team in the Storage layer based on team details that are sent to its respective repository.
         /// </summary>
         /// <param name="team">team</param>
-        /// <returns> int</returns>
+        /// <returns>
+        ///     Id of the created task. 
+        /// </returns>
         public async Task<int> Create(Team team)
         {
             var storedTeam = Mapper.Map<StoredTeam>(team);
