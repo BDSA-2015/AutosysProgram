@@ -4,15 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.StudyManagement;
+using Storage.Models;
+using Storage.Repository.Interface;
 
 namespace ApplicationLogics.StorageAdapter
 {
-    public class TaskRequestAdapter : IAdapter<TaskRequest>
+    public class TaskAdapter : IAdapter<TaskRequest>
     {
-        public void Dispose()
+
+        private readonly IRepository<StoredTaskRequest> _taskRepository;
+
+        public TaskAdapter(IRepository<StoredTaskRequest> taskRepository)
         {
-            throw new NotImplementedException();
-        }
+            _taskRepository = taskRepository;   
+        } 
 
         public Task<int> Create(TaskRequest user)
         {
@@ -43,6 +48,12 @@ namespace ApplicationLogics.StorageAdapter
         {
             throw new NotImplementedException();
         }
+
+        public void Dispose()
+        {
+            _taskRepository.Dispose();
+        }
     }
+
 
 }

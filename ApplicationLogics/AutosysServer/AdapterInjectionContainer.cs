@@ -37,10 +37,33 @@ namespace ApplicationLogics.AutosysServer
             return new StudyAdapter(studyRepository);
         }
 
-        public PhaseAdapter GetPhaseAdapter()
+        public BibtexTagAdapter GetBibtexTagAdapter()
         {
-            return new PhaseAdapter(); // Only used in StudyHandler to convert phases that are stored 
+            var tagRepository = new BibtexTagRepository();
+            return new BibtexTagAdapter(tagRepository);
         }
+
+        // TODO should Paper have its own repository, William?
+        public PaperAdapter GetPaperAdapter()
+        {
+            //var paperRepository = new PaperRepository();
+            //return new PaperAdapter(paperRepository);
+            return null;
+        }
+
+        public ProtocolAdapter GetProtocolAdapter()
+        {
+            var protocolRepository = new ProtocolRepository();
+            return new ProtocolAdapter(protocolRepository);
+        }
+
+        public TaskAdapter GetTaskAdapter()
+        {
+            var taskRepository = new TaskRepository();
+            return new TaskAdapter(taskRepository);
+        }
+
+
 
     }
 

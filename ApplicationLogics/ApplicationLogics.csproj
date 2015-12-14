@@ -139,7 +139,7 @@
     <Compile Include="StorageAdapter\PaperAdapter.cs" />
     <Compile Include="StorageAdapter\ProtocolAdapter.cs" />
     <Compile Include="StorageAdapter\StudyAdapter.cs" />
-    <Compile Include="StorageAdapter\TaskRequestAdapter.cs" />
+    <Compile Include="StorageAdapter\TaskAdapter.cs" />
     <Compile Include="StorageAdapter\TeamAdapter.cs" />
     <Compile Include="StorageAdapter\UserAdapter.cs" />
     <Compile Include="StudyManagement\Criteria.cs" />

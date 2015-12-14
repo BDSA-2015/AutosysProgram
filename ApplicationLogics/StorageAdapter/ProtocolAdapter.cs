@@ -1,14 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StorageAdapter.Interface;
+using Storage.Models;
+using Storage.Repository.Interface;
 
 namespace ApplicationLogics.StorageAdapter
 {
     public class ProtocolAdapter : IAdapter<Protocol>
     {
+
+        private readonly IRepository<StoredProtocol> _protocolRepository;
+
+        public ProtocolAdapter(IRepository<StoredProtocol> protocolRepository)
+        {
+            _protocolRepository = protocolRepository;   
+        } 
+
+
         public Task<int> Create(Protocol user)
         {
             throw new NotImplementedException();
