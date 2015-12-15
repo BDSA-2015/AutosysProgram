@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApplicationLogics.PaperManagement
 {
@@ -7,18 +8,36 @@ namespace ApplicationLogics.PaperManagement
     /// </summary>
     public class Paper
     {
+
+
+        /// <summary>
+        ///     The Entry type of the bibliographic item (e.g. Article, Book, Phdthesis...)
+        /// </summary>
+        public string Type;
+
+        /// <summary>
+        ///     A reference to the resource associated with this Paper (e.g. A PDF, or CSV file...)
+        /// </summary>
+        public string ResourceRef { get; set; }
+
         /// <summary>
         ///     A collection of the bibtex field types (e.g. Author, Year...)
         ///     The collection only holds information associated with the default bibtex field types
         /// </summary>
         public readonly IReadOnlyCollection<string> FieldTypes;
 
+        /// <summary>
+        ///     A collection of the bibtex field values (e.g. Author, Year...)
+        ///     The collection only holds information associated with the default bibtex field values
+        /// </summary>
         public readonly IReadOnlyCollection<string> FieldValues;
 
+
+
         /// <summary>
-        ///     The Entry type of the bibliographic item (e.g. Article, Book, Phdthesis...)
+        ///     A collection of Tasks associated with this Paper
         /// </summary>
-        public string Type;
+        public IEnumerable<Task> Tasks;
 
         /// <summary>
         ///     Constructor for creating a Paper based on a bibtex file entry type and fields
@@ -35,12 +54,5 @@ namespace ApplicationLogics.PaperManagement
             FieldTypes = fieldTypes;
             FieldValues = fieldValues;
         }
-
-        /// <summary>
-        ///     A reference to the resource associated with this Paper (e.g. A PDF, or CSV file...)
-        /// </summary>
-        public string ResourceRef { get; set; }
-
-        public int Id { get; set; }
     }
 }
