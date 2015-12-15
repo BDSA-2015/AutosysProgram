@@ -8,20 +8,21 @@ using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Storage.Models;
 
 namespace ApplicationLogicTests.UserManagement
 {
     [TestClass]
     public class UserHandlerTest
     {
-        private Mock<IAdapter<User>> _adapterMock;
+        private Mock<IAdapter<User, StoredUser>> _adapterMock;
         private User _user;
 
         [TestInitialize]
         public void Initialize()
         {
             AutoMapperConfigurator.Configure();
-            _adapterMock = new Mock<IAdapter<User>>();
+            _adapterMock = new Mock<IAdapter<User, StoredUser>>();
             _user = new User {Id = 0, MetaData = "Meta", Name = "name"};
         }
 

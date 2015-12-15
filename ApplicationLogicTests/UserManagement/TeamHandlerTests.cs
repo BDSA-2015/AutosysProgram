@@ -8,20 +8,21 @@ using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Storage.Models;
 
 namespace ApplicationLogicTests.UserManagement
 {
     [TestClass]
     public class TeamHandlerTests
     {
-        private Mock<IAdapter<Team>> _adapterMock;
+        private Mock<IAdapter<Team, StoredTeam>> _adapterMock;
         private Team _team;
 
         [TestInitialize]
         public void Initialize()
         {
             AutoMapperConfigurator.Configure();
-            _adapterMock = new Mock<IAdapter<Team>>();
+            _adapterMock = new Mock<IAdapter<Team, StoredTeam>>();
             _team = new Team {Id = 0, MetaData = "Meta", Name = "name", UserIDs = new[] {1, 2}};
         }
 
@@ -114,7 +115,7 @@ namespace ApplicationLogicTests.UserManagement
         public async void DeleteTeam_Valid_Test()
         {
             //Arrange
-            var adapter = new Mock<IAdapter<Team>>();
+            var adapter = new Mock<IAdapter<Team, StoredTeam>>();
             const int idToDelete = 0;
             adapter.Setup(r => r.DeleteIfExists(idToDelete)).Returns(Task.FromResult(true));
             var teamHandler = new TeamHandler(adapter.Object);
