@@ -96,7 +96,6 @@
     <Compile Include="Mapping\AutoMapperConfiguratorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StorageAdapter\TeamAdapterTests.cs" />
-    <Compile Include="StorageAdapter\BibtexTagAdapterTests.cs" />
     <Compile Include="StorageAdapter\ProtocolAdapterTests.cs" />
     <Compile Include="StorageAdapter\StudyAdapterTests.cs" />
     <Compile Include="StorageAdapter\TaskAdapterTests.cs" />

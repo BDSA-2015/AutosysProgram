@@ -28,12 +28,6 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles
 
             //StoredPaper to Paper
             Mapper.CreateMap<StoredPaper, Paper>();
-
-            //BibtexTag to StoredBibtexTag
-            Mapper.CreateMap<BibtexTag, StoredBibtexTag>();
-
-            //StoredBibtexTag to BibtexTag
-            Mapper.CreateMap<StoredBibtexTag, BibtexTag>();
         }
     }
 }

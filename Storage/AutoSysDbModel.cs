@@ -39,7 +39,6 @@ namespace Storage
 
         // Paper entities 
         public virtual DbSet<StoredPaper> Papers { get; set; }
-        public virtual DbSet<StoredBibtexTag> BibtexTags { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

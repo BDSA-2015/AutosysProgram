@@ -92,7 +92,6 @@
     <Compile Include="DatabaseIntegrationTests\RepositoryIntegrationTest.cs" />
     <Compile Include="RepositoryUnitTests\AsyncUserRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryUnitTests\AsyncBibtexTagRepositoryTests.cs" />
     <Compile Include="RepositoryUnitTests\StudyRepositoryTests.cs" />
     <Compile Include="RepositoryUnitTests\TeamRepositoryTests.cs" />
     <Compile Include="RepositoryUnitTests\TaskRepositoryTests.cs" />

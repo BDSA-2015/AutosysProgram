@@ -29,7 +29,6 @@ namespace Storage.Repository.Interface
 
         // Paper entities 
         DbSet<StoredPaper> Papers { get; set; }
-        DbSet<StoredBibtexTag> BibtexTags { get; set; }
 
         int SaveChanges();
 
@@ -81,7 +80,6 @@ namespace Storage.Repository.Interface
         public virtual DbSet<StoredUser> Users { get; set; }
         public DbSet<StoredProtocol> Protocols { get; set; }
         public DbSet<StoredPaper> Papers { get; set; }
-        public DbSet<StoredBibtexTag> BibtexTags { get; set; }
 
         /// <summary>
         ///     This allows mocking the UpdateIfExists functionality that is now hidden behind an interface.
