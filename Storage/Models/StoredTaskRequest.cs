@@ -19,7 +19,7 @@ namespace Storage.Models
 
         #region Properties 
 
-        public TypeOptions Type { get; set; }
+        public TaskTypeOptions Type { get; set; }
 
         public ProgressOptions Progress { get; set; }
 
@@ -82,7 +82,7 @@ namespace Storage.Models
         ///     FillOutDataFields for Reviewer
         ///     HandleConflictingDatafields for Validator
         /// </summary>
-        public enum TypeOptions
+        public enum TaskTypeOptions
         {
             FillOutDataFields,
             HandleConflictingDatafields
@@ -95,7 +95,7 @@ namespace Storage.Models
         public string TypeString
         {
             get { return Type.ToString(); }
-            private set { Type = EnumExtensions.ParseEnum<TypeOptions>(value); }
+            private set { Type = EnumExtensions.ParseEnum<TaskTypeOptions>(value); }
         }
 
         /// <summary>

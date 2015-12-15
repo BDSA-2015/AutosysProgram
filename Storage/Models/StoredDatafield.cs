@@ -14,7 +14,8 @@ namespace Storage.Models
     public class StoredDataField : IEntity
     {
         #region Enum helpers  
-        public enum TypeOptions
+
+        public enum DatafieldTypeOptions
         {
             String,
             Boolean, // True or false 
@@ -26,11 +27,11 @@ namespace Storage.Models
         /// <summary>
         ///     Used to map the enum Type as a string.
         /// </summary>
-        [Column("Type")]
+        [Column("DatafieldType")]
         public string TypeString
         {
             get { return Type.ToString(); }
-            private set { Type = EnumExtensions.ParseEnum<TypeOptions>(value); }
+            private set { Type = EnumExtensions.ParseEnum<DatafieldTypeOptions>(value); }
         }
 
         #endregion
@@ -45,17 +46,17 @@ namespace Storage.Models
 
         public string IsModifiable { get; set; }
 
-        public TypeOptions Type { get; set; }
+        public DatafieldTypeOptions Type { get; set; }
 
         /// <summary>
         ///     The value of the data field, which is filled out by a user.
         ///     Strings are used to define field values.
-        ///     For all types except <see cref="TypeOptions.Flags"/> the array contains a single string
+        ///     For all types except <see cref="DatafieldTypeOptions.Flags"/> the array contains a single string
         /// </summary>
         public virtual ICollection<string> FieldData { get; set; } 
 
         /// <summary>
-        ///     For <see cref="TypeOptions.Enumeration" /> and <see cref="TypeOptions.Flags" /> data types, a collection of the
+        ///     For <see cref="DatafieldTypeOptions.Enumeration" /> and <see cref="DatafieldTypeOptions.Flags" /> data types, a collection of the
         ///     predefined values.
         /// </summary>
         public virtual ICollection<string> TypeInfo { get; set; }
