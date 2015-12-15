@@ -84,7 +84,7 @@ namespace ApplicationLogics.AutosysServer
             throw new NotImplementedException();
         }
 
-        public void GetTasks(int studyId, int userId, int count, TaskRequest.Type type)
+        public void GetTasks(int studyId, int userId, int count, TaskRequest type)
         {
             throw new NotImplementedException();
         }

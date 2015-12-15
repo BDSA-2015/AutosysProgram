@@ -38,7 +38,7 @@ namespace ApplicationLogics.StudyManagement
         ///     The task description to be followed for completing the task
         /// </summary>
         public string Description { get; set; }
-        
+
         /// <summary>
         ///     Visible fields presented to a reviewer doing the task (e.g. author and the name of the author)
         /// </summary>

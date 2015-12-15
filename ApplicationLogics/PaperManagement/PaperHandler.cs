@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.StudyManagement;
 using BibtexLibrary;
@@ -13,31 +14,30 @@ namespace ApplicationLogics.PaperManagement
         private readonly IAdapter<Paper> _paperAdapter;
         //Used to generate Bibtex files, which later is stored as Papers in the database
         private readonly IParser<BibtexFile> _parser;
-        
+
         public PaperHandler(IParser<BibtexFile> parser, IAdapter<Paper> paperAdapter)
         {
             _parser = parser;
             _paperAdapter = paperAdapter;
         }
 
-        /// <summary>
-        ///      Parses a given string file to Paper objects for import into the database
+        ///<summary>
+        ///      Parses a given string file to Paper objects used in a specific Study
         /// </summary>
         /// <param name="file">
-        ///      The given file to be parsed to Paper objects for import
+        ///      The given file to be parsed to Paper objects
         /// </param>
-        public void ImportBibtex(string file)
+        /// <returns>
+        ///     A collection of Papers to be used in a chosen Study
+        /// </returns>
+        public IEnumerable<Paper> ParseFile(string file)
         {
             if (string.IsNullOrEmpty(file))
             {
                 throw new ArgumentNullException(nameof(file));
             }
-                var papers = _parser.ParseToPapers(file);
 
-                foreach (var paper in papers)
-                {
-                    _paperAdapter.Create(paper);
-                }
+            return _parser.ParseToPapers(file);
         }
     }
 }
