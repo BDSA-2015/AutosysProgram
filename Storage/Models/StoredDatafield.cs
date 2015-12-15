@@ -13,7 +13,7 @@ namespace Storage.Models
     [Table("DataField")]
     public class StoredDataField : IEntity
     {
-
+        #region Enum helpers  
         public enum TypeOptions
         {
             String,
@@ -23,27 +23,29 @@ namespace Storage.Models
             Resource // type such as PDF, JPEG etc.
         }
 
-        [Required]
-        [StringLength(50)]
-        public string Name { get; set; }
-
-        [Required]
-        [StringLength(400)]
-        public string Description { get; set; }
-
-        [NotMapped]
-        public TypeOptions Type { get; set; }
-
         /// <summary>
         ///     Used to map the enum Type as a string.
         /// </summary>
-        [Required]
         [Column("Type")]
         public string TypeString
         {
             get { return Type.ToString(); }
             private set { Type = EnumExtensions.ParseEnum<TypeOptions>(value); }
         }
+
+        #endregion
+
+        #region Datafield properties 
+
+        [StringLength(50)]
+        public string Name { get; set; }
+
+        [StringLength(400)]
+        public string Description { get; set; }
+
+        public string IsModifiable { get; set; }
+
+        public TypeOptions Type { get; set; }
 
         /// <summary>
         ///     The value of the data field, which is filled out by a user.
@@ -52,17 +54,29 @@ namespace Storage.Models
         /// </summary>
         public virtual ICollection<string> FieldData { get; set; } 
 
-        public string IsModifiable { get; set; }
-
         /// <summary>
         ///     For <see cref="TypeOptions.Enumeration" /> and <see cref="TypeOptions.Flags" /> data types, a collection of the
         ///     predefined values.
         /// </summary>
         public virtual ICollection<string> TypeInfo { get; set; }
 
+        #endregion
+
+        #region Keys 
+
+        public virtual StoredStudy Study { get; set; }
+
         public virtual StoredTaskRequest Task { get; set; }
+
+        public virtual StoredPaper Paper { get; set; }
+
+        public virtual StoredPhase Phase { get; set; }
 
         [Key]
         public int Id { get; set; }
+
+        #endregion
+
     }
+
 }

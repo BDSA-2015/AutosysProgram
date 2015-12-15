@@ -13,15 +13,28 @@ namespace Storage.Models
     /// </summary>
     public class StoredTeam : IEntity
     {
+        #region Team Properties
+
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
-
-        public virtual ICollection<StoredUser> Users { get; set; }
-            
+   
         [StringLength(400)]
         public string MetaData { get; set; }
 
+        #endregion
+
+        #region Referenced entities
+
+        public virtual ICollection<StoredUser> Users { get; set; }
+
+        #endregion
+
+        #region Keys 
+
         public int Id { get; set; }
+
+        #endregion
     }
+
 }

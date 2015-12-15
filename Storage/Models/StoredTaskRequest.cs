@@ -17,6 +17,56 @@ namespace Storage.Models
     public class StoredTaskRequest : IEntity
     {
 
+        #region Properties 
+
+        public TypeOptions Type { get; set; }
+
+        public ProgressOptions Progress { get; set; }
+
+        /// <summary>
+        ///     Determines task state
+        /// </summary>
+        public bool IsFinished { get; set; }
+
+        /// <summary>
+        ///     The task description to be followed for completing the task
+        /// </summary>
+        public string Description { get; set; }
+
+        #endregion
+
+        #region Referenced entities
+
+        /// <summary>
+        ///     Visible fields (unmodifiable) presented to a reviewer doing the task (e.g. author and the name of the author)
+        /// </summary>
+        public virtual ICollection<StoredDataField> VisibleDataFields { get; set; }
+
+        /// <summary>
+        ///     Modifiable fields, which a reviewer needs to fill out for a specific paper
+        /// </summary>
+        public virtual ICollection<StoredDataField> RequestedDataFields { get; set; }
+
+        /// <summary>
+        ///     In case this is a <see cref="TypeOptions.HandleConflictingDatafields" /> task, represents for each of the <see cref="RequestedDataFields" /> the
+        ///     list of <see cref="ConflictingData" /> provided by separate users.
+        ///     Each StoredFieldConflict represents a data field entry with a list of conflicts. 
+        /// </summary>
+        public virtual ICollection<StoredFieldConflicts> ConflictingData { get; set; }
+
+        #endregion
+
+        #region Keys 
+
+        [Key]
+        public int Id { get; set; }
+
+        public virtual PhaseTask PhaseTask { get; set; }
+
+        #endregion
+
+        #region Enum Helpers 
+
         /// <summary>
         ///     Determines the status of a given task
         /// </summary>
@@ -38,10 +88,6 @@ namespace Storage.Models
             HandleConflictingDatafields
         }
 
-        public TypeOptions Type { get; set; }
-
-        public ProgressOptions Progress { get; set; }
-
         /// <summary>
         ///     Used to map the enum Type as a string.
         /// </summary>
@@ -51,7 +97,7 @@ namespace Storage.Models
             get { return Type.ToString(); }
             private set { Type = EnumExtensions.ParseEnum<TypeOptions>(value); }
         }
-        
+
         /// <summary>
         ///     Used to map the enum Progress as a string.
         /// </summary>
@@ -62,35 +108,7 @@ namespace Storage.Models
             private set { Progress = EnumExtensions.ParseEnum<ProgressOptions>(value); }
         }
 
-        /// <summary>
-        ///     The task description to be followed for completing the task
-        /// </summary>
-        public string Description { get; set; }
-
-        /// <summary>
-        ///     Visible fields (unmodifiable) presented to a reviewer doing the task (e.g. author and the name of the author)
-        /// </summary>
-        public virtual ICollection<StoredDataField> VisibleDataFields { get; set; }
-
-        /// <summary>
-        ///     Modifiable fields, which a reviewer needs to fill out for a specific paper
-        /// </summary>
-        public virtual ICollection<StoredDataField> RequestedDataFields { get; set; }
-
-        /// <summary>
-        ///     In case this is a <see cref="TypeOptions.HandleConflictingDatafields" /> task, represents for each of the <see cref="RequestedDataFields" /> the
-        ///     list of <see cref="ConflictingData" /> provided by separate users.
-        ///     Each StoredTaskConflict represents a data field entry with a list of conflicts. 
-        /// </summary>
-        public virtual ICollection<StoredTaskConflict> ConflictingData { get; set; } 
-        
-        /// <summary>
-        ///     Determines task state
-        /// </summary>
-        public bool IsFinished { get; set; }
-
-        [Key]
-        public int Id { get; set; }
+        #endregion
 
     }
 

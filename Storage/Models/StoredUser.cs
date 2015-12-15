@@ -10,18 +10,29 @@ namespace Storage.Models
     /// </summary>
     public class StoredUser : IEntity
     {
+
+        #region User properties 
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string MetaData { get; set; }
+
+        #endregion
+
+        #region Keys
 
         [Key]
         public int Id { get; set; }
 
         public virtual StoredTeam Team { get; set; }
+
+        public virtual StoredStudy Study { get; set; }
+
+        public virtual PhaseRole PhaseRole { get; set; }
+
+        #endregion
 
     }
 
