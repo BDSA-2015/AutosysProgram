@@ -3,6 +3,7 @@
 // Jacob Mullit Møiniche.
 
 using System;
+using System.Collections.Generic;
 using ApplicationLogics.StorageAdapter.Interface;
 
 namespace ApplicationLogics.StudyManagement
@@ -32,6 +33,42 @@ namespace ApplicationLogics.StudyManagement
         }
 
         public void Delete(Study study)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Phase CurrentPhase { get; protected set; }
+
+        // Key is user id and values consist of the roles assigned to a user in current phase
+        public Dictionary<int, Role> RolesInPhase { get; protected set; }
+
+        // A map of tasks in the current phase, each task can have multiple users 
+        public Dictionary<TaskRequest, List<int>> TasksInPhase { get; protected set; }
+
+
+        public void AddRole(int userId, Role role = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveRole(int userId, Role role = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveAllRoles(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        
+
+        public void RemoveMemberFromTask(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveTask(TaskRequest task)
         {
             throw new NotImplementedException();
         }
