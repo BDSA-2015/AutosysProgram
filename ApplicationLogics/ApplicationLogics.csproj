@@ -102,6 +102,7 @@
     <Compile Include="AutosysServer\Mapping\Profiles\StudyManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\PaperManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\UserManagementStorageProfile.cs" />
+    <Compile Include="Conflict.cs" />
     <Compile Include="PaperManagement\BibtexParser.cs" />
     <Compile Include="PaperManagement\BibtexTag.cs" />
     <Compile Include="PaperManagement\FileTagHandler.cs" />
