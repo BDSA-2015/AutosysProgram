@@ -17,6 +17,8 @@ namespace Storage.Models
         [Required]
         public virtual string Name { get; set; }
 
+        public int StudyId { get; set; }
+
         public virtual StoredStudy Study { get; set; }
 
         public virtual ICollection<StoredPaper> Reports { get; set; }
