@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Dynamic;
 using Storage.Repository.Interface;
 
 namespace Storage.Models
@@ -42,18 +43,17 @@ namespace Storage.Models
             private set { FieldType = EnumExtensions.ParseEnum<Type>(value); }
         }
 
-
         /// <summary>
-        ///     We use string to define field values.
-        ///     We use comma serperation when using enumerarion and flags.
+        ///     The value of the data field, which is filled out by a user.
+        ///     Strings are used to define field values.
+        ///     For all types except <see cref="Type.Flags"/> the array contains a single string
         /// </summary>
-        /// Todo Should this be on a column for itself? Dennis
-        public string FieldValue { get; set; }
+        public string[] FieldData { get; set; }
 
         public string IsModifiable { get; set; }
 
         /// <summary>
-        ///     For <see cref="DataType.Enumeration" /> and <see cref="DataType.Flags" /> data types, a collection of the
+        ///     For <see cref="Type.Enumeration" /> and <see cref="Type.Flags" /> data types, a collection of the
         ///     predefined values.
         /// </summary>
         public string[] TypeInfo { get; set; }
