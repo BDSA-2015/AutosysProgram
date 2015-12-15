@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace ApplicationLogics.PaperManagement.Savers
+namespace ApplicationLogics.PaperManagement.Bibtex
 {
     /// <summary>
     /// Interface for saver classes which are used to save new tags in the database 
     /// when a file with unknown tags is imported into the system
     /// </summary>
-    public interface ISaver<in T> where T : class 
+    public interface ITagFilter<in T> where T : class 
     {
         /// <summary>
         ///     Saves the data from a file in the database if the data does not exist in the database.
@@ -15,6 +15,6 @@ namespace ApplicationLogics.PaperManagement.Savers
         /// <param name="data">
         ///     The data to be saved
         /// </param>
-        void Save(T data);
+        IEnumerable<string> Check(T data);
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ApplicationLogics.PaperManagement
+﻿namespace ApplicationLogics.PaperManagement.Bibtex
 {
     /// <summary>
     /// This class represents a bibtex tag which can both be an entry e.g. article or book and also a field type e.g. author or year.

@@ -1,50 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using ApplicationLogics.StorageAdapter.Interface;
 using BibtexLibrary;
 
-namespace ApplicationLogics.PaperManagement.Savers
+namespace ApplicationLogics.PaperManagement.Bibtex
 {
     /// <summary>
     /// This class has responsibility for checking if the entry and field types of a given bibtex file
     /// is already stored in the database. If the entry and field types are new they will be stored in the database as StoredBibtexTags.
     /// </summary>
-    public class BibtexTagSaver : ISaver<BibtexFile>
+    public class BibtexTagFilter : ITagFilter<BibtexFile>
     {
-        private readonly IAdapter<BibtexTag> _bibtexAdapter;
         private ICollection<BibtexEntry> _dataEntries;
-        private List<BibtexTag> _bibtexTags;
         private List<BibtexTag> _bibtexNewTags;   
 
-        public BibtexTagSaver(IAdapter<BibtexTag> bibtexAdapter)
-        {
-            _bibtexAdapter = bibtexAdapter;
-        }
         /// <summary>
         /// Method for saving bibtex entries which are not yet stored in the database
         /// </summary>
         /// <param name="data">The given bibtex file entry type</param>
-        public void Save(BibtexFile data)
+        public IEnumerable<string> Check(BibtexFile data)
         {
             if (data == null)
             {
                 throw new ArgumentNullException(nameof(data));
             }
+            if (data.Entries.Count < 1)
+            {
+                throw new InvalidDataException($"The bibtex file {nameof(data)} was empty");
+            }
 
             _dataEntries = data.Entries;
-            _bibtexTags = _bibtexAdapter.Read().ToList();
             _bibtexNewTags = new List<BibtexTag>();
 
-            SaveEntryTypes();
-            SaveFieldTypes();
+            FindEntryTypes();
+            FindFieldTypes();
 
-            if (_bibtexNewTags.Count > 0)
+            if (_bibtexNewTags.Count <= 0) yield break;
+            foreach (var tag in _bibtexNewTags)
             {
-                foreach (var tag in _bibtexNewTags)
-                {
-                    _bibtexAdapter.Create(tag);
-                }
+                yield return tag.Type;
             }
         }
 
@@ -57,13 +52,12 @@ namespace ApplicationLogics.PaperManagement.Savers
         /// <param name="bibtexTags">
         ///     The bibtex tags already stored in the database
         /// </param>
-        private void SaveEntryTypes()
+        private void FindEntryTypes()
         {
             foreach (var entry in _dataEntries)
             {
                 var entryType = entry.Type;
-                    if (!_bibtexTags.Any(r => r.Type.Equals(entryType)) && 
-                    !_bibtexNewTags.Any(r => r.Type.Equals(entryType)))
+                    if (!_bibtexNewTags.Any(r => r.Type.Equals(entryType)))
                     {
                         _bibtexNewTags.Add(new BibtexTag() {Type = entryType});
                     }
@@ -79,7 +73,7 @@ namespace ApplicationLogics.PaperManagement.Savers
         /// <param name="bibtexTags">
         ///     The bibtex tags already stored in the database
         /// </param>
-        private void SaveFieldTypes()
+        private void FindFieldTypes()
         {
             foreach (var entry in _dataEntries)
             {
@@ -87,8 +81,7 @@ namespace ApplicationLogics.PaperManagement.Savers
 
                 foreach (var type in fieldTypes)
                 {
-                    if (!_bibtexTags.Any(r => r.Type.Equals(type)) &&
-                        !_bibtexNewTags.Any(r => r.Type.Equals(type)))
+                    if (!_bibtexNewTags.Any(r => r.Type.Equals(type)))
                     {
                         _bibtexNewTags.Add(new BibtexTag() { Type = type });
                     }

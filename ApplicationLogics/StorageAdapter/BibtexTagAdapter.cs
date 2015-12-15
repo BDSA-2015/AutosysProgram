@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.PaperManagement;
+using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.StorageAdapter.Interface;
 using AutoMapper;
 using Storage.Models;

@@ -8,16 +8,14 @@ namespace ApplicationLogics.PaperManagement
     /// <summary>
     ///     Class for handling all functionality associated with creating and importing Papers into the program
     /// </summary>
-    public class PaperHandler
+    public class FileHandler
     {
-        private readonly IAdapter<Paper> _paperAdapter;
         //Used to generate Bibtex files, which later is stored as Papers in the database
-        private readonly IParser<BibtexFile> _parser;
+        private readonly IParser _parser;
 
-        public PaperHandler(IParser<BibtexFile> parser, IAdapter<Paper> paperAdapter)
+        public FileHandler(IParser parser)
         {
             _parser = parser;
-            _paperAdapter = paperAdapter;
         }
 
         ///<summary>
@@ -29,7 +27,7 @@ namespace ApplicationLogics.PaperManagement
         /// <returns>
         ///     A collection of Papers to be used in a chosen Study
         /// </returns>
-        public IEnumerable<Paper> ParseFile(string file)
+        public IEnumerable<Paper> ParseToPapers(string file)
         {
             if (string.IsNullOrEmpty(file))
             {
@@ -37,6 +35,21 @@ namespace ApplicationLogics.PaperManagement
             }
 
             return _parser.ParseToPapers(file);
+        }
+
+        /// <summary>
+        ///     Method to save new tags from a file.
+        ///     E.g. a bibtex file could be given containing the tags author and book
+        ///     these will be stored if they are not already in the database
+        /// </summary>
+        /// <param name="file"></param>
+        public string[] ParseTags(string file)
+        {
+            if (string.IsNullOrEmpty(file))
+            {
+                throw new ArgumentNullException(nameof(file));
+            }
+            return _parser.ParseToTags(file);
         }
     }
 }

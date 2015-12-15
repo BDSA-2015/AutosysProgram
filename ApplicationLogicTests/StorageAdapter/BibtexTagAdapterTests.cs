@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.AutosysServer.Mapping;
 using ApplicationLogics.PaperManagement;
+using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.StorageAdapter;
 using AutoMapper.Internal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
