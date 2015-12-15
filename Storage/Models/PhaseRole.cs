@@ -22,7 +22,8 @@ namespace Storage.Models
 
         public StoredRole Role { get; set; } // Key in dictionary 
         public virtual ICollection<StoredUser> Users { get; set; } // Value in dictionary 
-        public int PrincipalId { get; set; } // FK to principal entity
+        public int PhaseId { get; set; } // FK to principal entity
+        public virtual StoredPhase Phase { get; set; }
     }
 
 }
