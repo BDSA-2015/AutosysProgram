@@ -33,17 +33,6 @@ namespace ApplicationLogics.StudyManagement
         public bool IsFinished { get; set; }
 
         /// <summary>
-        ///     Determines the type of Task
-        ///     FillOutDataFields for Reviewer
-        ///     HandleConflictingDatafields for Validator
-        /// </summary>
-        public enum Type
-        {
-            FillOutDataFields,
-            HandleConflictingDatafields
-        }
-
-        /// <summary>
         ///     The id of the paper which the task is associated with.
         /// </summary>
         public int PaperId { get; set; }
