@@ -38,10 +38,8 @@ namespace Storage.Repository
         {
             if (team == null) throw new ArgumentNullException(nameof(team));
 
-            _dbContext.Attach(team); // Used for mocking
-            // _dbContext.Set<T>().Attach(team);
             _dbContext.Add(team); // Used for mocking 
-            //_dbContext.Set<T>().Add(team);
+            //_dbContext.Set<StoredTeam>().Add(team);
             await _dbContext.SaveChangesAsync();
             return team.Id;
         }

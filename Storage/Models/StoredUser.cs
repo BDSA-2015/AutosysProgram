@@ -8,7 +8,6 @@ namespace Storage.Models
     ///     A user can be part of a team working on a given study and if so can be assigned different roles defining task
     ///     possibilities.
     /// </summary>
-    [Table("User")]
     public class StoredUser : IEntity
     {
         [Required]
@@ -22,9 +21,8 @@ namespace Storage.Models
         [Key]
         public int Id { get; set; }
 
-        public int TeamId { get; set; }
+        public int StoredTeamId { get; set; }
 
-        [ForeignKey("TeamId")]
         public virtual StoredTeam Team { get; set; }
     }
 }

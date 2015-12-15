@@ -81,7 +81,7 @@ namespace StorageTests.DatabaseIntegrationTests
         public async Task InsertTeam_WithUser_SavesUserInDatabase()
         {
             // Arrange
-            var user = new StoredUser { Id = 1, Name = "William", MetaData = "Researcher" };
+            var user = new StoredUser { Name = "William", MetaData = "Researcher" };
 
             var team = new StoredTeam
             {

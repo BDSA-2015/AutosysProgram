@@ -12,6 +12,7 @@ namespace Storage.Models
     [Table("DataField")]
     public class StoredDataField : IEntity
     {
+
         public enum Type
         {
             String,
@@ -48,7 +49,7 @@ namespace Storage.Models
         ///     Strings are used to define field values.
         ///     For all types except <see cref="Type.Flags"/> the array contains a single string
         /// </summary>
-        public string[] FieldData { get; set; }
+        public string[] FieldData { get; set; } // icollection in database, .ToArray
 
         public string IsModifiable { get; set; }
 

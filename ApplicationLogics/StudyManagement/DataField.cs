@@ -2,6 +2,8 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using Storage.Models;
+
 namespace ApplicationLogics.StudyManagement
 {
     /// <summary>
