@@ -38,13 +38,6 @@ namespace ApplicationLogics.AutosysServer
             _userHandler = new UserHandler(injector.GetUserAdapter());
         }
 
-        /// <summary>
-        /// Return a study coresponding to the given ID
-        /// </summary>
-        public Study GetStudy(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         private void HandleRequest()
         {
@@ -91,7 +84,7 @@ namespace ApplicationLogics.AutosysServer
             throw new NotImplementedException();
         }
 
-        public TaskRequest[] GetTasks(int studyId, int userId, int count, TaskRequest.Filter fitler, TaskRequest.Type type)
+        public void GetTasks(int studyId, int userId, int count, TaskRequest type)
         {
             throw new NotImplementedException();
         }
@@ -102,7 +95,7 @@ namespace ApplicationLogics.AutosysServer
         /// <param name="userId">
         ///     If of user related to a given study.
         /// </param>
-        public List<TaskRequest> GetStudyOverview(int userId)
+        public List<Task> GetStudyOverview(int userId)
         {
             throw new NotImplementedException();
         }
@@ -147,7 +140,7 @@ namespace ApplicationLogics.AutosysServer
             throw new NotImplementedException();
         }
 
-        public List<TaskRequest> GetReviewableTasks(int userId, int studyId)
+        public List<Task> GetReviewableTasks(int userId, int studyId)
         {
             throw new NotImplementedException();
         }

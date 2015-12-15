@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace ApplicationLogics.StudyManagement
 {
-
     /// <summary>
     ///     This class represents an assignment in a given phase in a study.
     ///     By way of example, a phase could involve review tasks assigned to two reviewers.
@@ -14,11 +13,13 @@ namespace ApplicationLogics.StudyManagement
     /// </summary>
     public class TaskRequest
     {
+        public int Id { get; set; }
+
         /// <summary>
         ///     Determines task state
         /// </summary>
-        public enum Filter
-        {
+        public bool IsFinished { get; set; }
+
         /// <summary>
         ///     Determines the type of Task
         ///     FillOutDataFields for Reviewer
@@ -38,9 +39,6 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         ///     The task description to be followed for completing the task
         /// </summary>
-        public bool IsDeliverable { get; set; }
-
-
         public string Description { get; set; }
 
         /// <summary>
@@ -59,5 +57,4 @@ namespace ApplicationLogics.StudyManagement
         /// </summary>
         public Conflict[][] ConflictingData { get; set; }
     }
-
 }
