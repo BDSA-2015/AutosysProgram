@@ -4,73 +4,39 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 
 namespace ApplicationLogics.StudyManagement
 {
-    internal class StudyHandler // TODO Why internal? 
+    public class StudyHandler
     {
 
-        private IAdapter<Study> _studyAdapter;
+        private readonly IAdapter<Study> _studyAdapter;
 
         public StudyHandler(IAdapter<Study> adapter)
         {
             _studyAdapter = adapter;
         }
 
-        public void Create()
+        public async Task<int> Create(Study study)
         {
-            throw new NotImplementedException();
+            return await _studyAdapter.Create(study);
         }
 
-        public Study Read(int studyId)
+        public async Task<Study> Read(int studyId)
         {
-            throw new NotImplementedException();
+            return await _studyAdapter.Read(studyId);
         }
 
-        public void Update(Study study)
+        public async Task<bool> Update(Study study)
         {
+            return await _studyAdapter.UpdateIfExists(study);
         }
 
-        public void Delete(Study study)
+        public async Task<bool> Delete(Study study)
         {
-            throw new NotImplementedException();
-        }
-
-        public Phase CurrentPhase { get; protected set; }
-
-        // Key is user id and values consist of the roles assigned to a user in current phase
-        public Dictionary<int, Role> RolesInPhase { get; protected set; }
-
-        // A map of tasks in the current phase, each task can have multiple users 
-        public Dictionary<TaskRequest, List<int>> TasksInPhase { get; protected set; }
-
-
-        public void AddRole(int userId, Role role = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveRole(int userId, Role role = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveAllRoles(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        
-
-        public void RemoveMemberFromTask(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveTask(TaskRequest task)
-        {
-            throw new NotImplementedException();
+            return await _studyAdapter.DeleteIfExists(study.Id);
         }
     }
 }
