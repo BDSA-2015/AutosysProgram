@@ -34,8 +34,8 @@ namespace StorageTests.RepositoryUnitTests
         {
             _data = new List<StoredProtocol>
             {
-                new StoredProtocol {Id = 1, Description = "Year Protocol"}, // TODO add phases
-                new StoredProtocol {Id = 2, Description = "Year Protocol"}
+                new StoredProtocol {Id = 1, StudyName = "StudyName" }, // TODO add pseudo data 
+                new StoredProtocol {Id = 2,  StudyName = "StudyName" }
             };
 
             _mockSet = MockUtility.CreateAsyncMockDbSet(_data, u => u.Id);
@@ -144,7 +144,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SetAttachProtocol_IsCalled()
         {
             // Arrange 
-            var protocol = new StoredProtocol {Id = 1, Description = "New Description"};
+            var protocol = new StoredProtocol {Id = 1 };
 
             // Act 
             await _repository.UpdateIfExists(protocol);
@@ -186,7 +186,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task GetById()
         {
             var secondProtocol = await _repository.Read(1);
-            Assert.AreEqual("Year Protocol", secondProtocol.Description);
+            Assert.AreEqual("StudyName", secondProtocol.StudyName);
         }
 
         #endregion
@@ -305,7 +305,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_FindAsync_IsCalled()
         {
             // Arrange 
-            var firstProtocolUpdated = new StoredProtocol {Id = 1, Description = "New Protocol"};
+            var firstProtocolUpdated = new StoredProtocol { Id = 1 };
             _mockSet.Setup(t => t.FindAsync(1))
                 .Returns(Task.FromResult(It.IsAny<StoredProtocol>()));
 
@@ -321,7 +321,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_Attach_IsCalled()
         {
             // Arrange 
-            var firstStudyUpdated = new StoredProtocol {Id = 1, Description = "New Protocol"};
+            var firstStudyUpdated = new StoredProtocol { Id = 1 };
 
             // Act 
             await _repository.UpdateIfExists(firstStudyUpdated);
@@ -334,7 +334,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SetModified_IsCalled()
         {
             // Arrange 
-            var firstProtocolUpdated = new StoredProtocol {Id = 1, Description = "New Protocol"};
+            var firstProtocolUpdated = new StoredProtocol { Id = 1 };
 
             // Act 
             await _repository.UpdateIfExists(firstProtocolUpdated);
@@ -347,7 +347,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_SaveChangesAsync_IsCalled()
         {
             // Arrange 
-            var firstProtocolUpdated = new StoredProtocol {Id = 1, Description = "New Protocol"};
+            var firstProtocolUpdated = new StoredProtocol { Id = 1 };
 
             // Act 
             await _repository.UpdateIfExists(firstProtocolUpdated);
@@ -360,7 +360,7 @@ namespace StorageTests.RepositoryUnitTests
         public async Task Update_ValidProtocol_ReturnsTrue()
         {
             // Arrange 
-            var firstProtocolUpdated = new StoredProtocol {Id = 1, Description = "New Protocol"};
+            var firstProtocolUpdated = new StoredProtocol { Id = 1 };
 
             // Act 
             var isUpdated = await _repository.UpdateIfExists(firstProtocolUpdated);
