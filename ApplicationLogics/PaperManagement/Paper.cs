@@ -36,9 +36,6 @@ namespace ApplicationLogics.PaperManagement
         /// <param name="type">
         ///     The type of Paper which is associated with the entry type of the bibtex file it is created from
         /// </param>
-        /// <param name="resourceRef">
-        ///     The unique key of a single Paper related to a single bibtex entry
-        /// </param>
         /// <param name="fieldTypes">
         ///     Collection of bibtex fieldtypes from an imported bibtex file
         ///     which fields are contained in the associated bibtex file
