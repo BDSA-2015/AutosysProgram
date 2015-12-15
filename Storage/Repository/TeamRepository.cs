@@ -7,7 +7,7 @@ using Storage.Repository.Interface;
 namespace Storage.Repository
 {
     /// <summary>
-    ///     This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on teams in the
+    ///     This class implements the IRepository interface outlining the async CRUD operations to be used on teams in the
     ///     database. <see cref="StoredTeam" />
     ///     These are used specifically on a Team DbSet in the AutoSysDbModel.
     /// </summary>
@@ -19,6 +19,10 @@ namespace Storage.Repository
         public TeamRepository(IAutoSysContext context)
         {
             _dbContext = context;
+        }
+
+        public TeamRepository()
+        {
         }
 
         /// <summary>
@@ -53,7 +57,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual async Task<StoredTeam> Read(int id)
         {
-            return await _dbContext.Set<StoredTeam>().FindAsync(id);
+            return await _dbContext.Read<StoredTeam>(id); // Used for mocking 
+            // return await _dbContext.Set<StoredTeam>().FindAsync(id);
         }
 
         /// <summary>
@@ -109,7 +114,8 @@ namespace Storage.Repository
 
             if (teamToDelete == null) return false;
 
-            _dbContext.Set<StoredTeam>().Remove(teamToDelete);
+            _dbContext.Remove(teamToDelete); // Used for mocking 
+            //_dbContext.Set<StoredTeam>().Remove(teamToDelete);
             await _dbContext.SaveChangesAsync();
 
             return true;

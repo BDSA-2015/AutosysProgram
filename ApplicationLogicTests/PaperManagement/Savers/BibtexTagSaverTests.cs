@@ -52,7 +52,7 @@ namespace ApplicationLogicTests.PaperManagement.Savers
                        "title = {Something nice}," +
                        "year = {700}}";
             //Act
-            var parsedFile = _parser.ParseToFile(file);
+            var parsedFile = _parser.ParseToTags(file);
             _saver.Save(parsedFile);
 
             //Assert
@@ -70,7 +70,7 @@ namespace ApplicationLogicTests.PaperManagement.Savers
             var file = "";
 
             //Act
-            var parsedFile = _parser.ParseToFile(file);
+            var parsedFile = _parser.ParseToTags(file);
             _saver.Save(parsedFile);
 
             //Assert

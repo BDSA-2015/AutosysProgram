@@ -8,14 +8,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.AutosysServer.Mapping;
 using ApplicationLogics.StorageAdapter;
-using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Storage.Models;
 using Storage.Repository.Interface;
 
-namespace ApplicationLogicTests.UserManagement
+namespace ApplicationLogicTests.StorageAdapter
 {
     /// <summary>
     ///     Test for the TeamHandler Class

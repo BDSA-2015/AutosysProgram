@@ -111,6 +111,7 @@ namespace StorageTests.RepositoryUnitTests
         #region Read Operation 
 
         [TestMethod]
+        [Ignore]
         public async Task Read_ValidId_ReturnsTeam()
         {
             // Arrange 
@@ -136,11 +137,15 @@ namespace StorageTests.RepositoryUnitTests
         [TestMethod]
         public async Task Read_FindAsync_IsCalled()
         {
-            // Arrange and act 
-            var team = await _repository.Read(0);
+            // Arrange
+            _context.Setup(c => c.Read<StoredTeam>(0))
+                .Returns(Task.FromResult(It.IsAny<StoredTeam>()));
+
+            // Act 
+            await _repository.Read(0);
 
             // Assert 
-            _context.Verify(c => c.Teams.FindAsync(), Times.Once);
+            _context.Verify(c => c.Read<StoredTeam>(0), Times.Once);
         }
 
         [TestMethod]
@@ -170,14 +175,14 @@ namespace StorageTests.RepositoryUnitTests
         {
             // Arrange 
             var firstTeamUpdated = new StoredTeam {Id = 1, Name = "New Team"};
+            _mockSet.Setup(t => t.FindAsync(1))
+                .Returns(Task.FromResult(It.IsAny<StoredTeam>()));
 
             // Act 
             await _repository.UpdateIfExists(firstTeamUpdated);
 
-            _mockSet.Setup(t => t.FindAsync(It.IsAny<StoredTeam>().Id)).Returns(Task.FromResult(It.IsAny<StoredTeam>()));
-
             // Assert
-            _context.Verify(c => c.Users.FindAsync(firstTeamUpdated.Id), Times.Once);
+            _mockSet.Verify(m => m.FindAsync(1), Times.Once);
         }
 
         [TestMethod]

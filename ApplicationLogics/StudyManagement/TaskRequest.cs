@@ -14,14 +14,9 @@ namespace ApplicationLogics.StudyManagement
     public class TaskRequest
     {
         /// <summary>
-        ///     Determines task states
+        ///     Determines task state
         /// </summary>
-        public enum Progress
-        {
-            NotStarted,
-            Started,
-            Done
-        }
+        public bool IsFinished { get; set; }
 
         /// <summary>
         ///     Determines the type of Task

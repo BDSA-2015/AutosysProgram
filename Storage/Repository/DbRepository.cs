@@ -21,6 +21,10 @@ namespace Storage.Repository
             _dbContext = context;
         }
 
+        public DbRepository()
+        {
+        }
+
         /// <summary>
         ///     Creates a new T entity and returns its id. Throws an ArgumentNullException if the item to create is null.
         /// </summary>
@@ -42,12 +46,13 @@ namespace Storage.Repository
         ///     Returns an item based on its id.
         /// </summary>
         /// <param name="id">
-        ///     Id of item to find.
+        ///     Id of item to find.x 
         /// </param>
         /// <returns></returns>
         public virtual async Task<T> Read(int id)
         {
-            return await _dbContext.Set<T>().FindAsync(id);
+            return await _dbContext.Read<T>(id); // Used for mocking 
+            //return await _dbContext.Set<T>().FindAsync(id);
         }
 
         /// <summary>
@@ -58,7 +63,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual IQueryable<T> Read()
         {
-            return _dbContext.Set<T>().AsQueryable();
+            return _dbContext.Read<T>(); // Used for mocking 
+            // return _dbContext.Set<T>().AsQueryable();
         }
 
         /// <summary>
@@ -104,7 +110,8 @@ namespace Storage.Repository
 
             if (entity == null) return false;
 
-            _dbContext.Set<T>().Remove(entity);
+            _dbContext.Remove(entity);
+            //_dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
 
             return true;

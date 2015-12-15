@@ -1,5 +1,5 @@
-﻿using SystematicStudyService.Models;
-using AutoMapper;
+﻿using AutoMapper;
+using WebApi.Models;
 
 namespace WebApi.Mapping.Profiles
 {
