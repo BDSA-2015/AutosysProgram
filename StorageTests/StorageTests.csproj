@@ -70,7 +70,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DatabaseIntegrationTests\RollbackAttribute.cs" />
     <Compile Include="DbContextTests.cs" />
     <Compile Include="DatabaseIntegrationTests\RepositoryIntegrationTest.cs" />
     <Compile Include="RepositoryUnitTests\AsyncUserRepositoryTests.cs" />
