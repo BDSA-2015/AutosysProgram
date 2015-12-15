@@ -88,8 +88,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DatabaseIntegrationTests\StudyRepositoryIntegrationTest.cs" />
+    <Compile Include="DatabaseIntegrationTests\StudyTestData.cs" />
     <Compile Include="DbContextTests.cs" />
-    <Compile Include="DatabaseIntegrationTests\RepositoryIntegrationTest.cs" />
+    <Compile Include="DatabaseIntegrationTests\UserRepositoryIntegrationTest.cs" />
     <Compile Include="RepositoryUnitTests\AsyncUserRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryUnitTests\StudyRepositoryTests.cs" />
