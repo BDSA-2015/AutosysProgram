@@ -48,40 +48,6 @@ namespace Storage.Models
         [Key]
         public int Id { get; set; }
 
-        //[StringLength(400)]
-        //public string Type { get; set; }
-        //[Required]
-
-        //[StringLength(400)]
-        //[Required]
-        //public string Author { get; set; }
-
-        //[StringLength(400)]
-        //[Required]
-        //public string Title { get; set; }
-
-        //[StringLength(400)]
-        //[Required]
-        //public string BookTitle { get; set; }
-
-        //[Required]
-        //public int Year { get; set; }
-
-        //public string Month { get; set; } 
-
-        //[StringLength(400)]
-        //public string Volume { get; set; }
-
-        //public int Pages { get; set; }
-
-        //[StringLength(400)]
-        //public string Abstract { get; set; }
-
-        //[StringLength(50)]
-        //public string Doi { get; set; } 
-
-        //[StringLength(50)]
-        //public string ISSN { get; set; } 
     }
 
 }

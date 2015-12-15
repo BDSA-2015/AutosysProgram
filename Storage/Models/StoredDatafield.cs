@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Dynamic;
 using Storage.Repository.Interface;
@@ -13,7 +14,7 @@ namespace Storage.Models
     public class StoredDataField : IEntity
     {
 
-        public enum Type
+        public enum TypeOptions
         {
             String,
             Boolean, // True or false 
@@ -31,7 +32,7 @@ namespace Storage.Models
         public string Description { get; set; }
 
         [NotMapped]
-        public Type FieldType { get; set; }
+        public TypeOptions Type { get; set; }
 
         /// <summary>
         ///     Used to map the enum Type as a string.
@@ -40,24 +41,26 @@ namespace Storage.Models
         [Column("Type")]
         public string TypeString
         {
-            get { return FieldType.ToString(); }
-            private set { FieldType = EnumExtensions.ParseEnum<Type>(value); }
+            get { return Type.ToString(); }
+            private set { Type = EnumExtensions.ParseEnum<TypeOptions>(value); }
         }
 
         /// <summary>
         ///     The value of the data field, which is filled out by a user.
         ///     Strings are used to define field values.
-        ///     For all types except <see cref="Type.Flags"/> the array contains a single string
+        ///     For all types except <see cref="TypeOptions.Flags"/> the array contains a single string
         /// </summary>
-        public string[] FieldData { get; set; } // icollection in database, .ToArray
+        public virtual ICollection<string> FieldData { get; set; } 
 
         public string IsModifiable { get; set; }
 
         /// <summary>
-        ///     For <see cref="Type.Enumeration" /> and <see cref="Type.Flags" /> data types, a collection of the
+        ///     For <see cref="TypeOptions.Enumeration" /> and <see cref="TypeOptions.Flags" /> data types, a collection of the
         ///     predefined values.
         /// </summary>
-        public string[] TypeInfo { get; set; }
+        public virtual ICollection<string> TypeInfo { get; set; }
+
+        public virtual StoredTaskRequest Task { get; set; }
 
         [Key]
         public int Id { get; set; }
