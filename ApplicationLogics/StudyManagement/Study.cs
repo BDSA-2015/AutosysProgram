@@ -49,7 +49,7 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         ///     A list of all the users who are working on the study
         /// </summary>
-        public ICollection<int> UserId { get; set; } 
+        public ICollection<int> UserIds { get; set; } 
 
         /// <summary>
         ///     Phases that the study has undergone and the current phase.
