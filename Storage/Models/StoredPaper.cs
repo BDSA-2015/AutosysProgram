@@ -13,6 +13,8 @@ namespace Storage.Models
     public class StoredPaper : IEntity
     {
 
+        #region Paper entities 
+
         /// <summary>
         ///     The Entry type of the bibliographic item (e.g. Article, Book, Phdthesis...)
         /// </summary>
@@ -20,68 +22,45 @@ namespace Storage.Models
         public string Type { get; set; }
 
         /// <summary>
+        ///     A reference to the resource associated with this Paper (e.g. A PDF, or CSV file...)
+        /// </summary>
+        [StringLength(100)]
+        public string ResourceRef { get; set; }
+
+        #endregion
+
+        #region Referenced entities 
+
+        /// <summary>
         ///     A collection of bibtex field types (e.g. Author, Year...)
         ///     The collection holds information associated with the bibtex field values in the FieldValues collection
         /// </summary>
         [Required]
-        public virtual ICollection<string> FieldTypes { get; set; } // TODO map to IReadOnlyCollection in logic 
+        public virtual ICollection<string> FieldTypes { get; set; } 
 
         /// <summary>
         ///     A collection of bibtex field values (e.g. Henrik Madsen, 2015)
         ///     The collection holds information associated with the bibtex field types in the FieldTypes collection
         /// </summary>
         [Required]
-        public virtual ICollection<string> FieldValues { get; set; } // TODO map to IReadOnlyCollection in logic 
+        public virtual ICollection<string> FieldValues { get; set; } 
 
         /// <summary>
         ///     A collection of custom made data fields holding information related to a specific Paper
         /// </summary>
         public virtual ICollection<StoredDataField> RequesteDataFields { get; set; }
 
-        /// <summary>
-        ///     A reference to the resource associated with this Paper (e.g. A PDF, or CSV file...)
-        /// </summary>
-        [StringLength(100)]
-        [Required]
-        public string ResourceRef { get; set; }
+        #endregion
+
+        #region Keys 
+
+        public virtual StoredStudy Study { get; set; }
 
         [Key]
         public int Id { get; set; }
 
-        //[StringLength(400)]
-        //public string Type { get; set; }
-        //[Required]
+        #endregion
 
-        //[StringLength(400)]
-        //[Required]
-        //public string Author { get; set; }
-
-        //[StringLength(400)]
-        //[Required]
-        //public string Title { get; set; }
-
-        //[StringLength(400)]
-        //[Required]
-        //public string BookTitle { get; set; }
-
-        //[Required]
-        //public int Year { get; set; }
-
-        //public string Month { get; set; } 
-
-        //[StringLength(400)]
-        //public string Volume { get; set; }
-
-        //public int Pages { get; set; }
-
-        //[StringLength(400)]
-        //public string Abstract { get; set; }
-
-        //[StringLength(50)]
-        //public string Doi { get; set; } 
-
-        //[StringLength(50)]
-        //public string ISSN { get; set; } 
     }
 
 }

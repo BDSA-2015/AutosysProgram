@@ -12,8 +12,7 @@ namespace Storage.Models
     [Table("Phase")]
     public class StoredPhase : IEntity
     {
-        [Key]
-        public int Id { get; set; }
+        #region Phase properties 
 
         [Required]
         public string Name { get; set; }
@@ -21,6 +20,10 @@ namespace Storage.Models
         public string Description { get; set; }
 
         public string IsFinished { get; set; }
+
+        #endregion
+
+        #region Referenced entities 
 
         /// <summary>
         ///     The data fields which needs to be filled out for the phase to be completed
@@ -36,6 +39,17 @@ namespace Storage.Models
         ///     Used to give similar tasks to multiple users, e.g. a review task.
         /// </summary>
         public virtual ICollection<PhaseTask> Tasks { get; set; }
+
+        #endregion
+
+        #region Keys
+
+        [Key]
+        public int Id { get; set; }
+
+        public virtual StoredStudy Study { get; set; }
+
+        #endregion
 
     }
 

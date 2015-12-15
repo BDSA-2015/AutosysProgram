@@ -40,7 +40,6 @@ namespace Storage.Repository
         {
             if (tag == null) throw new ArgumentNullException(nameof(tag));
 
-            _dbContext.Attach(tag); // Used for mocking
             _dbContext.Add(tag); // Used for mocking 
             await _dbContext.SaveChangesAsync();
             return tag.Id;

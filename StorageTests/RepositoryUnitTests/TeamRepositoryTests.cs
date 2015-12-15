@@ -69,19 +69,6 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
-        public async Task Create_Attatch_IsCalled()
-        {
-            // Arrange
-            var validTeam = new StoredTeam {Id = 0};
-
-            // Act 
-            await _repository.Create(validTeam);
-
-            // Assert
-            _context.Verify(c => c.Attach(validTeam), Times.Once);
-        }
-
-        [TestMethod]
         public async Task Create_Add_IsCalled()
         {
             // Arrange

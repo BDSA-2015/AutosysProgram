@@ -2,6 +2,7 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using System.Linq;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
 using AutoMapper;
@@ -42,7 +43,7 @@ namespace ApplicationLogics.AutosysServer.Mapping.Profiles
             //StoredTeam to Team
             Mapper.CreateMap<StoredTeam, Team>()
                 .ForMember(target => target.UserIDs,
-                    opt => opt.MapFrom(storedTeam => storedTeam.UserIds));
+                    opt => opt.MapFrom(storedTeam => storedTeam.Users.ToArray()));
 
 
             //Team to StoredTeam

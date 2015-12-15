@@ -68,19 +68,6 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
-        public async Task Create_Attatch_IsCalled()
-        {
-            // Arrange
-            var validTag = new StoredBibtexTag() { Id = 0 };
-
-            // Act 
-            await _repository.Create(validTag);
-
-            // Assert
-            _context.Verify(c => c.Attach(validTag), Times.Once);
-        }
-
-        [TestMethod]
         public async Task Create_Add_IsCalled()
         {
             // Arrange

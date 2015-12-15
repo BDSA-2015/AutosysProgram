@@ -69,19 +69,6 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
-        public async Task Create_Attatch_IsCalled()
-        {
-            // Arrange
-            var validUser = new StoredUser {Id = 0, Name = "Steven", MetaData = "Researcher"};
-
-            // Act 
-            await _repository.Create(validUser);
-
-            // Assert
-            _context.Verify(c => c.Attach(validUser), Times.Once);
-        }
-
-        [TestMethod]
         public async Task Create_Add_IsCalled()
         {
             // Arrange

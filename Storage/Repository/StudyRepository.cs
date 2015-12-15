@@ -38,8 +38,6 @@ namespace Storage.Repository
         {
             if (study == null) throw new ArgumentNullException(nameof(study));
 
-            _dbContext.Attach(study); // Used for mocking
-            // _dbContext.Set<T>().Attach(study);
             _dbContext.Add(study); // Used for mocking 
             //_dbContext.Set<T>().Add(study);
             await _dbContext.SaveChangesAsync();

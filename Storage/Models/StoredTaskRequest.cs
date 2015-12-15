@@ -16,56 +16,26 @@ namespace Storage.Models
     [Table("Task")]
     public class StoredTaskRequest : IEntity
     {
-        public enum Progress
-        {
-            NotStarted,
-            Started,
-            Done
-        }
+
+        #region Properties 
+
+        public TypeOptions Type { get; set; }
+
+        public ProgressOptions Progress { get; set; }
 
         /// <summary>
-        ///     Determines the type of Task
-        ///     FillOutDataFields for Reviewer
-        ///     HandleConflictingDatafields for Validator
+        ///     Determines task state
         /// </summary>
-        public enum Type
-        {
-            FillOutDataFields,
-            HandleConflictingDatafields
-        }
-
-        [NotMapped]
-        public Type TaskType { get; set; }
-
-        [NotMapped]
-        public Progress TaskProgress { get; set; }
-
-        /// <summary>
-        ///     Used to map the enum Type as a string.
-        /// </summary>
-        [Required]
-        [Column("Type")]
-        public string TypeString
-        {
-            get { return TaskType.ToString(); }
-            private set { TaskType = EnumExtensions.ParseEnum<Type>(value); }
-        }
-
-        /// <summary>
-        ///     Used to map the enum Progress as a string.
-        /// </summary>
-        [Required]
-        [Column("Progress")]
-        public string ProgressString
-        {
-            get { return TaskProgress.ToString(); }
-            private set { TaskProgress = EnumExtensions.ParseEnum<Progress>(value); }
-        }
+        public bool IsFinished { get; set; }
 
         /// <summary>
         ///     The task description to be followed for completing the task
         /// </summary>
         public string Description { get; set; }
+
+        #endregion
+
+        #region Referenced entities
 
         /// <summary>
         ///     Visible fields (unmodifiable) presented to a reviewer doing the task (e.g. author and the name of the author)
@@ -78,28 +48,68 @@ namespace Storage.Models
         public virtual ICollection<StoredDataField> RequestedDataFields { get; set; }
 
         /// <summary>
-        ///     In case this is a <see cref="Type.HandleConflictingDatafields" /> task, represents for each of the <see cref="RequestedDataFields" /> the
+        ///     In case this is a <see cref="TypeOptions.HandleConflictingDatafields" /> task, represents for each of the <see cref="RequestedDataFields" /> the
         ///     list of <see cref="ConflictingData" /> provided by separate users.
+        ///     Each StoredFieldConflict represents a data field entry with a list of conflicts. 
         /// </summary>
-        public StoredConflict[][] ConflictingData { get; set; } // TODO convert 2d array in EF?
-    
-        /// <summary>
-        ///     Determines task state
-        /// </summary>
-        public bool IsFinished { get; set; }
+        public virtual ICollection<StoredFieldConflicts> ConflictingData { get; set; }
 
-        /// <summary>
-        /// The associated paper to the task. 
-        /// </summary>
-        public virtual StoredPaper Paper { get; set; }
+        #endregion
 
-        /// <summary>
-        ///     The id of the paper which the task is associated with.
-        /// </summary>
-        public int PaperId { get; set; }
+        #region Keys 
 
         [Key]
         public int Id { get; set; }
+
+        public virtual PhaseTask PhaseTask { get; set; }
+
+        #endregion
+
+        #region Enum Helpers 
+
+        /// <summary>
+        ///     Determines the status of a given task
+        /// </summary>
+        public enum ProgressOptions
+        {
+            NotStarted,
+            Started,
+            Done
+        }
+
+        /// <summary>
+        ///     Determines the type of Task
+        ///     FillOutDataFields for Reviewer
+        ///     HandleConflictingDatafields for Validator
+        /// </summary>
+        public enum TypeOptions
+        {
+            FillOutDataFields,
+            HandleConflictingDatafields
+        }
+
+        /// <summary>
+        ///     Used to map the enum Type as a string.
+        /// </summary>
+        [Column("Type")]
+        public string TypeString
+        {
+            get { return Type.ToString(); }
+            private set { Type = EnumExtensions.ParseEnum<TypeOptions>(value); }
+        }
+
+        /// <summary>
+        ///     Used to map the enum Progress as a string.
+        /// </summary>
+        [Column("Progress")]
+        public string ProgressString
+        {
+            get { return Progress.ToString(); }
+            private set { Progress = EnumExtensions.ParseEnum<ProgressOptions>(value); }
+        }
+
+        #endregion
+
     }
 
 }

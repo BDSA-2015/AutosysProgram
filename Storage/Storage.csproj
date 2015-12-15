@@ -57,6 +57,7 @@
     <Compile Include="Models\PhaseTask.cs" />
     <Compile Include="Models\StoredBibtexTag.cs" />
     <Compile Include="Models\StoredConflict.cs" />
+    <Compile Include="Models\StoredFieldConflicts.cs" />
     <Compile Include="Repository\BibtexTagRepository.cs" />
     <Compile Include="Repository\Interface\IAutoSysContext.cs" />
     <Compile Include="Repository\DbRepository.cs" />

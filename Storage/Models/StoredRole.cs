@@ -9,26 +9,32 @@ namespace Storage.Models
     /// </summary>
     public class StoredRole : IEntity
     {
-        public enum Type
+
+        public TypeOptions Type { get; set; }
+
+        [Key]
+        public int Id { get; set; }
+
+        #region Enum Helpers
+
+        public enum TypeOptions
         {
             Validator,
             Reviewer
         }
 
-        public Type RoleType { get; set; }
-
         /// <summary>
         ///     Used to map the enum Type as a string.
         /// </summary>
-        [Required]
         [Column("Type")]
         public string TypeString
         {
-            get { return RoleType.ToString(); }
-            private set { RoleType = EnumExtensions.ParseEnum<Type>(value); }
+            get { return Type.ToString(); }
+            private set { Type = EnumExtensions.ParseEnum<TypeOptions>(value); }
         }
 
-        [Key]
-        public int Id { get; set; }
+        #endregion
+
     }
+
 }

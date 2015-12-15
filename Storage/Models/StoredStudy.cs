@@ -12,6 +12,18 @@ namespace Storage.Models
     /// </summary>
     public class StoredStudy : IEntity
     {
+        
+        #region Study Properties 
+
+        [StringLength(50)]
+        public string Name { get; set; }
+
+        [StringLength(400)]
+        public string Description { get; set; }
+
+        #endregion
+
+        #region Referenced entities 
 
         /// <summary>
         ///     The papers which are included in the project.
@@ -38,23 +50,22 @@ namespace Storage.Models
         /// <summary>
         ///     A list of all the users who are working on the study
         /// </summary>
-        public virtual ICollection<int> UserIds { get; set; }
+        public virtual ICollection<StoredUser> Users { get; set; } // Previously list of user ids 
 
         /// <summary>
         ///     Phases that the study has undergone and the current phase.
         /// </summary>
         public virtual ICollection<StoredPhase> Phases { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Name { get; set; }
+        #endregion
 
-        [Required]
-        [StringLength(400)]
-        public string Description { get; set; }
+        #region Keys 
 
         [Key]
         public int Id { get; set; }
+
+        #endregion 
+
     }
 
 }

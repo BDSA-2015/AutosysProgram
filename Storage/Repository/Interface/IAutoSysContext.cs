@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -61,6 +62,12 @@ namespace Storage.Repository.Interface
     public class AutoSysContext : DbContext, IAutoSysContext
     {
         public AutoSysContext() : base("name=AutoSysDbModel")
+        {
+        }
+
+        // Fake Db Connection object used for integration tests in Effort (in-memory EF database provider) 
+        public AutoSysContext(DbConnection connection)
+            : base (connection, true) // Dispose connection when context is disposed 
         {
         }
 

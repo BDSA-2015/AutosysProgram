@@ -38,8 +38,6 @@ namespace Storage.Repository
         {
             if (protocol == null) throw new ArgumentNullException(nameof(protocol));
 
-            _dbContext.Attach(protocol); // Used for mocking
-            // _dbContext.Set<T>().Attach(protocol);
             _dbContext.Add(protocol); // Used for mocking 
             //_dbContext.Set<T>().Add(protocol);
             await _dbContext.SaveChangesAsync();
