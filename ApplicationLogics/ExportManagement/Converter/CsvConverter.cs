@@ -57,9 +57,9 @@ namespace ApplicationLogics.ExportManagement.Converter
         private static void CreateRows(Protocol protocol, StringBuilder builder)
         {
             var i = 1;
-            foreach (var phase in protocol.Phases)
+            foreach (var phase in protocol.StudyPhases)
             {
-                builder.Append($"{protocol.StudyName};{protocol.Description};Phase{i++};");
+                builder.Append($"{protocol.StudyName};{protocol.StudyDescription};Phase{i++};");
                 AppendCriteria(phase.ExclusionCriteria, builder);
                 AppendCriteria(phase.InclusionCriteria, builder);
                 AppendAssignedTasks(phase.Tasks, builder);

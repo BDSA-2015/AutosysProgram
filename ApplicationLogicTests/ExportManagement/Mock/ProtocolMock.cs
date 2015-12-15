@@ -22,8 +22,8 @@ namespace ApplicationLogicTests.ExportManagement.Mock
             return new Protocol
             {
                 StudyName = "Software Study",
-                Description = "For fun",
-                Phases = CreatePhases()
+                StudyDescription = "For fun",
+                StudyPhases = CreatePhases()
             };
         }
 
