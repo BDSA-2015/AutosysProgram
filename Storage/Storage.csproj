@@ -53,7 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\PhaseRole.cs" />
+    <Compile Include="Models\PhaseTask.cs" />
     <Compile Include="Models\StoredBibtexTag.cs" />
+    <Compile Include="Models\StoredConflict.cs" />
     <Compile Include="Repository\BibtexTagRepository.cs" />
     <Compile Include="Repository\Interface\IAutoSysContext.cs" />
     <Compile Include="Repository\DbRepository.cs" />

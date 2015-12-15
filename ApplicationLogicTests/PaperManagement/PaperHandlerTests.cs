@@ -52,7 +52,7 @@ namespace ApplicationLogicTests.PaperManagement
                            "year = {1905}}";
 
                 //Act
-                _paperHandler.ImportBibtex(file);
+                _paperHandler.ParseFile(file);
 
                 //Assert
                 _mockAdapter.Verify(r => r.Create(It.IsAny<Paper>()), Times.Once);
@@ -79,7 +79,7 @@ namespace ApplicationLogicTests.PaperManagement
                            "year = {700}}";
 
                 //Act
-                _paperHandler.ImportBibtex(file);
+                _paperHandler.ParseFile(file);
 
                 //Assert
                 _mockAdapter.Verify(r => r.Create(It.IsAny<Paper>()), Times.Exactly(3));
@@ -93,7 +93,7 @@ namespace ApplicationLogicTests.PaperManagement
             public void ImportNullBibtex()
             {
                 //Act
-                _paperHandler.ImportBibtex(null);
+                _paperHandler.ParseFile(null);
             }
 
             /// <summary>
@@ -104,7 +104,7 @@ namespace ApplicationLogicTests.PaperManagement
             public void ImportEmptyBibtex()
             {
                 //Act
-                _paperHandler.ImportBibtex("");
+                _paperHandler.ParseFile("");
             }
         #endregion
     }
