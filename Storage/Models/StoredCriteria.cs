@@ -84,6 +84,7 @@ namespace Storage.Models
         [Required]
         public virtual StoredDataField DataField { get; set; }
 
+        public int DataFieldId { get; set; }
 
         /// <summary>
         ///     This represents the bibtex tag affected by a given criteria.
