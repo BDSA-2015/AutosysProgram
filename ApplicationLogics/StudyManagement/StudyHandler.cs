@@ -6,15 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
+using Storage.Models;
 
 namespace ApplicationLogics.StudyManagement
 {
     public class StudyHandler
     {
 
-        private readonly IAdapter<Study> _studyAdapter;
+        private readonly IAdapter<Study, StoredStudy> _studyAdapter;
 
-        public StudyHandler(IAdapter<Study> adapter)
+        public StudyHandler(IAdapter<Study, StoredStudy> adapter)
         {
             _studyAdapter = adapter;
         }
