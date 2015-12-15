@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web.WebPages;
 using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.StorageAdapter.Interface;
+using ApplicationLogics.StudyManagement;
 using BibtexLibrary;
 
 namespace ApplicationLogics.PaperManagement
