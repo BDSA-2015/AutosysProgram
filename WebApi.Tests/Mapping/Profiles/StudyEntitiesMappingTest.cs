@@ -15,6 +15,12 @@ using DDataField = ApplicationLogics.StudyManagement.DataField;
 using ADataField = WebApi.Models.DataField;
 using AStage = WebApi.Models.StageOverview;
 using DStage = ApplicationLogics.StudyManagement.Phase;
+using DTask = ApplicationLogics.StudyManagement.TaskRequest;
+using ATask = WebApi.Models.TaskRequest;
+using DUser = ApplicationLogics.UserManagement.Entities.User;
+using DTeam = ApplicationLogics.UserManagement.Entities.Team;
+using AUser = WebApi.Models.User;
+using ATeam = WebApi.Models.Team;
 
 
 
@@ -54,17 +60,18 @@ namespace WebApi.Mapping.Profiles.Tests
         {
             //Arrange
             var aStage = new AStage();
-            aStage.CompletedTasks = new Dictionary<int, int>() { { 0, 100 }, { 1, 100} };
-            aStage.IncompleteTasks = new Dictionary<int, int>() { { 0, 3 }, { 1, 200 } };
+            aStage.CompletedTasks = new Dictionary<int, int>() { { 1, 2 }, { 2, 0} }; //User 1 has two completed and zero incomplete tasks  && 
+            aStage.IncompleteTasks = new Dictionary<int, int>() { { 1, 0 }, { 2, 2 } };
             aStage.Name = "first Phase";
 
-            var dStage = new DStage();
-            dStage.
-            dStage.CompletedTasks = new Dictionary<int, int>() { { 0, 100 }, { 1, 100 } };
-            dStage.IncompleteTasks = new Dictionary<int, int>() { { 0, 3 }, { 1, 200 } };
-            dStage.Name = "first Phase";
+            var dStage = CreateDStageTasks();
 
             //Act
+
+            var newAStage = AutoMapper.Mapper.Map<AStage>(dStage);
+
+            //Assert 
+            
 
         }
 
@@ -151,93 +158,36 @@ namespace WebApi.Mapping.Profiles.Tests
         {
             throw new NotImplementedException();
         }
-    }
-}
 
-namespace WebApi.Mapping.Tests
-{
-    [TestClass()]
-    public class StudyEntitiesMappingTest
-    {
-        StudyEntitiesMapping _entityMapper;
-
-        [TestInitialize]
-        public void CreateDataMapping()
+        //Help methods
+        private Dictionary<DUser,List<DTask>> CreateDStageTasks()
         {
-            _entityMapper = new StudyEntitiesMapping();
-        }
+            var dTasklist = new Dictionary<DUser, List<DTask>>();
 
-        [TestMethod()]
-        public void CreateConflictingDataMappingTest()
-        {
-            //Arrange
-            var DConflictData = new DatabaseConflictingData();
-            DConflictData.Data =  new string[]{ "True","False,True"};
-            DConflictData.UserId = 3;
-            
-            var AConflictingData = new APIConflictingData();
-            AConflictingData.Data = new string[] { "True", "False,True" };
-            AConflictingData.UserId = 3;
-            //Act
-            var newAConflictData = AutoMapper.Mapper.Map<APIConflictingData>(DConflictData);
-            //Assert
-            Assert.AreEqual(AConflictingData, newAConflictData);
-        }
+            //Create Users
+            var dUser_1 = new DUser(); dUser_1.Id = 1;
+            var dUser_2 = new DUser(); dUser_2.Id = 2;
 
-        
+            //Crate a List of Tasks for each user
+            var Task_user1_1 = new DTask(); Task_user1_1.IsFinished = false;
+            var Task_user1_2 = new DTask(); Task_user1_1.IsFinished = false;
+            var user1Tasks = new List<DTask>() { Task_user1_1, Task_user1_2 };
 
-        [TestMethod()]
-        public void CreateDataFieldMappingTest()
-        {
-            var AField = new ADataField();
+            //
+            var Task_user2_1 = new DTask(); Task_user1_1.IsFinished = true;
+            var Task_user2_2 = new DTask(); Task_user1_1.IsFinished = true;
+            var user2Tasks = new List<DTask>() { Task_user2_1, Task_user2_2 };
 
-            AField.Data = new string[] { "Some data describing the task" };
-            AField.Description = "Does the text contains the word 'Software'";
-            AField.FieldType = ADataField.DataType.Boolean;
-            AField.Name = "Contains -Software";
-            AField.TypeInfo = new string[] { "True", "False" };
-            
+            //Assign tasks
+            dTasklist.Add(dUser_1, user1Tasks);
+            dTasklist.Add(dUser_2, user2Tasks);
 
 
-            Assert.Fail();
-
-
-
-        }
-
-        [TestMethod()]
-        public void CreatePhaseMappingTest()
-        {
-            var stage = new StageOverview();
-            stage.Name = "TestStage";
-            stage.CompletedTasks = new Dictionary<int, int>() { {0,100}, {1,100}, {2,200}};
-            stage.IncompleteTasks = new Dictionary<int, int>() { {0,100}, {1,0}, {2,5} };
-
-            
-        }
-
-        [TestMethod()]
-        public void CreateRoleMappingTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void CreateStudyMappingTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void CreateStudyManagerMappingTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void CreateTaskRequestMappingTest()
-        {
-            Assert.Fail();
+            return dTasklist;
         }
     }
+
+
+    
 }
+

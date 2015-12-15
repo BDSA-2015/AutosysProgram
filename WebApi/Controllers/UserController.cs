@@ -1,10 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
-using SystematicStudyService.Models;
+
+using AutoMapper;
 using ApplicationLogics.AutosysServer;
 using System.Net;
 using System.Diagnostics;
+using WebApi.Mapping.Profiles;
+using WebApi.Mapping;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WebApi.Models;
+using ApplicationLogics.StudyManagement;
+using DConflictingData = ApplicationLogics.StudyManagement.ConflictingData;
+using AConflictingData = WebApi.Models.ConflictingData;
+using DCriteria = ApplicationLogics.StudyManagement.Criteria;
+using DDataField = ApplicationLogics.StudyManagement.DataField;
+using ADataField = WebApi.Models.DataField;
+using AStage = WebApi.Models.StageOverview;
+using DStage = ApplicationLogics.StudyManagement.Phase;
+using DTask = ApplicationLogics.StudyManagement.TaskRequest;
+using ATask = WebApi.Models.TaskRequest;
+using DUser = ApplicationLogics.UserManagement.Entities.User;
+using DTeam = ApplicationLogics.UserManagement.Entities.Team;
+using AUser = WebApi.Models.User;
+using ATeam = WebApi.Models.Team;
+using System.Net.Http;
 
 namespace WebApi.Controllers
 {
@@ -14,14 +38,9 @@ namespace WebApi.Controllers
     [RoutePrefix("api/User")]
     public class UserController : ApiController
     {
-        /*
-        private IDisposable _facade;
-         
-        public UserController(IDisposable facade)
-        {
-            _facade = facade;
-        }
-        */
+
+
+
 
         private readonly MainHandler _facade;
 
@@ -37,9 +56,18 @@ namespace WebApi.Controllers
         /// <param name="name">Search for users which match the specified name.</param>
         public IEnumerable<User> Get(string name = "")
         {
-            // GET: api/User
-            // GET: api/User?name=alice
-            throw new NotImplementedException();
+            AUser[] aUsers = null;
+
+
+            DUser[] dUsers = null;//_facade.getAllUsers(name);
+            aUsers = new User[dUsers.Length];
+            for (int i = 0; i < dUsers.Length; i++)
+            {
+                aUsers[i] = Mapper.Map<AUser>(dUsers[i]);
+            }
+
+            return aUsers;
+
         }
 
         /// <summary>
@@ -48,23 +76,17 @@ namespace WebApi.Controllers
         /// <param name="id">The ID of the user to retrieve.</param>
         public User Get(int id)
         {
-            // Get call stack
-            StackTrace stackTrace = new StackTrace();
+            DUser dUser = null;// _facade.getUser(id);
 
-            // Get calling method name
-            Console.WriteLine(stackTrace.GetFrame(1).GetMethod().Name);
 
-            // GET: api/User/5
-            throw new HttpResponseException(HttpStatusCode.BadRequest);
-            var user = new User();
-            user.Id = 0;
-            user.Metadata = stackTrace.GetFrame(1).GetMethod().Name;
-            user.Name = "Hal";
-            return user;
-            
+            return null;
+
+            return Mapper.Map<AUser>(dUser);
+
+
         }
 
-       public  UserController()
+        public UserController()
         {
 
         }
@@ -77,6 +99,7 @@ namespace WebApi.Controllers
         [Route("{id}/StudyIDs")]
         public IEnumerable<int> GetStudyIDs(int id)
         {
+            return new int[] { 1, 2, 3 };
             // GET: api/User/5/StudyIDs
             throw new NotImplementedException();
         }
@@ -85,10 +108,11 @@ namespace WebApi.Controllers
         ///     Create a new user.
         /// </summary>
         /// <param name="user">The new user to create.</param>
-        public IHttpActionResult Post([FromBody] User user)
+        public   Post([FromBody] User user)
         {
-            // POST: api/User
-            throw new NotImplementedException();
+             
+            return _facade.CreateUser();
+                //ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "You must provide a valid User"));
         }
 
         /// <summary>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
-using SystematicStudyService.Models;
+
 using WebApi.Controllers;
 using WebApi.Models;
 using TaskRequest = WebApi.Models.TaskRequest;
@@ -29,6 +29,7 @@ namespace WebApi.Adapter
 
         public StudyOverview GetOverview(int id)
         {
+            /*
             var study =_facade.GetStudy(id);
             var studyOverview = new StudyOverview(); // The intended return value of this function
 
@@ -45,7 +46,7 @@ namespace WebApi.Adapter
                     
                     foreach(DatabaseTask task in usersTasks.Value)//Account for the users completed and incomplete tasks
                     {
-                        if (DatabaseTask.Filter.Done == task.Progress)
+                        //if (DatabaseTask.Type.Done == task.Progress)
                             completedTasks.AddOrUpdate(usersTasks.Key.Id, 1, (userId, finishedWork) => finishedWork + 1);
                         else
                             incompleteTasksTasks.AddOrUpdate(usersTasks.Key.Id, 1, (userId, unfinishedWork) => unfinishedWork + 1);
@@ -64,6 +65,8 @@ namespace WebApi.Adapter
             stages.CopyTo(studyOverview.Stages);
 
             return studyOverview;
+            */
+            throw new NotFiniteNumberException();
         }
 
         public IHttpActionResult GetResource(int id, int resourceId)
@@ -89,15 +92,9 @@ namespace WebApi.Adapter
             var taskRequestFilter = TaskRequestFilterTranslator(filter);
             var taskRequestType = TaskRequestTypeTranslator(type);
 
-            var DatabaseTasks =  _facade.GetTasks(id, userId, count, taskRequestFilter, taskRequestType);
+            
             var tasks = new List<TaskRequest>();
-            TaskRequest newTask; 
-            foreach (DatabaseTask task in DatabaseTasks)
-            {
-                newTask = new TaskRequest();
-                
-                
-            }
+           
 
             throw new NotImplementedException();
 
@@ -113,8 +110,9 @@ namespace WebApi.Adapter
         /// </summary>
         /// <param name="filterType"></param>
         /// <returns></returns>
-        private DatabaseTask.Filter TaskRequestFilterTranslator(TaskRequest.Filter filterType)
+        private DatabaseTask.Type TaskRequestFilterTranslator(TaskRequest.Filter filterType)
         {
+            /*
 
             if (filterType == TaskRequest.Filter.Done)
                 return DatabaseTask.Filter.Done;
@@ -123,6 +121,8 @@ namespace WebApi.Adapter
             else if (filterType == TaskRequest.Filter.Remaining)
                 return DatabaseTask.Filter.Remaining;
             else throw new NotImplementedException();//This code does not reflect all of the possible Filters. Extend this method if this statement is reached
+            */
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -132,6 +132,7 @@ namespace WebApi.Adapter
         /// <returns></returns>
         private DatabaseTask.Type TaskRequestTypeTranslator(TaskRequest.Type type)
         {
+            /*
             throw new NotImplementedException();
 
             if (type == TaskRequest.Type.Both)
@@ -141,6 +142,8 @@ namespace WebApi.Adapter
             else if (type == TaskRequest.Type.Review)
                 return DatabaseTask.Type.FillOutDataFields;
             else throw new NotImplementedException(); //This code does not reflect all of the possible Types. Extend this method if this statement is reached
+            */
+            throw new NotImplementedException();
         }
 
         
