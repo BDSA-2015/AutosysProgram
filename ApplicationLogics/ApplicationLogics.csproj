@@ -116,7 +116,6 @@
     <Compile Include="ExportManagement\ExportHandler.cs" />
     <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
     <Compile Include="ExportManagement\Converter\CsvConverter.cs" />
-    <Compile Include="StorageAdapter\IAdapter.cs" />
     <Compile Include="StudyManagement\BibTexFileSearcher.cs" />
     <Compile Include="StorageAdapter\Interface\IAdapter.cs" />
     <Compile Include="StorageAdapter\PaperAdapter.cs" />
