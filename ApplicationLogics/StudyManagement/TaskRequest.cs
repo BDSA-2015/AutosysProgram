@@ -35,6 +35,11 @@ namespace ApplicationLogics.StudyManagement
         }
 
         /// <summary>
+        ///     The id of the paper which the task is associated with.
+        /// </summary>
+        public int PaperId { get; set; }
+
+        /// <summary>
         ///     The task description to be followed for completing the task
         /// </summary>
         public string Description { get; set; }
@@ -47,10 +52,10 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         ///     Modifiable fields, which a reviewer needs to fill out for a specific paper
         /// </summary>
-        public List<DataField> RequesteDataFields { get; set; }
+        public List<DataField> RequestedDataFields { get; set; }
 
         /// <summary>
-        ///     In case this is a <see cref="Type.HandleConflictingDatafields" /> task, represents for each of the <see cref="RequesteDataFields" /> the
+        ///     In case this is a <see cref="Type.HandleConflictingDatafields" /> task, represents for each of the <see cref="RequestedDataFields" /> the
         ///     list of <see cref="ConflictingData" /> provided by separate users.
         /// </summary>
         public Conflict[][] ConflictingData { get; set; }
