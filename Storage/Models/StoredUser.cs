@@ -21,5 +21,10 @@ namespace Storage.Models
 
         [Key]
         public int Id { get; set; }
+
+        public int TeamId { get; set; }
+
+        [ForeignKey("TeamId")]
+        public virtual StoredTeam Team { get; set; }
     }
 }

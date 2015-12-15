@@ -102,8 +102,9 @@ namespace ApplicationLogicTests.StorageAdapter
             //Assert 
             Assert.IsTrue(_study.Id == actualStudy.Id);
             Assert.IsTrue(_study.Name == actualStudy.Name);
-            Assert.IsTrue(_study.UserIds == actualStudy.UserIds);
-            Assert.IsTrue(_study.Phases == actualStudy.Phases);
+            CollectionAssert.AreEqual(_study.UserIds.ToList(), actualStudy.UserIds.ToList());
+            //Assert.IsTrue(_study.UserIds == actualStudy.UserIds);
+            //Assert.IsTrue(_study.Phases == actualStudy.Phases);
         }
 
         /// <summary>

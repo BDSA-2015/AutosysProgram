@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -18,7 +19,9 @@ namespace Storage.Models
         public string Name { get; set; }
 
         public int[] UserIds { get; set;}
-
+        
+        public virtual ICollection<StoredUser> Users { get; set; }
+            
         [StringLength(400)]
         public string MetaData { get; set; }
 
