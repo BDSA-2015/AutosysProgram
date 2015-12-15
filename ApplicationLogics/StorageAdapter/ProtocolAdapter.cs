@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.ProtocolManagement;
@@ -13,7 +14,7 @@ namespace ApplicationLogics.StorageAdapter
     /// <summary>
     ///     This class is responsible for converting protocols in the logical layer to stored protocol entities in the storage layer and call appropriate database operations.
     /// </summary>
-    public class ProtocolAdapter : IAdapter<Protocol>
+    public class ProtocolAdapter : IAdapter<Protocol, StoredProtocol>
     {
 
         private readonly IRepository<StoredProtocol> _protocolRepository;
@@ -34,8 +35,7 @@ namespace ApplicationLogics.StorageAdapter
         /// </returns>
         public async Task<int> Create(Protocol protocol)
         {
-            var storedProtocol = Mapper.Map<StoredProtocol>(protocol);
-            return await _protocolRepository.Create(storedProtocol);
+            return await _protocolRepository.Create(Map(protocol));
         }
 
         /// <summary>
@@ -52,22 +52,18 @@ namespace ApplicationLogics.StorageAdapter
             return await _protocolRepository.DeleteIfExists(id);
         }
 
-        // TODO remove from interface? 
-        public Protocol Map(Protocol item)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         ///     Returns all protocols. 
         /// </summary>
         /// <returns>
         ///     A set of protocols. 
         /// </returns>
-        public IQueryable<Protocol> Read()
+        public IEnumerable<Protocol> Read()
         {
-            var storedProtocols = _protocolRepository.Read();
-            return storedProtocols.Select(Mapper.Map<Protocol>).AsQueryable();
+            foreach (var protocol in _protocolRepository.Read())
+            {
+                yield return Map(protocol);
+            }
         }
 
         /// <summary>
@@ -81,8 +77,7 @@ namespace ApplicationLogics.StorageAdapter
         /// </returns>
         public async Task<Protocol> Read(int id)
         {
-            var storedProtocol = await _protocolRepository.Read(id);
-            return Mapper.Map<Protocol>(storedProtocol);
+            return await Task.FromResult(Map(_protocolRepository.Read(id).Result));
         }
 
         /// <summary>
@@ -96,9 +91,19 @@ namespace ApplicationLogics.StorageAdapter
         /// </returns>
         public async Task<bool> UpdateIfExists(Protocol protocol)
         {
-            var storedProtocol = Mapper.Map<StoredProtocol>(protocol);
-            return await _protocolRepository.UpdateIfExists(storedProtocol);
+            return await _protocolRepository.UpdateIfExists(Map(protocol));
         }
+
+        public StoredProtocol Map(Protocol item)
+        {
+            return Mapper.Map<StoredProtocol>(item);
+        }
+
+        public Protocol Map(StoredProtocol item)
+        {
+            return Mapper.Map<Protocol>(item);
+        }
+
 
         public void Dispose()
         {
