@@ -57,14 +57,12 @@ namespace ApplicationLogics.ExportManagement.Converter
         private static void CreateRows(Protocol protocol, StringBuilder builder)
         {
             var i = 1;
+            AppendCriteria(protocol.ExclusionCriteria, builder);
+            AppendCriteria(protocol.InclusionCriteria, builder);
             foreach (var phase in protocol.StudyPhases)
             {
                 builder.Append($"{protocol.StudyName};{protocol.StudyDescription};Phase{i++};");
-                AppendCriteria(phase.ExclusionCriteria, builder);
-                AppendCriteria(phase.InclusionCriteria, builder);
-                AppendAssignedTasks(phase.Tasks, builder);
                 AppendRoles(phase.AssignedRole, builder);
-                AppendResources(phase.Reports, builder);
             }
         }
 

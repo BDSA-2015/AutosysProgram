@@ -13,6 +13,8 @@ namespace ApplicationLogics.StudyManagement
     /// </summary>
     public class TaskRequest
     {
+        public int Id { get; set; }
+
         /// <summary>
         ///     Determines task state
         /// </summary>
