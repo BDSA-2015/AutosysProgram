@@ -67,7 +67,7 @@ namespace ApplicationLogicTests.StorageAdapter
         }
 
         [TestMethod]
-        public async Task DeleteObjectNotNullTest()
+        public void DeleteObjectNotNullTest()
         {
             //Arrange
             var fieldTypes = new List<string>();
@@ -91,7 +91,7 @@ namespace ApplicationLogicTests.StorageAdapter
         }
 
         [TestMethod]
-        public async Task DeleteObjectCorrectStateTest()
+        public void DeleteObjectCorrectStateTest()
         {
             //Arrange
             var fieldTypes = new List<string>();
