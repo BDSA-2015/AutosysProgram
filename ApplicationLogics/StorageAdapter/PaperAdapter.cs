@@ -10,97 +10,101 @@ using Storage.Repository.Interface;
 
 namespace ApplicationLogics.StorageAdapter
 {
+
+    /// <summary>
+    ///     This class is responsible for converting papers in the logical layer to stored user entities in the storage layer and call appropriate database operations.
+    /// </summary>
     public class PaperAdapter : IAdapter<Paper>
     {
-        //TODO Write purpose of class
-        private readonly IRepository<StoredPaper> _papers;
 
-        public PaperAdapter(IRepository<StoredPaper> papers)
+        private readonly IRepository<StoredPaper> _paperRepository;
+
+        public PaperAdapter(IRepository<StoredPaper> paperRepository)
         {
-            _papers = papers;
+            _paperRepository = paperRepository;
         }
 
-        public Task<int> Create(Paper item)
+        /// <summary>
+        /// Creates a paper and converts it to a stored paper in the storage layer that is stored in the database. 
+        /// </summary>
+        /// <param name="paper">
+        /// Paper to be created. 
+        /// </param>
+        /// <returns>
+        /// Id of newly created paper. 
+        /// </returns>
+        public async Task<int> Create(Paper paper)
         {
-            if (item == null)
-            {
-                throw new ArgumentNullException("The given Paper cannot be null");
-            }
-            var storedPaper = Mapper.Map<StoredPaper>(item);
-            return _papers.Create(storedPaper);
+            var storedPaper = Mapper.Map<StoredPaper>(paper);
+            return await _paperRepository.Create(storedPaper);
         }
 
-        Task<Paper> IAdapter<Paper>.Read(int id)
+        /// <summary>
+        /// Returns a paper based on its id. 
+        /// </summary>
+        /// <param name="id">
+        /// Id of retrieved paper. 
+        /// </param>
+        /// <returns>
+        /// Found paper. 
+        /// </returns>
+        public async Task<Paper> Read(int id)
         {
-            throw new NotImplementedException();
+            return Mapper.Map<Paper>(await _paperRepository.Read(id));
         }
 
-        IQueryable<Paper> IAdapter<Paper>.Read()
+        /// <summary>
+        /// Return all papers. 
+        /// </summary>
+        /// <returns>
+        /// All papers. 
+        /// </returns>
+        public IQueryable<Paper> Read()
         {
-            throw new NotImplementedException();
+            var storedUsers = _paperRepository.Read();
+            return storedUsers.Select(Mapper.Map<Paper>).AsQueryable();
         }
 
-        Task<bool> IAdapter<Paper>.UpdateIfExists(Paper user)
+        /// <summary>
+        /// Updates a paper if it is already stored through the storage layer in the database. 
+        /// </summary>
+        /// <param name="paper">
+        /// Paper to update.
+        /// </param>
+        /// <returns>
+        /// True if paper was updated. 
+        /// </returns>
+        public async Task<bool> UpdateIfExists(Paper paper)
         {
-            throw new NotImplementedException();
+            var storedPaper = Mapper.Map<StoredPaper>(paper);
+            return await _paperRepository.UpdateIfExists(storedPaper);
         }
 
-        public Task<bool> DeleteIfExists(int id)
+        /// <summary>
+        /// Deletes a paper if it exists. 
+        /// </summary>
+        /// <param name="id">
+        /// Id of paper to delete. 
+        /// </param>
+        /// <returns>
+        /// True if paper was deleted, false if paper does not exist.
+        /// </returns>
+        public async Task<bool> DeleteIfExists(int id)
         {
-            throw new NotImplementedException();
+            return await _paperRepository.DeleteIfExists(id);
         }
 
-        public void DeleteIfExists(Paper item)
-        {
-            if (item == null)
-            {
-                throw new ArgumentNullException("The given Paper cannot be null");
-            }
-            var storedPaper = Mapper.Map<StoredPaper>(item);
-            _papers.DeleteIfExists(storedPaper.Id);
-        }
-
+        // TODO remove Map from interface? 
         public Paper Map(Paper item)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Paper> Read()
-        {
-            foreach (var storedPaper in _papers.Read())
-            {
-                yield return Mapper.Map<Paper>(storedPaper);
-            }
-        }
-
-        Task<int> IAdapter<Paper>.Create(Paper user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Paper Read(int id)
-        {
-            if (id < 0)
-            {
-                throw new ArgumentOutOfRangeException("The given id must be 0 or greater");
-            }
-
-            return Mapper.Map<Paper>(_papers.Read(id));
-        }
-
-        public void UpdateIfExists(Paper item)
-        {
-            if (item == null)
-            {
-                throw new ArgumentNullException("The given Paper cannot be null");
-            }
-
-            _papers.UpdateIfExists(Mapper.Map<StoredPaper>(item));
-        }
-
         public void Dispose()
         {
-            throw new NotImplementedException();
+           _paperRepository.Dispose();
         }
+
     }
+    
 }

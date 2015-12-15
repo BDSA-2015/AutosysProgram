@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Antlr.Runtime.Tree;
 using ApplicationLogics.PaperManagement;
 using ApplicationLogics.StorageAdapter.Interface;
+using AutoMapper;
 using Storage.Models;
 using Storage.Repository.Interface;
 
@@ -29,11 +29,12 @@ namespace ApplicationLogics.StorageAdapter
         /// The BibtexTag to be stored
         /// </param>
         /// <returns>
-        /// The Id of the created StoedBibtexTag in the database
+        /// The Id of the created StoredBibtexTag in the database
         /// </returns>
-        public Task<int> Create(BibtexTag tag)
+        public async Task<int> Create(BibtexTag tag)
         {
-            throw new NotImplementedException();
+            var storedTag = Mapper.Map<StoredBibtexTag>(tag);
+            return await _bibtexTagRepository.Create(storedTag);
         }
 
         /// <summary>
@@ -45,9 +46,11 @@ namespace ApplicationLogics.StorageAdapter
         /// <returns>
         ///     The requested Bibtextag if it exists, null if non exists
         /// </returns>
-        public Task<BibtexTag> Read(int id)
+        public async Task<BibtexTag> Read(int id)
         {
-            throw new NotImplementedException();
+            var storedUser = await _bibtexTagRepository.Read(id);
+            var convertedUser = Mapper.Map<BibtexTag>(storedUser);
+            return convertedUser;
         }
 
         /// <summary>
@@ -58,7 +61,8 @@ namespace ApplicationLogics.StorageAdapter
         /// </returns>
         public IQueryable<BibtexTag> Read()
         {
-            throw new System.NotImplementedException();
+            var storedTags = _bibtexTagRepository.Read();
+            return storedTags.Select(Mapper.Map<BibtexTag>).AsQueryable();
         }
 
         /// <summary>
@@ -72,9 +76,10 @@ namespace ApplicationLogics.StorageAdapter
         /// <returns>
         ///     True if BibtexTag was updated, vice versa.
         /// </returns>
-        public Task<bool> UpdateIfExists(BibtexTag tag)
+        public async Task<bool> UpdateIfExists(BibtexTag tag)
         {
-            throw new System.NotImplementedException();
+            var storedTag = Mapper.Map<StoredBibtexTag>(tag);
+            return await _bibtexTagRepository.UpdateIfExists(storedTag);
         }
 
         /// <summary>
@@ -86,9 +91,9 @@ namespace ApplicationLogics.StorageAdapter
         /// <returns>
         ///     True if BibtexTag was deleted, false if BibtexTag does not exist.
         /// </returns>
-        public Task<bool> DeleteIfExists(int id)
+        public async Task<bool> DeleteIfExists(int id)
         {
-            throw new System.NotImplementedException();
+            return await _bibtexTagRepository.DeleteIfExists(id);
         }
 
         //TODO Refactor IAdapter Interface Mapper method(s)
@@ -102,7 +107,9 @@ namespace ApplicationLogics.StorageAdapter
         /// </summary>
         public void Dispose()
         {
-            throw new System.NotImplementedException();
+            _bibtexTagRepository.Dispose();
         }
+
     }
+
 }

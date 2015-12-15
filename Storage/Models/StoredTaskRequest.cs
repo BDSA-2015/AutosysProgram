@@ -23,6 +23,11 @@ namespace Storage.Models
             Done
         }
 
+        /// <summary>
+        ///     Determines the type of Task
+        ///     FillOutDataFields for Reviewer
+        ///     HandleConflictingDatafields for Validator
+        /// </summary>
         public enum Type
         {
             FillOutDataFields,
@@ -57,15 +62,44 @@ namespace Storage.Models
             private set { TaskProgress = EnumExtensions.ParseEnum<Progress>(value); }
         }
 
+        /// <summary>
+        ///     The task description to be followed for completing the task
+        /// </summary>
         public string Description { get; set; }
 
-        [Required]
-        public virtual ICollection<StoredDataField> NonModifiableDatafields { get; set; }
+        /// <summary>
+        ///     Visible fields (unmodifiable) presented to a reviewer doing the task (e.g. author and the name of the author)
+        /// </summary>
+        public virtual ICollection<StoredDataField> VisibleDataFields { get; set; }
 
-        [Required]
-        public virtual ICollection<StoredDataField> ModifiableDatafields { get; set; }
+        /// <summary>
+        ///     Modifiable fields, which a reviewer needs to fill out for a specific paper
+        /// </summary>
+        public virtual ICollection<StoredDataField> RequestedDataFields { get; set; }
+
+        /// <summary>
+        ///     In case this is a <see cref="Type.HandleConflictingDatafields" /> task, represents for each of the <see cref="RequestedDataFields" /> the
+        ///     list of <see cref="ConflictingData" /> provided by separate users.
+        /// </summary>
+        public StoredConflict[][] ConflictingData { get; set; } // TODO convert 2d array in EF?
+    
+        /// <summary>
+        ///     Determines task state
+        /// </summary>
+        public bool IsFinished { get; set; }
+
+        /// <summary>
+        /// The associated paper to the task. 
+        /// </summary>
+        public virtual StoredPaper Paper { get; set; }
+
+        /// <summary>
+        ///     The id of the paper which the task is associated with.
+        /// </summary>
+        public int PaperId { get; set; }
 
         [Key]
         public int Id { get; set; }
     }
+
 }

@@ -10,7 +10,7 @@ using Moq;
 using Storage.Models;
 using Storage.Repository.Interface;
 
-namespace ApplicationLogicTests.StorageFasade
+namespace ApplicationLogicTests.StorageAdapter
 {
     [TestClass]
     public class PaperFacadeTests
@@ -84,7 +84,7 @@ namespace ApplicationLogicTests.StorageFasade
             mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>().Id)).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
-            _adapter.DeleteIfExists(paper);
+            //await _adapter.DeleteIfExists(paper.Id);
 
             //Assert
             Assert.IsNotNull(callBackPaper);
@@ -108,7 +108,7 @@ namespace ApplicationLogicTests.StorageFasade
             mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>().Id)).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
-            _adapter.DeleteIfExists(paper);
+            //await _adapter.DeleteIfExists(paper.Id);
 
             //Assert
             //TODO Make NUnit TestCase() work and reduce method to a single Assert
@@ -122,18 +122,6 @@ namespace ApplicationLogicTests.StorageFasade
             Assert.IsTrue(callBackPaper.FieldValues.ElementAt(0) == "Will BeGood");
             Assert.IsTrue(callBackPaper.FieldValues.ElementAt(1) == "Life's Questions");
             Assert.IsTrue(callBackPaper.FieldValues.ElementAt(2) == "1905");
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public void DeleteNullTest()
-        {
-            //Arrange
-
-            //Act
-            _adapter.DeleteIfExists(null);
-
-            //Assert
         }
 
         [TestMethod]
@@ -174,14 +162,14 @@ namespace ApplicationLogicTests.StorageFasade
         }
 
         [TestMethod]
-        public void ReadObjectTest()
+        public async Task ReadObjectTest()
         {
             //Arrange
             var callBackPaperId = -1;
             mockRepo.Setup(r => r.Read(It.IsAny<int>())).Callback<int>(o => callBackPaperId = o);
 
             //Act
-            _adapter.Read(5);
+            await _adapter.Read(5);
 
             //Assert
             //TODO Make NUnit TestCase() work and reduce method to a single Assert
@@ -190,18 +178,18 @@ namespace ApplicationLogicTests.StorageFasade
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentOutOfRangeException))]
-        public void ReadObjectNegativeIdTest()
+        public async Task ReadObjectNegativeIdTest()
         {
             //Arrange
 
             //Act
-            _adapter.Read(-1);
+            await _adapter.Read(-1);
 
             //Assert
         }
 
         [TestMethod]
-        public void UpdateObjectNotNullTest()
+        public async Task UpdateObjectNotNullTest()
         {
             //Arrange
             var fieldTypes = new List<string>();
@@ -218,14 +206,14 @@ namespace ApplicationLogicTests.StorageFasade
             mockRepo.Setup(r => r.UpdateIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
-            _adapter.UpdateIfExists(paper);
+            await _adapter.UpdateIfExists(paper);
 
             //Assert
             Assert.IsNotNull(callBackPaper);
         }
 
         [TestMethod]
-        public void UpdateObjectCorrectStateTest()
+        public async Task UpdateObjectCorrectStateTest()
         {
             //Arrange
             var fieldTypes = new List<string>();
@@ -242,7 +230,7 @@ namespace ApplicationLogicTests.StorageFasade
             mockRepo.Setup(r => r.UpdateIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
-            _adapter.UpdateIfExists(paper);
+            await _adapter.UpdateIfExists(paper);
 
             //Assert
             //TODO Make NUnit TestCase() work and reduce method to a single Assert
@@ -262,10 +250,11 @@ namespace ApplicationLogicTests.StorageFasade
         [ExpectedException(typeof (ArgumentNullException))]
         public void UpdateNullTest()
         {
+            throw new NotImplementedException();
             //Arrange
 
             //Act
-            _adapter.UpdateIfExists(null);
+            //_adapter.UpdateIfExists(null);
 
             //Assert
         }

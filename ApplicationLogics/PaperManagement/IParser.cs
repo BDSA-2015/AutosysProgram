@@ -27,6 +27,6 @@ namespace ApplicationLogics.PaperManagement
         /// <returns>
         ///     A file object e.g. BibtexFile
         /// </returns>
-        T ParseToFile(string data);
+        T ParseToTags(string data);
     }
 }

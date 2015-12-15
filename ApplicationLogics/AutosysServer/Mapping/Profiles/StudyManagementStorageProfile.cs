@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using ApplicationLogics.StudyManagement;
 using AutoMapper;
-using Storage.Entities;
 using Storage.Models;
 
 namespace ApplicationLogics.AutosysServer.Mapping.Profiles

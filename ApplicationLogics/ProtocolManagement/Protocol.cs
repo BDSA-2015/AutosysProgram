@@ -8,13 +8,14 @@ using ApplicationLogics.StudyManagement;
 namespace ApplicationLogics.ProtocolManagement
 {
     /// <summary>
-    ///     This class represents the Research Protocol used to configure a given study.
+    ///     This class represents the Research Protocol created from the configuration details of a specific study.
+    ///     A protocol can be exported to a client in a specified format e.g. a protocol can be formatted to CSV and exported
     /// </summary>
     public class Protocol
     {
         public string StudyName { get; set; }
-        public List<Phase> Phases { get; set; }
-        public string Description { get; set; }
+        public List<Phase> StudyPhases { get; set; }
+        public string StudyDescription { get; set; }
 
         public List<Criteria> InclusionCriteria { get; set; } // UpdateIfExists Csv tests and remove this  
 

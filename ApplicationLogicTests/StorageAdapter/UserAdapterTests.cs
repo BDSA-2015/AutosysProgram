@@ -14,10 +14,10 @@ using Moq;
 using Storage.Models;
 using Storage.Repository.Interface;
 
-namespace ApplicationLogicTests.UserManagement
+namespace ApplicationLogicTests.StorageAdapter
 {
     /// <summary>
-    ///     Test for the userHandler class
+    ///     Test for the UserAdapter class
     /// </summary>
     [TestClass]
     public class UserAdapterTests
@@ -208,7 +208,7 @@ namespace ApplicationLogicTests.UserManagement
         ///     Exception must be thrown to pass test.
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof (NullReferenceException))]
+        [ExpectedException(typeof (NullReferenceException))] // Assert 
         public async void DeleteUser_Fail_UserDoesNotExist_Test()
         {
             //Arrange
@@ -219,9 +219,8 @@ namespace ApplicationLogicTests.UserManagement
 
             //Act
             await adapter.DeleteIfExists(toDeleteId);
-
-            //Assert
-            //Exception must be thrown
         }
+
     }
+
 }

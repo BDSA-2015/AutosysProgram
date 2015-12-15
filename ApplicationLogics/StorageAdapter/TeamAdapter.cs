@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
-using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
 using AutoMapper;
 using Storage.Models;
@@ -12,7 +11,7 @@ namespace ApplicationLogics.StorageAdapter
 {
     /// <summary>
     ///     This class is responsible for the communication between application logic layer and storage layer.
-    ///     This class will handle Teams and convert them the the propriate object that are to be propagated
+    ///     This class will handle Teams and convert them the the appropriate object that are to be propagated.
     /// </summary>
     public class TeamAdapter : IAdapter<Team>
     {
@@ -24,19 +23,26 @@ namespace ApplicationLogics.StorageAdapter
         }
 
         /// <summary>
-        ///     Reads storedteam and returns a team to the caller.
+        ///     Reads a given team from the Storage layer and returns it as a team to the caller.
         /// </summary>
-        /// <param name="id"> Id in database</param>
-        /// <returns>Team</returns>
+        /// <param name="id"> 
+        /// Id of given team to look up. 
+        /// </param>
+        /// <returns>
+        /// Converted team object. 
+        /// </returns>
         public async Task<Team> Read(int id)
         {
-            return Mapper.Map<Team>(await _teamRepository.Read(id));
+            var storedTeam = await _teamRepository.Read(id);
+            return Mapper.Map<Team>(storedTeam);
         }
 
         /// <summary>
-        ///     Returns an IQueryable set of teams
+        ///     Returns all teams.
         /// </summary>
-        /// <returns>IQueryable set of teams</returns>
+        /// <returns>
+        ///     Set of teams.
+        /// </returns>
         public IQueryable<Team> Read()
         {
             var storedTeam =  _teamRepository.Read();
@@ -44,18 +50,26 @@ namespace ApplicationLogics.StorageAdapter
         }
 
         /// <summary>
-        ///     Converts team to storage entity and update it.
+        ///     Converts a team to storage entity and updates it if it exists.
         /// </summary>
-        /// <param name="team">Team object</param>
+        /// <param name="team">
+        /// Team object.
+        /// </param>
         public async Task<bool> UpdateIfExists(Team team)
         {
-            return await _teamRepository.UpdateIfExists(Mapper.Map<StoredTeam>(team));
+            var storedTeam = Mapper.Map<StoredTeam>(team);
+            return await _teamRepository.UpdateIfExists(storedTeam);
         }
 
         /// <summary>
-        ///     DeleteIfExists given team from database.
+        ///     Deletes a given team from the database if it exists. 
         /// </summary>
-        /// <param name="id">id of team</param>
+        /// <param name="id">
+        ///     Id of team to delete. 
+        /// </param>
+        /// <returns>
+        /// True if existin team was deleted. 
+        /// </returns>
         public async Task<bool> DeleteIfExists(int id)
         {
             var result = await _teamRepository.DeleteIfExists(id);
@@ -64,16 +78,19 @@ namespace ApplicationLogics.StorageAdapter
         }
 
         /// <summary>
-        ///     Creates a new storedTeam from team details and send it to repository
+        ///     Creates a new team in the Storage layer based on team details that are sent to its respective repository.
         /// </summary>
         /// <param name="team">team</param>
-        /// <returns> int</returns>
+        /// <returns>
+        ///     Id of the created task. 
+        /// </returns>
         public async Task<int> Create(Team team)
         {
-            return await _teamRepository.Create(Mapper.Map<StoredTeam>(team));
+            var storedTeam = Mapper.Map<StoredTeam>(team);
+            return await _teamRepository.Create(storedTeam);
         }
 
-
+        // TODO consider removing Map method in interface 
         public Team Map(Team item)
         {
             throw new NotImplementedException();
@@ -83,5 +100,7 @@ namespace ApplicationLogics.StorageAdapter
         {
             _teamRepository.Dispose();
         }
+
     }
+
 }
