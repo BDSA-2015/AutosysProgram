@@ -3,6 +3,7 @@
 // Jacob Mullit Møiniche.
 
 using ApplicationLogics.StorageAdapter.Interface;
+using ApplicationLogics.UserManagement.Entities;
 
 namespace ApplicationLogics.UserManagement.Utils
 {

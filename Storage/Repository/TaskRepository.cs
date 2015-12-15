@@ -7,7 +7,7 @@ using Storage.Repository.Interface;
 namespace Storage.Repository
 {
     /// <summary>
-    ///     This class implements the IAsyncRepository interface outlining the async CRUD operations to be used on task
+    ///     This class implements the IRepository interface outlining the async CRUD operations to be used on task
     ///     requests in the database. <see cref="StoredTaskRequest" />
     ///     These are used specifically on a Task DbSet in the AutoSysDbModel.
     /// </summary>
@@ -19,6 +19,10 @@ namespace Storage.Repository
         public TaskRepository(IAutoSysContext context)
         {
             _dbContext = context;
+        }
+
+        public TaskRepository()
+        {
         }
 
         /// <summary>
@@ -53,7 +57,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual async Task<StoredTaskRequest> Read(int id)
         {
-            return await _dbContext.Set<StoredTaskRequest>().FindAsync(id);
+            return await _dbContext.Read<StoredTaskRequest>(id);
+            //return await _dbContext.Set<StoredTaskRequest>().FindAsync(id);
         }
 
         /// <summary>
@@ -64,7 +69,8 @@ namespace Storage.Repository
         /// </returns>
         public virtual IQueryable<StoredTaskRequest> Read()
         {
-            return _dbContext.Set<StoredTaskRequest>().AsQueryable();
+            return _dbContext.Read<StoredTaskRequest>(); // Used for mocking 
+            //return _dbContext.Set<StoredTaskRequest>().AsQueryable();
         }
 
         /// <summary>
@@ -110,7 +116,8 @@ namespace Storage.Repository
 
             if (userToDelete == null) return false;
 
-            _dbContext.Set<StoredTaskRequest>().Remove(userToDelete);
+            _dbContext.Remove(userToDelete);
+            //_dbContext.Set<StoredTaskRequest>().Remove(userToDelete);
             await _dbContext.SaveChangesAsync();
             return true;
         }

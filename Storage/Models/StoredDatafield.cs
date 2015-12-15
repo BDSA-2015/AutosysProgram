@@ -42,6 +42,14 @@ namespace Storage.Models
             private set { FieldType = EnumExtensions.ParseEnum<Type>(value); }
         }
 
+
+        /// <summary>
+        ///     We use string to define field values.
+        ///     We use comma serperation when using enumerarion and flags.
+        /// </summary>
+        /// Todo Should this be on a column for itself? Dennis
+        public string FieldValue { get; set; }
+
         public string IsModifiable { get; set; }
 
         /// <summary>

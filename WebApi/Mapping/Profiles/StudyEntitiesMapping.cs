@@ -12,37 +12,52 @@ namespace WebApi.Mapping
     public class StudyEntitiesMapping : Profile
     {
 
-        public void CreateTaskRequest_ProgressMapping()
+
+        public StudyEntitiesMapping()
         {
-            AutoMapper.Mapper.CreateMap<DatabaseTask.Filter, TaskRequest.Filter>().ConstructUsing(value =>
-            {
-                switch(value)
-                {
-                    case DatabaseTask.Filter.Done:
-                        return TaskRequest.Filter.Done;
-                    case DatabaseTask.Filter.Editable:
-                        return TaskRequest.Filter.Editable;
-                    default:
-                        return TaskRequest.Filter.Remaining;
-                }
-            }
-            
-            
-            );
+            CreateConflictingDataMapping();
+            CreateDataFieldMapping();
+            CreatePhaseMapping();
+            CreateRoleMapping();
+            CreateStudyMapping();
+            CreateTaskRequestMapping();
+        }
+
+       public void CreateConflictingDataMapping()
+        {
+            throw new  NotImplementedException();
 
         }
-        
+
+        public void CreateDataFieldMapping()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreatePhaseMapping()
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreateRoleMapping()
         {
-            Mapper.CreateMap<DatabaseTask, TaskRequest>()
-            .ForMember(dest => dest.TaskFilter, opts => opts.MapFrom(src => src.Progress))
-            
-
-            ;
-                
-            
+            throw new NotImplementedException();
         }
 
+        public void CreateStudyMapping()
+        {
+            throw new NotImplementedException();
+        }
+       
+        public void CreateStudyManagerMapping()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateTaskRequestMapping()
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

@@ -111,6 +111,7 @@ namespace StorageTests.RepositoryUnitTests
         #region Read Operation 
 
         [TestMethod]
+        [Ignore]
         public async Task Read_ValidId_ReturnsTask()
         {
             // Arrange 
@@ -136,11 +137,15 @@ namespace StorageTests.RepositoryUnitTests
         [TestMethod]
         public async Task Read_FindAsync_IsCalled()
         {
-            // Arrange and act 
-            var task = await _repository.Read(0);
+            // Arrange
+            _context.Setup(c => c.Read<StoredTaskRequest>(0))
+                .Returns(Task.FromResult(It.IsAny<StoredTaskRequest>()));
+
+            // Act 
+            await _repository.Read(0);
 
             // Assert 
-            _context.Verify(c => c.Tasks.FindAsync(), Times.Once);
+            _context.Verify(c => c.Read<StoredTaskRequest>(0), Times.Once);
         }
 
         [TestMethod]
@@ -151,7 +156,7 @@ namespace StorageTests.RepositoryUnitTests
             var tasks = _repository.Read();
 
             // Assert 
-            _context.Verify(c => c.Tasks.AsQueryable(), Times.Once);
+            _context.Verify(c => c.Read<StoredTaskRequest>(), Times.Once);
         }
 
         #endregion
@@ -170,15 +175,14 @@ namespace StorageTests.RepositoryUnitTests
         {
             // Arrange 
             var firstTaskUpdated = new StoredTaskRequest {Id = 1, Description = "New Task"};
+            _mockSet.Setup(t => t.FindAsync(1))
+                .Returns(Task.FromResult(It.IsAny<StoredTaskRequest>()));
 
             // Act 
             await _repository.UpdateIfExists(firstTaskUpdated);
 
-            _mockSet.Setup(t => t.FindAsync(It.IsAny<StoredTaskRequest>().Id))
-                .Returns(Task.FromResult(It.IsAny<StoredTaskRequest>())); // TODO Move to MockUtility
-
             // Assert
-            _context.Verify(c => c.Tasks.FindAsync(firstTaskUpdated.Id), Times.Once);
+            _mockSet.Verify(m => m.FindAsync(1), Times.Once);
         }
 
         [TestMethod]

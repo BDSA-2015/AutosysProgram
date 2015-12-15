@@ -37,6 +37,8 @@ namespace ApplicationLogics.StudyManagement
             IsModifiable = isModifiable;
         }
 
+        public int Id { get; set; }
+
         public string Name
         {
             get { return _name; }

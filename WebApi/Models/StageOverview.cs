@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿    using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace SystematicStudyService.Models
+namespace WebApi.Models
 {
     /// <summary>
     ///     The overview of a stage within a <see cref="StudyOverview" />.

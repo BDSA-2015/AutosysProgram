@@ -16,6 +16,8 @@ namespace ApplicationLogics.StudyManagement
     /// </summary>
     public class Phase 
     {
+        public int Id { get; set; }
+
         /// <summary>
         /// The phase's name
         /// </summary>
@@ -45,11 +47,6 @@ namespace ApplicationLogics.StudyManagement
         ///     A dictionary over Roles. Each role holds a list of Users with the assigned Role.
         /// </summary>
         public Dictionary<Role, List<User>> AssignedRole { get; set; } 
-
-        /// <summary>
-        ///     Task which has not yet been assigned.
-        /// </summary>
-        public List<TaskRequest> UnassignedTasks { get; set; }
 
         /// <summary>
         ///     Returns a booleans value which determines if this dependentPhase has reached its end.

@@ -11,21 +11,46 @@ namespace ApplicationLogics.PaperManagement
     ///     For parsing the imported bibtex files the BibtexLibrary package is used,
     ///     which can be found at: https://github.com/MaikelH/BibtexLibrary
     /// </summary>
-    public class BibtexParser : IParser
+    public class BibtexParser : IParser<BibtexFile>
     {
-        public IEnumerable<Paper> Parse(string file)
+        /// <summary>
+        ///     Parses a bibtex file to a Paper.
+        ///     The paper will be created with the entry type, field types, the fields values, and the resource key for the bibtex file
+        /// </summary>
+        /// <param name="file">
+        ///     The bibtex file to be parsed
+        /// </param>
+        /// <returns>
+        ///     A collection of Papers if any was parsed from the bibtex file
+        ///     Throws an InvalidDataException if the given bibtex file does not follow the defined bibtex syntax
+        /// </returns>
+        public IEnumerable<Paper> ParseToPapers(string file)
         {
             try
             {
-                var bibFile = BibtexImporter.FromString(@file);
+                var bibfile = BibtexImporter.FromString(@file);
                 return
-                    bibFile.Entries.Select(
+                    bibfile.Entries.Select(
                         bib => new Paper(bib.Type.Trim(), bib.Tags.Keys, bib.Tags.Values) {ResourceRef = bib.Key});
             }
             catch (ParseException e)
             {
-                throw new InvalidDataException($"The parsed file was not recognized as a bibtex file", e);
+                throw new InvalidDataException($"The parsed file {nameof(file)} was not recognized as a bibtex file", e);
             }
+        }
+
+        /// <summary>
+        ///     Parses a given file to a BibtexFile which can be used in a BibtexTagSaver
+        /// </summary>
+        /// <param name="file"> 
+        ///     The given file to be parsed
+        /// </param>
+        /// <returns>
+        ///     A BibtexFile
+        /// </returns>
+        public BibtexFile ParseToTags(string file)
+        {
+            return BibtexImporter.FromString(@file);
         }
     }
 }

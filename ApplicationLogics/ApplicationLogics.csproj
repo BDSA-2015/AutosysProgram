@@ -33,19 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="BibtexLibrary">
       <HintPath>..\packages\BibtexLibrary.1.2.0\lib\net45\BibtexLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
-      <HintPath>..\packages\CsvHelper.2.13.5.0\lib\net40-client\CsvHelper.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -55,16 +47,8 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.0.5813.39031, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -108,21 +92,24 @@
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutosysServer\FacadeInjectionContainer.cs" />
+    <Compile Include="AutosysServer\AdapterInjectionContainer.cs" />
     <Compile Include="AutosysServer\Mapping\AutoMapperConfigurator.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\StudyManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\PaperManagementStorageProfile.cs" />
     <Compile Include="AutosysServer\Mapping\Profiles\UserManagementStorageProfile.cs" />
     <Compile Include="PaperManagement\BibtexParser.cs" />
+    <Compile Include="PaperManagement\BibtexTag.cs" />
+    <Compile Include="PaperManagement\FileTagHandler.cs" />
     <Compile Include="PaperManagement\IParser.cs" />
     <Compile Include="PaperManagement\Paper.cs" />
     <Compile Include="PaperManagement\PaperHandler.cs" />
+    <Compile Include="PaperManagement\Savers\BibtexTagSaver.cs" />
+    <Compile Include="PaperManagement\Savers\ISaver.cs" />
     <Compile Include="ProtocolManagement\Protocol.cs" />
     <Compile Include="ProtocolManagement\ProtocolHandler.cs" />
     <Compile Include="Program.cs" />
@@ -130,16 +117,13 @@
     <Compile Include="ExportManagement\ExportHandler.cs" />
     <Compile Include="ExportManagement\Interfaces\IConverter.cs" />
     <Compile Include="ExportManagement\Converter\CsvConverter.cs" />
+    <Compile Include="StorageAdapter\BibtexTagAdapter.cs" />
     <Compile Include="StudyManagement\BibTexFileSearcher.cs" />
-    <Compile Include="StorageAdapter\CriteriaAdapter.cs" />
-    <Compile Include="StorageAdapter\DatafieldAdapter.cs" />
     <Compile Include="StorageAdapter\Interface\IAdapter.cs" />
     <Compile Include="StorageAdapter\PaperAdapter.cs" />
-    <Compile Include="StorageAdapter\PhaseAdapter.cs" />
     <Compile Include="StorageAdapter\ProtocolAdapter.cs" />
-    <Compile Include="StorageAdapter\RoleAdapter.cs" />
     <Compile Include="StorageAdapter\StudyAdapter.cs" />
-    <Compile Include="StorageAdapter\TaskRequestAdapter.cs" />
+    <Compile Include="StorageAdapter\TaskAdapter.cs" />
     <Compile Include="StorageAdapter\TeamAdapter.cs" />
     <Compile Include="StorageAdapter\UserAdapter.cs" />
     <Compile Include="StudyManagement\ConflictingData.cs" />

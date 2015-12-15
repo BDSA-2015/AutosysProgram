@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using WebApi.Areas.HelpPage.ModelDescriptions;
 using WebApi.Areas.HelpPage.Models;
+using WebApi.Areas.HelpPage.SampleGeneration;
 
 namespace WebApi.Areas.HelpPage
 {

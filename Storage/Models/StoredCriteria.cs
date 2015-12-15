@@ -84,6 +84,14 @@ namespace Storage.Models
         [Required]
         public virtual StoredDataField DataField { get; set; }
 
+
+        /// <summary>
+        ///     This represents the bibtex tag affected by a given criteria.
+        ///     By way of example, a tag {Title} could be targetted in the criteria through a string comparison.
+        /// </summary>
+        ///Todo how do we define this in database? Dennis
+        public string Tag { get; set; }
+
         [Key]
         public int Id { get; set; }
     }
