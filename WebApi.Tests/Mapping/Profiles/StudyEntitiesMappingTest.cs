@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using WebApi.Mapping.Profiles;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebApi.Mapping;
 using System;
 using System.Collections.Generic;
@@ -7,13 +8,151 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApi.Models;
 using ApplicationLogics.StudyManagement;
-using DatabaseConflictingData = ApplicationLogics.StudyManagement.ConflictingData;
-using APIConflictingData = WebApi.Models.ConflictingData;
+using DConflictingData = ApplicationLogics.StudyManagement.ConflictingData;
+using AConflictingData = WebApi.Models.ConflictingData;
 using DCriteria = ApplicationLogics.StudyManagement.Criteria;
 using DDataField = ApplicationLogics.StudyManagement.DataField;
 using ADataField = WebApi.Models.DataField;
+using AStage = WebApi.Models.StageOverview;
+using DStage = ApplicationLogics.StudyManagement.Phase;
 
 
+
+namespace WebApi.Mapping.Profiles.Tests
+{
+    //Variables with a prefix of A refor to API
+    //Variables with a prefix of D refer to Enities found in ApplicationLogics
+    [TestClass()]
+    public class StudyEntitiesMappingTest
+    {
+
+        [TestMethod()]
+        public void CreateConflictingDataMappingTest()
+        {
+            //Arrange
+            var dConflictingData = new DConflictingData();
+            dConflictingData.UserId = 0;
+            dConflictingData.Data = new string[] { "True", "False", "True" };
+
+            var aConflictingData = new AConflictingData();
+            aConflictingData.Data = new string[] { "True", "False", "True" };
+            dConflictingData.UserId = 0;
+            //Act
+            var newAConflictingData = AutoMapper.Mapper.Map<AConflictingData>(dConflictingData);
+            //Assert
+            Assert.AreEqual(aConflictingData, newAConflictingData);
+        }
+
+        [TestMethod()]
+        public void CreateRessourceMappingTest()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void CreateStageOverviewMappingTest()
+        {
+            //Arrange
+            var aStage = new AStage();
+            aStage.CompletedTasks = new Dictionary<int, int>() { { 0, 100 }, { 1, 100} };
+            aStage.IncompleteTasks = new Dictionary<int, int>() { { 0, 3 }, { 1, 200 } };
+            aStage.Name = "first Phase";
+
+            var dStage = new DStage();
+            dStage.
+            dStage.CompletedTasks = new Dictionary<int, int>() { { 0, 100 }, { 1, 100 } };
+            dStage.IncompleteTasks = new Dictionary<int, int>() { { 0, 3 }, { 1, 200 } };
+            dStage.Name = "first Phase";
+
+            //Act
+
+        }
+
+        [TestMethod()]
+        public void CreateStudyOverviewMappingTest()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void CreateTaskRequestMappingTest()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void TaskSubmissionMappingTest()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void CreateTeamMappingTest()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void CreateUserMappingTest()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void ModelEntitiesMappingTest1()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void CreateConflictingDataMappingTest1()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void CreateRessourceMappingTest1()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void CreateStageOverviewMappingTest1()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void CreateStudyOverviewMappingTest1()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void CreateTaskRequestMappingTest1()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void TaskSubmissionMappingTest1()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void CreateTeamMappingTest1()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod()]
+        public void CreateUserMappingTest1()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
 
 namespace WebApi.Mapping.Tests
 {

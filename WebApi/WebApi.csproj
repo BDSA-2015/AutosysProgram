@@ -176,8 +176,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mapping\AutoMapperConfigurator.cs" />
+    <Compile Include="Mapping\Profiles\ModelEntitiesMapping.cs" />
     <Compile Include="Mapping\Profiles\UserManagementDTOProfile.cs" />
-    <Compile Include="Mapping\Profiles\StudyEntitiesMapping.cs" />
     <Compile Include="Models\ConflictingData.cs" />
     <Compile Include="Models\DataField.cs" />
     <Compile Include="Models\Resource.cs" />
