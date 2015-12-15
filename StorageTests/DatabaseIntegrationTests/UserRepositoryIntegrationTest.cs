@@ -207,6 +207,37 @@ namespace StorageTests.DatabaseIntegrationTests
             _context.Teams.First().Users.Should().NotBeNull();
         }
 
+        [TestMethod]
+        public async Task UpdateUser_ExistingUser_UserIsUpdated()
+        {
+            // Arrange
+            var user = new StoredUser { Id = 1, Name = "William", MetaData = "Researcher"};
+            var updatedUser = new StoredUser { Id = 1, Name = "Peter", MetaData = "Validator"};
+
+            // Act
+            await _repository.Create(user);
+            await _repository.UpdateIfExists(updatedUser);
+
+            // Assert
+            _context.Users.First().Should().NotBeNull();
+            _context.Users.First().Name.Should().Be(updatedUser.Name);
+            _context.Users.First().MetaData.Should().Be(updatedUser.MetaData);
+        }
+
+        [TestMethod]
+        public async Task DeleteUser_ExistingUser_UserIdDeleted()
+        {
+            // Arrange
+            var user = new StoredUser { Name = "William", MetaData = "Researcher" };
+
+            // Act
+            await _repository.Create(user);
+            await _repository.DeleteIfExists(1);
+
+            // Assert
+            _context.Users.Should().BeEmpty();
+        }
+
     }
 
 }

@@ -88,9 +88,16 @@ namespace Storage.Repository
 
             var userToUpdate = await _dbContext.Set<StoredUser>().FindAsync(user.Id);
 
-            if (userToUpdate == null) return false;
-
-            _dbContext.Attach(user); // Used for mocking 
+            if (userToUpdate == null)
+            {
+                _dbContext.Attach(user); // Used for mocking 
+                
+                
+                await _dbContext.SaveChangesAsync();
+                return false;
+                
+            }
+            else             
             //_dbContext.Set<T>().Attach(user);
             _dbContext.SetModified(user); // Used for mocking 
             //dbContext.Entry<T>(user).State = EntityState.Modified; 
