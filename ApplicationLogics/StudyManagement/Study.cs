@@ -3,6 +3,7 @@
 // Jacob Mullit Møiniche.
 
 using System.Collections.Generic;
+using ApplicationLogics.PaperManagement;
 
 namespace ApplicationLogics.StudyManagement
 {
@@ -19,22 +20,40 @@ namespace ApplicationLogics.StudyManagement
         public string Name { get; set; }
 
         /// <summary>
-        ///     Study type.
-        /// </summary>
-        public string Classification { get; set; }
-
-        /// <summary>
-        /// A list of all the users who are working or have been working on the study
-        /// </summary>
-        public List<int> UserId { get; set; } 
-        /// <summary>
-        /// A quick summary of the study
+        ///     A quick summary of the study
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        ///     Phases that study has undergone and the current phase.
+        ///     The papers which are included in the project.
+        ///     Papers are imported from a file (e.g. a bibtex file) which loaded into the program by a client
         /// </summary>
-        public List<Phase> Phases { get; set; }
+        public ICollection<Paper> Papers { get; set; } 
+
+        /// <summary>
+        ///     The data fields defined for a study.
+        ///     These data fields will be distributed to tasks which will be associated with each paper in the study.
+        /// </summary>
+        public ICollection<DataField> DataFields { get; set; } 
+
+        /// <summary>
+        ///     This list contains Criteria, which each report cannot contain.
+        /// </summary>
+        public ICollection<Criteria> ExclusionCriteria { get; set; }
+
+        /// <summary>
+        ///     This list contains Criteria, which each report must contain.
+        /// </summary>
+        public ICollection<Criteria> InclusionCriteria { get; set; }
+
+        /// <summary>
+        ///     A list of all the users who are working on the study
+        /// </summary>
+        public ICollection<int> UserIds { get; set; } 
+
+        /// <summary>
+        ///     Phases that the study has undergone and the current phase.
+        /// </summary>
+        public ICollection<Phase> Phases { get; set; }
     }
 }
