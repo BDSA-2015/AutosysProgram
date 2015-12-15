@@ -61,6 +61,8 @@ namespace ApplicationLogics.AutosysServer
             }
         }
 
+        
+
 
         private void HandleRequest()
         {
@@ -169,5 +171,22 @@ namespace ApplicationLogics.AutosysServer
         }
 
         #endregion
+
+        /// <summary>
+        ///     Creates the HttpActionResult used to identify the result of a action invoked by the WebApi
+        /// </summary>
+        /// <param name="statusCode">
+        ///     The HttpStatusCode identifying the type of result
+        /// </param>
+        /// <param name="message">
+        ///     If given, a message describing the details about the Response given e.g. why an error occurred
+        /// </param>
+        /// <returns>
+        ///     A HttpActionResult associated with the requested action
+        /// </returns>
+        private HttpResponseMessage CreateResponse(HttpStatusCode statusCode, string message = null)
+        {
+            return new HttpResponseMessage(statusCode) { ReasonPhrase = message };
+        }
     }
 }
