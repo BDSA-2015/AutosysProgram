@@ -69,19 +69,6 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
-        public async Task Create_Attatch_IsCalled()
-        {
-            // Arrange
-            var validStudy = new StoredStudy {Id = 0};
-
-            // Act 
-            await _repository.Create(validStudy);
-
-            // Assert
-            _context.Verify(c => c.Attach(validStudy), Times.Once);
-        }
-
-        [TestMethod]
         public async Task Create_Add_IsCalled()
         {
             // Arrange

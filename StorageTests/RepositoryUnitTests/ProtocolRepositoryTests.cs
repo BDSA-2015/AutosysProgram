@@ -201,19 +201,6 @@ namespace StorageTests.RepositoryUnitTests
         }
 
         [TestMethod]
-        public async Task Create_Attatch_IsCalled()
-        {
-            // Arrange
-            var validProtocol = new StoredProtocol {Id = 0};
-
-            // Act 
-            await _repository.Create(validProtocol);
-
-            // Assert
-            _context.Verify(c => c.Attach(validProtocol), Times.Once);
-        }
-
-        [TestMethod]
         public async Task Create_Add_IsCalled()
         {
             // Arrange
