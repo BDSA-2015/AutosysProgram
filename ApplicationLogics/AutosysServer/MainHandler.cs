@@ -9,22 +9,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
-using System.Web.Mvc;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.PaperManagement;
-using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
-using System.Web.Http.Results;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using ApplicationLogics.AutosysServer;
-
 
 
 namespace ApplicationLogics.AutosysServer
@@ -173,17 +163,15 @@ namespace ApplicationLogics.AutosysServer
         /// <returns>
         ///     A tuple, T1 is a string array containing the extracted bibtex tags, T2 is the HttpActionResult of the request
         /// </returns>
-        public Tuple<string[], IHttpActionResult> ExtractBibtexTags(string file)
+        public Tuple<string[], HttpResponseMessage> ExtractBibtexTags(string file)
         {
             try
             {
-                return new Tuple<string[], IHttpActionResult>(_fileHandler.ParseTags(file), CreateResponse(HttpStatusCode.OK));
+                return new Tuple<string[], HttpResponseMessage>(_fileHandler.ParseTags(file), CreateResponse(HttpStatusCode.OK));
             }
             catch (ArgumentNullException exception)
             {
-                var httpResult = new ResponseMessageResult(
-                    new HttpResponseMessage(HttpStatusCode.BadRequest) {ReasonPhrase = exception.Message});
-                return new Tuple<string[],IHttpActionResult>(null, httpResult);
+                return new Tuple<string[],HttpResponseMessage>(null, CreateResponse(HttpStatusCode.BadRequest, exception.Message));
             }
         }
 
@@ -199,10 +187,9 @@ namespace ApplicationLogics.AutosysServer
         /// <returns>
         ///     A HttpActionResult associated with the requested action
         /// </returns>
-        private IHttpActionResult CreateResponse(HttpStatusCode statusCode, string message = null)
+        private HttpResponseMessage CreateResponse(HttpStatusCode statusCode, string message = null)
         {
-            return new ResponseMessageResult(
-                    new HttpResponseMessage(statusCode) { ReasonPhrase = message});
+            return new HttpResponseMessage(statusCode) { ReasonPhrase = message};
         }
 
         #endregion

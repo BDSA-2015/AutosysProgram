@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using ApplicationLogics.AutosysServer;
+using Microsoft.Ajax.Utilities;
 using WebApi.Models;
 
 namespace WebApi.Controllers
@@ -29,6 +30,8 @@ namespace WebApi.Controllers
         public StudyController(MainHandler facade)
         {
             _facade = facade;
+            var handler = new MainHandler();
+            handler.ExtractBibtexTags("").Item2.IfNotNull();
         }
 
         /// <summary>
