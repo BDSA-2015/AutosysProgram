@@ -16,15 +16,15 @@ namespace ApplicationLogicTests.StorageAdapter
     public class PaperFacadeTests
     {
         private PaperAdapter _adapter;
-        private Mock<IRepository<StoredPaper>> mockRepo;
+        private Mock<IRepository<StoredPaper>> _mockRepo;
 
         [TestInitialize]
         public void Initialize()
         {
             Mapper.CreateMap<Paper, StoredPaper>();
             Mapper.CreateMap<StoredPaper, Paper>();
-            mockRepo = new Mock<IRepository<StoredPaper>>();
-            _adapter = new PaperAdapter(mockRepo.Object);
+            _mockRepo = new Mock<IRepository<StoredPaper>>();
+            _adapter = new PaperAdapter(_mockRepo.Object);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace ApplicationLogicTests.StorageAdapter
         {
             //Arrange
             var storedPaper = new StoredPaper {Id = 0, Type = "article"};
-            mockRepo.Setup(r => r.Create(storedPaper)).Returns(Task.FromResult(storedPaper.Id));
+            _mockRepo.Setup(r => r.Create(storedPaper)).Returns(Task.FromResult(storedPaper.Id));
             var fieldTypes = new List<string>();
             fieldTypes.Add("author");
             fieldTypes.Add("title");
@@ -60,38 +60,27 @@ namespace ApplicationLogicTests.StorageAdapter
         {
             //Arrange
             var storedPaper = new StoredPaper {Id = 0, Type = "article"};
-            mockRepo.Setup(r => r.Create(storedPaper)).Returns(Task.FromResult(storedPaper.Id));
+            _mockRepo.Setup(r => r.Create(storedPaper)).Returns(Task.FromResult(storedPaper.Id));
 
             //Act
             var paperId = _adapter.Create(null);
         }
 
         [TestMethod]
-        public void DeleteObjectNotNullTest()
+        public async Task DeleteObjectNotNullTest()
         {
             //Arrange
-            var fieldTypes = new List<string>();
-            fieldTypes.Add("author");
-            fieldTypes.Add("title");
-            fieldTypes.Add("year");
-            var fieldValues = new List<string>();
-            fieldValues.Add("Will BeGood");
-            fieldValues.Add("Life's Questions");
-            fieldValues.Add("1905");
-            var paper = new Paper("article", fieldTypes, fieldValues);
-
-            StoredPaper callBackPaper = null;
-            mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>().Id)).Callback<StoredPaper>(o => callBackPaper = o);
+            _mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>().Id));
 
             //Act
-            //await _adapter.DeleteIfExists(paper.Id);
+            await _adapter.DeleteIfExists(0);
 
             //Assert
-            Assert.IsNotNull(callBackPaper);
+            _mockRepo.Verify(r => r.DeleteIfExists(0), Times.Once);
         }
 
         [TestMethod]
-        public void DeleteObjectCorrectStateTest()
+        public async Task DeleteObjectCorrectStateTest()
         {
             //Arrange
             var fieldTypes = new List<string>();
@@ -105,10 +94,10 @@ namespace ApplicationLogicTests.StorageAdapter
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             StoredPaper callBackPaper = null;
-            mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>().Id)).Callback<StoredPaper>(o => callBackPaper = o);
+            _mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>().Id)).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
-            //await _adapter.DeleteIfExists(paper.Id);
+            await _adapter.DeleteIfExists(0);
 
             //Assert
             //TODO Make NUnit TestCase() work and reduce method to a single Assert
@@ -149,7 +138,7 @@ namespace ApplicationLogicTests.StorageAdapter
             paperCollection.Add(Mapper.Map<StoredPaper>(paper4));
             paperCollection.Add(Mapper.Map<StoredPaper>(paper5));
 
-            mockRepo.Setup(r => r.Read()).Returns(paperCollection.AsQueryable());
+            _mockRepo.Setup(r => r.Read()).Returns(paperCollection.AsQueryable());
 
             //Act
             var papers = _adapter.Read();
@@ -166,7 +155,7 @@ namespace ApplicationLogicTests.StorageAdapter
         {
             //Arrange
             var callBackPaperId = -1;
-            mockRepo.Setup(r => r.Read(It.IsAny<int>())).Callback<int>(o => callBackPaperId = o);
+            _mockRepo.Setup(r => r.Read(It.IsAny<int>())).Callback<int>(o => callBackPaperId = o);
 
             //Act
             await _adapter.Read(5);
@@ -203,7 +192,7 @@ namespace ApplicationLogicTests.StorageAdapter
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             StoredPaper callBackPaper = null;
-            mockRepo.Setup(r => r.UpdateIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
+            _mockRepo.Setup(r => r.UpdateIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
             await _adapter.UpdateIfExists(paper);
@@ -227,7 +216,7 @@ namespace ApplicationLogicTests.StorageAdapter
             var paper = new Paper("article", fieldTypes, fieldValues);
 
             StoredPaper callBackPaper = null;
-            mockRepo.Setup(r => r.UpdateIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
+            _mockRepo.Setup(r => r.UpdateIfExists(It.IsAny<StoredPaper>())).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
             await _adapter.UpdateIfExists(paper);

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using ApplicationLogics.PaperManagement;
+using ApplicationLogics.PaperManagement.Bibtex;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApplicationLogicTests.PaperManagement
@@ -123,7 +124,7 @@ namespace ApplicationLogicTests.PaperManagement
         ///     Tests that the parsing of an empty input i handled correctly
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof (InvalidDataException))]
         public void ParseEmptyInputTest()
         {
             //Act

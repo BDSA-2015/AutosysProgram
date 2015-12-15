@@ -3,6 +3,7 @@
 // Jacob Mullit Møiniche.
 
 using ApplicationLogics.PaperManagement;
+using ApplicationLogics.PaperManagement.Bibtex;
 using AutoMapper;
 using Storage.Models;
 

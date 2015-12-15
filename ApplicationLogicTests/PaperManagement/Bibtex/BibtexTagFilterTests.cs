@@ -1,42 +1,32 @@
 ﻿using System;
-using System.Threading.Tasks;
-using ApplicationLogics.PaperManagement;
-using ApplicationLogics.PaperManagement.Savers;
-using ApplicationLogics.StorageAdapter;
-using ApplicationLogics.StorageAdapter.Interface;
+using System.IO;
+using System.Linq;
+using ApplicationLogics.PaperManagement.Bibtex;
 using BibtexLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Storage.Repository;
 
-namespace ApplicationLogicTests.PaperManagement.Savers
+namespace ApplicationLogicTests.PaperManagement.Bibtex
 {
     /// <summary>
-    ///     Class for testing the implementation of a BibtexSaver which is used to
-    ///     save new bibtex tags in the database from an imported bibtex file
+    ///     Class for testing the implementation of a BibtexTagChecker which is used to
+    ///     filter the entry and field types from an imported bibtex file
     /// </summary>
     [TestClass()]
-    public class BibtexTagSaverTests
+    public class BibtexTagFilterTests
     {
-        private BibtexTagSaver _saver;
-        private IParser<BibtexFile> _parser;
-        private Mock<IAdapter<BibtexTag>> _mockAdapter;
+        private ITagFilter<BibtexFile> _tagFilter;
 
         [TestInitialize()]
         public void Initialize()
         {
-            _mockAdapter = new Mock<IAdapter<BibtexTag>>();
-            _mockAdapter.Setup(r => r.Create(It.IsAny<BibtexTag>()));
-
-            _saver = new BibtexTagSaver(_mockAdapter.Object);
-            _parser = new BibtexParser();
+            _tagFilter = new BibtexTagFilter();
         }
 
         /// <summary>
         ///     Test method for testing the saving of tags (e.g. article, author, book, year...) from a BibtexFile
         /// </summary>
         [TestMethod()]
-        public void Save_ValidInput_CreateIsCalled()
+        public void Check_ValidInput_NumberOfTagsIs4()
         {
             //Arrange
             var file = "@Article{py03," +
@@ -52,39 +42,37 @@ namespace ApplicationLogicTests.PaperManagement.Savers
                        "title = {Something nice}," +
                        "year = {700}}";
             //Act
-            var parsedFile = _parser.ParseToTags(file);
-            _saver.Save(parsedFile);
-
+            var bibtexFile = BibtexImporter.FromString(file);
+            var tags = _tagFilter.Check(bibtexFile);
+            
             //Assert
-            _mockAdapter.Verify(r => r.Create(It.IsAny<BibtexTag>()), Times.Exactly(4));
+            Assert.IsTrue(tags.Count() == 4);
         }
 
         /// <summary>
         ///     Test method for testing that a BibtexFile with no entries is handled probably
         ///     No attempt to save tags to the database should be done, if the file contains no entries
         /// </summary>
-        [TestMethod()]
-        public void Save_EmptyFile_CreateIsNotCalled()
+        [TestMethod(), ExpectedException(typeof(InvalidDataException))]
+        public void Save_EmptyFile_ExceptionThrown()
         {
             //Arrange
-            var file = "";
+            var file = new BibtexFile();
 
             //Act
-            var parsedFile = _parser.ParseToTags(file);
-            _saver.Save(parsedFile);
-
-            //Assert
-            _mockAdapter.Verify(r => r.Create(It.IsAny<BibtexTag>()), Times.Never);
+            _tagFilter.Check(file);
         }
 
         /// <summary>
         ///     Test method to check if a null input for the saver is handled probably
         /// </summary>
-        [TestMethod(), ExpectedException(typeof (ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void Save_NullInput_ExceptionIsThrown()
         {
             //Act
-            _saver.Save(null);
+            BibtexFile file = null;
+
+            _tagFilter.Check(file);
         }
     }
 }

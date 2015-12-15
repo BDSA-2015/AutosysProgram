@@ -15,6 +15,18 @@ namespace ApplicationLogics.StudyManagement
     {
         public int Id { get; set; }
 
+        public Type TaskType { get; set; }
+
+        /// <summary>
+        ///     The possible types of a task
+        /// </summary>
+        public enum Type
+        {
+            Review,
+            Conflict,
+            Both
+        } 
+
         /// <summary>
         ///     Determines task state
         /// </summary>

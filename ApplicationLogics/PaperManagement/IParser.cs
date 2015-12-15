@@ -5,7 +5,7 @@ namespace ApplicationLogics.PaperManagement
     /// <summary>
     ///     Interface for Parsers used to parsing files into the program
     /// </summary>
-    public interface IParser<T> where T : class 
+    public interface IParser
     {
         /// <summary>
         ///     Method for parsing imported files as strings
@@ -27,6 +27,6 @@ namespace ApplicationLogics.PaperManagement
         /// <returns>
         ///     A file object e.g. BibtexFile
         /// </returns>
-        T ParseToTags(string data);
+        string[] ParseToTags(string data);
     }
 }
