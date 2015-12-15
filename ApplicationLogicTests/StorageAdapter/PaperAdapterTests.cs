@@ -84,7 +84,7 @@ namespace ApplicationLogicTests.StorageAdapter
             mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>().Id)).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
-            await _adapter.DeleteIfExists(paper.Id);
+            //await _adapter.DeleteIfExists(paper.Id);
 
             //Assert
             Assert.IsNotNull(callBackPaper);
@@ -108,7 +108,7 @@ namespace ApplicationLogicTests.StorageAdapter
             mockRepo.Setup(r => r.DeleteIfExists(It.IsAny<StoredPaper>().Id)).Callback<StoredPaper>(o => callBackPaper = o);
 
             //Act
-            await _adapter.DeleteIfExists(paper.Id);
+            //await _adapter.DeleteIfExists(paper.Id);
 
             //Assert
             //TODO Make NUnit TestCase() work and reduce method to a single Assert
