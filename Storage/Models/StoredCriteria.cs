@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.Design;
 using Storage.Repository.Interface;
 
 namespace Storage.Models
@@ -41,6 +42,8 @@ namespace Storage.Models
         #region Keys 
 
         public virtual StoredStudy Study { get; set; }
+
+        public virtual StoredProtocol Protocol { get; set; }
 
         [Key]
         public int Id { get; set; }
