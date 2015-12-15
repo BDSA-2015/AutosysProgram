@@ -66,4 +66,5 @@ namespace Storage.Models
         //[StringLength(50)]
         //public string ISSN { get; set; } 
     }
+
 }

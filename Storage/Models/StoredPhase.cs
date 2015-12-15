@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Storage.Models;
 using Storage.Repository.Interface;
 
-namespace Storage.Entities
+namespace Storage.Models
 {
     /// <summary>
     ///     This class represents the Phase entity detailing how task requests are handled and handed out.
@@ -18,6 +17,8 @@ namespace Storage.Entities
         [Required]
         public virtual string Name { get; set; }
 
+        public int StudyId { get; set; }
+
         public virtual StoredStudy Study { get; set; }
 
         public virtual ICollection<StoredPaper> Reports { get; set; }
@@ -28,13 +29,11 @@ namespace Storage.Entities
 
         public string IsFinished { get; set; } 
 
-        public virtual ICollection<StoredCriteria> Criteria { get; set; }
-
-        public virtual IDictionary<StoredUser, List<StoredTaskRequest>> Tasks { get; set; }
-
-        public virtual IDictionary<StoredUser, StoredRole> AssignedRole { get; set; }
+        public virtual ICollection<PhaseRole> AssignedRoles { get; set; } 
+        public virtual ICollection<PhaseTask> Tasks { get; set; }
 
         public virtual ICollection<StoredPhase> DependentPhases { get; set; }
 
     }
+
 }

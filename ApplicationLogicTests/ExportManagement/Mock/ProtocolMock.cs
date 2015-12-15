@@ -22,38 +22,29 @@ namespace ApplicationLogicTests.ExportManagement.Mock
             return new Protocol
             {
                 StudyName = "Software Study",
-                Description = "For fun",
-                Phases = CreatePhases()
+                StudyDescription = "For fun",
+                StudyPhases = CreatePhases()
             };
         }
 
-       private static List<Phase> CreatePhases()
+        private static List<Phase> CreatePhases()
         {
             return new List<Phase>
             {
                 new Phase
                 {
-                    ExclusionCriteria = CreateExclusionCriteria(),
-                    InclusionCriteria = CreateInclusionCriteria(),
-                    AssignedRole = CreateAssignedRoles(),
-                    //Tasks = CreateAssignedTasks(),
-                    Reports = CreateReports()
+                   AssignedRole = CreateAssignedRoles(),
+                    Tasks = CreateAssignedTasks()
                 },
                 new Phase
                 {
-                    ExclusionCriteria = CreateExclusionCriteria(),
-                    InclusionCriteria = CreateInclusionCriteria(),
                     AssignedRole = CreateAssignedRoles(),
-                    //Tasks = CreateAssignedTasks(),
-                    Reports = CreateReports()
+                    Tasks = CreateAssignedTasks(),
                 },
                 new Phase
                 {
-                    ExclusionCriteria = CreateExclusionCriteria(),
-                    InclusionCriteria = CreateInclusionCriteria(),
                     AssignedRole = CreateAssignedRoles(),
-                    //Tasks = CreateAssignedTasks(),
-                    Reports = CreateReports()
+                    Tasks = CreateAssignedTasks()
                 }
             };
         }
@@ -91,16 +82,35 @@ namespace ApplicationLogicTests.ExportManagement.Mock
             };
         }
 
-        private static Dictionary<TaskRequest, List<User>> CreateAssignedTasks()
+        private static Dictionary<User, List<TaskRequest>> CreateAssignedTasks()
         {
-            return new Dictionary<TaskRequest, List<User>>
+            return new Dictionary<User, List<TaskRequest>>
             {
                 {
-                    new TaskRequest {Description = "Review papers 1-200"},
-                    new List<User>
+                    new User {Name = "Member1"},
+                    new List<TaskRequest>
                     {
-                        new User {Name = "Member1"}
+                        CreateTaskRequest()
                     }
+                }
+            };
+        }
+
+        private static TaskRequest CreateTaskRequest()
+        {
+            return new TaskRequest
+            {
+                Description = "Review papers 1-200",
+                IsFinished = false,
+                RequestedDataFields = new List<DataField>()
+                {
+                    new DataField(
+                        "Software Engineering",
+                        "Is this paper about software engineering?",
+                        DataField.Type.Boolean,
+                        new string[1],
+                        true
+                        )
                 }
             };
         }
@@ -120,11 +130,11 @@ namespace ApplicationLogicTests.ExportManagement.Mock
                 "2015"
             });
 
-            var paper1 = new Paper("book", fieldTypes, fieldValues) {ResourceRef = "1"};
-            var paper2 = new Paper("book", fieldTypes, fieldValues) {ResourceRef = "2"};
-            var paper3 = new Paper("book", fieldTypes, fieldValues) {ResourceRef = "3"};
+            var paper1 = new Paper("book", fieldTypes, fieldValues) { ResourceRef = "1" };
+            var paper2 = new Paper("book", fieldTypes, fieldValues) { ResourceRef = "2" };
+            var paper3 = new Paper("book", fieldTypes, fieldValues) { ResourceRef = "3" };
 
-            return new List<Paper> {paper1, paper2, paper3};
+            return new List<Paper> { paper1, paper2, paper3 };
         }
 
         public static string OutPut()

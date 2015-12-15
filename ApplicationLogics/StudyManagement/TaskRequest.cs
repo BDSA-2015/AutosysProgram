@@ -8,62 +8,56 @@ namespace ApplicationLogics.StudyManagement
 {
 
     /// <summary>
-    /// This class represents an assignment in a given phase in a study. 
-    /// A task is deﬁned by a unique id, a set of visible data ﬁelds (unmodiﬁable), a set of requested data ﬁelds (modiﬁable) and a type. 
-    /// A taks type can either be request to ﬁll out data ﬁeld(s) or a request to handle conﬂicting data ﬁeld(s). 
-    /// By way of example, a phase could involve review tasks assigned for two reviewers. 
-    /// A validator could then analyze any inconsistencies between the work of both reviewers in a second phase . 
+    ///     This class represents an assignment in a given phase in a study.
+    ///     By way of example, a phase could involve review tasks assigned to two reviewers.
+    ///     A validator could then analyze any inconsistencies between the work of both reviewers in a second phase by looking at ConflictingData.
     /// </summary>
-    public class TaskRequest 
+    public class TaskRequest
     {
         /// <summary>
-        /// Filters task requests.
+        ///     Determines task state
         /// </summary>
         public enum Filter
         {
-            /// <summary>
-            /// Only list remaining tasks.
-            /// </summary>
-            Remaining,
-            /// <summary>
-            /// Only list delivered tasks which are still editable.
-            /// </summary>
-            Editable,
-            /// <summary>
-            /// Only list tasks which are done, and are no longer editable.
-            /// </summary>
-            Done
-        }
-        
-        public Filter Progress { get; set; }
-
-        public int Id { get; set; }
-
-
+        /// <summary>
+        ///     Determines the type of Task
+        ///     FillOutDataFields for Reviewer
+        ///     HandleConflictingDatafields for Validator
+        /// </summary>
         public enum Type
         {
-            Both,
             FillOutDataFields,
-            HandleConflictingDatafields,
-            
+            HandleConflictingDatafields
         }
 
         /// <summary>
-        ///     Defines whether the task is still deliverable or not.
+        ///     The id of the paper which the task is associated with.
+        /// </summary>
+        public int PaperId { get; set; }
+
+        /// <summary>
+        ///     The task description to be followed for completing the task
         /// </summary>
         public bool IsDeliverable { get; set; }
 
 
         public string Description { get; set; }
 
-        private List<DataField> NonModifiableDatafields { get; set; }
-
-        public List<DataField> ModifiableDatafields { get; set; }
+        /// <summary>
+        ///     Visible fields presented to a reviewer doing the task (e.g. author and the name of the author)
+        /// </summary>
+        private List<DataField> VisibleDataFields { get; set; }
 
         /// <summary>
-        /// In case this is a <see cref="Type.Conflict" /> task, represents for each of the <see cref="RequestedFields" /> the list of <see cref="ConflictingData" /> provided by separate users.
+        ///     Modifiable fields, which a reviewer needs to fill out for a specific paper
         /// </summary>
-        public ConflictingData[][] ConflictingData { get; set; }
+        public List<DataField> RequestedDataFields { get; set; }
+
+        /// <summary>
+        ///     In case this is a <see cref="Type.HandleConflictingDatafields" /> task, represents for each of the <see cref="RequestedDataFields" /> the
+        ///     list of <see cref="ConflictingData" /> provided by separate users.
+        /// </summary>
+        public Conflict[][] ConflictingData { get; set; }
     }
 
 }

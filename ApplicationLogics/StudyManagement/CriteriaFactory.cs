@@ -35,7 +35,7 @@ namespace ApplicationLogics.StudyManagement
         /// </param>
         public void SetSearchCriteria(Criteria criteria, Criteria.Type type)
         {
-            criteria.FilterType = type;
+            criteria.CriteriaType = type;
         }
 
 
