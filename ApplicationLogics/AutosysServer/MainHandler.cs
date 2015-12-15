@@ -4,13 +4,28 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Results;
+using System.Web.Mvc;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.PaperManagement;
+using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
+using System.Web.Http.Results;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using ApplicationLogics.AutosysServer;
+
+
 
 namespace ApplicationLogics.AutosysServer
 {
@@ -143,6 +158,51 @@ namespace ApplicationLogics.AutosysServer
         public List<Task> GetReviewableTasks(int userId, int studyId)
         {
             throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region BibtexParser
+
+        /// <summary>
+        ///     Method for extracting the tags from a given bibtex file (includes bibtex entries and field types)
+        /// </summary>
+        /// <param name="file">
+        ///     The given file to extract the bibtex tags from
+        /// </param>
+        /// <returns>
+        ///     A tuple, T1 is a string array containing the extracted bibtex tags, T2 is the HttpActionResult of the request
+        /// </returns>
+        public Tuple<string[], IHttpActionResult> ExtractBibtexTags(string file)
+        {
+            try
+            {
+                return new Tuple<string[], IHttpActionResult>(_fileHandler.ParseTags(file), CreateResponse(HttpStatusCode.OK));
+            }
+            catch (ArgumentNullException exception)
+            {
+                var httpResult = new ResponseMessageResult(
+                    new HttpResponseMessage(HttpStatusCode.BadRequest) {ReasonPhrase = exception.Message});
+                return new Tuple<string[],IHttpActionResult>(null, httpResult);
+            }
+        }
+
+        /// <summary>
+        ///     Creates the HttpActionResult used to identify the result of a action invoked by the WebApi
+        /// </summary>
+        /// <param name="statusCode">
+        ///     The HttpStatusCode identifying the type of result
+        /// </param>
+        /// <param name="message">
+        ///     If given, a message describing the details about the Response given e.g. why an error occurred
+        /// </param>
+        /// <returns>
+        ///     A HttpActionResult associated with the requested action
+        /// </returns>
+        private IHttpActionResult CreateResponse(HttpStatusCode statusCode, string message = null)
+        {
+            return new ResponseMessageResult(
+                    new HttpResponseMessage(statusCode) { ReasonPhrase = message});
         }
 
         #endregion

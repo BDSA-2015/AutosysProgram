@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using ApplicationLogics.AutosysServer;
 using WebApi.Models;
@@ -37,7 +39,7 @@ namespace WebApi.Controllers
         public StudyOverview GetOverview(int id)
         {
             // GET: api/Study/5/Overview
-            throw new NotImplementedException();
+            ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "You must provide a valid User"));
         }
 
         /// <summary>
