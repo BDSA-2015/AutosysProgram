@@ -95,16 +95,11 @@ namespace WebApi.Adapter
             foreach (DatabaseTask task in DatabaseTasks)
             {
                 newTask = new TaskRequest();
-                newTask.ConflictingData = task.ConflictingData;
-                newTask.Id = null;
-                newTask.IsDeliverable = null;
-                newTask.RequestedFields = null;
-                newTask.TaskType = null;
-                newTask.VisibleFields  = null
+                
                 
             }
 
-
+            throw new NotImplementedException();
 
         }
 
@@ -148,6 +143,6 @@ namespace WebApi.Adapter
             else throw new NotImplementedException(); //This code does not reflect all of the possible Types. Extend this method if this statement is reached
         }
 
-        private TaskRequest TaskRequest
+        
     }
 }

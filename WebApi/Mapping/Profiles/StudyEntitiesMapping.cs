@@ -12,23 +12,33 @@ namespace WebApi.Mapping
     public class StudyEntitiesMapping : Profile
     {
 
-        public void CreateEnumMapping_TaskRequest_Filter()
+        public void CreateTaskRequest_ProgressMapping()
         {
-            Mapper.CreateMap<DatabaseTask.Filter, TaskRequest.Filter>();
+            AutoMapper.Mapper.CreateMap<DatabaseTask.Filter, TaskRequest.Filter>().ConstructUsing(value =>
+            {
+                switch(value)
+                {
+                    case DatabaseTask.Filter.Done:
+                        return TaskRequest.Filter.Done;
+                    case DatabaseTask.Filter.Editable:
+                        return TaskRequest.Filter.Editable;
+                    default:
+                        return TaskRequest.Filter.Remaining;
+                }
+            }
+            
+            
+            );
+
         }
         
         public void CreateRoleMapping()
         {
-            var d = new DatabaseTask();
-            var t = new TaskRequest();
-
-            Mapper.CreateMap<DatabaseTask.Filter, TaskRequest.Filter>();
-
             Mapper.CreateMap<DatabaseTask, TaskRequest>()
-            .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Id))
             .ForMember(dest => dest.TaskFilter, opts => opts.MapFrom(src => src.Progress))
-            .ForMember(dest => dest.RequestedFields, opts=> opts.MapFrom(src => src.))
+            
 
+            ;
                 
             
         }

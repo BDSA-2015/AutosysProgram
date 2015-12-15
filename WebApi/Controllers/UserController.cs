@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Web.Http;
 using SystematicStudyService.Models;
 using ApplicationLogics.AutosysServer;
+using System.Net;
+using System.Diagnostics;
 
 namespace WebApi.Controllers
 {
@@ -46,8 +48,25 @@ namespace WebApi.Controllers
         /// <param name="id">The ID of the user to retrieve.</param>
         public User Get(int id)
         {
+            // Get call stack
+            StackTrace stackTrace = new StackTrace();
+
+            // Get calling method name
+            Console.WriteLine(stackTrace.GetFrame(1).GetMethod().Name);
+
             // GET: api/User/5
-            throw new NotImplementedException();
+            throw new HttpResponseException(HttpStatusCode.BadRequest);
+            var user = new User();
+            user.Id = 0;
+            user.Metadata = stackTrace.GetFrame(1).GetMethod().Name;
+            user.Name = "Hal";
+            return user;
+            
+        }
+
+       public  UserController()
+        {
+
         }
 
         /// <summary>
