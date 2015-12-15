@@ -29,11 +29,11 @@ namespace Storage.Models
 
         public string IsFinished { get; set; } 
 
-        public virtual IDictionary<StoredTaskRequest, List<StoredUser>> Tasks { get; set; }
-
-        public virtual IDictionary<StoredUser, StoredRole> AssignedRole { get; set; }
+        public virtual ICollection<PhaseRole> AssignedRoles { get; set; } 
+        public virtual ICollection<PhaseTask> Tasks { get; set; }
 
         public virtual ICollection<StoredPhase> DependentPhases { get; set; }
 
     }
+
 }

@@ -27,7 +27,7 @@ namespace Storage.Models
         public virtual ICollection<StoredPhase> Phases { get; set; }
 
         [Required]
-        public virtual ICollection<int> UserId { get; set; }
+        public virtual ICollection<int> UserIds { get; set; }
 
         [Key]
         public int Id { get; set; }
