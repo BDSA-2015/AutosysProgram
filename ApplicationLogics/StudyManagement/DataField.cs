@@ -2,19 +2,22 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
-using System;
-
 namespace ApplicationLogics.StudyManagement
 {
     /// <summary>
-    ///     A datafield is part of a given task and is used to determine how paper content is evaluated.
+    ///     A data field is part of a given task and is used to determine how paper content is evaluated.
     /// </summary>
     public class DataField
     {
+        /// <summary>
+        ///     The type of a data field which determines how the data for the field should be gathered
+        /// </summary>
         public enum Type
         {
             String,
             Boolean, // True or false 
+            
+            //Not supported
             Enumeration, // Select one item from list. Comma separated
             Flags, // Select multiple items or none from list. Comma separated
             Resource // type such as PDF, JPEG etc.
@@ -22,22 +25,17 @@ namespace ApplicationLogics.StudyManagement
 
         private string _description;
         private Type _fieldType;
-        private string _fieldValue;
+        private string[] _fieldData;
         private string _name;
 
-        public DataField(string name, string description, Type fieldType, string fieldValue, bool isModifiable)
+        public DataField(string name, string description, Type fieldType, string[] fieldData, bool isModifiable)
         {
-            if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(description) && string.IsNullOrEmpty(fieldValue))
-                throw new ArgumentNullException(
-                    "Please enter valid arguments. Null, whitespaces and empty strings are not allowed.");
             _name = name;
             _description = description;
             _fieldType = fieldType;
-            _fieldValue = fieldValue;
+            _fieldData = fieldData;
             IsModifiable = isModifiable;
         }
-
-        public int Id { get; set; }
 
         public string Name
         {
@@ -45,13 +43,18 @@ namespace ApplicationLogics.StudyManagement
             set { if (IsModifiable) _name = value; }
         }
 
+        /// <summary>
+        ///     Description of the data field, containing the question associated with the data field
+        /// </summary>
         public string Description
         {
             get { return _description; }
             set { if (IsModifiable) _description = value; }
         }
 
-
+        /// <summary>
+        ///     The type of a data field which determines how the data for the field should be gathered 
+        /// </summary>
         public Type FieldType
         {
             get { return _fieldType; }
@@ -60,20 +63,27 @@ namespace ApplicationLogics.StudyManagement
 
 
         /// <summary>
-        ///     We use string to define field values.
-        ///     We use comma serperation when using enumerarion and flags.
+        ///     The value of the data field, which is filled out by a user
+        ///     Strings are used to define field values.
+        ///     For all types except <see cref="Type.Flags"/> the array contains a single string
         /// </summary>
-        public string FieldValue
+        public string[] FieldData
         {
-            get { return _fieldValue; }
-            set { if (IsModifiable) _fieldValue = value; }
+            get { return _fieldData; }
+            set { if (IsModifiable) _fieldData = value; }
         }
 
+        /// <summary>
+        ///     Boolean which tells if a data field is modifiable or unmodifiable.
+        ///     A modifiable data field is a requested field to be filled out by a user
+        ///     An unmodifiable data field is a visible field with information about a file (e.g. author, year, and title)
+        /// </summary>
         public bool IsModifiable { get; }
 
 
         /// <summary>
-        /// For <see cref="DataType.Enumeration"/> and <see cref="DataType.Flags"/> data types, a collection of the predefined values.
+        ///     Used for <see cref="Type.Enumeration"/> and <see cref="Type.Flags"/> types
+        ///     Defines the possible values where one can be chosen for enumeration or several can be flagged 
         /// </summary>
         public string[] TypeInfo { get; set; }
     }
