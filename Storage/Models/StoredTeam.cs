@@ -17,8 +17,6 @@ namespace Storage.Models
         [StringLength(50)]
         public string Name { get; set; }
 
-        public int[] UserIds { get; set;}
-
         public virtual ICollection<StoredUser> Users { get; set; }
             
         [StringLength(400)]

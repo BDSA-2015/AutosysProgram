@@ -31,7 +31,18 @@ namespace ApplicationLogicTests.StorageAdapter
         {
             AutoMapperConfigurator.Configure();
             _repositoryMock = new Mock<IRepository<StoredTeam>>();
-            _storedTeam = new StoredTeam {Name = "name", MetaData = "metaData", UserIds = new[] {1, 2, 3}};
+            _storedTeam = new StoredTeam
+            {
+                Name = "name",
+                MetaData = "metaData",
+                Users = new List<StoredUser>
+                {
+                    new StoredUser { Id = 1 },
+                    new StoredUser { Id = 2 },
+                    new StoredUser { Id = 3 }       
+                } 
+            
+            };
             _team = new Team {Name = "name", MetaData = "metaData", UserIDs = new[] {1, 2, 3}};
         }
 
@@ -160,9 +171,9 @@ namespace ApplicationLogicTests.StorageAdapter
         public void GetAllTeams_Valid_ReturnsCorrectTeams_Test()
         {
             //Arrange
-            var team1 = new StoredTeam {Name = "name1", MetaData = "metaData1", UserIds = new[] {1}};
-            var team2 = new StoredTeam {Name = "name2", MetaData = "metaData2", UserIds = new[] {2}};
-            var team3 = new StoredTeam {Name = "name3", MetaData = "metaData3", UserIds = new[] {3}};
+            var team1 = new StoredTeam {Name = "name1", MetaData = "metaData1", Users = new List<StoredUser> { new StoredUser { Id = 1} } };
+            var team2 = new StoredTeam {Name = "name2", MetaData = "metaData2", Users = new List<StoredUser> { new StoredUser { Id = 2 } } };
+            var team3 = new StoredTeam {Name = "name3", MetaData = "metaData3", Users = new List<StoredUser> { new StoredUser { Id = 3 } } };
             IEnumerable<StoredTeam> list = new List<StoredTeam> {team1, team2, team3};
             _repositoryMock.Setup(r => r.Read()).Returns(list.AsQueryable());
             var teamFacade = new TeamAdapter(_repositoryMock.Object);
@@ -178,7 +189,7 @@ namespace ApplicationLogicTests.StorageAdapter
                 Assert.IsTrue(expectedTeam.Name == returnedTeam.Name);
                 Assert.IsTrue(expectedTeam.MetaData == returnedTeam.MetaData);
                 Assert.IsTrue(expectedTeam.Id == returnedTeam.Id);
-                Assert.IsTrue(expectedTeam.UserIds.Length == returnedTeam.UserIDs.Length);
+                Assert.IsTrue(expectedTeam.Users.ToArray().Length == returnedTeam.UserIDs.Length);
                 counter++;
             }
         }

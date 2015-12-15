@@ -2,6 +2,7 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.UserManagement;
@@ -111,7 +112,17 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var id = 0;
             var repositoryMock = new Mock<IRepository<StoredTeam>>();
-            var storedTeam = new StoredTeam {Id = 0, Name = "name", MetaData = "metaData", UserIds = new[] {1, 2, 3}};
+            var storedTeam = new StoredTeam
+            {
+                Id = 0, Name = "name",
+                MetaData = "metaData",
+                Users = new List<StoredUser>
+                {
+                    new StoredUser { Id = 1 },
+                    new StoredUser { Id = 2 },
+                    new StoredUser { Id = 3 }
+                }
+            };
             repositoryMock.Setup(r => r.Read(id)).Returns(Task.FromResult(storedTeam));
 
             var teamFacade = new TeamAdapter(repositoryMock.Object);
@@ -132,7 +143,18 @@ namespace ApplicationLogicTests.UserManagement
             //Arrange
             var id = 0;
             var repositoryMock = new Mock<IRepository<StoredTeam>>();
-            var storedTeam = new StoredTeam {Id = 0, Name = "name", MetaData = "metaData", UserIds = new[] {1, 2, 3}};
+            var storedTeam = new StoredTeam
+            {
+                Id = 0,
+                Name = "name",
+                MetaData = "metaData",
+                Users = new List<StoredUser>
+                {
+                    new StoredUser { Id = 1 },
+                    new StoredUser { Id = 2 },
+                    new StoredUser { Id = 3 }
+                }
+            };
             repositoryMock.Setup(r => r.Read(id));
 
             var teamFacade = new TeamAdapter(repositoryMock.Object);
