@@ -10,19 +10,18 @@ using ApplicationLogics.UserManagement.Entities;
 namespace ApplicationLogics.StudyManagement
 {
     /// <summary>
-    ///     A dependentPhase is a given set of review tasks.
+    ///     A Phase is a given set of tasks.
     ///     Each dependentPhase is dependent on each other sequentially and is completed in a ﬁxed order.
     ///     The class details how task requests are handled and handed out.
     /// </summary>
     public class Phase 
     {
-        public int Id { get; set; }
-
         /// <summary>
         /// The phase's name
         /// </summary>
         public string Name { get; set; }
      
+
         public Study Study { get; set; }
 
         public List<Paper> Reports { get; set; }
