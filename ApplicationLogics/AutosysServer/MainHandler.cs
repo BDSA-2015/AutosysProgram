@@ -4,6 +4,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.PaperManagement;
@@ -36,6 +38,27 @@ namespace ApplicationLogics.AutosysServer
         private void InitializeHandlers(AdapterInjectionContainer injector)
         {
             _userHandler = new UserHandler(injector.GetUserAdapter());
+        }
+
+        /// <summary>
+        ///     Method for extracting the tags from a given bibtex file (includes bibtex entries and field types)
+        /// </summary>
+        /// <param name="file">
+        ///     The given file to extract the bibtex tags from
+        /// </param>
+        /// <returns>
+        ///     A tuple, T1 is a string array containing the extracted bibtex tags, T2 is the HttpActionResult of the request
+        /// </returns>
+        public Tuple<string[], HttpResponseMessage> ExtractBibtexTags(string file)
+        {
+            try
+            {
+                return new Tuple<string[], HttpResponseMessage>(_fileHandler.ParseTags(file), CreateResponse(HttpStatusCode.OK));
+            }
+            catch (ArgumentNullException exception)
+            {
+                return new Tuple<string[], HttpResponseMessage>(null, CreateResponse(HttpStatusCode.BadRequest, exception.Message));
+            }
         }
 
 
