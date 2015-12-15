@@ -37,7 +37,7 @@ namespace ApplicationLogics.StudyManagement
         /// <summary>
         ///     Used to determine whether the criteria should include or exclude data.
         /// </summary>
-        public Type FilterType { get; set; }
+        public Type CriteriaType { get; set; }
 
         /// <summary>
         ///     Used to determine how the criteria should be evaluated
@@ -61,9 +61,10 @@ namespace ApplicationLogics.StudyManagement
         public string Description { get; set; }
 
         /// <summary>
-        ///     This represents the bibtex tag affected by a given criteria.
+        ///     This represents a file tag e.g. a bibtex entry, which will be affected by the criteria.
+        ///     The value of the Tag should be the same as the value in the Criteria for the tag to be either included or excluded.
         ///     By way of example, a tag {Title} could be targeted in the criteria through a string comparison.
         /// </summary>
-        public string Tag { get; set; } // TODO Replace with reference to Tag entity class 
+        public string Tag { get; set; }
     }
 }
