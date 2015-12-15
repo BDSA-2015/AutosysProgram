@@ -5,6 +5,27 @@ using System.Web.Http;
 using ApplicationLogics.AutosysServer;
 using WebApi.Models;
 
+using DConflictingData = ApplicationLogics.StudyManagement.ConflictingData;
+using AConflictingData = WebApi.Models.ConflictingData;
+using DCriteria = ApplicationLogics.StudyManagement.Criteria;
+using DDataField = ApplicationLogics.StudyManagement.DataField;
+using ADataField = WebApi.Models.DataField;
+using AStage = WebApi.Models.StageOverview;
+using DStage = ApplicationLogics.StudyManagement.Phase;
+using DTask = ApplicationLogics.StudyManagement.TaskRequest;
+using ATask = WebApi.Models.TaskRequest;
+using DUser = ApplicationLogics.UserManagement.Entities.User;
+using DTeam = ApplicationLogics.UserManagement.Entities.Team;
+using AUser = WebApi.Models.User;
+using ATeam = WebApi.Models.Team;
+using AStudy = WebApi.Models.StudyOverview;
+using DStudy = ApplicationLogics.StudyManagement.Study;
+using AFilter = WebApi.Models.TaskRequest.Filter;
+using DFilter = ApplicationLogics.StudyManagement.TaskRequest.
+
+using System.Net.Http;
+using AutoMapper;
+
 namespace WebApi.Controllers
 {
     /// <summary>
@@ -14,21 +35,17 @@ namespace WebApi.Controllers
     public class StudyController : ApiController, IStudyControllerAdapter
     {
 
-        /*
-        private IDisposable _facade;
-         
-        public UserController(IDisposable facade)
-        {
-            _facade = facade;
-        }
-        */
 
         private readonly MainHandler _facade;
+        
+        
+
+        
 
         // Injecting a facade with IDisposable 
-        public StudyController(MainHandler facade)
+        public StudyController()
         {
-            _facade = facade;
+            _facade = new MainHandler();
         }
 
         /// <summary>
@@ -39,7 +56,13 @@ namespace WebApi.Controllers
         public StudyOverview GetOverview(int id)
         {
             // GET: api/Study/5/Overview
-            throw new NotImplementedException();
+            Tuple<DStage,HttpResponseMessage> databaseResponse = _facade.GetStudyOverview(int);
+            if (databaseResponse.Item2.IsSuccessStatusCode)
+            {
+                return Mapper.Map<AStudy>(databaseResponse.Item1);
+            }
+
+            else return null;
         }
 
         /// <summary>
@@ -55,6 +78,10 @@ namespace WebApi.Controllers
         public IEnumerable<TaskRequest> GetTasks(int id, int userId, int count = 1, TaskRequest.Filter filter = TaskRequest.Filter.Remaining, TaskRequest.Type type = TaskRequest.Type.Both)
         {
             // GET: api/Study/4/Task?userId=5&count=1&filter=Remaining&type=Review
+            
+
+            
+            _facade.GetTasks(id,userId,count,filter)
             throw new NotImplementedException();
         }
 

@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using System.Web.Http;
 using ApplicationLogics.AutosysServer;
 using WebApi.Models;
+using System.Net.Http;
+using DStage = ApplicationLogics.StudyManagement.Phase;
+using DTask = ApplicationLogics.StudyManagement.TaskRequest;
+using ATask = WebApi.Models.TaskRequest;
+using DUser = ApplicationLogics.UserManagement.Entities.User;
+using DTeam = ApplicationLogics.UserManagement.Entities.Team;
+using AUser = WebApi.Models.User;
+using ATeam = WebApi.Models.Team;
+using AutoMapper;
+using System.Linq;
 
 namespace WebApi.Controllers
 {
@@ -11,21 +21,12 @@ namespace WebApi.Controllers
     /// </summary>
     public class TeamController : ApiController
     {
-        /*
-        private IDisposable _facade;
-         
-        public UserController(IDisposable facade)
-        {
-            _facade = facade;
-        }
-        */
-
         private readonly MainHandler _facade;
 
         // Injecting a facade with IDisposable 
-        public TeamController(MainHandler facade)
+        public TeamController()
         {
-            _facade = facade;
+            _facade = new MainHandler();
         }
 
         /// <summary>
@@ -36,7 +37,15 @@ namespace WebApi.Controllers
         {
             // GET: api/Team
             // GET: api/Team?name=untouchables
-            throw new NotImplementedException();
+            Tuple<IEnumerable<DTeam>, HttpResponseMessage> databaseReponse = _facade.GetTeams(name);
+            if (databaseReponse.Item2.IsSuccessStatusCode)
+            {
+                foreach (DTeam team in databaseReponse.Item1)
+                {
+                    yield return Mapper.Map<ATeam>(team);
+                }
+            }
+            else yield break;
         }
 
         /// <summary>
@@ -46,7 +55,12 @@ namespace WebApi.Controllers
         public Team Get(int id)
         {
             // GET: api/Team/5
-            throw new NotImplementedException();
+            Tuple<DTeam, HttpResponseMessage> databaseReponse = _facade.GetTeam(name);
+            if (databaseResponse.Item2.IsSuccessStatusCode)
+            {
+                return Mapper.Map<ATeam>(databaseReponse.Item1);
+            }
+            else return null;
         }
 
         /// <summary>
@@ -56,7 +70,9 @@ namespace WebApi.Controllers
         public IHttpActionResult Post([FromBody] Team team)
         {
             // POST: api/Team
-            throw new NotImplementedException();
+            var dTeam = Mapper.Map<DTeam>(team);
+            HttpResponseMessage databaseResponse = _facade.CreateTeam(dTeam);
+            return ResponseMessage(Request.CreateResponse(databaseResponse.StatusCode, databaseResponse.ReasonPhrase));
         }
 
         /// <summary>
@@ -65,10 +81,13 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="id">The ID of the team to update.</param>
         /// <param name="user">The new team data.</param>
-        public IHttpActionResult Put(int id, [FromBody] Team user)
+        public IHttpActionResult Put(int id, [FromBody] ATeam team)
         {
             // PUT: api/Team/5
-            throw new NotImplementedException();
+            var dTeam = Mapper.Map<DTeam>(team);
+
+            HttpResponseMessage databaseResponse = _facade.UpdateTeam(Id, dTeam);
+            return ResponseMessage(Request.CreateResponse(databaseResponse.StatusCode, databaseResponse.ReasonPhrase));
         }
 
         /// <summary>
@@ -79,7 +98,8 @@ namespace WebApi.Controllers
         public IHttpActionResult Delete(int id)
         {
             // DELETE: api/Team/5
-            throw new NotImplementedException();
+            HttpResponseMessage databaseResponse = _facade.DeleteTeam(id);
+            return ResponseMessage(Request.CreateResponse(databaseResponse.StatusCode, databaseResponse.ReasonPhrase));
         }
 
         /// <summary>

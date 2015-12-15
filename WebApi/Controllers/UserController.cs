@@ -45,9 +45,9 @@ namespace WebApi.Controllers
         private readonly MainHandler _facade;
 
         // Injecting a facade with IDisposable 
-        public UserController(MainHandler facade)
+        public UserController()
         {
-            _facade = facade;
+             _facade = MainHandler();
         }
 
         /// <summary>
@@ -108,11 +108,12 @@ namespace WebApi.Controllers
         ///     Create a new user.
         /// </summary>
         /// <param name="user">The new user to create.</param>
-        public   Post([FromBody] User user)
+        public IHttpActionResult Post([FromBody] User user)
         {
              
-            return _facade.CreateUser();
-                //ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "You must provide a valid User"));
+            HttpResponseMessage databaseResponse =  _facade.CreateUser();
+            
+            return ResponseMessage(Request.CreateErrorResponse(databaseResponse.StatusCode, databaseResponse.ReasonPhrase));
         }
 
         /// <summary>
@@ -120,10 +121,13 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="id">The ID of the user to update.</param>
         /// <param name="user">The new user data.</param>
-        public IHttpActionResult Put(int id, [FromBody] User user)
+        public IHttpActionResult Put(int id, [FromBody] AUser user)
         {
             // PUT: api/User/5
-            throw new NotImplementedException();
+
+           HttpResponseMessage databaseResponse = _facade.UpdateUser();
+
+           return ResponseMessage(Request.CreateErrorResponse(databaseResponse.StatusCode, databaseResponse.ReasonPhrase));
         }
 
         /// <summary>
@@ -134,7 +138,9 @@ namespace WebApi.Controllers
         public IHttpActionResult Delete(int id)
         {
             // DELETE: api/User/5
-            throw new NotImplementedException();
+            HttpResponseMessage databaseResponse = _facade.DeleteUser();
+
+            return ResponseMessage(Request.CreateErrorResponse(databaseResponse.StatusCode, databaseResponse.ReasonPhrase));
         }
 
         /// <summary>
