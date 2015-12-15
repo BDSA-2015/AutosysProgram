@@ -14,25 +14,28 @@ namespace Storage.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
-        public virtual string Name { get; set; }
+        public string Name { get; set; }
 
-        public int StudyId { get; set; }
+        public string Description { get; set; }
 
-        public virtual StoredStudy Study { get; set; }
+        public string IsFinished { get; set; }
 
-        public virtual ICollection<StoredPaper> Reports { get; set; }
+        /// <summary>
+        ///     The data fields which needs to be filled out for the phase to be completed
+        /// </summary>
+        public virtual ICollection<StoredDataField> RequestedDataFields { get; set; }
 
-        public virtual ICollection<StoredCriteria> ExclusionCriteria { get; set; }
+        /// <summary>
+        ///     A collection of key value pairs (PhaseRole) used in dictionary from logic over Roles. Each role holds a list of Users with the assigned Role.
+        /// </summary>
+        public virtual ICollection<PhaseRole> AssignedRoles { get; set; }
 
-        public virtual ICollection<StoredCriteria> InclusionCriteria { get; set; }
-
-        public string IsFinished { get; set; } 
-
-        public virtual ICollection<PhaseRole> AssignedRoles { get; set; } 
+        /// <summary>
+        ///     Used to give similar tasks to multiple users, e.g. a review task.
+        /// </summary>
         public virtual ICollection<PhaseTask> Tasks { get; set; }
-
-        public virtual ICollection<StoredPhase> DependentPhases { get; set; }
 
     }
 
