@@ -21,8 +21,8 @@ namespace Storage.Models
         [Key]
         public int Id { get; set; }
 
-        public int StoredTeamId { get; set; }
-
         public virtual StoredTeam Team { get; set; }
+
     }
+
 }

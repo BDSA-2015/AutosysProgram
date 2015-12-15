@@ -32,28 +32,28 @@ namespace StorageTests.DatabaseIntegrationTests
         }
 
         [TestMethod]
-        public void GetUser_WithNonExistingId_ReturnsNull()
+        public async Task GetUser_WithNonExistingId_ReturnsNull()
         {
                 // Arrange
                 const int nonExistingId = 155;
 
                 // Act
-                var user = _repository.Read(nonExistingId);
+                var user = await _repository.Read(nonExistingId);
 
                 // Assert
                 Assert.IsNull(user);
         }
 
         [TestMethod]
-        public void InsertUser_ValidUser_UserWasAddedCorrectly()
+        public async Task InsertUser_ValidUser_UserWasAddedCorrectly()
         {
             // Arrange
             const string name = "William";
             const string metadata = "Researcher";
-            var user = new StoredUser {Name = name, MetaData = "Researcher" };
+            var user = new StoredUser { Name = name, MetaData = "Researcher" };
 
             // Act
-            _repository.Create(user);
+            await _repository.Create(user);
 
             // Assert
             _context.Users.Should().HaveCount(1);
