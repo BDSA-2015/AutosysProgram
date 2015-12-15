@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ApplicationLogics.StorageAdapter.Interface;
+using ApplicationLogics.StudyManagement;
 using BibtexLibrary;
 
 namespace ApplicationLogics.PaperManagement

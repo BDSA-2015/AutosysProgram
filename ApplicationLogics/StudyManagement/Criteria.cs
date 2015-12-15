@@ -5,10 +5,9 @@
 namespace ApplicationLogics.StudyManagement
 {
     /// <summary>
-    ///     Criteria that is evaluated throughout the whole lifetime of a givne study.
+    ///     Criteria that is evaluated throughout the whole lifetime of a given study.
     ///     By way of example, a criteria could be whether the data is from later than 2005.
-    ///     The criteria is used along the way to synthesize the data.
-    ///     As opposed to the classiﬁcation criteria that is only used in the end of the study.
+    ///     The criteria is used along the way to filter the data.
     /// </summary>
     public class Criteria
     {
@@ -19,13 +18,15 @@ namespace ApplicationLogics.StudyManagement
         {
             Less, // Numerical comparison 
             Equals, // String comparison 
-            Greater, // Numerical comparison 
+            Greater, // Numerical comparison
+
+            //Not implemented
             Contains,
             Regex // Not currently supported 
         }
 
         /// <summary>
-        ///     Used to determine whether the criteria should include or exclude data.
+        ///     The possible types of a Criteria
         /// </summary>
         public enum Type
         {
@@ -33,17 +34,15 @@ namespace ApplicationLogics.StudyManagement
             Exclusion
         }
 
-        public Type FilterType { get; set; }
+        /// <summary>
+        ///     Used to determine whether the criteria should include or exclude data.
+        /// </summary>
+        public Type CriteriaType { get; set; }
 
         /// <summary>
-        ///     The type of comparison used to
+        ///     Used to determine how the criteria should be evaluated
         /// </summary>
         public Operation ComparisonType { get; set; }
-
-        /// <summary>
-        ///     The actual value used to retrieve relevant papers for a given study upon comparison.
-        /// </summary>
-        public string Value { get; set; }
 
         /// <summary>
         ///     Can be used to associate a default type of limitation with a certain name
@@ -51,14 +50,21 @@ namespace ApplicationLogics.StudyManagement
         public string Name { get; set; }
 
         /// <summary>
-        ///     A short description of the Criteria purpose and functionality.
+        ///     The actual value of the criteria used to check against when evaluating papers for a given study.
+        ///     Boolean expressions will have the value "true" or "false"
+        /// </summary>
+        public string Value { get; set; }
+
+        /// <summary>
+        ///     A short description of what the criteria is evaluating
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        ///     This represents the bibtex tag affected by a given criteria.
-        ///     By way of example, a tag {Title} could be targetted in the criteria through a string comparison.
+        ///     This represents a file tag e.g. a bibtex entry, which will be affected by the criteria.
+        ///     The value of the Tag should be the same as the value in the Criteria for the tag to be either included or excluded.
+        ///     By way of example, a tag {Title} could be targeted in the criteria through a string comparison.
         /// </summary>
-        public string Tag { get; set; } // TODO Replace with reference to Tag entity class 
+        public string Tag { get; set; }
     }
 }

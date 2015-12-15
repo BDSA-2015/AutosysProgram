@@ -1,9 +1,14 @@
-﻿using Storage.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ApplicationLogics.StudyManagement
 {
     /// <summary>
-    ///     Represents data of one user provided for a <see cref="DataField" />, used to indicate conflicting data between users.
+    ///     Represents data of one user provided for a <see cref="DataField" />, used to indicate conflicting data between
+    ///     users.
     /// </summary>
     public class Conflict
     {
