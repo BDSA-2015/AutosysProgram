@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using ApplicationLogics.AutosysServer;
+using Microsoft.Ajax.Utilities;
 using WebApi.Models;
 
 namespace WebApi.Controllers
@@ -27,6 +30,8 @@ namespace WebApi.Controllers
         public StudyController(MainHandler facade)
         {
             _facade = facade;
+            var handler = new MainHandler();
+            handler.ExtractBibtexTags("").Item2.IfNotNull();
         }
 
         /// <summary>
@@ -37,7 +42,7 @@ namespace WebApi.Controllers
         public StudyOverview GetOverview(int id)
         {
             // GET: api/Study/5/Overview
-            throw new NotImplementedException();
+            ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "You must provide a valid User"));
         }
 
         /// <summary>
