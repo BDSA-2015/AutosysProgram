@@ -8,11 +8,8 @@ namespace ApplicationLogics.StudyManagement
 {
     /// <summary>
     ///     This class represents an assignment in a given phase in a study.
-    ///     A task is deﬁned by a unique id, a set of visible data ﬁelds (unmodiﬁable), a set of requested data ﬁelds
-    ///     (modiﬁable) and a type.
-    ///     A taks type can either be request to ﬁll out data ﬁeld(s) or a request to handle conﬂicting data ﬁeld(s).
-    ///     By way of example, a phase could involve review tasks assigned for two reviewers.
-    ///     A validator could then analyze any inconsistencies between the work of both reviewers in a second phase .
+    ///     By way of example, a phase could involve review tasks assigned to two reviewers.
+    ///     A validator could then analyze any inconsistencies between the work of both reviewers in a second phase by looking at ConflictingData.
     /// </summary>
     public class TaskRequest
     {
@@ -31,29 +28,45 @@ namespace ApplicationLogics.StudyManagement
         } 
 
         /// <summary>
-        ///     Defines if a Task is completed or is still in progress
+        ///     Determines task state
         /// </summary>
         public bool IsFinished { get; set; }
 
         /// <summary>
-        ///     The Id of the specified User associated with this Task
+        ///     Determines the type of Task
+        ///     FillOutDataFields for Reviewer
+        ///     HandleConflictingDatafields for Validator
         /// </summary>
-        public int UserId { get; set; }
+        public enum Type
+        {
+            FillOutDataFields,
+            HandleConflictingDatafields
+        }
 
         /// <summary>
-        ///     The Task description, which defines the work to be completed in the Task
+        ///     The id of the paper which the task is associated with.
+        /// </summary>
+        public int PaperId { get; set; }
+
+        /// <summary>
+        ///     The task description to be followed for completing the task
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        ///     A collection of non modifiable fields containing to be visualized to a Client.
-        ///     A field can be a tag imported from a file e.g. the entry from a bibtex file or the field type and its value
+        ///     Visible fields presented to a reviewer doing the task (e.g. author and the name of the author)
         /// </summary>
-        private List<string> VisibleDataFields { get; set; }
+        private List<DataField> VisibleDataFields { get; set; }
 
         /// <summary>
-        ///     A collection of modifiable fields which are defined by a Client
+        ///     Modifiable fields, which a reviewer needs to fill out for a specific paper
         /// </summary>
         public List<DataField> RequestedDataFields { get; set; }
+
+        /// <summary>
+        ///     In case this is a <see cref="Type.HandleConflictingDatafields" /> task, represents for each of the <see cref="RequestedDataFields" /> the
+        ///     list of <see cref="ConflictingData" /> provided by separate users.
+        /// </summary>
+        public Conflict[][] ConflictingData { get; set; }
     }
 }

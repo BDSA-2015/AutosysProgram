@@ -10,37 +10,20 @@ using ApplicationLogics.UserManagement.Entities;
 namespace ApplicationLogics.StudyManagement
 {
     /// <summary>
-    ///     A dependentPhase is a given set of review tasks.
-    ///     Each dependentPhase is dependent on each other sequentially and is completed in a ﬁxed order.
+    ///     A Phase is a given set of tasks.
+    ///     Each Phase is dependent on each other sequentially and is completed in a ﬁxed order.
     ///     The class details how task requests are handled and handed out.
     /// </summary>
     public class Phase 
     {
-        public int Id { get; set; }
-
-        /// <summary>
-        /// The phase's name
-        /// </summary>
         public string Name { get; set; }
-     
-        public Study Study { get; set; }
 
-        public List<Paper> Reports { get; set; }
-
-        /// <summary>
-        ///     This list contains Criteria, which each report cannot contain.
-        /// </summary>
-        public List<Criteria> ExclusionCriteria { get; set; }
-
-        /// <summary>
-        ///     This list contains Criteria, which each report must contain.
-        /// </summary>
-        public List<Criteria> InclusionCriteria { get; set; }
-        
+        public string Description { get; set; }
+       
         /// <summary>
         ///     Used to give similar tasks to multiple users, e.g. a review task.
         /// </summary>
-        public Dictionary<TaskRequest, List<User>> Tasks { get; set; }
+        public Dictionary<User, List<TaskRequest>> Tasks { get; set; }
         
         /// <summary>
         ///     A dictionary over Roles. Each role holds a list of Users with the assigned Role.
@@ -48,24 +31,24 @@ namespace ApplicationLogics.StudyManagement
         public Dictionary<Role, List<User>> AssignedRole { get; set; } 
 
         /// <summary>
-        ///     Returns a booleans value which determines if this dependentPhase has reached its end.
+        ///     The data fields which needs to be filled out for the phase to be completed
         /// </summary>
-        public bool IsFinished { get; set; }
+        public IReadOnlyCollection<DataField> RequestedDataFields { get; set; } 
 
         /// <summary>
-        ///     A dependentPhase cannot begin prior to the completion of these Phases.
+        ///     Returns a Boolean value which determines if this Phase has reached its end.
         /// </summary>
-        public List<Phase> DependentPhases { get; set; }
+        public bool IsFinished { get; set; }
     
         /// <summary>
-        ///     Used to dertermine if a criteria has been assigned in a dependentPhase.
+        ///     Used to determine if a criteria has been assigned in a Phase.
         ///     Either occurs in the InclusionList or ExclusionList
         /// </summary>
         /// <param name="criteria">
-        ///     The criteria looked for in a given dependentPhase.
+        ///     The criteria looked for in a given Phase.
         /// </param>
         /// <returns>
-        ///     Returns true if the criteria is used in a given dependentPhase.
+        ///     Returns true if the requested criteria is used in a given Phase.
         /// </returns>
         public bool HasCriteria(Criteria criteria)
         {
@@ -73,37 +56,29 @@ namespace ApplicationLogics.StudyManagement
         }
 
         /// <summary>
-        ///     Add an exclusion criteria to the dependentPhase.
+        ///   Add an exclusion criteria to the Phase
         /// </summary>
-        /// <param name="criteria"></param>
-        public void AddCriteria(Criteria criteria, Criteria.Type type)
+        /// <param name="criteria">
+        ///     The given criteria to be add to the phase
+        /// </param>
+        public void AddCriteria(Criteria criteria)
         {
-            if (type == Criteria.Type.Exclusion) 
+            if (criteria.CriteriaType == Criteria.Type.Exclusion) 
                 throw new NotImplementedException(); // Create exclusion criteria
 
-            if (type == Criteria.Type.Inclusion)
+            if (criteria.CriteriaType == Criteria.Type.Inclusion)
                 throw new NotImplementedException(); // Create inclusion criteria 
 
             throw new NotImplementedException();
         }
 
         /// <summary>
-        ///     Remove a criteria from this dependentPhase.
+        ///     Remove a criteria from this Phase.
         /// </summary>
         /// <param name="criteriaName">
         ///     Name of the criteria to delete.
         /// </param>
         public void RemoveCriteria(string criteriaName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddUserToTask(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveUserFromTask(User user)
         {
             throw new NotImplementedException();
         }
@@ -140,28 +115,6 @@ namespace ApplicationLogics.StudyManagement
         ///     List of unfinished tasks.
         /// </returns>
         public IEnumerable<TaskRequest> GetUnfinishedTasks()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        ///     Add a dependentPhase that needs to be completed prior to a given dependentPhase has begun or finished.
-        /// </summary>
-        /// <param name="dependentPhase">
-        ///     Phase to be completed prior to this phase.
-        /// </param>
-        public void AddDependingPhase(Phase dependentPhase)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        ///     Remove a phase that this phase depends on itself.
-        /// </summary>
-        /// <param name="dependentPhase">
-        ///     Phase to be completed prior to this phase.
-        /// </param>
-        public void RemoveDependentPhase(Phase dependentPhase)
         {
             throw new NotImplementedException();
         }

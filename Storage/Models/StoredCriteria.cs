@@ -32,7 +32,7 @@ namespace Storage.Models
         }
 
         [NotMapped]
-        public Type FilterType { get; set; }
+        public Type CriteriaType { get; set; }
 
         [NotMapped]
         public Operation ComparisonType { get; set; }
@@ -41,11 +41,11 @@ namespace Storage.Models
         ///     Used to map the enum FilterType as a string.
         /// </summary>
         [Required]
-        [Column("FilterType")]
+        [Column("CriteriaType")]
         public string FilterTypeString
         {
-            get { return FilterType.ToString(); }
-            private set { FilterType = EnumExtensions.ParseEnum<Type>(value); }
+            get { return CriteriaType.ToString(); }
+            private set { CriteriaType = EnumExtensions.ParseEnum<Type>(value); }
         }
 
         /// <summary>
@@ -64,14 +64,6 @@ namespace Storage.Models
         /// </summary>
         public string Value { get; set; }
 
-        /*
-        /// <summary>
-        /// This represents the bibtex tag affected by a given criteria.
-        /// By way of example, a tag {Title} could be targetted in the criteria through a string comparison. 
-        /// </summary>
-        public virtual StoredTag Tag { get; set; } // TODO Replace with reference to Tag entity class 
-        */
-
         [Required]
         [StringLength(50)]
         [Index(IsUnique = true)] // Used to delete Criteria by name in Phase 
@@ -81,15 +73,11 @@ namespace Storage.Models
         [StringLength(50)]
         public string Description { get; set; }
 
-        [Required]
-        public virtual StoredDataField DataField { get; set; }
-
-
         /// <summary>
-        ///     This represents the bibtex tag affected by a given criteria.
-        ///     By way of example, a tag {Title} could be targetted in the criteria through a string comparison.
+        ///     This represents a file tag e.g. a bibtex entry, which will be affected by the criteria.
+        ///     The value of the Tag should be the same as the value in the Criteria for the tag to be either included or excluded.
+        ///     By way of example, a tag {Title} could be targeted in the criteria through a string comparison.
         /// </summary>
-        ///Todo how do we define this in database? Dennis
         public string Tag { get; set; }
 
         [Key]
