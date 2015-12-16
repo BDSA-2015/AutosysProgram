@@ -437,6 +437,30 @@ namespace ApplicationLogics.AutosysServer
                 new Tuple<TaskRequest, HttpResponseMessage>(task, CreateResponse(HttpStatusCode.OK));
         }
 
+        /// <summary>
+        ///     Method for creating a task with a state matching the given task object's state
+        /// </summary>
+        /// <param name="task">
+        ///     The given task to be created in the database
+        /// </param>
+        /// <returns>
+        ///     A response message indicating the result of the request
+        /// </returns>
+        public HttpResponseMessage CreateTask(TaskRequest task)
+        {
+            try
+            {
+                var taskId = _taskHandler.Create(task).Result;
+
+                return CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception exception)
+            {
+                return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
+            }
+
+        }
+
         #endregion
 
         #region BibtexParser
