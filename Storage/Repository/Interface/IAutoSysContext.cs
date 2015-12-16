@@ -13,7 +13,7 @@ namespace Storage.Repository.Interface
     public interface IAutoSysContext : IDisposable
     {
         // Study entities 
-        DbSet<StoredCriteria> Criterias { get; set; }
+        DbSet<StoredCriteria> Criteria { get; set; }
         DbSet<StoredPhase> Phases { get; set; }
         DbSet<StoredRole> Roles { get; set; }
         DbSet<StoredTaskRequest> Tasks { get; set; }
@@ -70,7 +70,7 @@ namespace Storage.Repository.Interface
         {
         }
 
-        public DbSet<StoredCriteria> Criterias { get; set; }
+        public DbSet<StoredCriteria> Criteria { get; set; }
         public DbSet<StoredPhase> Phases { get; set; }
         public DbSet<StoredRole> Roles { get; set; }
         public DbSet<StoredTaskRequest> Tasks { get; set; }

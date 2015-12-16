@@ -17,7 +17,7 @@ namespace Storage.Models
 
         #region Referenced entities 
 
-        public virtual ICollection<StoredTaskRequest> Value { get; set; } // Dictionary value 
+        public virtual ICollection<StoredTaskRequest> Tasks { get; set; } // Dictionary value 
 
         #endregion
 

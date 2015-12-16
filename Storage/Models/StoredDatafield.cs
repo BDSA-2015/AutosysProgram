@@ -13,28 +13,6 @@ namespace Storage.Models
     [Table("DataField")]
     public class StoredDataField : IEntity
     {
-        #region Enum helpers  
-        public enum TypeOptions
-        {
-            String,
-            Boolean, // True or false 
-            Enumeration, // Select one item from list. Comma separated
-            Flags, // Select multiple items or none from list. Comma separated
-            Resource // type such as PDF, JPEG etc.
-        }
-
-        /// <summary>
-        ///     Used to map the enum Type as a string.
-        /// </summary>
-        [Column("Type")]
-        public string TypeString
-        {
-            get { return Type.ToString(); }
-            private set { Type = EnumExtensions.ParseEnum<TypeOptions>(value); }
-        }
-
-        #endregion
-
         #region Datafield properties 
 
         [StringLength(50)]
@@ -45,17 +23,17 @@ namespace Storage.Models
 
         public string IsModifiable { get; set; }
 
-        public TypeOptions Type { get; set; }
+        public DatafieldTypeOptions Type { get; set; }
 
         /// <summary>
         ///     The value of the data field, which is filled out by a user.
         ///     Strings are used to define field values.
-        ///     For all types except <see cref="TypeOptions.Flags"/> the array contains a single string
+        ///     For all types except <see cref="DatafieldTypeOptions.Flags"/> the array contains a single string
         /// </summary>
         public virtual ICollection<string> FieldData { get; set; } 
 
         /// <summary>
-        ///     For <see cref="TypeOptions.Enumeration" /> and <see cref="TypeOptions.Flags" /> data types, a collection of the
+        ///     For <see cref="DatafieldTypeOptions.Enumeration" /> and <see cref="DatafieldTypeOptions.Flags" /> data types, a collection of the
         ///     predefined values.
         /// </summary>
         public virtual ICollection<string> TypeInfo { get; set; }
@@ -74,6 +52,29 @@ namespace Storage.Models
 
         [Key]
         public int Id { get; set; }
+
+        #endregion
+
+        #region Enum helpers  
+
+        public enum DatafieldTypeOptions
+        {
+            String,
+            Boolean, // True or false 
+            Enumeration, // Select one item from list. Comma separated
+            Flags, // Select multiple items or none from list. Comma separated
+            Resource // type such as PDF, JPEG etc.
+        }
+
+        /// <summary>
+        ///     Used to map the enum Type as a string.
+        /// </summary>
+        [Column("DatafieldType")]
+        public string TypeString
+        {
+            get { return Type.ToString(); }
+            private set { Type = EnumExtensions.ParseEnum<DatafieldTypeOptions>(value); }
+        }
 
         #endregion
 

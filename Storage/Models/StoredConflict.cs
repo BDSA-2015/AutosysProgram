@@ -29,7 +29,7 @@ namespace Storage.Models
         /// </summary>
         public virtual StoredUser User { get; set; }
 
-        public virtual StoredFieldConflicts FieldConflicts { get; set; }
+        public virtual TaskConflicts FieldConflicts { get; set; }
 
         [Key]
         public int Id { get; set; }

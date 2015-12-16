@@ -56,7 +56,7 @@
     <Compile Include="Models\PhaseRole.cs" />
     <Compile Include="Models\PhaseTask.cs" />
     <Compile Include="Models\StoredConflict.cs" />
-    <Compile Include="Models\StoredFieldConflicts.cs" />
+    <Compile Include="Models\TaskConflicts.cs" />
     <Compile Include="Repository\Interface\IAutoSysContext.cs" />
     <Compile Include="Repository\DbRepository.cs" />
     <Compile Include="AutoSysDbModel.cs" />
