@@ -169,8 +169,8 @@ namespace StorageTests.DatabaseIntegrationTests
                 {
                     AssignedRoles = CreateAssignedRoles(),
                     Tasks = CreateAssignedTasks(),
-                    Description = "ReviewPhase",
-                    IsFinished = "true",
+                    Description = "ValidationPhase",
+                    IsFinished = "false",
                     Name = "PhaseOne",
                     RequestedDataFields = CreateDatafields()
                 },
@@ -196,7 +196,7 @@ namespace StorageTests.DatabaseIntegrationTests
         }
 
         // A role is assigned to several users, each PhaseRole is a key/value pair where key is role and value is list of users 
-        public static ICollection<PhaseRole> CreateAssignedRoles()
+        public static List<PhaseRole> CreateAssignedRoles()
         {
             return new List<PhaseRole>
             {
@@ -248,7 +248,7 @@ namespace StorageTests.DatabaseIntegrationTests
             {
                 new TaskConflicts
                 {
-                    Task = CreateTaskRequest(),
+                    // Task = CreateTaskRequest(),
                     Conflicts = CreateConflict()
                 }
             };
