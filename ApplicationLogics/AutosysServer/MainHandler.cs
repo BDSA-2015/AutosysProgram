@@ -7,17 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Results;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.PaperManagement;
-using ApplicationLogics.PaperManagement.Bibtex;
-using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
-using BibtexLibrary.Parser;
 using BibtexParser = ApplicationLogics.PaperManagement.Bibtex.BibtexParser;
 
 
@@ -25,6 +19,7 @@ namespace ApplicationLogics.AutosysServer
 {
     public class MainHandler
     {
+        private TaskHandler _taskHandler;
         private ExportHandler _exportHandler;
         private FileHandler _fileHandler;
         private StudyHandler _studyHandler;
@@ -49,6 +44,7 @@ namespace ApplicationLogics.AutosysServer
             _fileHandler = new FileHandler(new BibtexParser());
             _exportHandler = new ExportHandler();
             _teamHandler = new TeamHandler(injector.GetTeamAdapter());
+            _taskHandler = new TaskHandler(injector.GetTaskAdapter());
         }
 
         #region User Operation
@@ -417,6 +413,28 @@ namespace ApplicationLogics.AutosysServer
 
                 return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
             }
+        }
+
+        #endregion
+
+        #region Task Operation
+
+        /// <summary>
+        ///     Retrieves a task with the requested id from the database if any exists
+        /// </summary>
+        /// <param name="taskId">
+        ///     Id of the requested task
+        /// </param>
+        /// <returns>
+        ///     A Tuple containing a task with an id property matching the given id or null if no match were found
+        ///     and a response message matching the result of the request
+        /// </returns>
+        public Tuple<TaskRequest, HttpResponseMessage> GetTask(int taskId)
+        {
+            var task = _taskHandler.Read(taskId).Result;
+            return task.Equals(null) ?
+                new Tuple<TaskRequest, HttpResponseMessage>(task, CreateResponse(HttpStatusCode.NoContent)) :
+                new Tuple<TaskRequest, HttpResponseMessage>(task, CreateResponse(HttpStatusCode.OK));
         }
 
         #endregion
