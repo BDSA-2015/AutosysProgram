@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -11,10 +12,13 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.PaperManagement;
+using ApplicationLogics.PaperManagement.Bibtex;
 using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
+using BibtexLibrary.Parser;
+using BibtexParser = ApplicationLogics.PaperManagement.Bibtex.BibtexParser;
 
 
 namespace ApplicationLogics.AutosysServer
@@ -23,7 +27,6 @@ namespace ApplicationLogics.AutosysServer
     {
         private ExportHandler _exportHandler;
         private FileHandler _fileHandler;
-        private ProtocolHandler _protocolHandler;
         private StudyHandler _studyHandler;
         private UserHandler _userHandler;
 
@@ -41,117 +44,141 @@ namespace ApplicationLogics.AutosysServer
         {
             _userHandler = new UserHandler(injector.GetUserAdapter());
             _studyHandler = new StudyHandler(injector.GetStudyAdapter());
+            _fileHandler = new FileHandler(new BibtexParser());
+            _exportHandler = new ExportHandler();
         }
 
-
-
-
-
-        private void HandleRequest()
-        {
-            throw new NotImplementedException(); //TODO Consider what parameters and how request are coming.
-        }
-
-        private bool ValidateUser(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        //TODO CONSIDER REFACTOR THESE METHODS INTO NEW CLASSES: EG CONTROLLERS (METHODS GIVEN BY STEVEN)
-
-        #region Code given by steven. Just extend the folding to see them.
-
-        public void CreateTeam(string teamName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddUserToTeam(int userId, int teamId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Team GetTeam(int teamId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CreateUser(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteUser(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public List<Study> GetStudies(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void GetTasks(int studyId, int userId, int count, TaskRequest type)
-        {
-            throw new NotImplementedException();
-        }
+        #region User Operation
 
         /// <summary>
-        ///     Reports the different stages in a study and shows completed tasks per stage for each user.
+        ///     Retrieves a user with the requested id from the database if any exists
         /// </summary>
         /// <param name="userId">
-        ///     If of user related to a given study.
-        /// </param>
-        public List<Task> GetStudyOverview(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        /// <summary>
-        ///     Deliver a finished task including a result with modified fields.
-        ///     This should return whether or not the task was delivered (e.g., can still be delivered) successfully).
-        ///     Can be called several times for the same task in which case the latest value is used (if the task is still
-        ///     editable, which is decided by the server).
-        /// </summary>
-        /// <param name="studyId">
-        ///     Study holding task.
-        /// </param>
-        /// <param name="userId">
-        ///     User assigned to task.
-        /// </param>
-        /// <param name="taskId">
-        ///     Id of the task.
-        /// </param>
-        /// <param name="modifiedField">
-        ///     Datafields that have been changed in the task.
+        ///     Id of the requested user
         /// </param>
         /// <returns>
-        ///     A task request with results.
+        ///     A Tuple containing a user with an id property matching the given id or null if no match were found
+        ///     and a response message matching the result of the request
         /// </returns>
-        public TaskRequest DeliverTask(int studyId, int userId, int taskId, string modifiedField)
+        public Tuple<User, HttpResponseMessage> GetUser(int userId)
         {
-            throw new NotImplementedException();
+            var user = _userHandler.Read(userId).Result;
+            return user.Equals(null) ?
+                new Tuple<User, HttpResponseMessage>(user, CreateResponse(HttpStatusCode.NoContent)) : 
+                new Tuple<User, HttpResponseMessage>(user, CreateResponse(HttpStatusCode.OK));
         }
-
 
         /// <summary>
-        ///     Retrieves all ids of task requests which have already been delivered and can still be edited.
+        ///     Retrieves all Users with a Name property matching the given string
         /// </summary>
-        /// <param name="userId">
+        /// <param name="name">
+        ///     The given string to match user names against
         /// </param>
-        /// <param name="studyId"></param>
-        /// <returns></returns>
-        public List<int> GetReviewableTaskIDs(int userId, int studyId)
+        /// <returns>
+        ///     A Tuple containing a collection of all users with a name property matching the given string or null if no matches were found
+        ///     and a response message matching the result of the request
+        /// </returns>
+        public Tuple<IEnumerable<User>, HttpResponseMessage> GetUsers(string name)
         {
-            throw new NotImplementedException();
+            var query = from user in _userHandler.GetAll()
+                        where user.Name.Equals(name)
+                        select user;
+
+            return !query.Any() ? 
+                new Tuple<IEnumerable<User>, HttpResponseMessage>(null, CreateResponse(HttpStatusCode.NoContent)) : 
+                new Tuple<IEnumerable<User>, HttpResponseMessage>(query, CreateResponse(HttpStatusCode.OK));
         }
 
-        public List<Task> GetReviewableTasks(int userId, int studyId)
+        /// <summary>
+        ///     Method for creating a user with a state matching the given User object's
+        /// </summary>
+        /// <param name="user">
+        ///     The given user to be created in the database
+        /// </param>
+        /// <returns>
+        ///     A response message indicating the result of the request
+        /// </returns>
+        public HttpResponseMessage CreateUser(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var userId = _userHandler.Create(user).Result;
+                return CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception exception)
+            {
+                return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
+            }
+            
         }
+
+        /// <summary>
+        ///     Tries to update the state of a user in the database with the given id to the state of the given user object.
+        ///     The update returns true if the update is complete, false otherwise
+        /// </summary>
+        /// <param name="id">
+        ///     The id of the user requested for update
+        /// </param>
+        /// <param name="user">
+        ///     The user object with the state which the chosen User should be updated to
+        /// </param>
+        /// <returns>
+        ///     A response message indicating the result of the request
+        /// </returns>
+        public HttpResponseMessage UpdateUser(int id, User user)
+        {
+            try
+            {
+                var result = _userHandler.Update(id, user).Result;
+
+                return CreateResponse(result ? HttpStatusCode.OK : HttpStatusCode.BadRequest);
+            }
+            catch (Exception exception)
+            {
+                
+                return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
+            }
+
+        }
+
+        /// <summary>
+        ///     Deletes a user with the given id in the database, if non i found the delete method returns false otherwise true.
+        /// </summary>
+        /// <param name="id">
+        ///     The id for the user which is requested for deletion
+        /// </param>
+        /// <returns>
+        ///     A response message indicating the result of the request
+        /// </returns>
+        public HttpResponseMessage DeleteUser(int id)
+        {
+            try
+            {
+                var result = _userHandler.Delete(id).Result;
+
+                return CreateResponse(result ? HttpStatusCode.OK : HttpStatusCode.BadRequest);
+            }
+            catch (Exception exception)
+            {
+                
+                return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
+            }
+        }
+
+        #endregion
+
+        #region Team Operation
+
+
+        #endregion
+
+        #region Task Operation
+
+
+
+        #endregion
+
+        #region Study Operation
 
         #endregion
 

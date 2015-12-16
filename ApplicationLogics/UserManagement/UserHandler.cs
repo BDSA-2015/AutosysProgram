@@ -56,7 +56,7 @@ namespace ApplicationLogics.UserManagement
         /// </summary>
         /// <param name="oldId">id of user to update</param>
         /// <param name="user">User object</param>
-        public async Task Update(int oldId, User user)
+        public async Task<bool> Update(int oldId, User user)
         {
             if (!UserValidator.ValidateId(oldId))
                 throw new ArgumentException("Id is not valid");
@@ -65,7 +65,7 @@ namespace ApplicationLogics.UserManagement
             if (!UserValidator.ValidateExistence(oldId, _storage))
                 throw new ArgumentException("User does not exist");
 
-            await _storage.UpdateIfExists(user);
+            return await _storage.UpdateIfExists(user);
         }
 
         /// <summary>
