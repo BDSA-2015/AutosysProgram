@@ -4,6 +4,7 @@
 
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Entities;
+using Storage.Models;
 
 namespace ApplicationLogics.UserManagement.Utils
 {
@@ -15,7 +16,7 @@ namespace ApplicationLogics.UserManagement.Utils
         /// <param name="userId">user to find</param>
         /// <param name="userFasade">StorageLocation</param>
         /// <returns>user's existence</returns>
-        internal static bool ValidateExistence(int userId, IAdapter<User> userFasade)
+        internal static bool ValidateExistence(int userId, IAdapter<User, StoredUser> userFasade)
         {
             return userFasade.Read(userId) != null;
         }

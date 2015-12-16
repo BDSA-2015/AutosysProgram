@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
@@ -13,7 +14,7 @@ namespace ApplicationLogics.StorageAdapter
     ///     This class is responsible for the communication between application logic layer and storage layer.
     ///     This class will handle Teams and convert them the the appropriate object that are to be propagated.
     /// </summary>
-    public class TeamAdapter : IAdapter<Team>
+    public class TeamAdapter : IAdapter<Team, StoredTeam>
     {
         private readonly IRepository<StoredTeam> _teamRepository;
 
@@ -35,6 +36,11 @@ namespace ApplicationLogics.StorageAdapter
         {
             var storedTeam = await _teamRepository.Read(id);
             return Mapper.Map<Team>(storedTeam);
+        }
+
+        IEnumerable<Team> IAdapter<Team, StoredTeam>.Read()
+        {
+            return Read();
         }
 
         /// <summary>
@@ -77,6 +83,16 @@ namespace ApplicationLogics.StorageAdapter
             return true;
         }
 
+        public StoredTeam Map(Team item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Team Map(StoredTeam item)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     Creates a new team in the Storage layer based on team details that are sent to its respective repository.
         /// </summary>
@@ -88,12 +104,6 @@ namespace ApplicationLogics.StorageAdapter
         {
             var storedTeam = Mapper.Map<StoredTeam>(team);
             return await _teamRepository.Create(storedTeam);
-        }
-
-        // TODO consider removing Map method in interface 
-        public Team Map(Team item)
-        {
-            throw new NotImplementedException();
         }
 
         public void Dispose()

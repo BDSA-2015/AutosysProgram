@@ -66,7 +66,15 @@ namespace ApplicationLogics.PaperManagement.Bibtex
             {
                 throw new ArgumentNullException(nameof(data));
             }
-            return _filter.Check(BibtexImporter.FromString(data)).ToArray();
+            try
+            {
+                return _filter.Check(BibtexImporter.FromString(data)).ToArray();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
     }
 }

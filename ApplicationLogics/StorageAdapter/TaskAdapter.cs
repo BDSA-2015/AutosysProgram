@@ -15,7 +15,7 @@ namespace ApplicationLogics.StorageAdapter
     /// <summary>
     ///     This class is responsible for converting tasks in the logical layer to stored task entities in the storage layer and call appropriate database operations.
     /// </summary>
-    public class TaskAdapter : IAdapter<TaskRequest>
+    public class TaskAdapter : IAdapter<TaskRequest, StoredTaskRequest>
     {
 
         private readonly IRepository<StoredTaskRequest> _taskRepository;
@@ -28,14 +28,15 @@ namespace ApplicationLogics.StorageAdapter
         /// <summary>
         /// Creates and converts a task to store it in the storage layer. 
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="task">
+        ///     The task to be created in the database
+        /// </param>
         /// <returns>
         /// Id of the created task. 
         /// </returns>
-        public async Task<int> Create(TaskRequest user)
+        public async Task<int> Create(TaskRequest task)
         {
-            var storedTask = Mapper.Map<StoredTaskRequest>(user);
-            return await _taskRepository.Create(storedTask);
+            return await _taskRepository.Create(Map(task));
         }
 
         /// <summary>
@@ -52,6 +53,11 @@ namespace ApplicationLogics.StorageAdapter
             var storedTask = await _taskRepository.Read(id);
             var convertedTask = Mapper.Map<TaskRequest>(storedTask);
             return convertedTask;
+        }
+
+        IEnumerable<TaskRequest> IAdapter<TaskRequest, StoredTaskRequest>.Read()
+        {
+            return Read();
         }
 
         /// <summary>
@@ -95,8 +101,12 @@ namespace ApplicationLogics.StorageAdapter
             return await _taskRepository.DeleteIfExists(id);
         }
 
-        // TODO remove from interface? 
-        public TaskRequest Map(TaskRequest item)
+        public TaskRequest Map(StoredTaskRequest item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public StoredTaskRequest Map(TaskRequest item)
         {
             throw new NotImplementedException();
         }

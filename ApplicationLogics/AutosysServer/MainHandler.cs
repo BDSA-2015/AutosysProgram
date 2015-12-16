@@ -7,12 +7,15 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Results;
 using ApplicationLogics.ExportManagement;
 using ApplicationLogics.PaperManagement;
 using ApplicationLogics.ProtocolManagement;
 using ApplicationLogics.StudyManagement;
 using ApplicationLogics.UserManagement;
 using ApplicationLogics.UserManagement.Entities;
+
 
 namespace ApplicationLogics.AutosysServer
 {
@@ -41,26 +44,6 @@ namespace ApplicationLogics.AutosysServer
             _protocolHandler = new ProtocolHandler(injector.GetProtocolAdapter());
         }
 
-        /// <summary>
-        ///     Method for extracting the tags from a given bibtex file (includes bibtex entries and field types)
-        /// </summary>
-        /// <param name="file">
-        ///     The given file to extract the bibtex tags from
-        /// </param>
-        /// <returns>
-        ///     A tuple, T1 is a string array containing the extracted bibtex tags, T2 is the HttpActionResult of the request
-        /// </returns>
-        public Tuple<string[], HttpResponseMessage> ExtractBibtexTags(string file)
-        {
-            try
-            {
-                return new Tuple<string[], HttpResponseMessage>(_fileHandler.ParseTags(file), CreateResponse(HttpStatusCode.OK));
-            }
-            catch (ArgumentNullException exception)
-            {
-                return new Tuple<string[], HttpResponseMessage>(null, CreateResponse(HttpStatusCode.BadRequest, exception.Message));
-            }
-        }
 
 
 
@@ -173,6 +156,29 @@ namespace ApplicationLogics.AutosysServer
 
         #endregion
 
+        #region BibtexParser
+
+        /// <summary>
+        ///     Method for extracting the tags from a given bibtex file (includes bibtex entries and field types)
+        /// </summary>
+        /// <param name="file">
+        ///     The given file to extract the bibtex tags from
+        /// </param>
+        /// <returns>
+        ///     A tuple, T1 is a string array containing the extracted bibtex tags, T2 is the HttpActionResult of the request
+        /// </returns>
+        public Tuple<string[], HttpResponseMessage> ExtractBibtexTags(string file)
+        {
+            try
+            {
+                return new Tuple<string[], HttpResponseMessage>(_fileHandler.ParseTags(file), CreateResponse(HttpStatusCode.OK));
+            }
+            catch (ArgumentNullException exception)
+            {
+                return new Tuple<string[],HttpResponseMessage>(null, CreateResponse(HttpStatusCode.BadRequest, exception.Message));
+            }
+        }
+
         /// <summary>
         ///     Creates the HttpActionResult used to identify the result of a action invoked by the WebApi
         /// </summary>
@@ -187,7 +193,9 @@ namespace ApplicationLogics.AutosysServer
         /// </returns>
         private HttpResponseMessage CreateResponse(HttpStatusCode statusCode, string message = null)
         {
-            return new HttpResponseMessage(statusCode) { ReasonPhrase = message };
+            return new HttpResponseMessage(statusCode) { ReasonPhrase = message};
         }
+
+        #endregion
     }
 }

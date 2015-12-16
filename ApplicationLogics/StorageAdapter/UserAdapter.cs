@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
@@ -13,7 +14,7 @@ namespace ApplicationLogics.StorageAdapter
     /// <summary>
     ///     This class is responsible for converting users in the logical layer to stored user entities in the storage layer and call appropriate database operations.
     /// </summary>
-    public class UserAdapter : IAdapter<User>
+    public class UserAdapter : IAdapter<User, StoredUser>
     {
         private readonly IRepository<StoredUser> _userRepository;
 
@@ -42,10 +43,9 @@ namespace ApplicationLogics.StorageAdapter
         /// <returns>
         ///     A set of users. 
         /// </returns>
-        public IQueryable<User> Read()
+        public IEnumerable<User> Read()
         {
-            var storedUsers = _userRepository.Read();
-            return storedUsers.Select(Mapper.Map<User>).AsQueryable();
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -70,6 +70,16 @@ namespace ApplicationLogics.StorageAdapter
             return true;
         }
 
+        public StoredUser Map(User item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public User Map(StoredUser item)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     Creates a new user from user details and sends it to the repository that converts it to a stored entity in the storage layer. 
         /// </summary>
@@ -78,12 +88,6 @@ namespace ApplicationLogics.StorageAdapter
         public async Task<int> Create(User user)
         {
             return await _userRepository.Create(Mapper.Map<StoredUser>(user));
-        }
-
-        // TODO remove from interface?
-        public User Map(User item)
-        {
-            throw new NotImplementedException();
         }
 
         public void Dispose()

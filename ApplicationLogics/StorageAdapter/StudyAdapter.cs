@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
@@ -15,7 +16,7 @@ namespace ApplicationLogics.StorageAdapter
     ///     This class is responsible for the communication between application logic layer and storage layer.
     ///     This class will handle studies and convert them the the appropriate object that are to be propagated.
     /// </summary>
-    public class StudyAdapter : IAdapter<Study>
+    public class StudyAdapter : IAdapter<Study, StoredStudy>
     {
 
         private readonly IRepository<StoredStudy> _studyRepository;
@@ -27,35 +28,45 @@ namespace ApplicationLogics.StorageAdapter
 
         public async Task<int> Create(Study study)
         {
-
-            var storedStudy = Mapper.Map<StoredStudy>(study);
-            return await _studyRepository.Create(storedStudy);
+            return await _studyRepository.Create(Map(study));
         }
 
-        public Task<Study> Read(int id)
+        public async Task<Study> Read(int id)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(Map(_studyRepository.Read(id).Result));
         }
 
-        public IQueryable<Study> Read()
+        public IEnumerable<Study> Read()
         {
-            throw new NotImplementedException();
+            foreach (var study in _studyRepository.Read())
+            {
+                yield return Map(study);
+
+            }
         }
 
-        public Task<bool> UpdateIfExists(Study user)
+        public async Task<bool> UpdateIfExists(Study user)
         {
-            throw new NotImplementedException();
+            return await _studyRepository.UpdateIfExists(Map(user));
         }
 
-        public Task<bool> DeleteIfExists(int id)
+        public async Task<bool> DeleteIfExists(int id)
         {
-            throw new NotImplementedException();
+            return await _studyRepository.DeleteIfExists(id);
         }
 
-        public Study Map(Study item)
+
+        //Mapping methods
+        public StoredStudy Map(Study item)
         {
-            throw new NotImplementedException();
+            return Mapper.Map<StoredStudy>(item);
         }
+
+        public Study Map(StoredStudy item)
+        {
+            return Mapper.Map<Study>(item);
+        }
+
 
         public void Dispose()
         {
