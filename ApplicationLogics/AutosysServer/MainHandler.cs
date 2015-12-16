@@ -307,13 +307,117 @@ namespace ApplicationLogics.AutosysServer
 
         #endregion
 
-        #region Task Operation
-
-
-
-        #endregion
-
         #region Study Operation
+
+        /// <summary>
+        ///     Retrieves a study with the requested id from the database if any exists
+        /// </summary>
+        /// <param name="studyId">
+        ///     Id of the requested study
+        /// </param>
+        /// <returns>
+        ///     A Tuple containing a study with an id property matching the given id or null if no match were found
+        ///     and a response message matching the result of the request
+        /// </returns>
+        public Tuple<Study, HttpResponseMessage> GetStudy(int studyId)
+        {
+            var study = _studyHandler.Read(studyId).Result;
+            return study.Equals(null) ?
+                new Tuple<Study, HttpResponseMessage>(study, CreateResponse(HttpStatusCode.NoContent)) :
+                new Tuple<Study, HttpResponseMessage>(study, CreateResponse(HttpStatusCode.OK));
+        }
+
+        /// <summary>
+        ///     Retrieves all Studies with a Name property matching the given string
+        /// </summary>
+        /// <returns>
+        ///     A Tuple containing a collection of all studies in the database
+        ///     and a response message matching the result of the request
+        /// </returns>
+        public Tuple<IEnumerable<Study>, HttpResponseMessage> GetAllStudies()
+        {
+            var studies = _studyHandler.Read();
+            return !studies.Any()?
+                new Tuple<IEnumerable<Study>, HttpResponseMessage>(null, CreateResponse(HttpStatusCode.NoContent)) :
+                new Tuple<IEnumerable<Study>, HttpResponseMessage>(studies, CreateResponse(HttpStatusCode.OK));
+        }
+
+        /// <summary>
+        ///     Method for creating a study with a state matching the given study object's state
+        /// </summary>
+        /// <param name="study">
+        ///     The given study to be created in the database
+        /// </param>
+        /// <returns>
+        ///     A response message indicating the result of the request
+        /// </returns>
+        public HttpResponseMessage CreateStudy(Study study)
+        {
+            try
+            {
+                var userId = _studyHandler.Create(study).Result;
+
+                return CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception exception)
+            {
+                return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
+            }
+
+        }
+
+        /// <summary>
+        ///     Tries to update the state of a study in the database with the given id to the state of the given study object.
+        ///     The update returns true if the update is complete, false otherwise
+        /// </summary>
+        /// <param name="id">
+        ///     The id of the study requested for update
+        /// </param>
+        /// <param name="study">
+        ///     The study object with the state which the chosen study should be updated to
+        /// </param>
+        /// <returns>
+        ///     A response message indicating the result of the request
+        /// </returns>
+        public HttpResponseMessage UpdateTask(Study study)
+        {
+            try
+            {
+                var result = _studyHandler.Update(study).Result;
+
+                return CreateResponse(result ? HttpStatusCode.OK : HttpStatusCode.BadRequest);
+            }
+            catch (Exception exception)
+            {
+
+                return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
+            }
+
+        }
+
+        /// <summary>
+        ///     Deletes a study with the given id in the database, if non is found the delete method returns false otherwise true.
+        /// </summary>
+        /// <param name="id">
+        ///     The id for the study which is requested for deletion
+        /// </param>
+        /// <returns>
+        ///     A response message indicating the result of the request
+        /// </returns>
+        public HttpResponseMessage DeleteTask(int id)
+        {
+            try
+            {
+                var result = _studyHandler.Delete(id).Result;
+
+                return CreateResponse(result ? HttpStatusCode.OK : HttpStatusCode.BadRequest);
+            }
+            catch (Exception exception)
+            {
+
+                return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
+            }
+        }
 
         #endregion
 

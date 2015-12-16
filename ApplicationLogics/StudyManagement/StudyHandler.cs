@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 using Storage.Models;
@@ -30,14 +31,19 @@ namespace ApplicationLogics.StudyManagement
             return await _studyAdapter.Read(studyId);
         }
 
+        public IEnumerable<Study> Read()
+        {
+            return _studyAdapter.Read();
+        } 
+
         public async Task<bool> Update(Study study)
         {
             return await _studyAdapter.UpdateIfExists(study);
         }
 
-        public async Task<bool> Delete(Study study)
+        public async Task<bool> Delete(int id)
         {
-            return await _studyAdapter.DeleteIfExists(study.Id);
+            return await _studyAdapter.DeleteIfExists(id);
         }
     }
 }
