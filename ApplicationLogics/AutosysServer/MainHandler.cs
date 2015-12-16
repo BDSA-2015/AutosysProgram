@@ -37,6 +37,8 @@ namespace ApplicationLogics.AutosysServer
         private void InitializeHandlers(AdapterInjectionContainer injector)
         {
             _userHandler = new UserHandler(injector.GetUserAdapter());
+            _studyHandler = new StudyHandler(injector.GetStudyAdapter());
+            _protocolHandler = new ProtocolHandler(injector.GetProtocolAdapter());
         }
 
         /// <summary>
