@@ -28,6 +28,8 @@ using DUser = ApplicationLogics.UserManagement.Entities.User;
 using DTeam = ApplicationLogics.UserManagement.Entities.Team;
 using AUser = WebApi.Models.User;
 using ATeam = WebApi.Models.Team;
+using DStudy = ApplicationLogics.StudyManagement.Study;
+using AStudy = WebApi.Models.StageOverview;
 using System.Net.Http;
 
 namespace WebApi.Controllers
@@ -47,7 +49,7 @@ namespace WebApi.Controllers
         // Injecting a facade with IDisposable 
         public UserController()
         {
-             _facade = MainHandler();
+            _facade = MainHandler();
         }
 
         /// <summary>
@@ -56,18 +58,16 @@ namespace WebApi.Controllers
         /// <param name="name">Search for users which match the specified name.</param>
         public IEnumerable<User> Get(string name = "")
         {
-            AUser[] aUsers = null;
+            Tuple<DUser[], HttpResponseMessage> databaseResponse = _facade.GetUsers(name);
 
-
-            DUser[] dUsers = null;//_facade.getAllUsers(name);
-            aUsers = new User[dUsers.Length];
-            for (int i = 0; i < dUsers.Length; i++)
+            if (databaseResponse.Item2.IsSuccessStatusCode)
             {
-                aUsers[i] = Mapper.Map<AUser>(dUsers[i]);
+                foreach (DUser user in databaseResponse.Item1)
+                {
+                    yield return Mapper.Map<AUser>(user);
+                }
             }
-
-            return aUsers;
-
+            else yield break;
         }
 
         /// <summary>
@@ -76,20 +76,20 @@ namespace WebApi.Controllers
         /// <param name="id">The ID of the user to retrieve.</param>
         public User Get(int id)
         {
-            DUser dUser = null;// _facade.getUser(id);
+            Tuple<DUser, HttpResponseMessage> databaseResponse = _facade.getUser(id);
+
+            if (databaseResponse.Item2.IsSuccessStatusCode)
+            {
+                return Mapper.Map<AUser>(databaseResponse.Item1);
+            }
+            else return null;
 
 
-            return null;
 
-            return Mapper.Map<AUser>(dUser);
 
 
         }
 
-        public UserController()
-        {
-
-        }
 
         /// <summary>
         ///     Get all study IDs of studies a given user is part of.
@@ -99,9 +99,17 @@ namespace WebApi.Controllers
         [Route("{id}/StudyIDs")]
         public IEnumerable<int> GetStudyIDs(int id)
         {
-            return new int[] { 1, 2, 3 };
-            // GET: api/User/5/StudyIDs
-            throw new NotImplementedException();
+            Tuple<IEnumerable<DStudy>, HttpResponseMessage> databaseResponse = _facade.GetStudies();
+            if (databaseResponse.Item2.IsSuccessStatusCode)
+            {
+                foreach (DStudy study in databaseResponse.Item1)
+                {
+                    if (study.UserId.Contains(id))
+                        yield return study.Id;
+                }
+            }
+            yield break;
+
         }
 
         /// <summary>
@@ -110,9 +118,9 @@ namespace WebApi.Controllers
         /// <param name="user">The new user to create.</param>
         public IHttpActionResult Post([FromBody] User user)
         {
-             
-            HttpResponseMessage databaseResponse =  _facade.CreateUser();
-            
+
+            HttpResponseMessage databaseResponse = _facade.CreateUser();
+
             return ResponseMessage(Request.CreateErrorResponse(databaseResponse.StatusCode, databaseResponse.ReasonPhrase));
         }
 
@@ -125,9 +133,9 @@ namespace WebApi.Controllers
         {
             // PUT: api/User/5
 
-           HttpResponseMessage databaseResponse = _facade.UpdateUser();
+            HttpResponseMessage databaseResponse = _facade.UpdateUser();
 
-           return ResponseMessage(Request.CreateErrorResponse(databaseResponse.StatusCode, databaseResponse.ReasonPhrase));
+            return ResponseMessage(Request.CreateErrorResponse(databaseResponse.StatusCode, databaseResponse.ReasonPhrase));
         }
 
         /// <summary>
