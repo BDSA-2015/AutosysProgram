@@ -29,6 +29,7 @@ namespace ApplicationLogics.AutosysServer
         private FileHandler _fileHandler;
         private StudyHandler _studyHandler;
         private UserHandler _userHandler;
+        private TeamHandler _teamHandler;
 
         public MainHandler()
         {
@@ -43,9 +44,11 @@ namespace ApplicationLogics.AutosysServer
         private void InitializeHandlers(AdapterInjectionContainer injector)
         {
             _userHandler = new UserHandler(injector.GetUserAdapter());
+
             _studyHandler = new StudyHandler(injector.GetStudyAdapter());
             _fileHandler = new FileHandler(new BibtexParser());
             _exportHandler = new ExportHandler();
+            _teamHandler = new TeamHandler(injector.GetTeamAdapter());
         }
 
         #region User Operation
@@ -64,7 +67,7 @@ namespace ApplicationLogics.AutosysServer
         {
             var user = _userHandler.Read(userId).Result;
             return user.Equals(null) ?
-                new Tuple<User, HttpResponseMessage>(user, CreateResponse(HttpStatusCode.NoContent)) : 
+                new Tuple<User, HttpResponseMessage>(user, CreateResponse(HttpStatusCode.NoContent)) :
                 new Tuple<User, HttpResponseMessage>(user, CreateResponse(HttpStatusCode.OK));
         }
 
@@ -84,8 +87,8 @@ namespace ApplicationLogics.AutosysServer
                         where user.Name.Equals(name)
                         select user;
 
-            return !query.Any() ? 
-                new Tuple<IEnumerable<User>, HttpResponseMessage>(null, CreateResponse(HttpStatusCode.NoContent)) : 
+            return !query.Any() ?
+                new Tuple<IEnumerable<User>, HttpResponseMessage>(null, CreateResponse(HttpStatusCode.NoContent)) :
                 new Tuple<IEnumerable<User>, HttpResponseMessage>(query, CreateResponse(HttpStatusCode.OK));
         }
 
@@ -103,13 +106,14 @@ namespace ApplicationLogics.AutosysServer
             try
             {
                 var userId = _userHandler.Create(user).Result;
+
                 return CreateResponse(HttpStatusCode.OK);
             }
             catch (Exception exception)
             {
                 return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
             }
-            
+
         }
 
         /// <summary>
@@ -135,7 +139,7 @@ namespace ApplicationLogics.AutosysServer
             }
             catch (Exception exception)
             {
-                
+
                 return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
             }
 
@@ -160,7 +164,7 @@ namespace ApplicationLogics.AutosysServer
             }
             catch (Exception exception)
             {
-                
+
                 return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
             }
         }
@@ -168,7 +172,138 @@ namespace ApplicationLogics.AutosysServer
         #endregion
 
         #region Team Operation
+        /// <summary>
+        ///     Retrieves a team from the database if any matches the given id
+        /// </summary>
+        /// <param name="id">
+        ///     The given id to be matched against the teams in the database
+        /// </param>
+        /// <returns>
+        ///     A Tuple, T1 is the requested Team, null if no match is found, 
+        ///     T2 is the HttpResponseMessage indicating the result of the request
+        /// </returns>
+        public Tuple<Team, HttpResponseMessage> GetTeam(int id)
+        {
+            try
+            {
+                var team = _teamHandler.Read(id).Result;
+                return team == null
+                    ? new Tuple<Team, HttpResponseMessage>(null,
+                        CreateResponse(HttpStatusCode.NoContent, "The file was not found"))
+                    : new Tuple<Team, HttpResponseMessage>(team, CreateResponse(HttpStatusCode.OK));
+            }
+            catch (Exception)
+            {
+                return new Tuple<Team, HttpResponseMessage>(null, CreateResponse(HttpStatusCode.BadRequest));
+            }
+        }
 
+        /// <summary>
+        ///     Retrieves a collection of teams from the database consisting of teams with a name matching the given string
+        /// </summary>
+        /// <param name="name">
+        ///     The given string to be matched against the names of the teams in the database
+        /// </param>
+        /// <returns>
+        ///     A Tuple, T1 is the requested collection of Team, null if no match is found, 
+        ///     T2 is the HttpResponseMessage indicating the result of the request
+        /// </returns>
+        public Tuple<IEnumerable<Team>, HttpResponseMessage> GetTeams(string name)
+        {
+            try
+            {
+                var query = from team in _teamHandler.GetAll()
+                            where team.Name.Equals(name)
+                            select team;
+
+                return query.Count() < 0
+                    ? new Tuple<IEnumerable<Team>, HttpResponseMessage>(null, CreateResponse(HttpStatusCode.NoContent, "The file was not found"))
+                    : new Tuple<IEnumerable<Team>, HttpResponseMessage>(query, CreateResponse(HttpStatusCode.OK));
+            }
+            catch (Exception)
+            {
+
+                return new Tuple<IEnumerable<Team>, HttpResponseMessage>(null, CreateResponse(HttpStatusCode.BadRequest));
+            }
+        }
+
+        /// <summary>
+        ///     Method for creating a team with a state matching the given team object's state
+        /// </summary>
+        /// <param name="team">
+        ///     The given team to be created in the database
+        /// </param>
+        /// <returns>
+        ///     A response message indicating the result of the request
+        /// </returns>
+        public HttpResponseMessage CreateTeam(Team team)
+        {
+            try
+            {
+                var id = _teamHandler.Create(team).Result;
+
+                return CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception exception)
+            {
+
+                return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
+            }
+        }
+
+        /// <summary>
+        ///     Tries to update the state of a team in the database with the given id to the state of the given team object.
+        ///     The update returns true if the update is complete, false otherwise
+        /// </summary>
+        /// <param name="id">
+        ///     The id of the team requested for update
+        /// </param>
+        /// <param name="team">
+        ///     The team object with the state which the chosen team should be updated to
+        /// </param>
+        /// <returns>
+        ///     A response message indicating the result of the request
+        /// </returns>
+        public HttpResponseMessage UpdateTeam(int id, Team team)
+        {
+            try
+            {
+                var result = _teamHandler.Update(id, team).Result;
+
+                return result
+                    ? CreateResponse(HttpStatusCode.OK)
+                    : CreateResponse(HttpStatusCode.NoContent);
+            }
+            catch (Exception exception)
+            {
+
+                return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
+            }
+        }
+
+        /// <summary>
+        ///     Deletes a team with the given id in the database, if non i found the delete method returns false otherwise true.
+        /// </summary>
+        /// <param name="id">
+        ///     The id for the team which is requested for deletion
+        /// </param>
+        /// <returns>
+        ///     A response message indicating the result of the request
+        /// </returns>
+        public HttpResponseMessage DeleteTeam(int id)
+        {
+            try
+            {
+                var result = _teamHandler.Delete(id).Result;
+
+                return CreateResponse(result ? HttpStatusCode.OK : HttpStatusCode.BadRequest);
+            }
+            catch (Exception exception)
+            {
+
+                return CreateResponse(HttpStatusCode.BadRequest, exception.Message);
+            }
+        }
 
         #endregion
 
