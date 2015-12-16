@@ -212,16 +212,18 @@ namespace StorageTests.DatabaseIntegrationTests
         {
             // Arrange
             var user = new StoredUser { Id = 1, Name = "William", MetaData = "Researcher"};
-            var updatedUser = new StoredUser { Id = 1, Name = "Peter", MetaData = "Validator"};
+            //var updatedUser = //--= new StoredUser { Id = 1, Name = "Peter", MetaData = "Validator"};
 
             // Act
             await _repository.Create(user);
-            await _repository.UpdateIfExists(updatedUser);
+
+            user.Name = "Peter";
+
+            await _repository.UpdateIfExists(user);
 
             // Assert
             _context.Users.First().Should().NotBeNull();
-            _context.Users.First().Name.Should().Be(updatedUser.Name);
-            _context.Users.First().MetaData.Should().Be(updatedUser.MetaData);
+            _context.Users.First().Name.Should().Be("Peter");
         }
 
         [TestMethod]

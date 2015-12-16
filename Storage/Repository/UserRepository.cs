@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Threading.Tasks;
 using Storage.Models;
@@ -88,18 +89,11 @@ namespace Storage.Repository
 
             var userToUpdate = await _dbContext.Set<StoredUser>().FindAsync(user.Id);
 
-            if (userToUpdate == null)
-            {
-                _dbContext.Attach(user); // Used for mocking 
-                
-                
-                await _dbContext.SaveChangesAsync();
-                return false;
-                
-            }
-            else             
+            if (userToUpdate == null) return false;
+               
+            _dbContext.Attach(user);         
             //_dbContext.Set<T>().Attach(user);
-            _dbContext.SetModified(user); // Used for mocking 
+            //_dbContext.SetModified(user); // Used for mocking 
             //dbContext.Entry<T>(user).State = EntityState.Modified; 
             await _dbContext.SaveChangesAsync();
 

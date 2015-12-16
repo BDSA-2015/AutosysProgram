@@ -92,7 +92,7 @@ namespace Storage.Repository
 
             _dbContext.Attach(study); // Used for mocking 
             //_dbContext.Set<T>().Attach(study);
-            _dbContext.SetModified(study); // Used for mocking 
+            //_dbContext.SetModified(study); // Used for mocking 
             //dbContext.Entry<T>(study).State = EntityState.Modified; 
             await _dbContext.SaveChangesAsync();
 
