@@ -29,9 +29,10 @@ namespace WebApi.Controllers
         // Injecting a facade with IDisposable 
         public StudyController(MainHandler facade)
         {
-            _facade = facade;
-            var handler = new MainHandler();
-            handler.ExtractBibtexTags("").Item2.IfNotNull();
+            //_facade = facade;
+            //var handler = new MainHandler();
+            //handler.ExtractBibtexTags("").Item2.IfNotNull();
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -42,7 +43,8 @@ namespace WebApi.Controllers
         public StudyOverview GetOverview(int id)
         {
             // GET: api/Study/5/Overview
-            ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "You must provide a valid User"));
+            //ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "You must provide a valid User"));
+            throw new NotImplementedException();
         }
 
         /// <summary>
