@@ -20,8 +20,9 @@ using AUser = WebApi.Models.User;
 using ATeam = WebApi.Models.Team;
 using AStudy = WebApi.Models.StudyOverview;
 using DStudy = ApplicationLogics.StudyManagement.Study;
-using AFilter = WebApi.Models.TaskRequest.Filter;
-using DFilter = ApplicationLogics.StudyManagement.TaskRequest.
+using ATaskFilter = WebApi.Models.TaskRequest.Filter;
+using ATaskType = WebApi.Models.TaskRequest.Type;
+
 
 using System.Net.Http;
 using AutoMapper;
@@ -106,7 +107,11 @@ namespace WebApi.Controllers
             yield break; //Break if the user does not exist
         }
 
-        private void AddTask
+        private bool TaskMatchesFilters(DTask task, ATaskFilter filter, ATaskType type)
+        {
+            switch()
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Get requested task IDs for a specific user of a given study. By default, delivered but still editable task IDs are returned.
