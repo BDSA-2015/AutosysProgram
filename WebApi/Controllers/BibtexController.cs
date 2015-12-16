@@ -16,24 +16,24 @@ namespace WebApi.Controllers
         // GET: api/Bibtex
         public IHttpActionResult Get()
         {
-            return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ""));
+            return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.NotImplemented, ""));
         }
 
         // GET: api/Bibtex/5
         public IHttpActionResult Get(int id)
         {
-            return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ""));
+            return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.NotImplemented, ""));
         }
 
         // POST: api/Bibtex
         public BibtexTag[] Post([FromBody]string value)
         {
-            Tuple<BibtexTag[], IHttpActionResult> dataAnswer = _facade.ConvertBibTexContentToTags(string value);
-            if (dataAnswer.Item1 == null)
+            Tuple<BibtexTag[], HttpResponseMessage> dataAnswer = _facade.ConvertBibTexContentToTags(string value);
+            if (dataAnswer.Item2.IsSuccessStatusCode)
             {
-                return null;
+                return dataAnswer.Item1;
             }
-            else return dataAnswer.Item1;
+            else return null;
         }
 
 //ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "You must provide a valid User"));        }
@@ -41,13 +41,13 @@ namespace WebApi.Controllers
             // PUT: api/Bibtex/5
         public IHttpActionResult Put(int id, [FromBody]string value)
         {
-            return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ""));
+            return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.NotImplemented, ""));
         }
 
         // DELETE: api/Bibtex/5
         public IHttpActionResult Delete(int id)
         {
-            return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ""));
+            return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.NotImplemented, ""));
         }
     }
 }
