@@ -14,7 +14,7 @@ namespace ApplicationLogics.StorageAdapter
     /// <summary>
     ///     This class is responsible for converting papers in the logical layer to stored user entities in the storage layer and call appropriate database operations.
     /// </summary>
-    public class PaperAdapter : IAdapter<Paper>
+    public class PaperAdapter : IAdapter<Paper, StoredPaper>
     {
 
         private readonly IRepository<StoredPaper> _paperRepository;
@@ -35,8 +35,7 @@ namespace ApplicationLogics.StorageAdapter
         /// </returns>
         public async Task<int> Create(Paper paper)
         {
-            var storedPaper = Mapper.Map<StoredPaper>(paper);
-            return await _paperRepository.Create(storedPaper);
+            return await _paperRepository.Create(Map(paper));
         }
 
         /// <summary>
@@ -50,7 +49,7 @@ namespace ApplicationLogics.StorageAdapter
         /// </returns>
         public async Task<Paper> Read(int id)
         {
-            return Mapper.Map<Paper>(await _paperRepository.Read(id));
+            return await Task.FromResult(Map(_paperRepository.Read(id).Result));
         }
 
         /// <summary>
@@ -59,10 +58,12 @@ namespace ApplicationLogics.StorageAdapter
         /// <returns>
         /// All papers. 
         /// </returns>
-        public IQueryable<Paper> Read()
+        public IEnumerable<Paper> Read()
         {
-            var storedUsers = _paperRepository.Read();
-            return storedUsers.Select(Mapper.Map<Paper>).AsQueryable();
+            foreach (var paper in _paperRepository.Read())
+            {
+                yield return Map(paper);
+            }
         }
 
         /// <summary>
@@ -76,8 +77,7 @@ namespace ApplicationLogics.StorageAdapter
         /// </returns>
         public async Task<bool> UpdateIfExists(Paper paper)
         {
-            var storedPaper = Mapper.Map<StoredPaper>(paper);
-            return await _paperRepository.UpdateIfExists(storedPaper);
+            return await _paperRepository.UpdateIfExists(Map(paper));
         }
 
         /// <summary>
@@ -94,17 +94,21 @@ namespace ApplicationLogics.StorageAdapter
             return await _paperRepository.DeleteIfExists(id);
         }
 
-        // TODO remove Map from interface? 
-        public Paper Map(Paper item)
+        public Paper Map(StoredPaper item)
         {
-            throw new NotImplementedException();
+            return Mapper.Map<Paper>(item);
+        }
+
+        public StoredPaper Map(Paper item)
+        {
+            return Mapper.Map<StoredPaper>(item);
         }
 
         public void Dispose()
         {
-           _paperRepository.Dispose();
+            _paperRepository.Dispose();
         }
 
     }
-    
+
 }

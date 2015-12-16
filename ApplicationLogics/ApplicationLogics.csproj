@@ -134,7 +134,6 @@
     <Compile Include="StudyManagement\TaskRequest.cs" />
     <Compile Include="StudyManagement\Study.cs" />
     <Compile Include="StudyManagement\StudyHandler.cs" />
-    <Compile Include="StudyManagement\StudyManager.cs" />
     <Compile Include="UserManagement\Entities\Team.cs" />
     <Compile Include="UserManagement\Entities\User.cs" />
     <Compile Include="UserManagement\TeamHandler.cs" />

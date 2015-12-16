@@ -4,6 +4,7 @@
 
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Entities;
+using Storage.Models;
 
 namespace ApplicationLogics.UserManagement.Utils
 {
@@ -18,7 +19,7 @@ namespace ApplicationLogics.UserManagement.Utils
         /// <param name="teamId">team to find</param>
         /// <param name="teamFasade">Storage location</param>
         /// <returns>Existence of team</returns>
-        public static bool ValidateExistence(int teamId, IAdapter<Team> teamFasade)
+        public static bool ValidateExistence(int teamId, IAdapter<Team, StoredTeam> teamFasade)
         {
             if (teamId < 0) return false;
             var team = teamFasade.Read(teamId);

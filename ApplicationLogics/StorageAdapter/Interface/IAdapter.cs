@@ -3,6 +3,7 @@
 // Jacob Mullit Møiniche.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationLogics.UserManagement;
@@ -14,19 +15,20 @@ namespace ApplicationLogics.StorageAdapter.Interface
     ///     This interface outlines the CRUD methods that the storage repository class will be able to perform.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IAdapter<T> : IDisposable
+    public interface IAdapter<T,K> : IDisposable
     {
         Task<int> Create(T item);
 
         Task<T> Read(int id);
 
-        IQueryable<T> Read();
+        IEnumerable<T> Read();
 
         Task<bool> UpdateIfExists(T item);
 
         Task<bool> DeleteIfExists(int id);
 
-        // Adapter specific functionality 
-        T Map(T item); // Convert entities to storage 
+        // Adapter specific mapping functionality 
+        K Map(T item);
+        T Map(K item); 
     }
 }

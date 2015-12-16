@@ -2,6 +2,9 @@
 // Creators: Dennis Thinh Tan Nguyen, William Diedricsehn Marstrand, Thor Valentin Aakjær Olesen Nielsen, 
 // Jacob Mullit Møiniche.
 
+using ApplicationLogics.StorageAdapter.Interface;
+using Storage.Models;
+
 namespace ApplicationLogics.ProtocolManagement
 {
     /// <summary>
@@ -9,6 +12,13 @@ namespace ApplicationLogics.ProtocolManagement
     /// </summary>
     public class ProtocolHandler
     {
+        private IAdapter<Protocol, StoredProtocol> _adapter;
+
+        public ProtocolHandler(IAdapter<Protocol, StoredProtocol> adapter)
+        {
+            _adapter = adapter;
+        }
+
         public static void CreateProtocol()
         {
         }

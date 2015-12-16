@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Entities;
 using ApplicationLogics.UserManagement.Utils;
+using Storage.Models;
 
 namespace ApplicationLogics.UserManagement
 {
@@ -17,9 +18,9 @@ namespace ApplicationLogics.UserManagement
     /// </summary>
     public class TeamHandler
     {
-        private readonly IAdapter<Team> _storage;
+        private readonly IAdapter<Team, StoredTeam> _storage;
 
-        public TeamHandler(IAdapter<Team> storage)
+        public TeamHandler(IAdapter<Team, StoredTeam> storage)
         {
             _storage = storage;
         }
@@ -71,7 +72,7 @@ namespace ApplicationLogics.UserManagement
         ///     Returns every teams stored in database
         /// </summary>
         /// <returns></returns>
-        public IQueryable<Team> GetAll()
+        public IEnumerable<Team> GetAll()
         {
             return _storage.Read();
         }

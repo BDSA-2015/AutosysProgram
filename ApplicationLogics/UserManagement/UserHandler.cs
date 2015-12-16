@@ -6,9 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationLogics.StorageAdapter;
 using ApplicationLogics.StorageAdapter.Interface;
 using ApplicationLogics.UserManagement.Entities;
 using ApplicationLogics.UserManagement.Utils;
+using Storage.Models;
 
 namespace ApplicationLogics.UserManagement
 {
@@ -17,9 +19,9 @@ namespace ApplicationLogics.UserManagement
     /// </summary>
     public class UserHandler
     {
-        private readonly IAdapter<User> _storage;
+        private readonly IAdapter<User, StoredUser> _storage;
 
-        public UserHandler(IAdapter<User> storage)
+        public UserHandler(IAdapter<User, StoredUser> storage)
         {
             _storage = storage;
         }
@@ -54,7 +56,7 @@ namespace ApplicationLogics.UserManagement
         /// </summary>
         /// <param name="oldId">id of user to update</param>
         /// <param name="user">User object</param>
-        public async Task Update(int oldId, User user)
+        public async Task<bool> Update(int oldId, User user)
         {
             if (!UserValidator.ValidateId(oldId))
                 throw new ArgumentException("Id is not valid");
@@ -63,7 +65,7 @@ namespace ApplicationLogics.UserManagement
             if (!UserValidator.ValidateExistence(oldId, _storage))
                 throw new ArgumentException("User does not exist");
 
-            await _storage.UpdateIfExists(user);
+            return await _storage.UpdateIfExists(user);
         }
 
         /// <summary>
@@ -95,7 +97,7 @@ namespace ApplicationLogics.UserManagement
         ///     Get every user from the database.
         /// </summary>
         /// <returns>All users</returns>
-        public IQueryable<User> GetAll()
+        public IEnumerable<User> GetAll()
         {
             return _storage.Read();
         }

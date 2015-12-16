@@ -3,37 +3,41 @@
 // Jacob Mullit Møiniche.
 
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApplicationLogics.StorageAdapter.Interface;
+using Storage.Models;
 
 namespace ApplicationLogics.StudyManagement
 {
-    internal class StudyHandler // TODO Why internal? 
+    public class StudyHandler
     {
 
-        private IAdapter<Study> _studyAdapter;
+        private readonly IAdapter<Study, StoredStudy> _studyAdapter;
 
-        public StudyHandler(IAdapter<Study> adapter)
+        public StudyHandler(IAdapter<Study, StoredStudy> adapter)
         {
             _studyAdapter = adapter;
         }
 
-        public void Create()
+        public async Task<int> Create(Study study)
         {
-            throw new NotImplementedException();
+            return await _studyAdapter.Create(study);
         }
 
-        public Study Read(int studyId)
+        public async Task<Study> Read(int studyId)
         {
-            throw new NotImplementedException();
+            return await _studyAdapter.Read(studyId);
         }
 
-        public void Update(Study study)
+        public async Task<bool> Update(Study study)
         {
+            return await _studyAdapter.UpdateIfExists(study);
         }
 
-        public void Delete(Study study)
+        public async Task<bool> Delete(Study study)
         {
-            throw new NotImplementedException();
+            return await _studyAdapter.DeleteIfExists(study.Id);
         }
     }
 }
