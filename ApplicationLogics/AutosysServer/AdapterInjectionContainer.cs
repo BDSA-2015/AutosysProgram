@@ -37,21 +37,6 @@ namespace ApplicationLogics.AutosysServer
             return new StudyAdapter(studyRepository);
         }
 
-        public BibtexTagAdapter GetBibtexTagAdapter()
-        {
-            var tagRepository = new BibtexTagRepository();
-            return new BibtexTagAdapter(tagRepository);
-            
-        }
-
-        // TODO should Paper have its own repository, William?
-        public PaperAdapter GetPaperAdapter()
-        {
-            //var paperRepository = new PaperRepository();
-            //return new PaperAdapter(paperRepository);
-            return null;
-        }
-
         public ProtocolAdapter GetProtocolAdapter()
         {
             var protocolRepository = new ProtocolRepository();
