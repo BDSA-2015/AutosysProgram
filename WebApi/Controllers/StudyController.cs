@@ -22,6 +22,7 @@ using AStudy = WebApi.Models.StudyOverview;
 using DStudy = ApplicationLogics.StudyManagement.Study;
 using ATaskFilter = WebApi.Models.TaskRequest.Filter;
 using ATaskType = WebApi.Models.TaskRequest.Type;
+using DTaskType = ApplicationLogics.StudyManagement.TaskRequest.Type;
 
 
 using System.Net.Http;
@@ -82,7 +83,7 @@ namespace WebApi.Controllers
 
             Tuple<DUser, HttpResponseMessage> databaseResponse_User = _facade.GetUser(userId);
             //If User exist, then continue
-            if(databaseResponse_User.Item2.IsSuccessStatusCode)
+            if (databaseResponse_User.Item2.IsSuccessStatusCode)
             {
                 Tuple<DStudy, HttpResponseMessage> databaseResponse_study = _facade.GetStudy();
                 //If Study Exist, then continue
@@ -93,9 +94,11 @@ namespace WebApi.Controllers
                     {
                         var usersTasks = stage.Tasks[databaseResponse_User.Item1];
                         //For each Task in the Stage, Continue as long as there are more tasks and the users specified maximum of returned Task haven't been reached
-                        for(int i = 0; i<usersTasks.Count && count == 0; i++ )
+                        for (int i = 0; i < usersTasks.Count && count == 0; i++)
                         {
-                            
+                            var currentTask = usersTasks[i];
+                            if (TaskMatchesFilter(currentTask, type )&& TaskMatchesProgress(currentTask, filter))
+                                yield return Mapper.Map<ATask>(currentTask);
                             count--;
                         }
                     }
@@ -106,13 +109,40 @@ namespace WebApi.Controllers
 
             yield break; //Break if the user does not exist
         }
-
-        private bool TaskMatchesFilters(DTask task, ATaskFilter filter, ATaskType type)
+        /// <summary>
+        /// Compares a DTask and a ATask. If they share the same value for AFilter, then return true
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        private bool TaskMatchesFilter(DTask task, ATaskType type)
         {
-            switch()
-            throw new NotImplementedException();
+            if (task.TaskType == DTaskType.Both && type == ATaskType.Both)
+                return true;
+            else if (task.TaskType == DTaskType.Conflict && type == ATaskType.Conflict)
+                return true;
+            else if (task.TaskType == DTaskType.Review && type == ATaskType.Review)
+                return true;
+            else return false;
+        }
+        /// <summary>
+        /// Compares a DTask to a ATask. If they share the same level of progress, then return true
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        private bool TaskMatchesProgress(DTask task, ATaskFilter filter)
+        {
+            if (filter == ATaskFilter.Done && task.IsFinished)
+                return true;
+            else if (filter == ATaskFilter.Editable && task.IsFinished || task.ConflictingData.Length > 0)//If any tasks still conflict and the task is not finished, then it is still editable
+                return true;
+            else if (filter == ATaskFilter.Remaining && !task.IsFinished) //If the task isn't finished, then it is not done
+                return true;
+            else return false;
         }
 
+        private bool TaskMatches
         /// <summary>
         /// Get requested task IDs for a specific user of a given study. By default, delivered but still editable task IDs are returned.
         /// Optionally, the type of task IDs to retrieve are specified.
@@ -124,10 +154,35 @@ namespace WebApi.Controllers
         [Route("{id}/TaskIDs")]
         public IEnumerable<int> GetTaskIDs(int id, int userId, TaskRequest.Filter filter = TaskRequest.Filter.Editable, TaskRequest.Type type = TaskRequest.Type.Both)
         {
+            // GET: api/Study/4/Task?userId=5&count=1&filter=Remaining&type=Review
 
+            Tuple<DUser, HttpResponseMessage> databaseResponse_User = _facade.GetUser(userId);
+            //If User exist, then continue
+            if (databaseResponse_User.Item2.IsSuccessStatusCode)
+            {
+                Tuple<DStudy, HttpResponseMessage> databaseResponse_study = _facade.GetStudy();
+                //If Study Exist, then continue
+                if (databaseResponse_study.Item2.IsSuccessStatusCode)
+                {
+                    //For each Stage
+                    foreach (DStage stage in databaseResponse_study.Item1.Phases)
+                    {
+                        var usersTasks = stage.Tasks[databaseResponse_User.Item1];
+                        //For each Task in the Stage, Continue as long as there are more tasks and yield the to the test 
+                        for (int i = 0; i < usersTasks.Count;  i++)
+                        {
+                            var currentTask = usersTasks[i];
+                            if (TaskMatchesFilter(currentTask, type) && TaskMatchesProgress(currentTask, filter))
+                                yield return currentTask.Id;
+                            
+                        }
+                    }
 
-            // GET: api/Study/4/TaskIDs?userId=5&filter=Editable
-            throw new NotImplementedException();
+                }
+                yield break; //Break if the study does not exist
+            }
+
+            yield break; //Break if the user does not exist
         }
 
         /// <summary>
@@ -140,7 +195,12 @@ namespace WebApi.Controllers
         public TaskRequest GetTask(int id, int taskId)
         {
             // GET: api/Study/4/Task/5
-            throw new NotImplementedException();
+            Tuple<DTask, HttpResponseMessage> databaseResponse = _facade.GetTask(id);
+            if (databaseResponse.Item2.IsSuccessStatusCode)
+            {
+                return Mapper.Map<ATask>(databaseResponse.Item1);
+            }
+            else return null;
         }
 
         /// <summary>
@@ -156,7 +216,14 @@ namespace WebApi.Controllers
         public IHttpActionResult PostTask(int id, int taskId, [FromBody]TaskSubmission task)
         {
             // POST: api/Study/4/Task/5
-            throw new NotImplementedException();
+            
+            Tuple<DStudy, HttpResponseMessage> databaseResponse = _facade.GetStudy(id);
+            if(databaseResponse.Item2.IsSuccessStatusCode)
+            {
+             
+            }
+            return ResponseMessage(Request.CreateResponse(databaseResponse.Item2.StatusCode, databaseResponse.Item2.ReasonPhrase));
+            
         }
 
         /// <summary>
