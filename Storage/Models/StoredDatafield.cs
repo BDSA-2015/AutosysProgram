@@ -13,29 +13,6 @@ namespace Storage.Models
     [Table("DataField")]
     public class StoredDataField : IEntity
     {
-        #region Enum helpers  
-
-        public enum DatafieldTypeOptions
-        {
-            String,
-            Boolean, // True or false 
-            Enumeration, // Select one item from list. Comma separated
-            Flags, // Select multiple items or none from list. Comma separated
-            Resource // type such as PDF, JPEG etc.
-        }
-
-        /// <summary>
-        ///     Used to map the enum Type as a string.
-        /// </summary>
-        [Column("DatafieldType")]
-        public string TypeString
-        {
-            get { return Type.ToString(); }
-            private set { Type = EnumExtensions.ParseEnum<DatafieldTypeOptions>(value); }
-        }
-
-        #endregion
-
         #region Datafield properties 
 
         [StringLength(50)]
@@ -75,6 +52,29 @@ namespace Storage.Models
 
         [Key]
         public int Id { get; set; }
+
+        #endregion
+
+        #region Enum helpers  
+
+        public enum DatafieldTypeOptions
+        {
+            String,
+            Boolean, // True or false 
+            Enumeration, // Select one item from list. Comma separated
+            Flags, // Select multiple items or none from list. Comma separated
+            Resource // type such as PDF, JPEG etc.
+        }
+
+        /// <summary>
+        ///     Used to map the enum Type as a string.
+        /// </summary>
+        [Column("DatafieldType")]
+        public string TypeString
+        {
+            get { return Type.ToString(); }
+            private set { Type = EnumExtensions.ParseEnum<DatafieldTypeOptions>(value); }
+        }
 
         #endregion
 

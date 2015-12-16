@@ -279,9 +279,10 @@ namespace StorageTests.DatabaseIntegrationTests
                     Type = StoredDataField.DatafieldTypeOptions.Boolean,
                     FieldData = new List<string>
                     {
-                        "FieldData"    
+                        "Data"    
                     },
                     IsModifiable = "true"
+
                 }
             };
         }
