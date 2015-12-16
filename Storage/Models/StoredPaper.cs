@@ -18,7 +18,6 @@ namespace Storage.Models
         /// <summary>
         ///     The Entry type of the bibliographic item (e.g. Article, Book, Phdthesis...)
         /// </summary>
-        [Required]
         public string Type { get; set; }
 
         /// <summary>
@@ -35,14 +34,12 @@ namespace Storage.Models
         ///     A collection of bibtex field types (e.g. Author, Year...)
         ///     The collection holds information associated with the bibtex field values in the FieldValues collection
         /// </summary>
-        [Required]
         public virtual ICollection<string> FieldTypes { get; set; } 
 
         /// <summary>
         ///     A collection of bibtex field values (e.g. Henrik Madsen, 2015)
         ///     The collection holds information associated with the bibtex field types in the FieldTypes collection
         /// </summary>
-        [Required]
         public virtual ICollection<string> FieldValues { get; set; } 
 
         /// <summary>

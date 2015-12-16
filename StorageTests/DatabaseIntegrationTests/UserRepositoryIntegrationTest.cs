@@ -216,7 +216,7 @@ namespace StorageTests.DatabaseIntegrationTests
 
             // Act
             await _repository.Create(user);
-
+            
             user.Name = "Peter";
 
             await _repository.UpdateIfExists(user);

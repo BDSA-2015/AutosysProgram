@@ -21,7 +21,6 @@ namespace Storage.Models
 
         public TaskTypeOptions Type { get; set; }
 
-        public ProgressOptions Progress { get; set; }
 
         /// <summary>
         ///     Determines task state
@@ -52,7 +51,7 @@ namespace Storage.Models
         ///     list of <see cref="ConflictingData" /> provided by separate users.
         ///     Each StoredFieldConflict represents a data field entry with a list of conflicts. 
         /// </summary>
-        public virtual ICollection<StoredFieldConflicts> ConflictingData { get; set; }
+        public virtual ICollection<TaskConflicts> ConflictingData { get; set; }
 
         #endregion
 
@@ -68,24 +67,15 @@ namespace Storage.Models
         #region Enum Helpers 
 
         /// <summary>
-        ///     Determines the status of a given task
-        /// </summary>
-        public enum ProgressOptions
-        {
-            NotStarted,
-            Started,
-            Done
-        }
-
-        /// <summary>
         ///     Determines the type of Task
         ///     FillOutDataFields for Reviewer
         ///     HandleConflictingDatafields for Validator
         /// </summary>
         public enum TaskTypeOptions
         {
-            FillOutDataFields,
-            HandleConflictingDatafields
+            Review,
+            Conflict,
+            Both
         }
 
         /// <summary>
@@ -96,16 +86,6 @@ namespace Storage.Models
         {
             get { return Type.ToString(); }
             private set { Type = EnumExtensions.ParseEnum<TaskTypeOptions>(value); }
-        }
-
-        /// <summary>
-        ///     Used to map the enum Progress as a string.
-        /// </summary>
-        [Column("Progress")]
-        public string ProgressString
-        {
-            get { return Progress.ToString(); }
-            private set { Progress = EnumExtensions.ParseEnum<ProgressOptions>(value); }
         }
 
         #endregion
