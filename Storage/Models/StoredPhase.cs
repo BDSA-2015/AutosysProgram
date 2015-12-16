@@ -49,6 +49,8 @@ namespace Storage.Models
 
         public virtual StoredStudy Study { get; set; }
 
+        public virtual StoredProtocol Protocol { get; set; }
+
         #endregion
 
     }

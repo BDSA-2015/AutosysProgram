@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.Design;
 using Storage.Repository.Interface;
 
 namespace Storage.Models
@@ -32,7 +33,7 @@ namespace Storage.Models
         /// </summary>
         public string Tag { get; set; }
 
-        public TypeOptions CriteriaType { get; set; }
+        public CriteriaTypeOptions CriteriaType { get; set; }
 
         public OperationOptions ComparisonType { get; set; }
 
@@ -41,6 +42,8 @@ namespace Storage.Models
         #region Keys 
 
         public virtual StoredStudy Study { get; set; }
+
+        public virtual StoredProtocol Protocol { get; set; }
 
         [Key]
         public int Id { get; set; }
@@ -64,7 +67,7 @@ namespace Storage.Models
         /// <summary>
         ///     Used to determine whether the criteria should include or exclude data.
         /// </summary>
-        public enum TypeOptions
+        public enum CriteriaTypeOptions
         {
             Inclusion,
             Exclusion
@@ -77,7 +80,7 @@ namespace Storage.Models
         public string FilterTypeString
         {
             get { return CriteriaType.ToString(); }
-            private set { CriteriaType = EnumExtensions.ParseEnum<TypeOptions>(value); }
+            private set { CriteriaType = EnumExtensions.ParseEnum<CriteriaTypeOptions>(value); }
         }
 
         /// <summary>

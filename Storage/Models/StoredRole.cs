@@ -10,14 +10,14 @@ namespace Storage.Models
     public class StoredRole : IEntity
     {
 
-        public TypeOptions Type { get; set; }
+        public RoleTypeOptions Type { get; set; }
 
         [Key]
         public int Id { get; set; }
 
         #region Enum Helpers
 
-        public enum TypeOptions
+        public enum RoleTypeOptions
         {
             Validator,
             Reviewer
@@ -30,7 +30,7 @@ namespace Storage.Models
         public string TypeString
         {
             get { return Type.ToString(); }
-            private set { Type = EnumExtensions.ParseEnum<TypeOptions>(value); }
+            private set { Type = EnumExtensions.ParseEnum<RoleTypeOptions>(value); }
         }
 
         #endregion

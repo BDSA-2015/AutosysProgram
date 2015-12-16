@@ -16,6 +16,7 @@ namespace Storage.Models
         #region Study Properties 
 
         [StringLength(50)]
+        [Required]
         public string Name { get; set; }
 
         [StringLength(400)]
