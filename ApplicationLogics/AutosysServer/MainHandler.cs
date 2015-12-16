@@ -21,7 +21,6 @@ namespace ApplicationLogics.AutosysServer
 {
     public class MainHandler
     {
-        //private IFasade<> _Storage; TODO WHAT TO GIVE MAINHANDLER AS OBJECT? ==> Check Dependency Injection Container that has been created.
         private ExportHandler _exportHandler;
         private FileHandler _fileHandler;
         private ProtocolHandler _protocolHandler;
@@ -41,7 +40,12 @@ namespace ApplicationLogics.AutosysServer
         private void InitializeHandlers(AdapterInjectionContainer injector)
         {
             _userHandler = new UserHandler(injector.GetUserAdapter());
+            _studyHandler = new StudyHandler(injector.GetStudyAdapter());
+            _protocolHandler = new ProtocolHandler(injector.GetProtocolAdapter());
         }
+
+
+
 
 
         private void HandleRequest()
