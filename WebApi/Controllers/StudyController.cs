@@ -37,10 +37,10 @@ namespace WebApi.Controllers
 
 
         private readonly MainHandler _facade;
-        
-        
 
-        
+
+
+
 
         // Injecting a facade with IDisposable 
         public StudyController()
@@ -56,7 +56,7 @@ namespace WebApi.Controllers
         public StudyOverview GetOverview(int id)
         {
             // GET: api/Study/5/Overview
-            Tuple<DStage,HttpResponseMessage> databaseResponse = _facade.GetStudyOverview(int);
+            Tuple<DStage, HttpResponseMessage> databaseResponse = _facade.GetStudyOverview(int);
             if (databaseResponse.Item2.IsSuccessStatusCode)
             {
                 return Mapper.Map<AStudy>(databaseResponse.Item1);
@@ -78,12 +78,35 @@ namespace WebApi.Controllers
         public IEnumerable<TaskRequest> GetTasks(int id, int userId, int count = 1, TaskRequest.Filter filter = TaskRequest.Filter.Remaining, TaskRequest.Type type = TaskRequest.Type.Both)
         {
             // GET: api/Study/4/Task?userId=5&count=1&filter=Remaining&type=Review
-            
 
-            
-            _facade.GetTasks(id,userId,count,filter)
-            throw new NotImplementedException();
+            Tuple<DUser, HttpResponseMessage> databaseResponse_User = _facade.GetUser(userId);
+            //If User exist, then continue
+            if(databaseResponse_User.Item2.IsSuccessStatusCode)
+            {
+                Tuple<DStudy, HttpResponseMessage> databaseResponse_study = _facade.GetStudy();
+                //If Study Exist, then continue
+                if (databaseResponse_study.Item2.IsSuccessStatusCode)
+                {
+                    //For each Stage
+                    foreach (DStage stage in databaseResponse_study.Item1.Phases)
+                    {
+                        var usersTasks = stage.Tasks[databaseResponse_User.Item1];
+                        //For each Task in the Stage, Continue as long as there are more tasks and the users specified maximum of returned Task haven't been reached
+                        for(int i = 0; i<usersTasks.Count && count == 0; i++ )
+                        {
+                            
+                            count--;
+                        }
+                    }
+
+                }
+                yield break; //Break if the study does not exist
+            }
+
+            yield break; //Break if the user does not exist
         }
+
+        private void AddTask
 
         /// <summary>
         /// Get requested task IDs for a specific user of a given study. By default, delivered but still editable task IDs are returned.
@@ -97,7 +120,7 @@ namespace WebApi.Controllers
         public IEnumerable<int> GetTaskIDs(int id, int userId, TaskRequest.Filter filter = TaskRequest.Filter.Editable, TaskRequest.Type type = TaskRequest.Type.Both)
         {
 
-            
+
             // GET: api/Study/4/TaskIDs?userId=5&filter=Editable
             throw new NotImplementedException();
         }
