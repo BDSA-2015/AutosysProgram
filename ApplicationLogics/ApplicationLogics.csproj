@@ -131,6 +131,7 @@
     <Compile Include="StudyManagement\DataField.cs" />
     <Compile Include="StudyManagement\Phase.cs" />
     <Compile Include="StudyManagement\Role.cs" />
+    <Compile Include="StudyManagement\TaskHandler.cs" />
     <Compile Include="StudyManagement\TaskRequest.cs" />
     <Compile Include="StudyManagement\Study.cs" />
     <Compile Include="StudyManagement\StudyHandler.cs" />

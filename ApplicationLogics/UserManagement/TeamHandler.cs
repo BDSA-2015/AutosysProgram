@@ -61,11 +61,11 @@ namespace ApplicationLogics.UserManagement
         /// </summary>
         /// <param name="oldId"> id of existing team</param>
         /// <param name="team"> Team object</param>
-        public async Task Update(int oldId, Team team)
+        public async Task<bool> Update(int oldId, Team team)
         {
             if (!TeamValidator.ValidateEnteredTeamData(team)) throw new ArgumentException("Team data is invalid");
             if (!TeamValidator.ValidateExistence(oldId, _storage)) throw new ArgumentException("Team does not exist");
-            await _storage.UpdateIfExists(team);
+            return await _storage.UpdateIfExists(team);
         }
 
         /// <summary>
