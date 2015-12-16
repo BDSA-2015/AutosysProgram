@@ -41,7 +41,6 @@ namespace ApplicationLogics.AutosysServer
         {
             _userHandler = new UserHandler(injector.GetUserAdapter());
             _studyHandler = new StudyHandler(injector.GetStudyAdapter());
-            _protocolHandler = new ProtocolHandler(injector.GetProtocolAdapter());
         }
 
 
@@ -175,7 +174,7 @@ namespace ApplicationLogics.AutosysServer
             }
             catch (ArgumentNullException exception)
             {
-                return new Tuple<string[],HttpResponseMessage>(null, CreateResponse(HttpStatusCode.BadRequest, exception.Message));
+                return new Tuple<string[], HttpResponseMessage>(null, CreateResponse(HttpStatusCode.BadRequest, exception.Message));
             }
         }
 
@@ -193,7 +192,7 @@ namespace ApplicationLogics.AutosysServer
         /// </returns>
         private HttpResponseMessage CreateResponse(HttpStatusCode statusCode, string message = null)
         {
-            return new HttpResponseMessage(statusCode) { ReasonPhrase = message};
+            return new HttpResponseMessage(statusCode) { ReasonPhrase = message };
         }
 
         #endregion
