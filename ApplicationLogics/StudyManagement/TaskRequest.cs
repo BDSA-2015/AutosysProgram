@@ -15,21 +15,22 @@ namespace ApplicationLogics.StudyManagement
     {
         public int Id { get; set; }
 
+        public Type TaskType { get; set; }
+
+        /// <summary>
+        ///     The possible types of a task
+        /// </summary>
+        public enum Type
+        {
+            Review,
+            Conflict,
+            Both
+        }
+
         /// <summary>
         ///     Determines task state
         /// </summary>
         public bool IsFinished { get; set; }
-
-        /// <summary>
-        ///     Determines the type of Task
-        ///     FillOutDataFields for Reviewer
-        ///     HandleConflictingDatafields for Validator
-        /// </summary>
-        public enum Type
-        {
-            FillOutDataFields,
-            HandleConflictingDatafields
-        }
 
         /// <summary>
         ///     The id of the paper which the task is associated with.
