@@ -1,6 +1,6 @@
 ﻿using System;
 /// <summary>
-/// deprecated, Do not use it
+/// Deprecated. This functionality is no longer supported and should not be used. 
 /// 
 /// 
 /// 

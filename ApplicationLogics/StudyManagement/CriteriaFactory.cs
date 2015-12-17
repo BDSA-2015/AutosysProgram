@@ -1,7 +1,7 @@
 ﻿using System;
 /// <summary>
 /// 
-/// deprecated, do not use it
+/// Deprecated. This functionality is no longer supported and should not be used. 
 /// 
 /// 
 /// 
