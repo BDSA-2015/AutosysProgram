@@ -1,5 +1,32 @@
 ﻿using System;
-
+/// <summary>
+/// 
+/// deprecated, do not use it
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// </summary>
 namespace ApplicationLogics.StudyManagement
 {
     /// <summary>

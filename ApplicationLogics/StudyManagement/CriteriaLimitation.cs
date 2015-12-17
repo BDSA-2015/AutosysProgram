@@ -1,5 +1,32 @@
 ﻿using System;
-
+/// <summary>
+/// deprecated, Do not use it
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// 
+/// </summary>
 namespace ApplicationLogics.StudyManagement
 {
     public class CriteriaLimitation
